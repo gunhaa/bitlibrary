@@ -7,8 +7,7 @@
 </head>
 
 <body>
-<div th:fragment="mainLogin">
-  <section class="main-login-area">
+  <section class="main-login-area" th:fragment="mainLogin">
     <!-- 로그인 안 됐을 때 -->
 <!--    <div th:if="${empty loginMember}">-->
       <article class="main-login-title">회원 로그인</article>
@@ -68,6 +67,5 @@
 <!--    </div>-->
   </section>
   <script th:src="@{/js/member/mainLogin.js}" defer></script>
-</div>
 </body>
 </html>
