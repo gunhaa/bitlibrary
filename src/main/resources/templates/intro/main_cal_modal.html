@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>일정 모달</title>
+</head>
+<body>
+
+<div th:fragment="mainCalModal">
+  <!-- 알림창 모달 내용 -->
+  <div id="main_popup_layer">
+    <div class="main_popup_box">
+      <div class="main_popup_header">
+        <span>일정</span>
+      </div>
+      <div class="main_popup_content">
+        <table>
+          <thead>
+          <tr>
+            <td>구분</td>
+            <td>일정</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><div class="cat_color gong"></div><span>공휴일</span></td>
+            <td>추석</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="main_popup_btn">
+        <button id="main_confirm_btn">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script th:src="@{/resources/js/intro/main_cal_hour.js}"></script>
+</body>
+</html>

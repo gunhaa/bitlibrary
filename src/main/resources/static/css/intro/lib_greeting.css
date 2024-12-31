@@ -1,0 +1,15 @@
+#greeting_book {
+	width: 100%;
+	height: 100px;
+	overflow: hidden;
+	background: url("/resources/images/intro/greeting_book.jpg") no-repeat
+		center 20%;
+	background-size: cover;
+	margin-bottom: 30px;
+	
+}
+
+#greeting_book + p{
+	line-height: 40px;
+	font-size: 20px;
+}

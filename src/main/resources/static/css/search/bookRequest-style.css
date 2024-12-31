@@ -1,0 +1,347 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+
+.main {
+	width: 1024px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.main-content {
+	margin-top: 70px;
+	width: 774px;
+	min-height: 700px;
+}
+
+.main-title {
+	font-size: 40px;
+	margin-bottom: 40px;
+	font-weight: 800;
+}
+
+.titleLine{
+	border:3px solid #d4d4d4;
+}
+
+.main-content .body-content{
+	margin-top: 30px;
+}
+
+.body-title{
+	margin-top:40px;
+	margin-bottom: 40px;
+	font-size: 28px;
+	font-weight: bold;
+}
+.apply-box{
+	display:flex;
+	width:100%;
+	height:90px;
+	margin-bottom:30px;
+}
+
+.apply-box-index{
+	display:flex;
+	font-weight: 800;
+	font-size: 20px;
+	color: #555;
+}
+
+.apply-box-index{
+	margin-left: 5px;
+	font-weight: 800;
+	font-size: 18px;
+	word-break: keep-all;
+	line-height: 30px;
+}
+
+.apply-book-title{
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.apply-book-details{
+	margin-bottom: 30px;
+}
+
+.apply-book-details > ul{
+	margin: 20px 0;
+}
+
+.apply-book-details > ul > li{
+	margin-left:30px;
+	margin-bottom: 10px;
+}
+.apply-area{
+	display: flex;
+	border: 1px solid #ddd;
+	width: 100%;
+	background-color: #d4d4d4;
+	height: 50px;
+	justify-content: space-between;
+}
+.apply-text{
+	margin-top:15px;
+	margin-left:15px;
+	margin-right:15px;
+}
+
+.apply-btn-area{
+	display:flex;
+	align-items:center;
+	gap: 10px;
+	margin-right: 10px;
+}
+
+.last-line{
+	margin-bottom:30px;
+}
+.line{
+	width:40px;
+	border: 1px solid #8FB788;
+	margin: 10px 0;
+}
+
+#request-btn,
+#apply-btn{
+	background-color: #8FB788;
+	color: white;
+	border: none;
+	cursor: pointer;
+	margin:auto;
+	padding: 10px;
+	width: 80px;
+	height: 35px;
+	
+}
+
+#request-btn:hover,
+#apply-btn:hover{
+	text-decoration: underline;
+}
+
+
+.request-form{
+	margin-top:30px;
+}
+
+.request-form td input,
+.request-form td{
+	
+	font-size: 15px;
+}
+
+.request-form td{padding-left: 15px;}
+
+.request-form #currentDate{
+	border:0;
+	outline: none;
+}
+
+table, tr, th, td	{
+	border: 1px solid #ddd;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 15px;
+}
+table th{
+	text-align:center;
+	width: 120px;
+	height: 50px;
+	color: white;
+	background-color: #8FB788;
+}
+
+.list-table th:nth-of-type(1){width: 10%;}
+.list-table th:nth-of-type(2){width: 50%;}
+.list-table th:nth-of-type(3){width: 15%;}
+.list-table th:nth-of-type(4){width: 15%;}
+.list-table th:nth-of-type(5){width: 10%;}
+
+.list-table td{
+	height: 50px;
+	text-align: center;
+}
+.list-table td:nth-of-type(2){
+	text-align: left;
+	padding-left: 15px;
+}
+
+.opinion{
+	height: 200px;
+}
+
+.btn-area{
+    text-align: right;
+    padding-bottom: 12px;
+}
+
+.btn-area button{
+    background-color: #8FB788;
+    border: none;
+    color: white;
+    width: 70px;
+    height: 30px;
+    margin-left: 10px;
+	cursor: pointer;
+	font-size: 15px;
+}
+
+.btn-area button:hover{
+    background-color: white;
+    border: 1px solid #8FB788;
+    color: black;
+}
+
+/* bookrequst-form area */
+.main-content .body-content .btn-area{
+	background-color:white;
+}
+
+
+/* 모달 전체 배경 */
+.modal {
+	position:fixed;
+	top:0;
+	left:0;
+	z-index: 10000; 
+	width: 100%; 
+	height: 100%; 
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+
+
+/* 도서 예약 모달 */
+.popup_box_res{
+	position: relative;
+	top:50%;
+	left:50%; 
+	width:500px;
+	height: 200px;
+	transform:translate(-50%, -50%);
+	z-index:1002;
+	box-sizing:border-box;
+	background:#fff;
+	box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
+	-webkit-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
+	-moz-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
+	border-radius:10px;
+}
+
+.popup_header{
+	margin-bottom: 10px;
+}
+.popup_content_mid{
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.popup_btn{
+	display: flex;
+	justify-content: center;
+	margin-top:10px;
+}
+.popup_btn button{
+	width: 100px;
+	height: 50px;
+	margin-right:20px;
+}
+.popup_btn #confirm_btn{
+	background-color : #8FB788;
+	color : white;
+	border-radius: 10px;
+	border : none;
+	font-weight : 800;
+}
+
+.popup_btn #confirm_btn:hover{
+	cursor : pointer;
+	box-shadow: 1px 1px 1px 1px gray;
+	background-color: #008c1d;
+}
+/*신청양식 input 태그 css*/
+input[type=text]{
+	width:100%;
+	height:60px;
+	border:0;
+	text-align:left;
+	outline:0;
+	
+	
+}
+#opinion{
+	width:100%;
+	height:200px;
+	text-align:left;
+	border: 0;
+	vertical-align:top;
+	outline:0;
+	padding-top: 15px;
+	resize:none;
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+    width: 8px;  /* 세로축 스크롤바 폭 너비 */
+}
+
+/* 스크롤바 막대 */
+::-webkit-scrollbar-thumb {
+    background: #8FB788; /* 스크롤바 막대 색상 */
+    border: 2px solid #8FB788; /* 스크롤바 막대 테두리 설정  */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #008c1d; /* 스크롤바 막대 색상 */
+	cursor: pointer;
+}
+
+/* 스크롤이 움직이는 뒷 배경 */
+::-webkit-scrollbar-track {
+	background: #ddf8d7; /* 스크롤바 뒷 배경 색상 */
+	border-radius: 10px;
+}
+
+.pagination{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.pagination > li{
+    width: 24px;
+    margin: 0 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pagination > li:hover{
+    width: 24px;
+    margin: 0 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pagination a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.current{
+    background-color: #8FB788;
+    border-radius: 30%;
+    color: white !important;
+    letter-spacing: 0 !important;
+}

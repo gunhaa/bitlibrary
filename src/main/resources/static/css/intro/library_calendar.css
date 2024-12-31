@@ -1,0 +1,146 @@
+/* 캘랜더 아이디 */
+#calendar{
+    height: 700px;  
+}
+
+/* 캘랜더 버튼 */
+.cate-button-surround{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 캘랜더 카테고리 */
+.calendar-category{
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+    box-shadow: 2px 2px 3px #d4d4d4;
+    cursor: pointer;
+}
+
+.calendar-category:hover{
+    background-color: #80afe1;
+    color: white;
+}
+
+.category-color{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 100px;
+    margin-right: 10px;
+}
+
+.gong{background-color: red;}
+.hue{background-color: #d4d4d4;}
+.classDay{background-color: yellow;}
+.eventDay{background-color: #5547ff;}
+
+/* 일정 편집 버튼 */
+#calendar-edit-btn{
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #5547ff;
+    color: white;
+    cursor: pointer;
+    transition-duration: 0.3s ;
+}
+
+#calendar-edit-btn:hover{
+    color: black;
+    background-color: #5647ff77;
+}
+
+.surround-calendar-area{
+    flex-basis: 55%;
+    position: relative;
+}
+
+/* 달력 해더 css */
+.fc-col-header-cell{
+    background-color: #8FB788;
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/* 요일별 css */
+.fc-day-fri a{
+    color: #d4d4d4;
+    font-size: 15px;
+}
+
+
+.fc-day-sun a{
+    color: #ef4e4e69;
+    font-size:15px;
+}
+
+
+.fc-day-sat a{
+color: rgba(0, 4, 255, 0.3);
+font-size:15px;
+}
+
+/* 달력 이벤트 제목 */
+.fc-event-title{
+    text-overflow: ellipsis;
+}
+
+/* 달력 버튼 영역 */
+.calendar-btn-area{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* 달력 버튼 */
+.calendar-btn-area div{
+    width: 70px;
+    height: 50px;
+
+    text-align: center;
+    line-height: 30px;
+
+    border: 1px solid #8FB788;
+    border-radius: 5px;
+
+    background-color: white;
+    color: #8FB788;
+    box-shadow: 2px 2px 3px #d4d4d4;
+
+    padding: 10px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.calendar-btn-area div:hover{
+    background-color: #8FB788;
+    color: white;
+}
+
+/* 오늘날짜, 선택한 날짜 표시 div */
+#date-div{
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* 선택한 날 일정 */
+#selectCalArea{
+    margin: 10px ;
+    font-size: 15px;
+    font-weight: 300px;
+    line-height: 30px;
+}
+
+

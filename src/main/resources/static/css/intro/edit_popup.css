@@ -1,0 +1,110 @@
+/* 편집 모달 */
+#edit-popup_layer {
+	position:fixed;
+	top:0;
+	left:0;
+	z-index: 10000; 
+	width: 100%; 
+	height: 100%; 
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+} 
+
+/* 팝업 박스 */
+.edit-popup_box{
+	position: relative;
+	top:50%;
+	left:50%; 
+
+	overflow: auto;
+
+	transform:translate(-50%, -50%);
+	z-index:1002;
+	box-sizing:border-box;
+	background:#fff;
+	box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
+	-webkit-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
+	-moz-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
+	border-radius:10px;
+}
+
+/* 팝업 헤더 */
+.edit-popup_header{
+	height: 70px;
+	background-color : #8FB788;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	display:flex;
+	align-items:center;
+	justify-content: space-between;
+}
+
+.edit-popup_header > p{
+	color:white;
+	font-size: 20px;
+	padding:20px;
+	font-weight: 700;
+}
+
+#edit-popup-close{
+	margin: 10px 30px;
+	cursor: pointer;
+	font-size: 30px;
+	color: white;
+}
+
+/*컨텐츠 영역*/
+.edit-popup_box .edit-popup_content {
+	
+	line-height:1.4rem;
+	font-size:14px;
+	display: flex;
+	justify-content: center;
+	align-items:center;
+	overflow: auto;
+}
+
+/*버튼영역*/
+.edit-popup_box .edit-popup_btn {
+	display:table;
+	table-layout: fixed;
+	width:100%;
+	word-break: break-word;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+.edit-popup_box .edit-popup_btn button{
+	width: 100px;
+	height: 50px;
+	
+}
+
+.edit-popup_box .edit-popup_btn #edit-confirm_btn{
+	
+	background-color : #0054b4;
+	color : white;
+	border-radius: 10px;
+	border : none;
+	font-weight : 800;
+}
+
+.edit-popup_box .edit-popup_btn #edit-confirm_btn:hover{
+	cursor : pointer;
+	box-shadow: 1px 1px 1px 1px gray;
+	background-color: #008c1d;
+}
+
+/*오버레이 뒷배경*/
+.edit-popup_overlay{
+	position:fixed;
+	top:0px;
+	right:0;
+	left:0;
+	bottom:0;
+	z-index:1001;
+	background:rgba(0,0,0,0.5);
+}    

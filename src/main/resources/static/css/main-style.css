@@ -1,0 +1,227 @@
+@font-face {
+    font-family: 'ELAND_Choice_M';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_M.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0; 
+    font-family: 'ELAND_Choice_M';
+}
+
+a{ 
+    text-decoration: none;
+    color : black;
+}
+
+#homeLogo{
+    height: 120px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+nav{
+	position: relative;
+	width: 1200px;
+	margin: auto;
+}
+
+nav > ul{
+    display: flex;
+	height: 150px;
+    list-style: none;
+}
+
+nav > ul > li{ flex-grow: 1; }
+
+nav > ul > li > a{
+    display: block;
+    text-align: center;
+    line-height: 150px;
+    color: black;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+nav li > a:hover{
+    display: block;
+    color: black;
+    font-weight: 900;
+}
+
+nav li > ul{
+    height: 0px;
+    margin-top: 10px;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    transition:height ease-out 0.5s 0s;
+    z-index: 999;
+    list-style: none;
+}
+
+nav a+ul > li{
+	margin: 5px 10px;
+	padding: 5px 0 7px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+nav+div{
+    height: 0px;
+    overflow: hidden;
+    position: absolute;
+    top: 150px;
+    width: 100%;
+    background-color: #f5f5f5;
+    transition:height ease-out 0.5s 0s;
+    z-index: 998;
+}
+
+nav:hover li > ul, nav:hover+div{
+    height: 200px;
+}
+
+
+.library-book{
+    height: 200px;
+    overflow: hidden;
+}
+
+.library-book > img{
+	width: 100%;
+}
+
+/* 헤더 메뉴 */
+.header-top-menu{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.header-top-menu *{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* 헤더 메뉴 체크박스 */
+#headerMenuToggle{ display: none;}
+
+/* 오른쪽 상단 닉네임 부분 */
+label[for='headerMenuToggle']{ cursor: pointer;}
+label[for='headerMenuToggle']:hover{ text-decoration: underline;}
+
+/* 체크박스 다음 형제 요소 div */
+#headerMenuToggle + div{ display: none;}
+
+/* 체크된 #headerMenuToggle의 다음 형제 요소 div */
+#headerMenuToggle:checked + div{ display: block;}
+
+/* 닉네임 클릭 시 보이는 메뉴 */
+.header-menu{
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    right: 0;
+    margin-top: 5px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.header-menu > a {
+    display: flex;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-menu > a:first-child{
+    border-bottom: 1px solid black;
+}
+
+.header-menu > a:hover{
+    background-color: #8FB788;
+    color: white;
+}
+
+/* 기본 적인 내용 영역 */
+.main{
+    width: 1024px;
+    min-height: 600px;
+    margin: auto;
+}
+
+/* intro 내용 영역 */
+.main-content-suround-section{
+    margin:auto;
+    width: 1024px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* main-page 내용 영역 */
+.main-page-suround-area-section{
+    margin: auto;
+    min-height: 600px;
+    width: 1024px;
+}
+
+.main-class-login-area{
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-food-notice-area{
+	display: flex;
+	justify-content: space-between;
+}
+
+.main-search-area{
+	width: 100%;
+}
+
+/* footer 영역 */
+footer {
+	margin-top: 50px;
+	width: 100%;
+	height: 200px;
+	background-color: #8FB788;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+footer>article>* {
+	font-size: 14px;
+}
+
+footer a {
+	color: white;
+	text-decoration: none;
+}
+
+footer span {
+	color: white;
+	padding: 0 10px;
+}
+
+footer>div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+footer>div>img {
+	margin: 20px;
+	max-width: 100px;
+	max-height: 100px;
+}
+
+footer>div>div>p {
+	font-size: 12px;
+	color: white;
+	margin: 5px;
+}

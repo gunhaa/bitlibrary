@@ -1,0 +1,647 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.side-menu-article{
+	float: left;
+}
+
+#searchBtn{
+	cursor: pointer;
+	background-color: white;
+	height:40px;
+	font-size:16px;
+	border:none;
+	width: 60px;
+	margin-left: 50px;
+}
+
+.fa-solid{
+	margin-right:5px;
+}
+
+#searchDetailBtn {
+	cursor: pointer;
+	background-color: #8FB788;
+	height:41px;
+	font-size:16px;
+	border: #8FB788;
+	border-radius: 5px;
+	color: white;
+	width:80px;
+	
+}
+.btnArea_a{
+	margin-right:10px;
+}
+
+.btnArea_b{
+	margin-left:20px;
+}
+.container{
+	width: 1024px;
+    margin: auto;
+}
+
+.main-content{
+	float: right;
+    width: 774px;
+	min-height: 700px;
+	margin: 20px 0;
+	margin-top:70px;
+}
+
+.main-title {
+	font-size: 40px;
+	margin-bottom: 40px;
+	font-weight: 800;
+}
+
+.searchForm {
+	position: relative;
+	width: 100%;
+}
+
+.search-result{
+	margin: 15px 0;
+}
+
+.searchBar {
+	display: flex;
+	border: 1px solid #8FB788;
+	height: 42px;
+	/* border-radius: 5px; */
+	overflow: hidden;
+	justify-content: space-between;
+}
+
+input {
+	width: 530px;
+	padding: 10px 12px;
+	font-size: 14px;
+	height: 40px;
+	border-width: 0;
+	border: none;
+	outline: none;
+	
+}
+
+#searchBtn i{
+	color: #8FB788;
+}
+
+#key{
+	width: 80px;
+	text-align: center;
+	border: 0;
+	outline: 0;
+}
+
+#queryResult{
+	margin: 15px 0 30px;
+}
+
+#queryResult > p{
+	padding: 5px 0;
+	border-bottom: 1px solid black;
+}
+
+.book-row{
+	padding: 15px;
+}
+
+.book-info-wapper{
+	display: flex;
+	justify-content: space-between;
+}
+
+.book-info-wapper > span{
+	font-size: 35px;
+	cursor: pointer;
+	height: 40px;
+}
+
+.book-info{
+	width: 65%;
+}
+
+.book-info > p{
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+.book-info > p:nth-of-type(1){
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.book-info > p:nth-of-type(2){}
+.book-info > p:nth-of-type(3){}
+.book-info > p:nth-of-type(4){}
+
+.resvInfoBtn{
+	padding: 8px 10px;
+	margin-left: 30px;
+	font-size: 14px;
+	cursor: pointer;
+	border: none;
+	background-color: #8FB788;
+	color: white;
+}
+
+.resvInfoBtn:hover{
+	text-decoration: underline;
+}
+
+.resvInfoBtn i{ margin-left: 10px;}
+
+.resvBtn{
+	padding: 5px 10px;
+	background-color: white;
+	border: 0;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.resvBtn:hover{
+	color: red;
+	text-decoration: underline;
+	font-size: 16px;
+
+}
+
+.searchDetailBtn {
+	background-color: #8FB788;
+	border-radius: 5px;
+	margin-left:10px;
+}
+
+#searchDetailBtn {
+	border: 0;
+}
+
+.titleLine{
+	border:3px solid #d4d4d4;
+	margin-bottom: 30px;
+}
+
+
+.body-content-mid {
+	height: 30px;
+	text-align: center;
+	
+}
+
+.body-content-bot {
+	height: 300px;
+	text-align: center;
+	border: 0.5px solid #8FB788;
+	border-radius:5px;
+	
+}
+
+.body-content-bot p{
+	color:gray;
+	text-align:left;
+	margin-left:10px;
+	margin-top:10px;
+	font-size:larger;
+}
+
+/*기본 페이지 */
+.body-content {
+	weight:800px;
+	height: auto;
+}
+
+.searchFormDetail {
+	border: 3px solid #8FB788;
+	height: 400px;
+	display: flex;
+}
+
+.detailItem {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: center; 
+	width : 100px;
+	margin-top: 30px;
+	width: 100px;
+}
+
+.details, .detailsYear, .detailsAlign, .detailsCount {
+	margin-bottom: 40px;
+	font-size: 18px;
+	margin-left: 15px;
+	width: 100px;
+}
+
+.detailInput {
+	margin-left: 30px;
+	margin-top:40px;
+}
+
+.details {
+	height: 150px;
+	line-height: 7;
+	margin-bottom: 35px;
+}
+
+.searchDetail, .searchAuthor, .searchPublisher {
+	margin-top: 10px;
+}
+
+.searchTitle, .searchAuthor, .searchPublisher {
+	display: flex;
+}
+
+.bookTitle, .author, .publisher {
+	border: 1px solid #8FB788;
+	background-color: #8FB788;
+	color: white;
+	height: 30px;
+	width: 70px;
+	text-align: center;
+	font-size: 14px;
+	line-height: 30px;
+	/* border-radius: 5px; */
+}
+
+.input {
+	margin-left: 10px;
+}
+
+.detailsTitle {
+	display: flex;
+}
+
+.searchYear{
+	margin-top:65px;
+}
+
+
+.inputYear{
+	display:flex;
+	align-items:center;
+	gap: 10px;
+}
+
+#inputDetail {
+	width: 400px;
+	padding: 10px 12px;
+	font-size: 12px;
+	height: 30px;
+	/* border-radius: 5px; */
+	border: 1px solid #8FB788;
+}
+
+#inputYear {
+	width: 100px;
+	padding: 10px;
+	font-size: 12px;
+	height: 30px;
+	/* border-radius: 5px; */
+	border: 1px solid #8FB788;
+}
+
+.searchAlign {
+	margin-top: 23px;
+}
+
+/* select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: 1rem;
+
+  color: #444;
+
+  margin: 0;
+
+  border: 1px solid #8FB788;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  outline:none;
+  
+} */
+
+/* select:hover {
+  border-color: #8FB788;
+} */
+
+select:focus {
+  /* border-color:  #8FB788; */
+  /* box-shadow: 0 0 1px 3px #DDF8D7; */
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  /* color:  #8FB788; */
+  outline: none;
+}
+
+select:disabled {
+  opacity: 0.5;
+}
+
+#searchAlign{
+	padding:5px;
+	border: 1px solid #8FB788; 
+	/* border-radius: 5px; */
+}
+
+.searchPrint {
+	margin-top: 27px;
+}
+
+#searchPrint{
+	padding:5px;
+	border: 1px solid #8FB788; 
+	/* border-radius: 5px; */
+}
+
+.btn-area {
+	display: flex;
+	justify-content: center;
+}
+
+.index-btn, .refresh-btn {
+	margin: 10px;
+}
+
+#index-btn, #refresh-btn{
+	width: 80px;
+	margin-top:10px;
+	padding: 0.5rem 1rem;
+	background-color: #8FB788;
+	color: white;
+	cursor: pointer;
+	border: 1.5px solid #8FB788;
+	outline: 0;
+	/* border-radius: 5px; */
+	text-decoration: none;
+}
+#index-btn:hover, #refresh-btn:hover{
+	background-color: #8FB788;
+	color:black;
+	background-color: white;
+}
+
+/*자료 검색 페이지*/
+.searchBody{
+	display:flex;
+	margin-top:30px;
+	height:100px;
+}
+.index{
+	width:20px;
+}
+.bookThumbnail{
+	width:140px;
+}
+.bookDetail{
+	margin-left:30px;
+	width:800px;
+}
+.bookDetailState{
+	width: 500px;
+	display:flex;
+}
+.bookDetailStateTextY{
+	display:flex;
+	color:green;
+	width: 200px;
+}
+.bookDetailStateTextN{
+	display:flex;
+	color:red;
+	width:200px;
+}
+.informBtn{
+	margin-left: 50px;
+}
+
+table{
+	/* border :1px solid #d4d4d4; */
+	margin-top: 10px;
+	width:100%;
+	text-align: center;
+}
+
+table thead{
+	background-color: #8FB788;
+	color: white;
+	height:40px;
+}
+table thead tr th:nth-child(n+5){
+	width:70px;
+}
+table tbody{
+	height:80px;
+}
+table tbody td{
+	border:1px solid #d4d4d4;
+}
+table tbody td:nth-child(n+5){
+	width:70px;
+}
+
+#informBtn{
+	background-color : white;
+	color: black;
+	border: 1px solid black;
+	width: 120px;
+	cursor:pointer;
+}
+#informBtn:hover {
+	background-color:#d4d4d4;
+	cursor:pointer;
+}
+
+.favoriteStar {
+    width: 30px;
+    height: 30px;
+    background-color: #d4d4d4; /* 버튼 배경 색상 (노란색) */
+    color: white;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+    );
+}
+
+.favoriteStar:hover {
+    background-color: #FFD700; /* 호버 시 배경 색상 변경 (주황색) */
+}
+
+#reservationBtn{
+	border:none;
+	background-color: #8FB788;
+	color: white;
+	cursor: pointer;
+	border-radius : 5px;
+	border: 1px solid #8FB788;
+	width: 60px;
+}
+#reservationBtn:hover {
+	border:none;
+	background-color: white;
+	color: #8FB788;
+	cursor: pointer;
+	border: 1px solid #8FB788;	
+}
+
+/* 모달 전체 배경 */
+.modal {
+	position:fixed;
+	top:0;
+	left:0;
+	z-index: 10000; 
+	width: 100%; 
+	height: 100%; 
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+
+
+/* 도서 예약 모달 */
+.popup_box_res{
+	position: relative;
+	top:50%;
+	left:50%; 
+	width:600px;
+	height: 350px;
+	transform:translate(-50%, -50%);
+	z-index:1002;
+	box-sizing:border-box;
+	background:#fff;
+	box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
+	-webkit-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
+	-moz-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
+	border-radius:10px;
+}
+.popup_content_top{
+	margin-bottom: 10px;
+}
+
+.popup_content_top #message_box{
+	font-size: small;
+	text-align: left;
+	padding-left: 20px;
+}
+
+
+.popup_content_bar{
+	border:1px solid #d4d4d4;
+}
+
+.popup_content_mid{
+	display: flex;
+	justify-content: space-between;
+	padding-left: 20px;
+}
+.popup_content_left{
+	border: 0.5px solid #ddd;
+}
+.popup_content_right{
+	width: 75%;
+	padding-left:10px;
+	height: 180px; 
+}
+.detailBox{
+	width: 40%;
+	height: 180px;
+	margin-right:10px;
+}
+.detailBox h2{
+	margin-bottom:10px;
+}
+.detailBox ul li{
+	list-style-type: none;
+	font-size:14px;
+	margin-bottom:3px;
+}
+.popup_content_right >h2 {
+	padding:13px 0;
+}
+.popup_content_right > p{
+	font-size:14px;
+	padding-bottom: 4px;
+	line-height: 20px;
+}
+.popup_btn{
+	display: flex;
+	justify-content: center;
+	margin-top:10px;
+}
+.popup_btn button{
+	width: 100px;
+	height: 50px;
+	margin-right:20px;
+}
+.popup_btn #confirm_btn{
+	background-color : #8FB788;
+	color : white;
+	border-radius: 10px;
+	border : none;
+	font-weight : 800;
+}
+.popup_btn #cancel_btn{
+	border : 2px solid #8FB788;
+	background-color : white;
+	color :#8FB788;
+	border-radius: 10px;
+	font-weight : 800;
+}
+.popup_btn #confirm_btn:hover{
+	cursor : pointer;
+	box-shadow: 1px 1px 1px 1px gray;
+	background-color: #008c1d;
+}
+.popup_btn #cancel_btn:hover{
+	cursor : pointer;
+	color: white;
+	box-shadow: 1px 1px 1px 1px gray;
+	background-color: #d4d4d4;
+	border: none;
+}
+/* 스와이퍼 */
+.swiper{
+ margin-top:20px;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.swiper-slide img {
+    width: 60%;
+    height: 60%;
+  }
+.swiper-button-next {
+	color: #8FB788 !important;
+}
+.swiper-button-prev{
+	color:#8FB788 !important;
+}
+

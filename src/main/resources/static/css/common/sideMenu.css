@@ -1,0 +1,125 @@
+/* 사이드 메뉴 */
+.side-menu-article {
+	margin: 20px 50px 0px 0px;
+	width: 200px;
+}
+
+/* 카테고리 div(레벨1) */
+.category {
+	height: 140px;
+	/* 테두리 위쪽 둥근부분 */
+	border-top-left-radius: 10px 10px;
+	border-top-right-radius: 10px 10px;
+	background-color: #008C1D;
+	/* 글씨 */
+	line-height: 140px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	color: white;
+}
+
+/* 사이드 메뉴 ul */
+.side-menu {
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid #d4d4d4;
+	/* 테두리 아래 둥근 부분 */
+	border-bottom-left-radius: 10px 10px;
+	border-bottom-right-radius: 10px 10px;
+	/* ul 스타일 없엠 */
+	list-style-type: none;
+
+	overflow: hidden;
+}
+
+/* 사이즈 메뉴 ul 바로 아래 li(레벨2) */
+.side-menu>li {
+	border-top: 1px solid #d4d4d4;
+	text-align: center;
+	transition-duration: 0.3s;
+
+}
+
+/* 레벨2 메뉴에 a 태그 */
+.side-menu>li>a {
+	display: inline-block;
+	text-decoration: none;
+	color: black;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 15px;
+	transition-duration: 0.3s;
+	width: 100%;
+}
+
+/* 레벨 2메뉴 a태그 hover */
+.side-menu>li>a:hover {
+	transform: scale(1.1);
+	color: white;
+}
+
+.side-menu>li:hover {
+	background-color: #8FB788;
+}
+
+/* 레벨3 메뉴 ul(하위에 하위 메뉴) */
+.side-menu>li>ul {
+	padding: 20px;
+	list-style: none;
+	text-align: left;
+	background-color: white;
+	/* border: 1px solid #8FB788; */
+}
+
+/* 레벨3 안에 있는 a태그 */
+.side-menu>li>ul>li>a {
+	color: #555;
+	text-decoration: none;
+	transition-duration: 0.3s;
+}
+
+.side-menu>li>ul>li>a:hover {
+	font-weight: bold;
+}
+
+/* 마지막 메뉴일 경우 */
+.last-menu {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+/* 레벨2 현재 선택된 메뉴일 경우 */
+.side-menu>li.side-current {
+	border: none;
+	background-color: #8FB788;
+}
+
+.side-menu>li>a.side-current-a {
+	color: white;
+}
+
+/* 레벨3 메뉴 a태그 현재 선택된 메뉴일 경우 */
+.side-menu>li>ul>li>a.side-side-current {
+	font-weight: bold;
+}
+
+/* 페이지 메인 내용 section */
+.content-suround-section {
+	min-height: 500px;
+	margin: 70px 0px 0 0;
+	width: 75%;
+}
+
+/* 제목 */
+.content-title{
+    font-size: 40px;
+    font-weight: 700;
+}
+
+/* 선 */
+.title-line{
+    width: 100%;
+    border: 3px solid #d4d4d4;
+    margin: 40px 0;
+}

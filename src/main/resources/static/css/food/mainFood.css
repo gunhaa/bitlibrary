@@ -1,0 +1,102 @@
+.main-food-area{
+    background-color: #8FB788;
+    width: 497px;
+    height: 300px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(69, 69, 69, 0.3);
+}
+
+.main-food-area > article:first-child{
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    align-items: center;
+    display: flex;
+    justify-content:space-between;
+}
+
+.main-food-area .today-menu-title{
+	display: flex;
+	gap:10px;
+	align-items: center;
+	font-weight: 800;
+}
+
+.main-food-area #goToFood{
+	width: 25px;
+	height: 25px;
+	background-color: white;
+	border-radius:100%;
+	box-shadow: 2px 2px 5px rgba(69, 69, 69, 0.3);
+    
+}
+
+#goToFood:hover{
+	background-color: #008c1d;
+}
+
+.main-food-area a{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	line-height: 25px;
+}
+
+.main-food-area #goToFood i{
+	width: 100%;
+	height: 100%;
+	color: #8FB788;
+    line-height: 25px;
+}
+.main-food-area #goToFood i:hover{
+	color: white;
+}
+
+
+.main-food-info-area{
+    display: flex;
+    border-radius:5px;
+    justify-content: space-around;
+}
+
+.main-food-info-area .main-today-menu{
+    background-color: white;
+    width: 45%;
+    border-radius: 5px;
+}
+
+.main-food-info-area .main-today-menu div{
+    border-bottom: 1px solid #d4d4dd;
+    height: 20%;
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-food-info-area .main-time-info{
+    background-color: white;
+    width: 45%;
+    border-radius: 5px;
+    height: 240px;
+}
+
+.main-cafe-time,
+.main-restaurant-time{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 50%;
+    gap: 15px;
+}
+
+.main-food-closed-day{
+	color:red;
+	height:100% !important;
+	text-align:center;
+	border:0 !important;
+	
+}

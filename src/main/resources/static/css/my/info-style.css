@@ -1,0 +1,155 @@
+.container{
+	display: flex;
+	justify-content: space-between;
+	width: 1024px;
+	margin: 20px auto;
+}
+
+.side-menu-article{
+	width: 200px;
+}
+
+.container > section{
+	width: 774px;
+	padding: 50px;
+}
+
+.myPage-title{
+    padding-bottom: 40px;
+    margin-bottom: 10px;
+    font-size: 40px;
+    border-bottom: 5px solid #d4d4d4;
+}
+
+.myPage-subject{
+    display: block;
+    margin-bottom: 30px;
+
+    font-size: 14px;
+    letter-spacing: -1px;
+}
+
+.myPage-row{
+    width: 90%;
+    height: 50px;
+    margin-top: 20px;
+
+    display: flex;
+    align-items: center;
+    border-bottom : 2px solid #d4d4d4;
+}
+
+.myPage-row > * {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.myPage-row > label{
+    width: 32%;
+    /* color: #0054B4; */
+    color: #008C1D;
+}
+
+.myPage-row > span{
+    width: 70%;
+    /* color: #0054B4; */
+    color: #008C1D;
+}
+
+.myPage-row > input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-weight: normal;
+}
+
+.myPage-submit{
+    width: 100%;
+    padding: 14px;
+    margin: 50px 0;
+    
+    font-size: 20px;
+    font-weight: bold;
+
+    background-color: #008C1D;
+    color: white;
+    cursor: pointer;
+    border: 1px solid #008C1D;
+    border-radius: 5px;
+}
+
+.myPage-submit:hover{
+    background-color: white;
+    border: 1px solid #008C1D;
+    color: #555;
+}
+
+
+
+form[name='myPageFrm']{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.myPage-row:focus-within{ 
+    border-bottom-color: #008C1D;
+}
+
+.info-title{
+    border: none;
+}
+
+.info-address{
+    margin: 0;
+}
+
+.info-address > button{
+    width: 30%;
+    height: 70%;
+
+    font-size: 14px;
+    font-weight: normal;
+
+    background-color: #008C1D;
+    border : 1px solid #008C1D;
+    color: white;
+    cursor: pointer;
+}
+
+.info-address > button:hover{
+    background-color: white; 
+    color: #555;
+    border: 1px solid #008C1D;
+}
+
+.myPage-wrapper{
+    padding: 20px;
+    margin: 20px 0;
+    border: 2px solid #ddd;
+}
+
+.myPage-wrapper span{
+    color: #A49292;
+}
+
+.myPage-wrapper strong{
+    color: black;
+}
+
+.myPage-wrapper > p:nth-child(1) span{
+    color: #7E7E7E;
+    font-size: 20px;
+}
+
+.myPage-wrapper > p:nth-child(1) strong{
+    color: black;
+    font-size: 24px;
+}
+
+.myPage-wrapper > p:nth-child(2){
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,139 @@
+.container{
+	width: 1024px;
+	margin: 20px auto;
+	overflow: hidden;
+}
+
+.side-menu{
+	float: left;
+	width: 200px;
+}
+
+.list-area{
+	float: right;
+	width: 774px;
+	padding: 50px;
+}
+
+.list-area > h1{
+	padding-bottom: 20px;
+    font-size: 40px;
+    border-bottom: 5px solid #ddd;
+}
+
+.list-area > div{
+	margin: 10px;
+	text-align: right;
+}
+
+#all{
+	vertical-align:-3px;
+}
+
+.nav-area{
+	display: flex;
+	border-bottom: 1px solid #80AFE1;
+	border-left: 1px solid #ddd;
+	margin: 20px 0;
+}
+
+.nav-area > a{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 150px;
+	height: 40px;
+	font-size: 18px;
+	background-color: white;
+	border: 1px solid #ddd;
+	cursor: pointer;
+}
+
+.nav-area > .selected{
+	background-color: #0054B4;
+	color: white;
+}
+
+#list-table{
+	width: 100%;
+	margin: 10px 0;
+	border: 1px solid #B9B9B9;
+	border-radius: 4px;
+	border-collapse: collapse;
+}
+
+#list-table > thead > tr{
+	height: 40px;
+	background-color: #F0F0F0;
+}
+
+#list-table > tbody td{
+	text-align: center;
+	padding: 10px;
+}
+
+#list-table td > button{
+	padding: 5px 10px;
+	border: 1px solid #f00;
+	border-radius: 10px;
+	background-color: #FF0303;
+	color: white;
+	cursor: pointer;
+}
+
+input[type='checkbox']{
+	accent-color: #65558F;
+	width: 17px;
+	height: 17px;
+}
+
+#list-table td > a:hover{
+	text-decoration: underline;
+}
+
+#list-table td > span{
+	cursor: pointer;
+}
+
+.admin-submit{
+	float: right;
+	font-size: 15px;
+	color: white;
+	padding: 10px 25px;
+	background-color: #555;
+	border: 1px solid #ddd;
+}
+
+.pagination{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.pagination > li{
+    width: 24px;
+    margin: 0 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pagination > li:hover{
+    width: 24px;
+    margin: 0 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pagination a{
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.current{
+    background-color: #c5c5c5;
+    border-radius: 30%;
+    color: black !important;
+    letter-spacing: 0 !important;
+}

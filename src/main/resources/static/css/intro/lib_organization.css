@@ -1,0 +1,99 @@
+.organWrap {
+	text-align: center;
+}
+
+.organWrap h4 {
+	max-width: 180px;
+	margin: 0 auto;
+	padding: 14px 10px;
+	line-height: 24px;
+	border-radius: 10px;
+	font-size: 1.213em;
+	font-weight: bord;
+	color: white;
+	background-color: #008C1D;
+}
+
+.organList {
+	overflow: hidden;
+	position: relative;
+	padding-top: 21px;
+}
+
+.organList::before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 1px;
+	height: 20px;
+	background-color: #ddd;
+}
+
+.organList::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 20px;
+	height: 1px;
+	background-color: #ddd;
+}
+
+.organList.cols2::after {
+	left: 73px;
+	right: 72px;
+}
+
+.organList>ul {
+	position: relative;
+	margin-left: -10px;
+	font-size: 0;
+	line-height: 0;
+	list-style: none;
+}
+
+.organList>ul>li {
+	display: inline-block;
+	width: 16%;
+	padding-top: 20px;
+	font-size: 1rem;
+	line-height: 1.5;
+	letter-spacing: -1px;
+	vertical-align: top;
+}
+
+.organList .box {
+	position: relative;
+	margin-left: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.organList .box::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: -21px;
+	left: 50%;
+	width: 1px;
+	height: 20px;
+	background-color: #ddd;
+}
+
+.organList .box>h5 {
+	padding: 20px 0;
+	line-height: 24px;
+	font-size: 1.071em;
+	background-color: #8FB788;
+	color: white;
+	border-top-left-radius: 5px 5px;
+	border-top-right-radius: 5px 5px;
+	margin: 0;
+}
+
+.organList>ul ul {
+	height: 195px;
+	padding: 10px 0;
+	list-style: none;
+}

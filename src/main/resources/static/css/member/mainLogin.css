@@ -1,0 +1,132 @@
+.main-login-area{
+    width: 30%;
+    color: white;
+    height: 300px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(69, 69, 69, 0.3);
+    padding: 10px;
+    background-color: #80AFE1;
+}
+
+.main-login-area .main-login-title{
+    font-size: 18px;
+    padding: 16px;
+}
+
+.main-login-area .main-login-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.main-login-area .main-login-form > input{
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    box-shadow: 2px 2px 5px rgba(69, 69, 69, 0.3);
+}
+
+.main-login-area .main-login-form input:focus{
+    outline: none;
+}
+
+.main-login-form .main-saveId{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    font-size: 13px;
+    padding-left: 15px;
+}
+
+.main-login-form .main-saveId input{
+    margin-right: 5px;
+}
+
+.main-login-area .main-login-btn-area{
+    width: 90%;
+}
+
+.main-login-area .main-login-btn-area #main-login-btn{
+    width: 100%;
+    color: white;
+    padding: 15px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 2px 2px 5px rgba(69, 69, 69, 0.3);
+}
+
+.main-login-area .main-login-btn-area #main-login-btn:hover{
+    background-color:  #008c16;
+    color: white;
+}
+
+.main-login-form .main-my-area span{
+    color: white;
+    font-size: 13px;
+}
+
+.main-login-form .main-my-area a span:hover{
+    color: #0054b4;
+    font-weight: 800;
+}
+
+/* 로그인 시 */
+.main-login-member-title{
+    border-radius: 30px;
+    color: #80AFE1;
+    background-color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.main-login-table{
+    width: 90%;
+    margin: auto;
+}
+
+.main-login-table table{
+    border-collapse: collapse;
+}
+
+.main-login-table table td{
+    width: 100%;
+    padding: 10px;
+    
+}
+
+.main-login-table table .second-tr{
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+}
+
+.main-logout-btn-area{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.main-logout-btn-area #main-my-library-btn{
+    width: 50%;
+    border-radius: 5px;
+    color: white;
+    background-color: #0054b4;
+    border: 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.main-logout-btn-area #main-my-library-btn a{
+    display: inline-block;
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+}

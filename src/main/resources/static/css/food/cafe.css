@@ -1,0 +1,489 @@
+/* 공통 부분 */
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.main{
+	width: 1024px;
+	display: flex;
+	justify-content:space-between;
+}
+
+.main-content{
+	margin-top:70px;
+	width: 750px;
+}
+
+/* 제목 */
+.content-title{
+    font-size: 40px;
+    font-weight : 800;
+}
+
+/* 선 */
+.title-line{
+    width: 100%;
+    border: 3px solid #d4d4d4;
+    margin: 40px 0;
+}
+
+
+/* content-detail-area */
+.content-detail-area{
+	margin-top:50px;
+}
+
+/* 공통 부분 끝 */
+
+/* 결제 구매 버튼 영역 */
+.cafe-btn-area {
+	display: flex;
+	justify-content:end;
+	align-items: center;
+}
+
+#pay-btn{
+	padding: 10px;
+	background-color: white;
+	border: 2px solid #8FB788;
+	border-radius: 10px;
+	color: #8FB788;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#pay-btn:hover{
+	background-color: #8FB788;
+	color: white;
+}
+
+
+/* menu detail 영역 */
+.cafe-menu{
+	display: flex;
+	flex-wrap: wrap;
+	max-width:760px;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top:10px;
+    gap: 20px 75px;
+}
+
+.cafe-menu-area {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+
+.cafe-menu-area  img{
+	width:200px;
+	height:200px;
+	object-fit: cover;
+	margin-bottom: 10px;
+	border-radius: 10px;
+}
+
+.cafe-menu-area  p {
+	font-size: 15px;
+}
+
+.cafe-menu-area  p:first-of-type{
+	font-weight: 800;
+}
+
+/*  cafe 모달 */
+.mcafe-popupBox{
+	width: 850px !important;
+}
+
+.popup_content .mcafe{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.popup_content .mcafe .mcafe-menu-area p:first-child{
+	color: #8FB788;
+	word-break: break-word;
+	margin-right: 10px;
+}
+
+/* 모달 메뉴 보여주는 곳 */
+.popup_content .mcafe .mcafe-menu-area{
+	display: flex;
+	width: 50%;
+}
+
+.popup_content .mcafe .mcafe-menu-list{
+	width: 80%;
+	height: 250px;
+	overflow-y : scroll;
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+    width: 8px;  /* 세로축 스크롤바 폭 너비 */
+}
+
+/* 스크롤바 막대 */
+::-webkit-scrollbar-thumb {
+    background: #8FB788; /* 스크롤바 막대 색상 */
+    border: 2px solid #8FB788; /* 스크롤바 막대 테두리 설정  */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #008c1d; /* 스크롤바 막대 색상 */
+	cursor: pointer;
+}
+
+/* 스크롤이 움직이는 뒷 배경 */
+::-webkit-scrollbar-track {
+	background: #ddf8d7; /* 스크롤바 뒷 배경 색상 */
+	border-radius: 10px;
+}
+
+.popup_content .mcafe .mcafe-menu-area .mcafe-menu{
+	display: flex;
+	width: 100%;
+	padding: 10px 0;
+}
+
+.popup_content .mcafe .mcafe-menu-area .mcafe-menu:hover{
+	background-color: #d4d4d4;
+	cursor: pointer;
+}
+
+.popup_content .mcafe .mcafe-menu-area .mcafe-menu img{
+	width:100px;
+	height:100px;
+	object-fit: cover;
+	margin: 10px;
+}
+
+.popup_content .mcafe .mcafe-menu .mcafe-menu-detail {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap:5px;
+}
+
+.popup_content .mcafe .mcafe-menu .mcafe-menu-detail span{
+	font-size: 13px;
+	width: 100%;
+	word-break: keep-all;
+}
+
+
+.mcafe-menu .mcafe-menu-detail .mcafe-menu-price{
+	display: flex;
+	justify-content: end;
+}
+
+.mcafe-menu .mcafe-menu-detail h4,
+.mcafe-menu .mcafe-menu-detail .mcafe-menu-price span{
+	font-size: 15px !important;
+	font-weight: 800;
+}
+
+/* 모달 장바구니 보여주는 곳 */
+.mcafe .mcafe-cart-area{
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.mcafe .mcafe-cart-area .mcafe-cart{
+	display: flex;
+	width: 100%;
+	height: 80%;
+	justify-content: space-between;
+}
+
+.mcafe .mcafe-cart-area .mcafe-cart-list{
+	box-shadow: 1px 1px 1px 1px #d4d4d4;
+	border-radius: 10px;
+	width: 70%;
+	height: 200px;
+	overflow-y:  auto;
+	margin: 0 10px;
+}
+
+.mcafe .mcafe-cart-area .mcafe-cart-list table{
+	width: 100%;
+}
+
+.mcafe .mcafe-cart-area .mcafe-price{
+	display: flex;
+	justify-content: space-between;
+}
+
+.mcafe .mcafe-cart-area .mcafe-cart p:first-child,
+.mcafe .mcafe-cart-area .mcafe-price p:first-child{
+	color: #8FB788;
+	word-break: break-word;
+}
+
+
+.mcafe-cart-area .mcafe-cart .mcafe-cart-menu{
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 10px;
+	width: 100%;
+}
+
+.mcafe-cart-area .mcafe-cart .mcafe-cart-menu td:first-child{
+	display: flex;
+	gap: 10px;
+}
+
+.mcafe-cart .mcafe-cart-menu .meal-ticket-btnArea .qty-result,
+.mcafe-cart-area .mcafe-cart .mcafe-cart-menu span{
+	font-size: 13px;
+	color: black !important;
+	font-weight: 800;
+}
+
+.mcafe-cart .mcafe-cart-menu .meal-ticket-btnArea input,
+.mcafe-cart-area .mcafe-cart .mcafe-cart-menu #cancelBtn{
+	border: 0;
+	background-color: #8FB788;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	font-size: 15px;
+	
+}
+
+.mcafe-cart-area .mcafe-cart .mcafe-cart-menu #cancelBtn{
+	/* 가운데 정렬 맞추기 용 */
+	padding-bottom : 10px;
+	padding-right: 1px;
+}
+
+.mcafe-cart .mcafe-cart-menu .meal-ticket-btnArea input:hover,
+.mcafe-cart-area .mcafe-cart .mcafe-cart-menu #cancelBtn:hover{
+	background-color: #008c1d;
+}
+
+.mcafe-cart .mcafe-cart-menu .meal-ticket-btnArea{
+	display: flex;
+	align-items: center;
+}
+
+#menu-add-btn,
+#menu-update-btn{
+	padding: 10px;
+	background-color: white;
+	border: 2px solid #8FB788;
+	border-radius: 10px;
+	color: #8FB788;
+	font-weight: 800;
+	cursor: pointer;
+}
+
+#menu-add-btn:hover,
+#menu-update-btn:hover{
+	color:white;
+	background-color:  #8FB788;
+}
+
+#cafe-update-btn,
+#menu-del-btn{
+	background-color: #8FB788;
+	color: white;
+	border: 0;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 15px;
+	padding: 5px 7px;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+#menu-del-btn:hover{
+	background-color: #008c1d;
+}
+
+#cafe-update-btn{
+	top: 5px;
+	left: 5px;
+	padding: 5px 7px;
+	font-size: 15px;
+	width: 30px;
+}
+
+.popup_content > p{
+	margin-top: 30px;
+}
+
+/* 관리자 메뉴 추가  */
+.menu-add-area{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	gap: 50px;
+}
+
+.menu-add-popupBox{
+	width: 1000px !important;
+}
+
+.menu-add-area .menu-name-price-area{
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.menu-add-area .menu-name-price-area .menu-price-area,
+.menu-add-area .menu-name-price-area .menu-name-area{
+	width: 100%;
+	display: flex;
+	text-align: center;
+	align-items: center;
+}
+
+.menu-desc-area textarea,
+.menu-add-area .menu-price-area input,
+.menu-add-area .menu-name-area input{
+	height: 60px;
+	box-shadow: 2px 2px 5px rgba(69, 69, 69, 0.3);
+	border: none;
+	border-radius: 5px;
+	padding-left: 10px;
+	margin-left: 10px;
+	width: 200px;
+	font-size: 18px;
+}
+
+.menu-desc-area textarea:focus,
+.menu-add-area .menu-price-area input:focus,
+.menu-add-area .menu-name-area input:focus{
+	outline: none;
+}
+
+.menu-add-area .image-area{
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.menu-desc-area p,
+.menu-add-area .menu-name-area p,
+.menu-add-area .menu-price-area p,
+.menu-add-area .image-area p{
+	color: #8FB788 !important;
+	font-size: 15px;
+	font-weight: 800;
+	word-break: break-word;
+	width: 80px;
+}
+
+.menu-add-area .image-area p{
+	margin-top: 20px;
+}
+
+/* 미리보기 영역 */
+.menu-add-area .image-area .left-image-area > label{
+	width: 200px;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 2px 2px 5px rgba(69, 69, 69, 0.3);
+	border-radius: 10px;
+	position: relative;
+}
+
+.menu-add-area .image-area .left-image-area i{
+	position: absolute;
+	top: 95px;
+	right: 360px;
+	font-size: 20px;
+	cursor: pointer;
+	color: #8FB788;
+	display: none;
+}
+
+/* file 타입 input */
+.menu-add-area .image-area .left-image-area .inputImage{display: none;}
+
+
+/* 미리보기 이미지 */
+.menu-add-area .image-area .left-image-area .preview{
+	max-width: 100%;
+	max-height: 100%;
+}
+
+
+/* 오른쪽 이미지 */
+.menu-add-area .image-area .right-image-area{
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-left: 10px;
+}
+
+.menu-add-area .image-area .right-image-area pre{
+	font-size: 13px;
+	width: 100%;
+	overflow: auto;
+	white-space: pre-wrap; /* pre tag내에 word wrap */
+	color: #727272;
+}
+
+.menu-add-area .image-area .right-image-area .image-btn button{
+	padding: 10px;
+	background-color: white;
+	border: 2px solid #8FB788;
+	border-radius: 10px;
+	color: #8FB788;
+	font-weight: 800;
+	cursor: pointer;
+}
+
+.menu-add-area .image-area .right-image-area .image-btn button:hover{
+	background-color: #8FB788;
+	color: white;
+}
+
+#menuAddFrm .popup_btn{
+	margin-top: 50px;
+}
+
+
+.popup_btn #agree_btn{
+	margin: 10px;
+}
+
+.menu-desc-area{
+	margin-top:30px;
+	margin-left: 15px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.menu-desc-area p{
+	width: 63px;
+}
+
+.menu-desc-area textarea{
+	width: 850px;
+	height: 100px;
+	padding-top: 10px;
+	resize: none;
+}

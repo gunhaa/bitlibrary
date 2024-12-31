@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항</title>
+  <!-- 필요한 스타일 및 스크립트 추가 -->
+</head>
+
+<body>
+<div th:fragment="mainNotice" >
+  <section class="main-notice-section">
+
+    <div class="main-notice-area">
+
+      <div class="notice-title">
+        <span>공지사항</span>
+        <div id="gotoNotice"><a th:href="@{/board/15}"><i class="fa-solid fa-plus"></i></a></div>
+      </div>
+
+      <div class="list-wrapper">
+        <table class="list-table">
+          <tbody>
+          <!-- 게시글이 존재하지 않을 경우 -->
+  <!--        <tr th:if="${#lists.isEmpty(boardList)}">-->
+            <th colspan="5">게시글이 존재하지 않습니다.</th>
+  <!--        </tr>-->
+
+          <!-- 게시글이 존재할 경우 -->
+  <!--        <tr th:each="board : ${boardList}" th:if="${boardList.size() > 0}">-->
+  <!--          <td>-->
+  <!--            <a th:href="@{/board/15/{boardNo}(boardNo=${board.boardNo})}" th:text="${board.boardTitle}"></a>-->
+  <!--          </td>-->
+  <!--          <td>-->
+  <!--            <span th:text="${board.boardUpdateDate != null ? board.boardUpdateDate : board.boardCreateDate}"></span>-->
+  <!--          </td>-->
+  <!--        </tr>-->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </section>
+</div>
+</body>
+</html>

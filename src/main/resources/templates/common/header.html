@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library</title>
+    <link rel="stylesheet" th:href="@{/css/main-style.css}">
+<!--    <script>-->
+<!--        (() => {-->
+<!--            var link = document.createElement('link');-->
+<!--            link.rel = "shortcut icon";-->
+<!--            link.href = "/images/logo.png";-->
+<!--            document.head.appendChild(link);-->
+<!--        })();-->
+<!--    </script>-->
+</head>
+<div th:fragment="header">
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}"><img id="homeLogo" th:src="@{/images/logo.png}">자바 라이브러리</a></li>
+                <li>
+                    <a th:href="@{/intro/1}">도서관 안내</a>
+                    <ul>
+                        <li><a th:href="@{/intro/1/7}">도서관 소개</a></li>
+                        <li><a th:href="@{/intro/1/8}">이용안내</a></li>
+                        <li><a th:href="@{/intro/1/9}">시설안내</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/book/1/1}">자료 검색</a>
+                    <ul>
+                        <li><a th:href="@{/book/1/1}">통합 자료 검색</a></li>
+                        <li><a th:href="@{/book/2}">희망 도서 신청</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/scheduling/12}">참여마당</a>
+                    <ul>
+                        <li><a th:href="@{/scheduling/12}">교육문화 프로그램</a></li>
+                        <li><a th:href="@{/scheduling/13}">열람실</a></li>
+                        <li><a th:href="@{/scheduling/14}">세미나실</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/board/15}">이용자 마당</a>
+                    <ul>
+                        <li><a th:href="@{/board/15}">공지사항</a></li>
+                        <li><a th:href="@{/board/16}">문의사항</a></li>
+                        <li><a th:href="@{/board/17}">자주 묻는 질문</a></li>
+                        <li><a th:href="@{/board/18}">책 후기 나눠요</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/food}">맛있는 도서관</a>
+                    <ul>
+                        <li><a th:href="@{/food}">구내식당</a></li>
+                        <li><a th:href="@{/cafe}">카페</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/myLibrary/book}" th:onclick="|alertMsg();|">내 서재</a>
+                    <ul>
+                        <li><a th:href="@{/myLibrary/book}" th:onclick="|alertMsg();|">나의 도서관</a></li>
+                        <li><a th:href="@{/myPayment}" th:onclick="|alertMsg();|">결제내역</a></li>
+                        <li><a th:href="@{/myPage/info}" th:onclick="|alertMsg();|">회원정보</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="header-top-menu">
+                <div th:if="${loginMember == null}">
+                    <!-- 로그인 X -->
+                    <a th:href="@{/member/login}">로그인</a> | <a th:href="@{/member/signUp}">회원가입</a>
+                </div>
+                <div th:if="${loginMember != null}">
+                    <!-- 로그인 O -->
+                    <label for="headerMenuToggle" th:text="${loginMember.memberName}">
+                        <i class="fa-solid fa-caret-down"></i>
+                    </label>
+                    <input type="checkbox" id="headerMenuToggle">
+                    <div class="header-menu">
+                        <div th:if="${loginMember.authority == 1}">
+                            <a th:href="@{/myPage/info}">내 정보</a>
+                        </div>
+                        <div th:if="${loginMember.authority == 2}">
+                            <a th:href="@{/admin/1}">관리자</a>
+                        </div>
+                        <a th:href="@{/member/logout}">로그아웃</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div></div>
+    </header>
+<!-- 임시 제거 (무슨 조건인지 모르겠음)-->
+<!--    <div th:if="${#request.servletPath != '/'}" class="library-book">-->
+        <img src="@{/images/library_book.png}">
+<!--    </div>-->
+
+    <script src="https://kit.fontawesome.com/58046189b2.js" crossorigin="anonymous"></script>
+    <script>
+        const loginMember = /*[[${loginMember}]]*/ "";
+
+        function alertMsg() {
+            if (loginMember === "") {
+                alert("로그인 후 이용해주세요.");
+            }
+        }
+
+        (() => {
+            let link = document.createElement('link');
+            link.rel = "shortcut icon";
+            link.href = "/images/logo.png";
+            document.head.appendChild(link);
+        })();
+    </script>
+</body>
+</div>
+</html>

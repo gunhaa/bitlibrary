@@ -1,0 +1,332 @@
+/* 다른 도서관 btn 영역 */
+.library-another-btn-area{
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+
+/* 버튼 css */
+.libraryAnother{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: auto;
+	height: 35px;
+	border: 1px solid #d4d4d4;
+	border-radius: 5px;
+	margin: 10px;
+	text-align: center;
+	padding: 5px;
+}
+
+.libraryAnother a{
+	display: inline-block;
+	width: 100%;
+	font-size: 18px;
+	text-decoration: none;
+	line-height: 35px;
+	color: #555;
+}
+
+.libraryAnother.current{
+	background-color: #008c1d;
+	border: 0;
+}
+
+.libraryAnother a.current{
+	color: white;
+}
+
+/* 소개 지도와 글 */
+.map-content-suround{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* 소개 글 */
+.introduce-another-library-area{
+	flex-basis: 50%;
+	height: 310px;
+
+}
+
+.introduce-another-content{
+	margin: 10px;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.introduce-another-content th{
+	border-right: 1px solid #d4d4d4;
+	padding: 10px;
+	text-align: left;
+}
+
+.introduce-another-content td{
+	padding-left: 10px;
+	overflow: auto;
+
+	white-space: pre-wrap;
+}
+
+/* 소개 지도 */
+#map{
+	flex-basis: 45%;
+	height: 310px;
+}
+
+/* 이미지 article 영역 */
+.library-another-images-area{
+	width: 100%;
+	margin: 20px 0;
+}
+
+/* 이미지를 감싸는 div */
+.boardImg{
+    width: 100%;
+    display: inline-block;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+    text-align: center;
+}
+
+/* 이미지 */
+.boardImg img{
+    max-width: 150px;
+    max-height: 150px;
+}
+
+/* 관리자 버튼 영역 */
+.manager-btn-area{
+	width: 100%;
+	display: flex;
+	justify-content: end;
+	margin: 20px;
+}
+
+.manager-btn-area button{
+	width: 100px;
+	margin-right: 20px;
+	border: 0;
+	border-radius: 5px;
+	cursor: pointer;
+	color: white;
+	padding: 10px;
+	transition-duration: 0.3s;
+}
+
+.manager-btn-area button:hover{
+	color: black;
+}
+
+#insertLibrary{
+	background-color: #80afe1;
+}
+
+#updateLibrary{
+	background-color: #8FB788;
+}
+
+#deleteLibrary{
+	background-color: rgb(181, 17, 17);
+}
+
+/* 사진 모달 */
+/* modal : 화면내에 html 요소를 이용해서 만드는 분할 창 */
+.modal{
+    background-color: rgb(0, 0,0, 0.4);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+
+    display: none;
+}
+
+/* 모달 이미지 */
+#modal-image{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    background-color: white;
+    margin:auto;
+}
+
+
+/* 닫기 버튼 */
+#modal-close{
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition-duration: 0.2s;
+}
+
+#modal-close:hover{
+    transform: scale(1.2);
+}
+
+.modal.show{/* 클래스로 modal, show를 동시에 가진 요소 선택 */
+    display: flex;
+
+    animation-name: show;/* @keyframes show 적용 */
+    animation-duration: 0.5s;/* 애니매이션 수행 시간 */
+}
+
+.modal.hide{
+    animation-name: hide ;
+    animation-duration: 0.5s;
+}
+
+/* @keyframes :
+애니메이션 중간중간의 특정 지점들을 거칠 수 있는 키프레임들을 설정함으로써
+CSS 애니메이션 과정의 중간 절차를 제어할 수 있게 합니다.  */
+@keyframes show {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+
+@keyframes hide {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+
+
+/* 편집 팝업 영역 */
+.edit-popup_box{
+	width:970px;
+	max-height: 800px;}
+
+/* 편집 팝업 컨텐츠 영역 */
+.edit-popup_content > form{
+	width: 90%;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.edit-popup_content > form > div > div{ margin: 10px;}
+
+.edit-popup_content > form > div > div > span{ 
+	display: inline-block;
+
+	font-size: 18px;
+	font-weight: 500;
+	width: 10%;
+}
+
+.popupTitle > input{
+	width: 85%;
+	font-size: 16px;
+	padding: 2px 2px 2px 10px;
+	border: 1px solid #d4d4d4;
+	border-radius: 5px;
+}
+
+.popupAddress > input{
+	width: 75%;
+	font-size: 16px;
+	padding: 2px 2px 2px 10px;
+	border: 1px solid #d4d4d4;
+	border-radius: 5px;
+}
+
+.popupAddress > button{
+	margin-left: 3px;
+	padding: 0 20px;
+	background-color: #8FB788;
+	border-radius: 5px;
+	border: 1px solid #8FB788;
+	color: white;
+	cursor: pointer;
+}
+
+/* map 영역 */
+.popup-map-suround{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#map2{
+	width: 90%;
+	height: 200px;
+}
+
+.popupIntroSuround > div{
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.popupIntroSuround > textarea{
+	width: 100%;
+	height: 125px;
+
+	padding: 10px;
+
+	resize: none;
+	border: 1px solid #d4d4d4;
+	border-radius: 5px;
+
+	white-space: pre-wrap;
+}
+
+.pop-image-suround{
+	width: 100%;
+	display: flex;
+    justify-content: space-between;
+}
+
+/* 이미지를 감싸는 div */
+.boardImage{
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+
+/* 미리보기 영역 */
+.boardImage label{
+    width: 100%;
+    height: 100%;
+
+    border: 1px solid #ccc;
+	border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* file 타입 input */
+.inputImage{ display: none;}
+
+/* 미리보기 이미지 */
+.preview{
+    max-width: 100%;
+    max-height: 100%;
+    /* 지정된 칸 내부에 비율을 변경하지 않고 이미지 배치 */
+}
+
+/* 이미지 삭제 */
+.delete-image{
+    position: absolute;
+    top: 0;
+    right: 7px;
+    font-size: 20px;
+    cursor: pointer;
+}

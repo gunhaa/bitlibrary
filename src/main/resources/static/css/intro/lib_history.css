@@ -1,0 +1,60 @@
+.library-history {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	position: relative;
+	list-style: none;
+}
+
+.library-history::before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 120px;
+	bottom: 20px;
+	border-left: 2px solid #D4D4D4;
+}
+
+.library-history li {
+	position: relative;
+}
+
+.library-history .year {
+	position: absolute;
+	left: 0;
+	top: 5px;
+	min-width: 180px;
+	font-size: 1.8em;
+	line-height: 1;
+	margin: 0;
+	padding: 0;
+	font-weight: 500;
+}
+
+.library-history>li>dl {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	position: relative;
+	padding-left: 156px;
+	background: url("/resources/images/intro/bul_history.png") no-repeat;
+	background-position: 112px;
+}
+
+.library-history>li dl+dl {
+	margin-top: 10px;
+}
+
+.library-history>li>dl>dt {
+	position: absolute;
+	left: 0;
+	top: 7px;
+	padding-left: 150px;
+	line-height: 29px;
+}
+
+.library-history>li>dl>dd {
+	margin-left: 80px;
+	line-height: 43px;
+}

@@ -1,0 +1,22 @@
+.library-introduce-table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.library-introduce-table td:nth-child(1) {
+	font-weight: bold;
+	font-size: 18px;
+	border-right: 3px solid #d4d4d4;
+	padding: 10px 30px 10px 0px;
+}
+
+.library-introduce-table td:nth-child(2) {
+	padding-left: 20px;
+}
+
+.kakao-map-suround {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/cb5f1fee4d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:fragment = "mainSearch">
+  <section class="main-search-area">
+    <article class="searchForm">
+      <input type="text" id="query" name="query" placeholder="도서 검색어를 입력하세요."
+             th:onkeyup="if(event.keyCode == 13){gotoSearch()}">
+      <div class="searchArea">
+        <button type="button" id="searchBtn" th:onclick="|gotoSearch()|">
+          <i class="fa-solid fa-magnifying-glass" style="width: fit-content;"></i>
+        </button>
+      </div>
+    </article>
+  </section>
+
+  <script>
+    const query = document.getElementById("query");
+
+    const btn = document.getElementById("searchBtn");
+
+    function gotoSearch() {
+        const queryValue = query.value;
+        location.href='/book/1/1?query=' + queryValue + '&key=ta';
+    }
+  </script>
+</div>
+</body>
+</html>
