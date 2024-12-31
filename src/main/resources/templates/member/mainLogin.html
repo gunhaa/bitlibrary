@@ -9,68 +9,65 @@
 <body>
 <div th:fragment="mainLogin">
   <section class="main-login-area">
-<!--  로그인 관련 전부 주석처리-->
     <!-- 로그인 안 됐을 때 -->
 <!--    <div th:if="${empty loginMember}">-->
-<!--      <article class="main-login-title">회원 로그인</article>-->
-<!--      <form action="/member/login" method="POST" class="main-login-form">-->
+      <article class="main-login-title">회원 로그인</article>
+      <form action="/member/login" method="POST" class="main-login-form">
+        <!-- 아이디 입력 (쿠키값을 사용하여 자동 입력) -->
 <!--        <input type="text" name="memberEmail" placeholder="아이디 입력" th:value="${#cookies.saveId.value}" />-->
-<!--        <input type="password" name="memberPw" placeholder="비밀번호 입력" />-->
+        <input type="text" name="memberEmail" placeholder="아이디 입력"/>
+        <input type="password" name="memberPw" placeholder="비밀번호 입력" />
 
-<!--        <div class="main-saveId">-->
+        <div class="main-saveId">
+          <!-- 아이디 저장 체크박스 (쿠키 값이 있을 경우 checked) -->
 <!--          <input type="checkbox" name="saveId" id="saveId" th:checked="${#strings.isNotEmpty(#cookies.saveId.value)}" />-->
-<!--          <label for="saveId">아이디 저장</label>-->
-<!--        </div>-->
+          <input type="checkbox" name="saveId" id="saveId"/>
+          <label for="saveId">아이디 저장</label>
+        </div>
 
-<!--        <div class="main-login-btn-area">-->
-<!--          <button id="main-login-btn">로그인</button>-->
-<!--        </div>-->
+        <div class="main-login-btn-area">
+          <button id="main-login-btn">로그인</button>
+        </div>
 
-<!--        <div class="main-my-area">-->
-<!--          <a href="/member/findId"><span>ID 찾기</span></a>-->
-<!--          <span>|</span>-->
-<!--          <a href="/member/resetPw"><span>비밀번호 초기화</span></a>-->
-<!--          <span>|</span>-->
-<!--          <a href="/member/signUp"><span>회원가입</span></a>-->
-<!--        </div>-->
-<!--      </form>-->
-<!--    </div>-->
+        <div class="main-my-area">
+          <a href="/member/findId"><span>ID 찾기</span></a>
+          <span>|</span>
+          <a href="/member/resetPw"><span>비밀번호 초기화</span></a>
+          <span>|</span>
+          <a href="/member/signUp"><span>회원가입</span></a>
+        </div>
+      </form>
+    <!--    임시 주석-->
 
     <!-- 로그인 됐을 때 -->
-<!--    임시 주석처리 - 상시 로그인 상태로-->
-<!--    <div th:if="${not empty loginMember}">-->
-      <!--        <strong th:text="${loginMember.memberName}">회원명</strong>님 환영합니다.-->
+<!--    <div>-->
+<!--      <article class="main-login-title main-login-member-title">-->
+<!--        <strong>회원명</strong>님 환영합니다.-->
+<!--      </article>-->
 
-      <article class="main-login-title main-login-member-title"><Strong>임시회원 님 환영합니다</Strong></article>
-
-      <article class="main-login-form main-login-table">
-        <table>
-          <tr>
-            <td>도서대출현황</td>
-            <td>TEMP</td>
+<!--      <article class="main-login-form main-login-table">-->
+<!--        <table>-->
+<!--          <tr>-->
+<!--            <td>도서대출현황</td>-->
 <!--            <td th:text="${loginMember.loanBook}">대출현황</td>-->
-          </tr>
-          <tr class="second-tr">
-            <td>도서예약현황</td>
-            <td>TEMP</td>
+<!--          </tr>-->
+<!--          <tr class="second-tr">-->
+<!--            <td>도서예약현황</td>-->
 <!--            <td th:text="${loginMember.resvBook}">예약현황</td>-->
-          </tr>
-          <tr>
-            <td>연체도서</td>
-            <td>TEMP</td>
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td>연체도서</td>-->
 <!--            <td th:text="${loginMember.overdueBook}">연체도서</td>-->
-          </tr>
-        </table>
-        <div class="main-login-btn-area main-logout-btn-area">
-          <div id="main-my-library-btn"><a th:href="@{/member/logout}">로그아웃</a></div>
-          <div id="main-my-library-btn"><a th:href="@{/myLibrary/book}">내 서재</a></div>
-        </div>
-      </article>
+<!--          </tr>-->
+<!--        </table>-->
+<!--        <div class="main-login-btn-area main-logout-btn-area">-->
+<!--          <div id="main-my-library-btn"><a th:href="@{/member/logout}">로그아웃</a></div>-->
+<!--          <div id="main-my-library-btn"><a th:href="@{/myLibrary/book}">내 서재</a></div>-->
+<!--        </div>-->
+<!--      </article>-->
 <!--    </div>-->
   </section>
   <script th:src="@{/js/member/mainLogin.js}" defer></script>
 </div>
-
 </body>
-
 </html>
