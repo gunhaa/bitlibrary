@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<article class="side-menu-article" th:fragment="sideMenu">
+  <th:block th:each="cat : ${category}">
+    <th:if test="${catLevel1 == cat.CAT_CODE}">
+      <div class="category" th:text="${cat.CAT_NAME}"></div>
+
+      <ul class="side-menu">
+        <th:block th:each="cat2 : ${category}">
+          <th:if test="${cat.CAT_CODE == cat2.PARENT_CODE}">
+            <div th:switch="${catLevel2}">
+              <div th:case="${catLevel2 == 9 && catLevel2 == cat2.CAT_CODE}">
+                <li class="side-current">
+                  <a th:href="@{/intro/{catCode}/{cat2Code}(catCode=${cat.CAT_CODE}, cat2Code=${cat2.CAT_CODE})}"
+                     class="side-current-a"
+                     th:text="${cat2.CAT_NAME}"></a>
+                </li>
+              </div>
+
+              <div th:case="${catLevel2 == cat2.CAT_CODE}">
+                <li class="side-current">
+                  <a th:href="@{/intro/{catCode}/{cat2Code}(catCode=${cat.CAT_CODE}, cat2Code=${cat2.CAT_CODE})}"
+                     class="side-current-a"
+                     th:text="${cat2.CAT_NAME}"></a>
+                  <ul>
+                    <th:block th:each="cat3 : ${category}">
+                      <th:if test="${catLevel2 == cat3.PARENT_CODE}">
+                        <div th:switch="${catLevel3}">
+                          <div th:case="${catLevel3 == cat3.CAT_CODE}">
+                            <li>
+                              <a th:href="@{/intro/{catCode}/{cat2Code}/{cat3Code}(catCode=${cat.CAT_CODE}, cat2Code=${cat2.CAT_CODE}, cat3Code=${cat3.CAT_CODE})}"
+                                 class="side-side-current"
+                                 th:text="${cat3.CAT_NAME}"></a>
+                            </li>
+                          </div>
+                          <div th:case="*">
+                            <li>
+                              <a th:href="@{/intro/{catCode}/{cat2Code}/{cat3Code}(catCode=${cat.CAT_CODE}, cat2Code=${cat2.CAT_CODE}, cat3Code=${cat3.CAT_CODE})}"
+                                 th:text="${cat3.CAT_NAME}"></a>
+                            </li>
+                          </div>
+                        </div>
+                      </th:if>
+                    </th:block>
+                  </ul>
+                </li>
+              </div>
+
+              <div th:case="*">
+                <li>
+                  <a th:href="@{/intro/{catCode}/{cat2Code}(catCode=${cat.CAT_CODE}, cat2Code=${cat2.CAT_CODE})}"
+                     th:text="${cat2.CAT_NAME}"></a>
+                </li>
+              </div>
+            </div>
+          </th:if>
+        </th:block>
+      </ul>
+    </th:if>
+  </th:block>
+</article>
