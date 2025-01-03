@@ -20,7 +20,7 @@ public class Category {
     private String categoryName;
 
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name ="parent_cagegory_id")
+    @JoinColumn (name ="parent_category_id")
     private Category parentCategory;
 
     @OneToMany (mappedBy = "parentCategory", cascade = CascadeType.ALL)

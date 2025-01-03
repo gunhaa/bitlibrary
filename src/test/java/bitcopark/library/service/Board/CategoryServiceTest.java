@@ -27,7 +27,7 @@ class CategoryServiceTest {
 
 
     @Test
-    public void 카테고리_인터셉터_SELECTALL(){
+    public void 카테고리_selectall_test(){
         //given
         //tempCategoryGenerate 에서 실행
         
@@ -41,7 +41,7 @@ class CategoryServiceTest {
 //        }
 
         //then                                                                  // given의 카테고리 총 갯수
-        org.assertj.core.api.Assertions.assertThat(categories.size()).isEqualTo(49);
+        assertThat(categories.size()).isEqualTo(49);
     }
 
     @Test
