@@ -11,6 +11,7 @@ public class IntroController {
 
     @GetMapping("/intro/introduce")
     public String intro(Model model){
+        model.addAttribute("catLevel1", 1);
         model.addAttribute("catLevel2", 7);
         model.addAttribute("catLevel3", 24);
         return "/intro/lib_greeting";

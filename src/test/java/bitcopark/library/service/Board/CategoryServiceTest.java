@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +27,24 @@ class CategoryServiceTest {
 
 
     @Test
-    @Commit
+    public void 카테고리_인터셉터_SELECTALL(){
+        //given
+        //tempCategoryGenerate 에서 실행
+        
+        //when
+        List<Category> categories = categoryRepository.selectAll();
+
+//        for (Category category : categories) {
+//            System.out.println("category.getId() = " + category.getId());
+//            System.out.println("category.getCategoryName() = " + category.getCategoryName());
+//            System.out.println("category.getParentCategory() = " + category.getParentCategory());
+//        }
+
+        //then                                                                  // given의 카테고리 총 갯수
+        org.assertj.core.api.Assertions.assertThat(categories.size()).isEqualTo(49);
+    }
+
+    @Test
     public void 부모가_있는_카테고리_생성(){
 
         //given
