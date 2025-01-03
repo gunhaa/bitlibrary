@@ -27,6 +27,19 @@ public class CategoryService {
         return category;
     }
 
+    @Transactional
+    public Category createNewCategoryWithParentCategory(String categoryName, Category parentCategory){
+        Category category = Category.builder()
+                .categoryName(categoryName)
+                .parentCategory(parentCategory)
+                .build();
+
+        validateDuplicateCategoryName(categoryName);
+
+        categoryRepository.save(category);
+        return category;
+    }
+
     public Category createCategoryObject(String categoryName){
         return categoryRepository.findByCategoryName(categoryName).orElseThrow(()-> new CategoryNotFoundException("존재하지 않는 카테고리 입니다 : " + categoryName));
     }

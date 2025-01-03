@@ -19,6 +19,13 @@ public class Category {
     private Long id;
     private String categoryName;
 
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name ="parent_cagegory_id")
+    private Category parentCategory;
+
+    @OneToMany (mappedBy = "parentCategory", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Category> subCategory = new ArrayList<>();
 
     @OneToMany(mappedBy = "category")
     @Builder.Default

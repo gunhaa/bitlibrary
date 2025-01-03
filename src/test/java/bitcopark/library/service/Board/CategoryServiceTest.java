@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -22,6 +23,22 @@ class CategoryServiceTest {
     @Autowired
     CategoryRepository categoryRepository;
 
+
+    @Test
+    @Commit
+    public void 부모가_있는_카테고리_생성(){
+
+        //given
+        Category category1 = categoryService.createNewCategory("역사");
+
+        //when
+        Category category2 = categoryService.createNewCategoryWithParentCategory("국사", category1);
+
+        //then
+        Category category3 = categoryRepository.findByCategoryName("국사").orElseThrow(()-> new IllegalArgumentException("오류 발생"));
+        assertThat(category2).isEqualTo(category3);
+
+    }
 
 
     @Test
