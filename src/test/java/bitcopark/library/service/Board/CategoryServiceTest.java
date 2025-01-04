@@ -38,7 +38,7 @@ class CategoryServiceTest {
         List<CategoryDTO> categoryDTOList = categoryService.getCategoryDTOList(categoryList);
 
         // then
-        assertThat("guide").isEqualTo(categoryDTOList.get(0).getCategoryEngName());
+        assertThat("intro").isEqualTo(categoryDTOList.get(0).getCategoryEngName());
 
 
     }

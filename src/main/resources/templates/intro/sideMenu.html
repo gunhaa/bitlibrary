@@ -75,7 +75,6 @@
                                        th:text="${category2.categoryName}"></a>
                                 </li>
                             </th:block>
-
                             <th:block th:if="${catLevel2 == category2.id}">
                                 <li class="side-current">
                                     <a th:href="@{/intro/{catCode}/{cat2Code}(catCode=${category.id}, cat2Code=${category2.id})}"
@@ -84,24 +83,42 @@
                                     <ul>
                                         <th:block th:each="category3 : ${categoryList}">
                                             <th:block th:if="${category3.parentCategory != null && catLevel2 == category3.parentCategory.id}">
-                                                <th:block th:if="${catLevel3 == category3.id}">
-                                                    <li>
-                                                        <a th:href="@{/intro/{catCode}/{cat2Code}/{cat3Code}(catCode=${category.id}, cat2Code=${category2.id}, cat3Code=${category3.id})}"
-                                                           class="side-side-current"
-                                                           th:text="${category3.categoryName}"></a>
-                                                    </li>
-                                                </th:block>
-                                                <th:block th:unless="${catLevel3 == category3.id}">
-                                                    <li>
-                                                        <a th:href="@{/intro/{catCode}/{cat2Code}/{cat3Code}(catCode=${category.id}, cat2Code=${category2.id}, cat3Code=${category3.id})}"
-                                                           th:text="${category3.categoryName}"></a>
-                                                    </li>
-                                                </th:block>
+                                                <li>
+                                                    <a th:href="@{/intro/{catCode}/{cat2Code}/{cat3Code}(catCode=${category.id}, cat2Code=${category2.id}, cat3Code=${category3.id})}"
+                                                       th:classappend="${catLevel3 == category3.id} ? 'side-side-current' : ''"
+                                                       th:text="${category3.categoryName}"></a>
+                                                </li>
                                             </th:block>
                                         </th:block>
                                     </ul>
                                 </li>
                             </th:block>
+<!--                            <th:block th:if="${catLevel2 == category2.id}">-->
+<!--                                <li class="side-current">-->
+<!--                                    <a th:href="@{/intro/{catCode}/{cat2Code}(catCode=${category.id}, cat2Code=${category2.id})}"-->
+<!--                                       class="side-current-a"-->
+<!--                                       th:text="${category2.categoryName}"></a>-->
+<!--                                    <ul>-->
+<!--                                        <th:block th:each="category3 : ${categoryList}">-->
+<!--                                            <th:block th:if="${category3.parentCategory != null && catLevel2 == category3.parentCategory.id}">-->
+<!--                                                <th:block th:if="${catLevel3 == category3.id}">-->
+<!--                                                    <li>-->
+<!--                                                        <a th:href="@{/intro/{catCode}/{cat2Code}/{cat3Code}(catCode=${category.id}, cat2Code=${category2.id}, cat3Code=${category3.id})}"-->
+<!--                                                           class="side-side-current"-->
+<!--                                                           th:text="${category3.categoryName}"></a>-->
+<!--                                                    </li>-->
+<!--                                                </th:block>-->
+<!--                                                <th:block th:unless="${catLevel3 == category3.id}">-->
+<!--                                                    <li>-->
+<!--                                                        <a th:href="@{/intro/{catCode}/{cat2Code}/{cat3Code}(catCode=${category.id}, cat2Code=${category2.id}, cat3Code=${category3.id})}"-->
+<!--                                                           th:text="${category3.categoryName}"></a>-->
+<!--                                                    </li>-->
+<!--                                                </th:block>-->
+<!--                                            </th:block>-->
+<!--                                        </th:block>-->
+<!--                                    </ul>-->
+<!--                                </li>-->
+<!--                            </th:block>-->
 
                             <th:block th:unless="${catLevel2 == category2.id}">
                                 <li>

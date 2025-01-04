@@ -70,14 +70,14 @@ public class CategoryService {
 
     private String mapKorToEngCategoryName(String categoryName) {
         Map<String, String> nameMap = new HashMap<>();
-        nameMap.put("도서관 안내", "guide");
+        nameMap.put("도서관 안내", "intro");
         nameMap.put("자료 검색", "search");
         nameMap.put("참여 마당", "community");
         nameMap.put("이용자 마당", "user");
         nameMap.put("맛있는 도서관", "deliciousLibrary");
         nameMap.put("내 서재", "myLibrary");
         nameMap.put("도서관 소개", "introduction");
-        nameMap.put("이용안내", "usageGuide");
+        nameMap.put("이용안내", "guide");
         nameMap.put("시설안내", "facilityGuide");
         nameMap.put("통합자료 검색", "integratedSearch");
         nameMap.put("희망 도서 신청", "wishBookRequest");

@@ -26,7 +26,7 @@ public class GlobalModelAttribute {
 
         @SuppressWarnings("unchecked")
         List<CategoryDTO> categoryDTOList = (List<CategoryDTO>) servletContext.getAttribute("categoryList");
-        
+
         if (categoryDTOList == null) {
             List<Category> categoryList = categoryRepository.selectAll();
             categoryDTOList = categoryService.getCategoryDTOList(categoryList);
