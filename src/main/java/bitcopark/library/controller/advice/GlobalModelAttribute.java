@@ -19,13 +19,10 @@ public class GlobalModelAttribute {
     @ModelAttribute("categoryList")
     public List<Category> addGlobalCategory() {
 
-        System.out.println("이곳 실행됨");
-        
         @SuppressWarnings("unchecked")
         List<Category> categoryList = (List<Category>) servletContext.getAttribute("categoryList");
         
         if (categoryList == null) {
-            System.out.println("category가 널값임 왜이럼??");
             categoryList = categoryRepository.selectAll();
             System.out.println("categoryList = " + categoryList);
             servletContext.setAttribute("categoryList", categoryList);

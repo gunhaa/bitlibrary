@@ -53,6 +53,3 @@
 	</c:forEach>
 
 </article>
-
-
-

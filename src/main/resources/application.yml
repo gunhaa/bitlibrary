@@ -1,4 +1,6 @@
 spring:
+  thymeleaf:
+    cache: false
   datasource:
     url: jdbc:h2:tcp://localhost/~/bitlibrary
     username: aa
