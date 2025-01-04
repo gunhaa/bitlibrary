@@ -1,5 +1,7 @@
 package bitcopark.library.service.Board;
 
+import bitcopark.library.controller.advice.CategoryDTO;
+import bitcopark.library.controller.advice.GlobalModelAttribute;
 import bitcopark.library.entity.Board.Category;
 import bitcopark.library.exception.CategoryNotFoundException;
 import bitcopark.library.repository.Board.CategoryRepository;
@@ -27,18 +29,27 @@ class CategoryServiceTest {
 
 
     @Test
+    public void 카테고리_engName_test(){
+
+        // given
+        List<Category> categoryList = categoryRepository.selectAll();
+
+        // when
+        List<CategoryDTO> categoryDTOList = categoryService.getCategoryDTOList(categoryList);
+
+        // then
+        assertThat("guide").isEqualTo(categoryDTOList.get(0).getCategoryEngName());
+
+
+    }
+
+    @Test
     public void 카테고리_selectall_test(){
         //given
         //tempCategoryGenerate 에서 실행
         
         //when
         List<Category> categories = categoryRepository.selectAll();
-
-//        for (Category category : categories) {
-//            System.out.println("category.getId() = " + category.getId());
-//            System.out.println("category.getCategoryName() = " + category.getCategoryName());
-//            System.out.println("category.getParentCategory() = " + category.getParentCategory());
-//        }
 
         //then                                                                  // given의 카테고리 총 갯수
         assertThat(categories.size()).isEqualTo(49);
