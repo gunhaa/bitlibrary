@@ -1,8 +1,7 @@
-package bitcopark.library.controller.advice;
+package bitcopark.library.controller.aop;
 
 import bitcopark.library.entity.Board.Board;
 import bitcopark.library.entity.Board.Category;
-import jakarta.persistence.Entity;
 import lombok.Data;
 
 import java.util.ArrayList;

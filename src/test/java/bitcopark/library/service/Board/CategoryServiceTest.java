@@ -1,7 +1,6 @@
 package bitcopark.library.service.Board;
 
-import bitcopark.library.controller.advice.CategoryDTO;
-import bitcopark.library.controller.advice.GlobalModelAttribute;
+import bitcopark.library.controller.aop.CategoryDTO;
 import bitcopark.library.entity.Board.Category;
 import bitcopark.library.exception.CategoryNotFoundException;
 import bitcopark.library.repository.Board.CategoryRepository;
@@ -9,7 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

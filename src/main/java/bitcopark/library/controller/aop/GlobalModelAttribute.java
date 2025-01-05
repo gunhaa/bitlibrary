@@ -1,4 +1,4 @@
-package bitcopark.library.controller.advice;
+package bitcopark.library.controller.aop;
 
 import bitcopark.library.entity.Board.Category;
 import bitcopark.library.repository.Board.CategoryRepository;
@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 @RequiredArgsConstructor

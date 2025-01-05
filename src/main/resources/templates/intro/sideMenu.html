@@ -68,23 +68,26 @@
                     <th:block th:if="${category2.parentCategory != null && category.id == category2.parentCategory.id}">
 
                         <th:block>
+
                             <th:block th:if="${catLevel2 == 9}">
                                 <li class="side-current">
-                                    <a th:href="@{/intro/{catCode}/{cat2Code}(catCode=${category.id}, cat2Code=${category2.id})}"
+                                    <a th:href="@{/intro/{catName}/{cat2Code}(catName=${category.categoryName}, cat2Code=${category2.id})}"
                                        class="side-current-a"
                                        th:text="${category2.categoryName}"></a>
                                 </li>
                             </th:block>
+
                             <th:block th:if="${catLevel2 == category2.id}">
                                 <li class="side-current">
-                                    <a th:href="@{/intro/{catCode}/{cat2Code}(catCode=${category.id}, cat2Code=${category2.id})}"
+<!--                                    <a th:href="@{/{catName}/{cat2Name}/{cat3Code}(catName=${category.categoryName}, cat2Name=${category2.categoryName}, cat3Code=${category3.id})}"-->
+                                    <a th:href="@{/intro/{catName}/{cat2Code}(catName=${category.categoryEngName}, cat2Code=${category2.id})}"
                                        class="side-current-a"
                                        th:text="${category2.categoryName}"></a>
                                     <ul>
                                         <th:block th:each="category3 : ${categoryList}">
                                             <th:block th:if="${category3.parentCategory != null && catLevel2 == category3.parentCategory.id}">
                                                 <li>
-                                                    <a th:href="@{/intro/{catCode}/{cat2Code}/{cat3Code}(catCode=${category.id}, cat2Code=${category2.id}, cat3Code=${category3.id})}"
+                                                    <a th:href="@{/{catName}/{cat2Name}/{cat3Code}(catName=${category.categoryEngName}, cat2Name=${category2.categoryEngName}, cat3Code=${category3.id})}"
                                                        th:classappend="${catLevel3 == category3.id} ? 'side-side-current' : ''"
                                                        th:text="${category3.categoryName}"></a>
                                                 </li>
@@ -93,6 +96,8 @@
                                     </ul>
                                 </li>
                             </th:block>
+
+
 <!--                            <th:block th:if="${catLevel2 == category2.id}">-->
 <!--                                <li class="side-current">-->
 <!--                                    <a th:href="@{/intro/{catCode}/{cat2Code}(catCode=${category.id}, cat2Code=${category2.id})}"-->

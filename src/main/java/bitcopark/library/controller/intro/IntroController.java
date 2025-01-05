@@ -1,7 +1,6 @@
 package bitcopark.library.controller.intro;
 
-import bitcopark.library.controller.advice.CategoryDTO;
-import bitcopark.library.entity.Board.Category;
+import bitcopark.library.controller.aop.CategoryDTO;
 import bitcopark.library.exception.CategoryNotFoundException;
 import bitcopark.library.repository.Board.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,32 +21,52 @@ public class IntroController {
 //    @GetMapping("/intro/introduction")
     @GetMapping("/intro/{catLevel2}/{catLevel3}")
     public String intro(Model model , @ModelAttribute("categoryList") List<CategoryDTO> categoryDTOList
-                        , @PathVariable String catLevel2, @PathVariable Integer catLevel3){
+                        , @PathVariable String catLevel2, @PathVariable String catLevel3){
 
         String catLevel1 = "intro";
-        CategoryDTO categoryDTO1 = getCategoryDTObyCategoryEngName(categoryDTOList, catLevel1);
-        model.addAttribute("catLevel1", categoryDTO1.getId());
+        CategoryDTO categoryLevel1 = getCategoryDTObyCategoryEngName(categoryDTOList, catLevel1);
+        model.addAttribute("catLevel1", categoryLevel1.getId());
 
 
-        CategoryDTO categoryDTO2 = getCategoryDTObyCategoryEngName(categoryDTOList, catLevel2);
-        model.addAttribute("catLevel2", categoryDTO2.getId());
+        CategoryDTO categoryLevel2 = getCategoryDTObyCategoryEngName(categoryDTOList, catLevel2);
+        model.addAttribute("catLevel2", categoryLevel2.getId());
 
 //        CategoryDTO categoryDTO3 = getCategoryDTObyCategoryId(categoryDTOList, catLevel3);
-        model.addAttribute("catLevel3", catLevel3);
+        model.addAttribute("catLevel3", Integer.parseInt(catLevel3));
 
         System.out.println("catLevel3 = " + catLevel3);
 //        System.out.println("categoryDTO3.getId() = " + categoryDTO3.getId());
         
-        if(categoryDTO2.getCategoryName().equals("도서관 소개")){
-            return "/intro/lib_greeting";
+        if(categoryLevel2.getCategoryName().equals("도서관 소개")){
+
+            CategoryDTO categoryLevel3 = getCategoryDTObyCategoryId(categoryDTOList, catLevel3);
+            switch (categoryLevel3.getCategoryName()) {
+                case "인사말" -> {
+                    return "/intro/lib_greeting";
+                }
+                case "연혁" -> {
+                    return "intro/lib_history";
+                }
+                case "조직도" -> {
+                    return "intro/lib_organization";
+                }
+                case "도서관 오시는 길" -> {
+                    return "intro/lib_intro";
+                }
+                case "주변 도서관" -> {
+                    // do something
+                    return "intro/lib_intro_another";
+                }
+            }
+
         }
 
-        if(categoryDTO2.getCategoryName().equals("이용안내")) {
+        if(categoryLevel2.getCategoryName().equals("이용안내")) {
 //            model.addAttribute("catLevel3", 29);
             return "intro/lib_hours";
         }
 
-        if(categoryDTO2.getCategoryName().equals("시설안내")) {
+        if(categoryLevel2.getCategoryName().equals("시설안내")) {
             return "intro/lib_map";
         }
 

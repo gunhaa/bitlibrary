@@ -1,6 +1,6 @@
 package bitcopark.library.service.Board;
 
-import bitcopark.library.controller.advice.CategoryDTO;
+import bitcopark.library.controller.aop.CategoryDTO;
 import bitcopark.library.entity.Board.Category;
 import bitcopark.library.exception.CategoryNotFoundException;
 import bitcopark.library.repository.Board.CategoryRepository;
