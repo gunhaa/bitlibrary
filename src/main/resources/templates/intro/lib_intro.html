@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Java Library - 도서관 소개</title>
+
+  <!-- CSS 링크 -->
+  <link rel="stylesheet" th:href="@{/css/main-style.css}">
+  <link rel="stylesheet" th:href="@{/css/common/sideMenu.css}">
+  <link rel="stylesheet" th:href="@{/css/intro/lib_intro.css}">
+</head>
+<body>
+<!-- Header 포함 -->
+<div th:replace="common/header :: header"></div>
+
+<section class="main-content-suround-section">
+  <!-- Side Menu 포함 -->
+  <div th:replace="intro/sideMenu :: sideMenu"></div>
+
+  <section class="content-suround-section">
+    <div class="content-title">도서관 오시는 길</div>
+    <div class="title-line"></div>
+
+    <section class="content-detail-section">
+      <div>
+        <table class="library-introduce-table">
+          <tr>
+            <td>주소</td>
+            <td>강남지원 1관 : 서울특별시 강남구 테헤란로 14길 6 남도빌딩</td>
+          </tr>
+          <tr>
+            <td>버스</td>
+            <td>역삼역.포스코P&S타워 정류장</td>
+          </tr>
+          <tr>
+            <td>지하철</td>
+            <td>지하철 2호선 역삼역 3번출구 100m</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>지하철 2호선 강남역 1번출구 약700m</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="kakao-map-suround">
+        <div id="map" style="width:500px;height:400px;"></div>
+      </div>
+    </section>
+  </section>
+</section>
+
+<!-- Footer 포함 -->
+<div th:replace="common/footer :: footer"></div>
+
+<!-- JavaScript -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0607ae9f020d16a7d4b36b27444aa9f4&libraries=services,drawing"></script>
+<script th:src="@{/js/intro/lib_intro.js}"></script>
+</body>
+</html>

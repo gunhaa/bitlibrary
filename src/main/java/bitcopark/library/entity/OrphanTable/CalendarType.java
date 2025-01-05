@@ -1,6 +1,6 @@
 package bitcopark.library.entity.OrphanTable;
 
-public enum ScheduleType {
+public enum CalendarType {
 
     HOLIDAY,EVENT,CLOSURE
 

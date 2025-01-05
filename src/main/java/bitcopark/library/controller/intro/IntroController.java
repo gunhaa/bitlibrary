@@ -31,15 +31,9 @@ public class IntroController {
         CategoryDTO categoryLevel2 = getCategoryDTObyCategoryEngName(categoryDTOList, catLevel2);
         model.addAttribute("catLevel2", categoryLevel2.getId());
 
-//        CategoryDTO categoryDTO3 = getCategoryDTObyCategoryId(categoryDTOList, catLevel3);
-        model.addAttribute("catLevel3", Integer.parseInt(catLevel3));
-
-        System.out.println("catLevel3 = " + catLevel3);
-//        System.out.println("categoryDTO3.getId() = " + categoryDTO3.getId());
-        
         if(categoryLevel2.getCategoryName().equals("도서관 소개")){
-
             CategoryDTO categoryLevel3 = getCategoryDTObyCategoryId(categoryDTOList, catLevel3);
+            model.addAttribute("catLevel3", Integer.parseInt(catLevel3));
             switch (categoryLevel3.getCategoryName()) {
                 case "인사말" -> {
                     return "/intro/lib_greeting";
@@ -62,8 +56,16 @@ public class IntroController {
         }
 
         if(categoryLevel2.getCategoryName().equals("이용안내")) {
-//            model.addAttribute("catLevel3", 29);
-            return "intro/lib_hours";
+            CategoryDTO categoryLevel3 = getCategoryDTObyCategoryId(categoryDTOList, catLevel3);
+            model.addAttribute("catLevel3", Integer.parseInt(catLevel3));
+            switch(categoryLevel3.getCategoryName()){
+                case "이용시간" -> {
+                    return "intro/lib_hours";
+                }
+                case "도서관 달력" -> {
+                    return "intro/lib_calender";
+                }
+            }
         }
 
         if(categoryLevel2.getCategoryName().equals("시설안내")) {
