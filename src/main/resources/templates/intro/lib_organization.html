@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Java Library - 조직도</title>
+
+  <link rel="stylesheet" href="/css/main-style.css">
+  <link rel="stylesheet" href="/css/common/sideMenu.css">
+  <link rel="stylesheet" href="/css/intro/lib_organization.css">
+
+</head>
+<body>
+<div th:replace="common/header :: header"></div>
+
+<section class="main-content-suround-section">
+  <div th:replace="intro/sideMenu :: sideMenu"></div>
+
+  <section class="content-suround-section">
+    <div class="content-title">조직도</div>
+    <div class="title-line"></div>
+
+    <section class="content-detail-section">
+
+      <section class="organWrap">
+        <h4>bitlibrary</h4>
+        <div class="organList cols2">
+          <ul>
+            <li><div class="box">
+              <h5>도서관 안내</h5>
+              <ul>
+                <li th:text="'황건하'"></li>
+              </ul>
+            </div></li>
+            <li><div class="box">
+              <h5>자료 검색</h5>
+              <ul>
+                <li th:text="'황건하'"></li>
+              </ul>
+            </div></li>
+            <li><div class="box">
+              <h5>참여마당</h5>
+              <ul>
+                <li th:text="'배지환'"></li>
+              </ul>
+            </div></li>
+            <li><div class="box">
+              <h5>이용자 마당</h5>
+              <ul>
+                <li th:text="'배지환'"></li>
+              </ul>
+            </div></li>
+
+            <li><div class="box">
+              <h5>맛있는 도서관</h5>
+              <ul>
+                <li th:text="'이재원'"></li>
+              </ul>
+            </div></li>
+            <li><div class="box">
+              <h5>내 서재</h5>
+              <ul>
+                <li th:text="'이재원'"></li>
+              </ul>
+            </div></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+
+  </section>
+
+</section>
+
+<div th:replace="common/footer :: footer"></div>
+</body>
+</html>
