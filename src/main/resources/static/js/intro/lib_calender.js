@@ -163,11 +163,11 @@ const calArea = document.getElementById("selectCalArea");
 function createSchedule(date, type){
 
     const cal = {
-        "startDt" : date,
+        "calendarStart" : date,
         "calendarType" : type
     };
 
-    fetch("/intro2/getDateCal",{
+    fetch("/intro/guide/calendar",{
         method : "POST",   
         headers : {"Content-Type" : "application/json"},
         body : JSON.stringify(cal) 
@@ -211,5 +211,5 @@ function createSchedule(date, type){
 
 const editBtn = document.getElementById("calendar-edit-btn");
 editBtn.addEventListener("click", () => {
-    location.href = "/intro/1/8/30/calEdit";
+    location.href = "/intro/guide/30/calEdit";
 })

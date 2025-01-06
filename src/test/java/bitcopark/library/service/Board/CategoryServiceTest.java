@@ -1,5 +1,6 @@
 package bitcopark.library.service.Board;
 
+import bitcopark.library.controller.aop.CategoryDTO;
 import bitcopark.library.entity.Board.Category;
 import bitcopark.library.exception.CategoryNotFoundException;
 import bitcopark.library.repository.Board.CategoryRepository;
@@ -7,8 +8,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +27,33 @@ class CategoryServiceTest {
 
 
     @Test
-    @Commit
+    public void 카테고리_engName_test(){
+
+        // given
+        List<Category> categoryList = categoryRepository.selectAll();
+
+        // when
+        List<CategoryDTO> categoryDTOList = categoryService.getCategoryDTOList(categoryList);
+
+        // then
+        assertThat("intro").isEqualTo(categoryDTOList.get(0).getCategoryEngName());
+
+
+    }
+
+    @Test
+    public void 카테고리_selectall_test(){
+        //given
+        //tempCategoryGenerate 에서 실행
+        
+        //when
+        List<Category> categories = categoryRepository.selectAll();
+
+        //then                                                                  // given의 카테고리 총 갯수
+        assertThat(categories.size()).isEqualTo(49);
+    }
+
+    @Test
     public void 부모가_있는_카테고리_생성(){
 
         //given

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Java Library - 조직도</title>
+
+  <link rel="stylesheet" href="/css/main-style.css">
+  <link rel="stylesheet" href="/css/common/sideMenu.css">
+  <link rel="stylesheet" href="/css/intro/lib_organization.css">
+
+</head>
+<body>
+<div th:replace="common/header :: header"></div>
+
+<section class="main-content-suround-section">
+  <div th:replace="intro/sideMenu :: sideMenu"></div>
+
+  <section class="content-suround-section">
+    <div class="content-title">조직도</div>
+    <div class="title-line"></div>
+
+    <section class="content-detail-section">
+
+      <section class="organWrap">
+        <h4>bitlibrary</h4>
+        <div class="organList cols2">
+          <ul>
+            <li><div class="box">
+              <h5>FE</h5>
+              <ul>
+                <li th:text="'HTML'"></li>
+                <li th:text="'CSS'"></li>
+                <li th:text="'JS'"></li>
+                <li th:text="'Thymeleaf'"></li>
+              </ul>
+            </div></li>
+            <li><div class="box">
+              <h5>BE</h5>
+              <ul>
+                <li th:text="'Spring Boot'"></li>
+                <li th:text="'JPA'"></li>
+                <li th:text="'QueryDSL'"></li>
+              </ul>
+            </div></li>
+            <li><div class="box">
+              <h5>Database</h5>
+              <ul>
+                <li th:text="'MySQL'"></li>
+                <li th:text="'H2'"></li>
+              </ul>
+            </div></li>
+            <li><div class="box">
+              <h5>CI/CD</h5>
+              <ul>
+                <li th:text="'Jenkins'"></li>
+                <li th:text="'AWS ec2'"></li>
+              </ul>
+            </div></li>
+            <li><div class="box">
+              <h5>Load Balancing</h5>
+              <ul>
+                <li th:text="'nginx'"></li>
+                <li th:text="'DB replication'"></li>
+              </ul>
+            </div></li>
+            <li><div class="box">
+              <h5>인프라 자동화</h5>
+              <ul>
+                <li th:text="'terraform'"></li>
+              </ul>
+            </div></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+
+  </section>
+
+</section>
+
+<div th:replace="common/footer :: footer"></div>
+</body>
+</html>

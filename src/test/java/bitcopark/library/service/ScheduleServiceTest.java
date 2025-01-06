@@ -1,9 +1,9 @@
 package bitcopark.library.service;
 
-import bitcopark.library.entity.OrphanTable.Schedule;
-import bitcopark.library.entity.OrphanTable.ScheduleType;
-import bitcopark.library.repository.OrphanTable.ScheduleRepository;
-import bitcopark.library.service.OrphanTable.ScheduleService;
+import bitcopark.library.entity.OrphanTable.Calendar;
+import bitcopark.library.entity.OrphanTable.CalendarType;
+import bitcopark.library.repository.OrphanTable.CalendarRepository;
+import bitcopark.library.service.OrphanTable.CalendarService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,10 @@ import java.util.List;
 class ScheduleServiceTest {
 
     @Autowired
-    ScheduleService scheduleService;
+    CalendarService scheduleService;
 
     @Autowired
-    ScheduleRepository scheduleRepository;
+    CalendarRepository scheduleRepository;
 
     @Test
     @Commit
@@ -30,15 +30,15 @@ class ScheduleServiceTest {
         //given
         String scheduleName = "스케쥴_이름";
         LocalDate scheduleEnd = LocalDate.of(2024, 12, 31);
-        ScheduleType scheduleType = ScheduleType.HOLIDAY;
+        CalendarType scheduleType = CalendarType.HOLIDAY;
 
         //when
         scheduleService.registerSchedule(scheduleName, scheduleEnd, scheduleType);
 
         //then
-        List<Schedule> findScheduleNameList = scheduleRepository.findByScheduleName(scheduleName);
+        List<Calendar> findScheduleNameList = scheduleRepository.findByCalendarName(scheduleName);
 
-        List<Schedule> findScheduleTypeList = scheduleRepository.findByScheduleType(scheduleType);
+        List<Calendar> findScheduleTypeList = scheduleRepository.findByCalendarType(scheduleType);
 
         Assertions.assertThat(findScheduleNameList.size()).isEqualTo(1);
 

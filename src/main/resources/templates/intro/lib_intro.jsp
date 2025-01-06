@@ -55,7 +55,7 @@
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=607938550ca3e7059ff2ce14439ad035&libraries=services,drawing"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0607ae9f020d16a7d4b36b27444aa9f4&libraries=services,drawing"></script>
 	<script src="/resources/js/intro/lib_intro.js"></script>
 
 </body>
