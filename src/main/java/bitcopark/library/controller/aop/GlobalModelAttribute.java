@@ -16,29 +16,15 @@ public class GlobalModelAttribute {
 
     private final ServletContext servletContext;
     private final CategoryRepository categoryRepository;
-    private final CategoryService categoryService;
 
     @ModelAttribute("categoryList")
     public List<Category> addGlobalCategory() {
-//
-//        @SuppressWarnings("unchecked")
-//        List<CategoryDTO> categoryDTOList = (List<CategoryDTO>) servletContext.getAttribute("categoryList");
-//
-//        if (categoryDTOList == null) {
-//            List<Category> categoryList = categoryRepository.selectAll();
-//            categoryDTOList = categoryService.getCategoryDTOList(categoryList);
-//
-//            servletContext.setAttribute("categoryList", categoryDTOList);
-//        }
-//
-//        return categoryDTOList;
-//
+
         @SuppressWarnings("unchecked")
         List<Category> categoryList = (List<Category>) servletContext.getAttribute("categoryList");
 
         if (categoryList == null) {
             categoryList = categoryRepository.selectAll();
-//            categoryList = categoryService.getCategoryDTOList(categoryList);
 
             servletContext.setAttribute("categoryList", categoryList);
         }

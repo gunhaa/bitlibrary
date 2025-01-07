@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Java Library - 도서관 지도</title>
+
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/common/sideMenu.css">
+    <link rel="stylesheet" href="/css/intro/lib_map.css">
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+
+<section class="main-content-suround-section">
+    <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
+    <section class="content-suround-section">
+        <div class="content-title">시설 안내</div>
+        <div class="title-line"></div>
+
+        <section class="content-detail-section">
+            <div>
+                <h3>층별 안내</h3>
+                <div class="suround-map">
+                    <div>
+                        <div class="map-btn">B1</div>
+                        <div class="map-btn current">1층</div>
+                        <div class="map-btn">2층</div>
+                        <div class="map-btn">3층</div>
+                        <div class="map-btn">4층</div>
+                    </div>
+
+                    <div class="real-map">
+                        <img src="/images/intro/library_map_1B.png" />
+                    </div>
+
+                    <div class="real-map current">
+                        <img src="/images/intro/library_map_1F.png" />
+                    </div>
+
+                    <div class="real-map">
+                        <img src="/images/intro/library_map_2F.png" />
+                    </div>
+
+                    <div class="real-map">
+                        <img src="/images/intro/library_map_3F.png" />
+                    </div>
+
+                    <div class="real-map">
+                        <img src="/images/intro/library_map_4F.png" />
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </section>
+</section>
+
+<div th:replace="~{common/footer :: footer}"></div>
+<script src="/js/intro/lib_map.js"></script>
+</body>
+</html>

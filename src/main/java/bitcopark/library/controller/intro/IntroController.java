@@ -20,24 +20,34 @@ public class IntroController {
     private final CategoryRepository categoryRepository;
 
 
-    @GetMapping("/{catLevel1:intro}/{catLevel2}/{catLevel3}")
+    @GetMapping(value = {"/{catLevel1:intro}/{catLevel2}/{catLevel3}", "/{catLevel1:intro}/{catLevel2}/"})
     public String intro(Model model , @ModelAttribute("categoryList") List<Category> categoryList
-                        ,@PathVariable String catLevel1, @PathVariable String catLevel2, @PathVariable String catLevel3){
+                        ,@PathVariable(name = "catLevel1") String catLevel1
+                        ,@PathVariable(name = "catLevel2") String catLevel2
+                        ,@PathVariable(name = "catLevel3", required = false) String catLevel3){
 
         System.out.println("해당 컨트롤러 사용됨");
-        System.out.println("catLevel1 = " + catLevel1);
-        System.out.println("catLevel1 = " + catLevel2);
-        System.out.println("catLevel1 = " + catLevel3);
+//        System.out.println("catLevel1 = " + catLevel1);
+//        System.out.println("catLevel2 = " + catLevel2);
+//        System.out.println("catLevel3 = " + catLevel3);
+//        for (Category category : categoryList) {
+//            System.out.println("category.getId() = " + category.getId());
+//            for (Category subCategory : category.getSubCategory()) {
+//                System.out.println("subCategory.getId() = " + subCategory.getId());
+//            }
+//        }
+
 
         Category categoryLevel1 = getCategoryByCategoryEngName(categoryList, catLevel1);
-        System.out.println("categoryLevel1.getId() = " + categoryLevel1.getId());
+//        System.out.println("categoryLevel1.getId() = " + categoryLevel1.getId());
         model.addAttribute("catLevel1", categoryLevel1.getId());
 
         Category categoryLevel2 = getCategoryByCategoryEngName(categoryList, catLevel2);
-        System.out.println("categoryLevel2.getId() = " + categoryLevel2.getId());
+//        System.out.println("categoryLevel2.getId() = " + categoryLevel2.getId());
         model.addAttribute("catLevel2", categoryLevel2.getId());
 
         if(categoryLevel2.getCategoryName().equals("도서관 소개")){
+            System.out.println("use 도서관소개");
             Category categoryLevel3 = getCategoryByCategoryId(categoryList, catLevel3);
             model.addAttribute("catLevel3", Integer.parseInt(catLevel3));
             switch (categoryLevel3.getCategoryName()) {
@@ -62,6 +72,7 @@ public class IntroController {
         }
 
         if(categoryLevel2.getCategoryName().equals("이용안내")) {
+            System.out.println("use 이용안내");
             Category categoryLevel3 = getCategoryByCategoryId(categoryList, catLevel3);
             model.addAttribute("catLevel3", Integer.parseInt(catLevel3));
             switch(categoryLevel3.getCategoryName()){
@@ -75,7 +86,7 @@ public class IntroController {
         }
 
         if(categoryLevel2.getCategoryName().equals("시설안내")) {
-
+            System.out.println("use 시설안내");
             // dosomething
             return "intro/lib_map";
         }
