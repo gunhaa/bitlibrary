@@ -57,10 +57,10 @@ class CategoryServiceTest {
     public void 부모가_있는_카테고리_생성(){
 
         //given
-        Category category1 = categoryService.createNewCategory("역사");
+        Category category1 = categoryService.createNewCategory("역사", "history");
 
         //when
-        Category category2 = categoryService.createNewCategoryWithParentCategory("국사", category1);
+        Category category2 = categoryService.createNewCategoryWithParentCategory("국사", category1, "history");
 
         //then
         Category category3 = categoryRepository.findByCategoryName("국사").orElseThrow(()-> new IllegalArgumentException("오류 발생"));
@@ -73,7 +73,7 @@ class CategoryServiceTest {
     public void 관리자_카테고리생성(){
 
         //given
-        Category category = categoryService.createNewCategory("역사");
+        Category category = categoryService.createNewCategory("역사", "history");
 
         //when
         Category findCategory = categoryRepository.findByCategoryName("역사").get();
@@ -86,18 +86,18 @@ class CategoryServiceTest {
     public void 관리자_중복카테고리생성_오류발생(){
 
         //given
-        Category category = categoryService.createNewCategory("역사");
+        Category category = categoryService.createNewCategory("역사", "history");
 
         //when , then
         assertThrows(CategoryNotFoundException.class, ()->{
-            categoryService.createNewCategory("역사");
+            categoryService.createNewCategory("역사", "history");
         });
     }
 
     @Test
     public void 카테고리_오브젝트_생성(){
         //given
-        Category category = categoryService.createNewCategory("역사");
+        Category category = categoryService.createNewCategory("역사", "history");
         
         //when
         Category findCategory = categoryService.createCategoryObject("역사");

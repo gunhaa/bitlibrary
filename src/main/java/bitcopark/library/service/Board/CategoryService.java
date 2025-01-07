@@ -21,9 +21,10 @@ public class CategoryService {
 
     // ADMIN만 사용가능한 메서드
     @Transactional
-    public Category createNewCategory(String categoryName){
+    public Category createNewCategory(String categoryName, String categoryEngName){
         Category category = Category.builder()
                 .categoryName(categoryName)
+                .categoryEngName(categoryEngName)
                 .build();
 
         validateDuplicateCategoryName(categoryName);
@@ -33,10 +34,11 @@ public class CategoryService {
     }
 
     @Transactional
-    public Category createNewCategoryWithParentCategory(String categoryName, Category parentCategory){
+    public Category createNewCategoryWithParentCategory(String categoryName, Category parentCategory, String categoryEngName){
         Category category = Category.builder()
                 .categoryName(categoryName)
                 .parentCategory(parentCategory)
+                .categoryEngName(categoryEngName)
                 .build();
 
         validateDuplicateCategoryName(categoryName);
