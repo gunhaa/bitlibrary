@@ -72,7 +72,7 @@
                                        class="side-current-a"
                                        th:text="${category2.categoryName}"></a>
 
-                                    <th:block th:if="${category2.parentCategory != null}">
+                                    <th:block th:if="${category2.subCategory.size() > 0}">
                                         <ul>
                                             <th:block th:each="subCategory : ${category2.subCategory}">
                                                 <li>
@@ -89,7 +89,7 @@
 
                             <th:block th:unless="${catLevel2 == category2.id}">
                                 <li>
-                                    <a th:href="@{/{catName}/{cat2Name}/{cat3id}(catName=${category.categoryEngName}, cat2Name=${category2.categoryEngName}, cat3id=${category2.subCategory})}"
+                                    <a th:href="@{/{catName}/{cat2Name}/{cat3id}(catName=${category.categoryEngName}, cat2Name=${category2.categoryEngName}, cat3id=${category2.firstSubCategoryId})}"
                                        th:text="${category2.categoryName}"></a>
                                 </li>
                             </th:block>

@@ -1,6 +1,6 @@
 package bitcopark.library.controller.intro;
 
-import bitcopark.library.controller.aop.CategoryDTO;
+import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.entity.Board.Category;
 import bitcopark.library.exception.CategoryNotFoundException;
 import bitcopark.library.repository.Board.CategoryRepository;
@@ -19,36 +19,30 @@ public class IntroController {
 
     private final CategoryRepository categoryRepository;
 
-
     @GetMapping(value = {"/{catLevel1:intro}/{catLevel2}/{catLevel3}", "/{catLevel1:intro}/{catLevel2}/"})
-    public String intro(Model model , @ModelAttribute("categoryList") List<Category> categoryList
+    public String intro(Model model , @ModelAttribute("categoryList") List<CategoryDTO> categoryDTOList
                         ,@PathVariable(name = "catLevel1") String catLevel1
                         ,@PathVariable(name = "catLevel2") String catLevel2
                         ,@PathVariable(name = "catLevel3", required = false) String catLevel3){
 
         System.out.println("해당 컨트롤러 사용됨");
-//        System.out.println("catLevel1 = " + catLevel1);
-//        System.out.println("catLevel2 = " + catLevel2);
-//        System.out.println("catLevel3 = " + catLevel3);
+
 //        for (Category category : categoryList) {
 //            System.out.println("category.getId() = " + category.getId());
-//            for (Category subCategory : category.getSubCategory()) {
-//                System.out.println("subCategory.getId() = " + subCategory.getId());
+//            for (Category subCat : category.getSubCategory()) {
+//                System.out.println("subCat.getId() = " + subCat.getId());
 //            }
 //        }
 
-
-        Category categoryLevel1 = getCategoryByCategoryEngName(categoryList, catLevel1);
-//        System.out.println("categoryLevel1.getId() = " + categoryLevel1.getId());
+        CategoryDTO categoryLevel1 = getCategoryByCategoryEngName(categoryDTOList, catLevel1);
         model.addAttribute("catLevel1", categoryLevel1.getId());
 
-        Category categoryLevel2 = getCategoryByCategoryEngName(categoryList, catLevel2);
-//        System.out.println("categoryLevel2.getId() = " + categoryLevel2.getId());
+        CategoryDTO categoryLevel2 = getCategoryByCategoryEngName(categoryDTOList, catLevel2);
         model.addAttribute("catLevel2", categoryLevel2.getId());
 
         if(categoryLevel2.getCategoryName().equals("도서관 소개")){
             System.out.println("use 도서관소개");
-            Category categoryLevel3 = getCategoryByCategoryId(categoryList, catLevel3);
+            CategoryDTO categoryLevel3 = getCategoryByCategoryId(categoryDTOList, catLevel3);
             model.addAttribute("catLevel3", Integer.parseInt(catLevel3));
             switch (categoryLevel3.getCategoryName()) {
                 case "인사말" -> {
@@ -73,7 +67,7 @@ public class IntroController {
 
         if(categoryLevel2.getCategoryName().equals("이용안내")) {
             System.out.println("use 이용안내");
-            Category categoryLevel3 = getCategoryByCategoryId(categoryList, catLevel3);
+            CategoryDTO categoryLevel3 = getCategoryByCategoryId(categoryDTOList, catLevel3);
             model.addAttribute("catLevel3", Integer.parseInt(catLevel3));
             switch(categoryLevel3.getCategoryName()){
                 case "이용시간" -> {
@@ -94,14 +88,14 @@ public class IntroController {
         return "common/main";
     }
 
-    private static Category getCategoryByCategoryEngName(List<Category> categoryList, String catLevel) {
-        return categoryList.stream()
+    private static CategoryDTO getCategoryByCategoryEngName(List<CategoryDTO> categoryDTOList, String catLevel) {
+        return categoryDTOList.stream()
                 .filter(category -> category.getCategoryEngName().equals(catLevel))
                 .findFirst().orElseThrow(CategoryNotFoundException::new);
     }
 
-    private static Category getCategoryByCategoryId(List<Category> categoryList, String catLevel){
-        return categoryList.stream()
+    private static CategoryDTO getCategoryByCategoryId(List<CategoryDTO> categoryDTOList, String catLevel){
+        return categoryDTOList.stream()
                 .filter(categoryDTO -> categoryDTO.getId().intValue() == Integer.parseInt(catLevel))
                 .findFirst().orElseThrow(CategoryNotFoundException::new);
     }

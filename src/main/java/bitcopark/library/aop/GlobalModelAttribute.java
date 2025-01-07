@@ -1,4 +1,4 @@
-package bitcopark.library.controller.aop;
+package bitcopark.library.aop;
 
 import bitcopark.library.entity.Board.Category;
 import bitcopark.library.repository.Board.CategoryRepository;
@@ -16,20 +16,21 @@ public class GlobalModelAttribute {
 
     private final ServletContext servletContext;
     private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
 
     @ModelAttribute("categoryList")
-    public List<Category> addGlobalCategory() {
+    public List<CategoryDTO> addGlobalCategory() {
 
         @SuppressWarnings("unchecked")
-        List<Category> categoryList = (List<Category>) servletContext.getAttribute("categoryList");
+        List<CategoryDTO> categoryDTOList = (List<CategoryDTO>) servletContext.getAttribute("categoryList");
 
-        if (categoryList == null) {
-            categoryList = categoryRepository.selectAll();
-
-            servletContext.setAttribute("categoryList", categoryList);
+        if (categoryDTOList == null) {
+            List<Category> categoryList = categoryRepository.selectAll();
+            categoryDTOList = categoryService.getCategoryDTOList(categoryList);
+            servletContext.setAttribute("categoryList", categoryDTOList);
         }
 
-        return categoryList;
+        return categoryDTOList;
     }
 
 
