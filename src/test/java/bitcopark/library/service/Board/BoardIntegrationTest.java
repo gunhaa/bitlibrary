@@ -73,7 +73,7 @@ public class BoardIntegrationTest {
         member = memberService.joinMember(email, name, phoneNumber, gender, birth, address);
 
         //카테고리 생성
-        Category category = categoryService.createNewCategory("역사");
+        Category category = categoryService.createNewCategory("역사", "history");
 
         //게시글 생성
         String title = "글 제목1";

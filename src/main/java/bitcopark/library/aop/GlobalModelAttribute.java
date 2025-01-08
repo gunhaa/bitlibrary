@@ -1,4 +1,4 @@
-package bitcopark.library.controller.aop;
+package bitcopark.library.aop;
 
 import bitcopark.library.entity.Board.Category;
 import bitcopark.library.repository.Board.CategoryRepository;
@@ -27,7 +27,6 @@ public class GlobalModelAttribute {
         if (categoryDTOList == null) {
             List<Category> categoryList = categoryRepository.selectAll();
             categoryDTOList = categoryService.getCategoryDTOList(categoryList);
-
             servletContext.setAttribute("categoryList", categoryDTOList);
         }
 

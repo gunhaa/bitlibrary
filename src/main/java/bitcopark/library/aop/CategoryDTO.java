@@ -1,4 +1,4 @@
-package bitcopark.library.controller.aop;
+package bitcopark.library.aop;
 
 import bitcopark.library.entity.Board.Board;
 import bitcopark.library.entity.Board.Category;
@@ -15,13 +15,15 @@ public class CategoryDTO {
     private List<Category> subCategory = new ArrayList<>();
     private List<Board> boardList = new ArrayList<>();
     private String categoryEngName;
+    private Long firstSubCategoryId;
 
-    public CategoryDTO(Long id, String categoryName, Category parentCategory, List<Category> subCategory, List<Board> boardList, String categoryEngName) {
+    public CategoryDTO(Long id, String categoryName, Category parentCategory, List<Category> subCategory, List<Board> boardList, String categoryEngName, Long firstSubCategoryId) {
         this.id = id;
         this.categoryName = categoryName;
         this.parentCategory = parentCategory;
         this.subCategory = subCategory;
         this.boardList = boardList;
         this.categoryEngName = categoryEngName;
+        this.firstSubCategoryId = firstSubCategoryId;
     }
 }
