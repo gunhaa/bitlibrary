@@ -27,7 +27,7 @@ public class GlobalModelAttribute {
         if (categoryDTOList == null) {
             List<Category> categoryList = categoryRepository.selectAll();
             categoryDTOList = categoryService.getCategoryDTOList(categoryList);
-            servletContext.setAttribute("categoryList", categoryDTOList);
+            servletContext.setAttribute("categoryDTOList", categoryDTOList);
         }
 
         return categoryDTOList;

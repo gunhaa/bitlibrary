@@ -1,7 +1,10 @@
 spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+#  mvc:
+#    pathmatch:
+#     use-trailing-slash-match: true
+       #  mvc:
+       #    pathmatch:
+      #      matching-strategy: ant_path_matcher
   thymeleaf:
     cache: false
   datasource:
@@ -11,7 +14,7 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true

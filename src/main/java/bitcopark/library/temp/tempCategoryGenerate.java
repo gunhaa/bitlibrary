@@ -35,8 +35,8 @@ public class tempCategoryGenerate implements ApplicationRunner {
             Category 이용안내 = categoryService.createNewCategoryWithParentCategory("이용안내", 도서관_안내, "guide");
             categoryService.createNewCategoryWithParentCategory("시설안내", 도서관_안내, "facility-guide");
 
-            Category 통합자료_검색 = categoryService.createNewCategoryWithParentCategory("통합자료 검색", 자료_검색, "integrated-search");
-            categoryService.createNewCategoryWithParentCategory("희망 도서 신청", 자료_검색, "wish-book-request");
+            Category 통합자료_검색 = categoryService.createNewCategoryWithParentCategory("통합자료 검색", 자료_검색, "books");
+            categoryService.createNewCategoryWithParentCategory("희망 도서 신청", 자료_검색, "book-req");
 
             categoryService.createNewCategoryWithParentCategory("교육문화 프로그램", 참여_마당, "edu-culture-program");
             categoryService.createNewCategoryWithParentCategory("열람실", 참여_마당, "reading-room");
