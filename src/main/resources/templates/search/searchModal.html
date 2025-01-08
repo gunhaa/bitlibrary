@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div id="popup_layer" th:fragment="searchModal">
+  <div class="popup_box_res">
+    <div class="popup_header">
+      <!-- 안에 p 태그로 -->
+      <p>도서 예약</p>
+    </div>
+
+    <!-- 팝업 컨텐츠 영역 -->
+    <div class="popup_content">
+      <div class="popup_content_top">
+        <div id="message_box" th:text="${message}"></div> <!-- 메시지 내용 -->
+        <div class="popup_content_bar"></div>
+      </div>
+
+      <div class="popup_content_mid">
+        <div class="popup_content_left">
+<!--          추가 후 주석 해제-->
+<!--          <img th:src="@{/resources/images/bookThumbnail}" alt="Book Thumbnail"/>-->
+        </div>
+        <div class="popup_content_right">
+<!--          <h2>도서 상세</h2>-->
+<!--          <p>서명 : <span th:text="${book.title}">safsf</span></p>-->
+<!--          <p>저자 : <span th:text="${book.author}">저자 정보 없음</span></p>-->
+<!--          <p>발행처 : <span th:text="${book.publisher}">발행처 정보 없음</span></p>-->
+<!--          <p>발행년도 : <span th:text="${book.year}">발행년도 정보 없음</span></p>-->
+<!--          <p>ISBN: <span th:text="${book.isbn}">ISBN 정보 없음</span></p>-->
+        </div>
+      </div>
+
+      <!-- 팝업 버튼 영역 -->
+      <div class="popup_btn">
+        <button id="confirm_btn">확인</button>
+        <button id="cancel_btn">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

@@ -7,30 +7,27 @@
   <link rel="stylesheet" href="/css/main-style.css">
   <link rel="stylesheet" href="/css/common/sideMenu.css">
   <link rel="stylesheet" href="/css/search/search-style.css">
+  <link rel="stylesheet" href="/css/common/modal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 
 <body>
-<!-- Header Include -->
-<div th:replace="common/header :: header"></div>
+<div th:replace="~{common/header :: header}"></div>
 
 <section class="container">
-  <!-- Side Menu Include -->
-  <div th:replace="search/sideMenu :: sideMenu"></div>
+  <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
 
   <section class="main-content">
     <div class="main-title">간략 검색</div>
     <hr class="titleLine"/>
     <div class="searchBar">
       <select id="key">
-        <!-- 타임리프를 이용한 `selected` 조건 처리 -->
-        <option value="ta" th:attr="selected=${param.key == 'ta'}">전체</option>
-        <option value="t" th:attr="selected=${param.key == 't'}">도서명</option>
-        <option value="a" th:attr="selected=${param.key == 'a'}">저자</option>
+        <option value="ta" th:selected="${param.key == null or param.key == '' or (param.key != 'ta' and param.key != 't' and param.key != 'a')}">전체</option>
+        <option value="t" th:selected="${param.key != null and param.key == 't'}">도서명</option>
+        <option value="a" th:selected="${param.key != null and param.key == 'a'}">저자</option>
       </select>
-
       <input type="text"
              id="query"
              name="query"
@@ -49,28 +46,27 @@
       <p>인기도서</p>
       <div class="swiper sample">
         <div class="swiper-wrapper">
-          <!-- Example Swiper Images -->
-          <div class="swiper-slide">
-            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image1">
-          </div>
-          <div class="swiper-slide">
-            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image2">
-          </div>
-          <div class="swiper-slide">
-            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image3">
-          </div>
-          <div class="swiper-slide">
-            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image4">
-          </div>
-          <div class="swiper-slide">
-            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image5">
-          </div>
-          <div class="swiper-slide">
-            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image6">
-          </div>
-          <div class="swiper-slide">
-            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image7">
-          </div>
+<!--          <div class="swiper-slide">-->
+<!--            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image1">-->
+<!--          </div>-->
+<!--          <div class="swiper-slide">-->
+<!--            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image2">-->
+<!--          </div>-->
+<!--          <div class="swiper-slide">-->
+<!--            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image3">-->
+<!--          </div>-->
+<!--          <div class="swiper-slide">-->
+<!--            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image4">-->
+<!--          </div>-->
+<!--          <div class="swiper-slide">-->
+<!--            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image5">-->
+<!--          </div>-->
+<!--          <div class="swiper-slide">-->
+<!--            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image6">-->
+<!--          </div>-->
+<!--          <div class="swiper-slide">-->
+<!--            <img src="../../../resources/images/bookThumbnail.jpg" alt="Image7">-->
+<!--          </div>-->
         </div>
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
@@ -78,17 +74,15 @@
     </div>
   </section>
 </section>
+<!--추가 해야함 오류 있음-->
+<div th:replace="~{search/searchModal :: searchModal}"></div>
 
-<!-- Modal Include -->
-<div th:replace="search/searchModal :: searchModal"></div>
+<div th:replace="~{common/footer :: footer}"></div>
 
-<!-- Footer Include -->
-<div th:replace="common/footer :: footer"></div>
-
-<!-- JavaScript Variables -->
-<script>
-  const loginMemberNo = /*[[${loginMember.memberNo}]]*/ '';
-</script>
-<script src="/resources/js/search/search.js"></script>
+<!-- 로그인 미개발-->
+<!--<script>-->
+<!--  const loginMemberNo = /*[[${loginMember.memberNo}]]*/ '';-->
+<!--</script>-->
+<script src="/js/search/search.js"></script>
 </body>
 </html>
