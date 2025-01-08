@@ -1,11 +1,10 @@
-package bitcopark.library.controller.intro;
+package bitcopark.library.controller.search;
 
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.categoryStrategy.CategoryRouter;
 import bitcopark.library.categoryStrategy.CategoryStrategy;
 import bitcopark.library.categoryStrategy.CategoryStrategyFactory;
 import bitcopark.library.controller.util.ControllerUtils;
-import bitcopark.library.repository.Board.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +16,13 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class IntroController {
+public class SearchController {
 
-    private final CategoryRepository categoryRepository;
-
-    @GetMapping(value = {"/{catLevel1:intro}/{catLevel2}/{catLevel3}", "/{catLevel1:intro}/{catLevel2}/"})
-    public String intro(Model model , @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
-                        ,@PathVariable(name = "catLevel1") String catLevel1
-                        ,@PathVariable(name = "catLevel2") String catLevel2
-                        ,@PathVariable(name = "catLevel3", required = false) String catLevel3){
+    @GetMapping(value = {"/{catLevel1:search}/{catLevel2}/{catLevel3}" , "/{catLevel1:search}/{catLevel2}/"})
+    public String search(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
+                         @PathVariable(name = "catLevel1") String catLevel1,
+                         @PathVariable(name = "catLevel2") String catLevel2,
+                         @PathVariable(name = "catLevel3", required = false) String catLevel3){
 
         CategoryDTO categoryLevel1 = ControllerUtils.getCategoryByCategoryEngName(categoryDTOList, catLevel1);
         model.addAttribute("catLevel1", categoryLevel1.getId());
@@ -43,8 +40,5 @@ public class IntroController {
 
         return router.route(categoryLevel3);
     }
-
-
-
 
 }

@@ -1,6 +1,7 @@
 package bitcopark.library.categoryStrategy;
 
 import bitcopark.library.aop.CategoryDTO;
+import org.springframework.stereotype.Component;
 
 public class CategoryRouter {
 
