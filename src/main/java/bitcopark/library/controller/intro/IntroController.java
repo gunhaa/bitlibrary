@@ -1,6 +1,7 @@
 package bitcopark.library.controller.intro;
 
 import bitcopark.library.aop.CategoryDTO;
+import bitcopark.library.categoryStrategy.CategoryRouter;
 import bitcopark.library.categoryStrategy.CategoryStrategy;
 import bitcopark.library.categoryStrategy.CategoryStrategyFactory;
 import bitcopark.library.entity.Board.Category;
@@ -40,48 +41,9 @@ public class IntroController {
         }
 
         CategoryStrategy strategy = CategoryStrategyFactory.getStrategy(categoryLevel2);
-        return strategy.routing(categoryLevel3);
+        CategoryRouter router = new CategoryRouter(strategy);
 
-//        if(categoryLevel2.getCategoryName().equals("도서관 소개")){
-//            switch (categoryLevel3.getCategoryName()) {
-//                case "인사말" -> {
-//                    return "/intro/lib_greeting";
-//                }
-//                case "연혁" -> {
-//                    return "intro/lib_history";
-//                }
-//                case "조직도" -> {
-//                    return "intro/lib_organization";
-//                }
-//                case "도서관 오시는 길" -> {
-//                    return "intro/lib_intro";
-//                }
-//                case "주변 도서관" -> {
-//                    // do something
-//                    return "intro/lib_intro_another";
-//                }
-//            }
-//
-//        }
-//
-//        if(categoryLevel2.getCategoryName().equals("이용안내")) {
-//            switch(categoryLevel3.getCategoryName()){
-//                case "이용시간" -> {
-//                    return "intro/lib_hours";
-//                }
-//                case "도서관 달력" -> {
-//                    return "intro/lib_calender";
-//                }
-//            }
-//        }
-//
-//        if(categoryLevel2.getCategoryName().equals("시설안내")) {
-//            System.out.println("use 시설안내");
-//            // dosomething
-//            return "intro/lib_map";
-//        }
-//
-//        return "common/main";
+        return router.route(categoryLevel3);
     }
 
     private static CategoryDTO getCategoryByCategoryEngName(List<CategoryDTO> categoryDTOList, String catLevel) {
