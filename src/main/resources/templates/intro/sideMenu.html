@@ -56,12 +56,12 @@
 
 
 <article class="side-menu-article" th:fragment="sideMenu">
-    <th:block th:each="category : ${categoryList}">
+    <th:block th:each="category : ${categoryDTOList}">
         <th:block th:if="${catLevel1 == category.id}">
             <div class="category" th:text="${category.categoryName}"></div>
 
             <ul class="side-menu">
-                <th:block th:each="category2 : ${categoryList}">
+                <th:block th:each="category2 : ${categoryDTOList}">
                     <th:block th:if="${category2.parentCategory != null && category.id == category2.parentCategory.id}">
                         <th:block>
 

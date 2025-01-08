@@ -18,11 +18,11 @@ public class GlobalModelAttribute {
     private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
 
-    @ModelAttribute("categoryList")
+    @ModelAttribute("categoryDTOList")
     public List<CategoryDTO> addGlobalCategory() {
 
         @SuppressWarnings("unchecked")
-        List<CategoryDTO> categoryDTOList = (List<CategoryDTO>) servletContext.getAttribute("categoryList");
+        List<CategoryDTO> categoryDTOList = (List<CategoryDTO>) servletContext.getAttribute("categoryDTOList");
 
         if (categoryDTOList == null) {
             List<Category> categoryList = categoryRepository.selectAll();
