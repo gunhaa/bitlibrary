@@ -45,8 +45,8 @@ public class Book {
         book.publicationDate = publicationDate;
         book.isbn = isbn;
         book.thumbnail = thumbnail;
-        book.state = BookState.I;
-        book.supple = BookSupple.N;
+        book.state = bookState;
+        book.supple = bookSupple;
         return book;
     }
 
