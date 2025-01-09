@@ -5,11 +5,13 @@ import bitcopark.library.entity.Book.BookState;
 import bitcopark.library.entity.Book.BookSupple;
 import bitcopark.library.exception.BookTitleNotFoundException;
 import bitcopark.library.repository.Book.BookRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -24,7 +26,20 @@ class BookServiceTest {
 
     @Autowired
     private BookRepository bookRepository;
-    
+
+    @Test
+    public void 책_전체_검색(){
+        //given
+        //tempBookGenerate();
+
+        //when
+        List<Book> bookList = bookRepository.selectAll();
+
+        //then
+        Assertions.assertThat(bookList.size()).isEqualTo(17);
+
+    }
+
     @Test
     public void 책등록(){
         //given
