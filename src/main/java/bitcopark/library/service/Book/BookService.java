@@ -1,6 +1,8 @@
 package bitcopark.library.service.Book;
 
 import bitcopark.library.entity.Book.Book;
+import bitcopark.library.entity.Book.BookState;
+import bitcopark.library.entity.Book.BookSupple;
 import bitcopark.library.exception.BookTitleNotFoundException;
 import bitcopark.library.repository.Book.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +17,9 @@ public class BookService {
     private final BookRepository bookRepository;
 
     @Transactional
-    public Book registerNewBook(String author, String title, String publisher, String publicationDate, String isbn, String thumbnail){
+    public Book registerNewBook(String author, String title, String publisher, String publicationDate, String isbn, String thumbnail, BookState bookState, BookSupple bookSupple){
 
-        Book book = Book.createBook(author, title, publisher, publicationDate, isbn, thumbnail);
+        Book book = Book.createBook(author, title, publisher, publicationDate, isbn, thumbnail, bookState, bookSupple);
         bookRepository.save(book);
 
         return book;

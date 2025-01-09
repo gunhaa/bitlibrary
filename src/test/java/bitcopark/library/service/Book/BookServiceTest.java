@@ -1,6 +1,8 @@
 package bitcopark.library.service.Book;
 
 import bitcopark.library.entity.Book.Book;
+import bitcopark.library.entity.Book.BookState;
+import bitcopark.library.entity.Book.BookSupple;
 import bitcopark.library.exception.BookTitleNotFoundException;
 import bitcopark.library.repository.Book.BookRepository;
 import org.junit.jupiter.api.Test;
@@ -32,7 +34,9 @@ class BookServiceTest {
         String publicationDate = "20121013";
         String isbn = "11111";
         String thumbnail = "썸네일1";
-        Book book = bookService.registerNewBook(author, title, publisher, publicationDate, isbn, thumbnail);
+        BookState bookState = BookState.I;
+        BookSupple bookSupple = BookSupple.N;
+        Book book = bookService.registerNewBook(author, title, publisher, publicationDate, isbn, thumbnail, bookState, bookSupple);
 
         //when
         Optional<Book> findBook = bookRepository.findByTitle(title);

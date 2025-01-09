@@ -37,7 +37,7 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<BookBorrow> bookBorrowList = new ArrayList<>();
 
-    public static Book createBook(String author, String title, String publisher, String publicationDate, String isbn, String thumbnail){
+    public static Book createBook(String author, String title, String publisher, String publicationDate, String isbn, String thumbnail, BookState bookState, BookSupple bookSupple){
         Book book = new Book();
         book.author = author;
         book.title = title;
@@ -45,7 +45,7 @@ public class Book {
         book.publicationDate = publicationDate;
         book.isbn = isbn;
         book.thumbnail = thumbnail;
-        book.state = BookState.A;
+        book.state = BookState.I;
         book.supple = BookSupple.N;
         return book;
     }
