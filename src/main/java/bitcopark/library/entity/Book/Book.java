@@ -26,10 +26,10 @@ public class Book {
 
     // A(available), B(borrowed), R(reserved)
     @Enumerated(EnumType.STRING)
-    private BookState state;
+    private BookState bookState;
 
     @Enumerated(EnumType.STRING)
-    private BookSupple supple;
+    private BookSupple bookSupple;
 
     @OneToMany(mappedBy = "book")
     private List<BookFavorite> bookFavoriteList = new ArrayList<>();
@@ -45,17 +45,17 @@ public class Book {
         book.publicationDate = publicationDate;
         book.isbn = isbn;
         book.thumbnail = thumbnail;
-        book.state = bookState;
-        book.supple = bookSupple;
+        book.bookState = bookState;
+        book.bookSupple = bookSupple;
         return book;
     }
 
     public void changeBookState(BookState bookState){
-        this.state = bookState;
+        this.bookState = bookState;
     }
 
     public void changeBookSupple(BookSupple bookSupple){
-        this.supple = bookSupple;
+        this.bookSupple = bookSupple;
     }
 
 
