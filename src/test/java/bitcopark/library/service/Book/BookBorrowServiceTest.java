@@ -2,6 +2,8 @@ package bitcopark.library.service.Book;
 
 import bitcopark.library.entity.Book.Book;
 import bitcopark.library.entity.Book.BookBorrow;
+import bitcopark.library.entity.Book.BookState;
+import bitcopark.library.entity.Book.BookSupple;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
@@ -69,7 +71,9 @@ class BookBorrowServiceTest {
         String publicationDate = "20121013";
         String isbn = "11111";
         String thumbnail = "썸네일1";
-        book = bookService.registerNewBook(author, title, publisher, publicationDate, isbn, thumbnail);
+        BookState bookState = BookState.I;
+        BookSupple bookSupple = BookSupple.N;
+        book = bookService.registerNewBook(author, title, publisher, publicationDate, isbn, thumbnail, bookState, bookSupple);
     }
 
 }

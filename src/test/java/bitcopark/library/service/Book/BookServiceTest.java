@@ -1,13 +1,17 @@
 package bitcopark.library.service.Book;
 
 import bitcopark.library.entity.Book.Book;
+import bitcopark.library.entity.Book.BookState;
+import bitcopark.library.entity.Book.BookSupple;
 import bitcopark.library.exception.BookTitleNotFoundException;
 import bitcopark.library.repository.Book.BookRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -22,7 +26,20 @@ class BookServiceTest {
 
     @Autowired
     private BookRepository bookRepository;
-    
+
+    @Test
+    public void 책_전체_검색(){
+        //given
+        //tempBookGenerate();
+
+        //when
+        List<Book> bookList = bookRepository.selectAll();
+
+        //then
+        Assertions.assertThat(bookList.size()).isEqualTo(17);
+
+    }
+
     @Test
     public void 책등록(){
         //given
@@ -32,7 +49,9 @@ class BookServiceTest {
         String publicationDate = "20121013";
         String isbn = "11111";
         String thumbnail = "썸네일1";
-        Book book = bookService.registerNewBook(author, title, publisher, publicationDate, isbn, thumbnail);
+        BookState bookState = BookState.I;
+        BookSupple bookSupple = BookSupple.N;
+        Book book = bookService.registerNewBook(author, title, publisher, publicationDate, isbn, thumbnail, bookState, bookSupple);
 
         //when
         Optional<Book> findBook = bookRepository.findByTitle(title);
