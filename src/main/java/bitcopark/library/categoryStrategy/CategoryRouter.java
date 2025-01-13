@@ -1,7 +1,6 @@
 package bitcopark.library.categoryStrategy;
 
 import bitcopark.library.aop.CategoryDTO;
-import org.springframework.stereotype.Component;
 
 public class CategoryRouter {
 
@@ -11,7 +10,7 @@ public class CategoryRouter {
         this.categoryStrategy = categoryStrategy;
     }
 
-    public String route(CategoryDTO categoryLevel3){
+    public String routing(CategoryDTO categoryLevel3){
         if (categoryStrategy == null) {
             throw new IllegalStateException("CategoryStrategy is not set!");
         }

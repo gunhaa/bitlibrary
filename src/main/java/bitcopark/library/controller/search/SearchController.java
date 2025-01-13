@@ -38,7 +38,7 @@ public class SearchController {
         CategoryStrategy strategy = CategoryStrategyFactory.getStrategy(categoryLevel2);
         CategoryRouter router = new CategoryRouter(strategy);
 
-        return router.route(categoryLevel3);
+        return router.routing(categoryLevel3);
     }
 
 }

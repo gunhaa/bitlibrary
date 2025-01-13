@@ -1,6 +1,5 @@
 package bitcopark.library.repository.Book;
 
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +23,7 @@ public class BookRepositoryCustomImplTest {
 
 
         //when
-        List<BookDto> BookDto = bookRepository.findAllBooks();
+        List<BookSearchDto> BookDto = bookRepository.findAllBooks(new BookSearchCondition());
 
         //then
 
