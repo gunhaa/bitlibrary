@@ -69,7 +69,7 @@ public class tempInitGenerate {
                 Category 참여_마당 = categoryService.createNewCategory("참여 마당", "community");
                 Category 이용자_마당 = categoryService.createNewCategory("이용자 마당", "user");
                 Category 맛있는_도서관 = categoryService.createNewCategory("맛있는 도서관", "delicious-library");
-                Category 내_서재 = categoryService.createNewCategory("내 서재", "my-library");
+                Category 내_서재 = categoryService.createNewCategory("내 서재", "study");
 
                 // 레벨 2 카테고리 생성
                 Category 도서관_소개 = categoryService.createNewCategoryWithParentCategory("도서관 소개", 도서관_안내, "introduction");
@@ -169,12 +169,10 @@ public class tempInitGenerate {
             bookFavoriteService.addBookFavorite(디셉션_포인트, member3);
 
             // 책 대여
-            bookBorrowService.registerBookRental(member1, 명품_인생을_살아라);
             bookBorrowService.registerBookRental(member1, 백범일지);
             bookBorrowService.registerBookRental(member1, 디셉션_포인트);
 
             //책 예약
-            bookReservationService.registerBookReservation(member1, 명품_인생을_살아라);
             bookReservationService.registerBookReservation(member1, 백범일지);
             bookReservationService.registerBookReservation(member2, 백범일지);
             bookReservationService.registerBookReservation(member1, 디셉션_포인트);

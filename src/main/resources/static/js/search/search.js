@@ -115,6 +115,7 @@ function showBookList(result){
     }
 
     for(let b of bList){
+
         const bookRow = document.createElement("div");
         bookRow.classList.add("book-row");
 
@@ -250,6 +251,9 @@ function showBookList(result){
 
 const modal = document.getElementById("popup_layer");
 function showModal(book){
+    console.log(book);
+    console.log(typeof book.thumbnail);
+    console.log(book.thumbnail);
     modal.style.display = "block";
     const img = document.querySelector(".popup_content_left > img");
     img.setAttribute("src", book.thumbnail);
@@ -257,8 +261,8 @@ function showModal(book){
     const detail = document.getElementsByClassName("popup_content_right")[0].children;
     detail[1].innerText = `도서명 : ${book.bookTitle}`;
     detail[2].innerText = `저자 : ${book.bookAuthor}`;
-    detail[3].innerText = `발행처 : ${book.bookPub}`;
-    detail[4].innerText = `발행연도 : ${book.bookPubDate}`;
+    detail[3].innerText = `발행처 : ${book.publisher}`;
+    detail[4].innerText = `발행연도 : ${book.publicationDate}`;
     detail[5].innerText = `ISBN : ${book.isbn}`;
 
     const confirmBtn = document.getElementById("confirm_btn");
