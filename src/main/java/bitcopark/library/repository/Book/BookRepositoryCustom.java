@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface BookRepositoryCustom {
 
-    List<BookDto> findAllBooks();
+    List<BookSearchDto> findAllBooks(BookSearchCondition bookSearchCondition);
 
 }

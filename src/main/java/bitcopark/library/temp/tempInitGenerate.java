@@ -116,7 +116,6 @@ public class tempInitGenerate {
             }
 
             if(bookRepository.selectAll().isEmpty()) {
-
                 bookService.registerNewBook("박은몽 글", "명품 인생을 살아라", "대교베텔스만", "2008", "9788957592472", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F762800%3Ftimestamp%3D20220904155651" , BookState.P, BookSupple.N );
                 bookService.registerNewBook("김구 저", "백범일지", "돌베개", "2008", "9788971992258", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F994701%3Ftimestamp%3D20240727112932", BookState.P, BookSupple.N);
                 bookService.registerNewBook("댄 브라운 지음", "디셉션 포인트", "대교베텔스만", "2006", "9788957591574", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F762541%3Ftimestamp%3D20220825213715", BookState.I, BookSupple.N);
@@ -134,7 +133,6 @@ public class tempInitGenerate {
                 bookService.registerNewBook("최일도", "행복하소서", "위즈덤하우스", "2008", "9788960861312", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F840862%3Ftimestamp%3D20220917071152", BookState.I, BookSupple.N);
                 bookService.registerNewBook("로버트 제임스 윌러 저", "메디슨 카운티의 다리", "시공사", "1994", "9791193783405", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F6626858%3Ftimestamp%3D20240621155506", BookState.P, BookSupple.N);
                 bookService.registerNewBook("와다 히데키 지음", "남자는 왜? 여자는 왜?", "예문", "2002", "9791165042615", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F5910968%3Ftimestamp%3D20240522150401", BookState.P, BookSupple.N);
-
             }
 
 
