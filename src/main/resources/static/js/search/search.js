@@ -6,6 +6,9 @@ const resetBtn = document.getElementById("refresh-btn");
 const params = new URL(location.href).searchParams;
 const options = document.querySelectorAll("#key > option");
 
+// 임시
+const loginMemberNo = 10;
+
 
 let key;
 
@@ -214,7 +217,7 @@ function showBookList(result){
             const td2 = document.createElement("td");
             td2.innerText = `대출중
                                 예약 가능
-                                (예약 : ${b.resvCount}명)`;
+                                (예약 : ${b.bookBorrowCount}명)`;
             const td3 = document.createElement("td");
             td3.innerText = `${(b.returnDueDate)}`;
             const td4 = document.createElement("td");

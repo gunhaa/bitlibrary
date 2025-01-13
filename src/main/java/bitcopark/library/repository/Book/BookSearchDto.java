@@ -10,8 +10,8 @@ import java.time.LocalDate;
 @Data
 public class BookSearchDto {
     
-    private final String author;
-    private final String title;
+    private final String bookAuthor;
+    private final String bookTitle;
     private final String publisher;
     private final String publicationDate;
     private final String isbn;
@@ -26,9 +26,9 @@ public class BookSearchDto {
     private final LocalDate returnDueDate;
 
     @QueryProjection
-    public BookSearchDto(String author, String title, String publisher, String publicationDate, String isbn, String thumbnail, BookState bookState, BookSupple bookSupple, Long bookBorrowCount, LocalDate returnDueDate) {
-        this.author = author;
-        this.title = title;
+    public BookSearchDto(String bookAuthor, String bookTitle, String publisher, String publicationDate, String isbn, String thumbnail, BookState bookState, BookSupple bookSupple, Long bookBorrowCount, LocalDate returnDueDate) {
+        this.bookAuthor = bookAuthor;
+        this.bookTitle = bookTitle;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
         this.isbn = isbn;
