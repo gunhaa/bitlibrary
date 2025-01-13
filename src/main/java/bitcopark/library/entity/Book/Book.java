@@ -37,6 +37,9 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<BookBorrow> bookBorrowList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "book")
+    private List<BookReservation> bookReservationList = new ArrayList<>();
+
     public static Book createBook(String author, String title, String publisher, String publicationDate, String isbn, String thumbnail, BookState bookState, BookSupple bookSupple){
         Book book = new Book();
         book.author = author;

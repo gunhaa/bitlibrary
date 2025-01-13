@@ -5,9 +5,14 @@ import bitcopark.library.entity.Book.BookState;
 import bitcopark.library.entity.Book.BookSupple;
 import bitcopark.library.exception.BookTitleNotFoundException;
 import bitcopark.library.repository.Book.BookRepository;
+import bitcopark.library.repository.Book.BookSearchCondition;
+import bitcopark.library.repository.Book.BookSearchDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +20,21 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookService {
 
     private final BookRepository bookRepository;
+
+    @Transactional
+    public BooklistAndLikelistDTO searchBooklistAndLikelist(BookSearchCondition bookSearchCondition){
+        List<BookSearchDto> books = bookRepository.findAllBooks(bookSearchCondition);
+
+        // 좋아요 로직 추가 필요
+        //bookRepository.findLikeMembers(memberNo);
+
+        System.out.println("books.size() = " + books.size());
+        for (BookSearchDto book : books) {
+            System.out.println("book = " + book);
+        }
+
+        return new BooklistAndLikelistDTO(books, new ArrayList<>());
+    }
 
     @Transactional
     public Book registerNewBook(String author, String title, String publisher, String publicationDate, String isbn, String thumbnail, BookState bookState, BookSupple bookSupple){
