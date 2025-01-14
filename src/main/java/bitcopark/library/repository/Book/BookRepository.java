@@ -12,6 +12,9 @@ public interface BookRepository extends JpaRepository<Book, Long> , BookReposito
 
     Optional<Book> findByTitle(String title);
 
+    Optional<Book> findByIsbn(String isbn);
+
+
     @Query("select b from Book b")
     List<Book> selectAll();
 

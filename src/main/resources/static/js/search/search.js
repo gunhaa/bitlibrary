@@ -7,11 +7,21 @@ const params = new URL(location.href).searchParams;
 const options = document.querySelectorAll("#key > option");
 
 // 임시
-const loginMemberNo = 10;
+const loginMemberNo = 3;
 
 
 let key;
 
+
+// ---- temp ----
+
+function getSelectedKey() {
+    const select = document.getElementById('key');
+    return select.value; // 현재 선택된 option의 value 반환
+}
+
+
+//
 const sidelow = document.querySelectorAll(".side-side-current a");
 for(let i=0; i<sidelow.length; i++){
     if(sidelow[i].getAttribute("href") == location.pathname){
@@ -25,19 +35,27 @@ if(params.get("query") != null){
 
 if(searchBtn != null){
 
-    searchBtn.addEventListener("click", ()=>{
-        
-        if(query.value.trim().length != 0){
-            
-            for(let o of options){
-                if(o.selected){
+    searchBtn.addEventListener("click", handleSearch);
+    query.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") { // Enter 키일 경우
+            handleSearch();
+        }
+    });
+
+    function handleSearch() {
+        if (query.value.trim().length != 0) {
+            let key = "";
+
+            for (let o of options) {
+                if (o.selected) {
                     key = o.value;
+                    break; // 선택된 값이 하나면 루프 종료
                 }
             }
 
             search(query.value, key);
         }
-    })
+    }
 
 }
 // 원본 loginMember는 왜 있음?
@@ -135,8 +153,9 @@ function showBookList(result){
         }else{
             span.innerText = "★";
         }
-
-        span.setAttribute("onclick", `bookLike(this, ${b.bookNo}, "${loginMemberNo}")`);
+//원본
+//        span.setAttribute("onclick", `bookLike(this, ${b.bookNo}, "${loginMemberNo}")`);
+        span.setAttribute("onclick", `bookLike(this, ${b.isbn}, "${loginMemberNo}")`);
 
         const p1 = document.createElement("p");
         p1.innerText = `${b.bookTitle}`;
@@ -251,9 +270,6 @@ function showBookList(result){
 
 const modal = document.getElementById("popup_layer");
 function showModal(book){
-    console.log(book);
-    console.log(typeof book.thumbnail);
-    console.log(book.thumbnail);
     modal.style.display = "block";
     const img = document.querySelector(".popup_content_left > img");
     img.setAttribute("src", book.thumbnail);
@@ -266,7 +282,7 @@ function showModal(book){
     detail[5].innerText = `ISBN : ${book.isbn}`;
 
     const confirmBtn = document.getElementById("confirm_btn");
-    confirmBtn.setAttribute("onclick", "addReservation(" + book.bookNo + ")");
+    confirmBtn.setAttribute("onclick", "addReservation(" + book.isbn + ")");
 }
 
 const cancelBtn = document.getElementById("cancel_btn");
@@ -274,7 +290,7 @@ cancelBtn.addEventListener("click", ()=>{
     modal.style.display = "none";
 })
 
-function addReservation(bookNo){
+function addReservation(isbn){
 
     if(loginMemberNo == ""){
         alert("로그인 후 이용해주세요");
@@ -282,16 +298,31 @@ function addReservation(bookNo){
         return;
     }
 
-    fetch("/book/resv?bookNo=" + bookNo + "&memberNo=" + loginMemberNo)
-    .then(resp=>resp.text())
-    .then(result=>{
+//    fetch("/book/resv?bookNo=" + bookNo + "&memberNo=" + loginMemberNo)
+//    fetch(`/search/books/reservation/v1?isbn=${isbn}&memberNo=${loginMemberNo}`)
+    const url = `/search/books/reservation/v1`;
+    const data = {
+        isbn: isbn,
+        memberId: loginMemberNo
+    };
 
-        if(result == -1){
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(resp=>resp.json())
+    .then(result => {
+
+
+        if(result === "ALREADY_RESERVED"){
             alert("이미 예약한 도서입니다");
-        }else if(result > 0){
-            alert("예약 성공!!");
-        }else{
-            alert("예약 실패 ㅠㅠ");
+        }else if(result === "SUCCESS"){
+            alert("예약 성공");
+        }else {
+            alert("오류 발생");
         }
 
         modal.style.display = "none";
