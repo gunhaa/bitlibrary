@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-
 <article class="side-menu-article" th:fragment="sideMenu">
     <th:block th:each="category : ${categoryDTOList}">
         <th:block th:if="${catLevel1 == category.id}">
@@ -10,41 +9,81 @@
             <ul class="side-menu">
                 <th:block th:each="category2 : ${categoryDTOList}">
                     <th:block th:if="${category2.parentCategory != null && category.id == category2.parentCategory.id}">
-                        <th:block>
 
-                            <th:block th:if="${catLevel2 == category2.id}">
+                        <th:block th:if="${catLevel2 == category2.id}">
 
-                                <li class="side-current">
-                                    <a th:href="@{/{catName}/{catName2}/{cat3Code}(catName=${category.categoryEngName}, catName2=${category2.categoryEngName}, cat3Code=${catLevel3})}"
+                            <li class="side-current">
+                                <th:block th:if="${category2.subCategory.size() == 0}">
+                                    <a th:href="@{/{catName}/{catName2}(catName=${category.categoryEngName}, catName2=${category2.categoryEngName})}"
                                        class="side-current-a"
                                        th:text="${category2.categoryName}"></a>
+                                </th:block>
 
-                                    <th:block th:if="${category2.subCategory.size() > 0}">
-                                        <ul>
-                                            <th:block th:each="subCategory : ${category2.subCategory}">
-                                                <li>
-                                                    <a th:href="@{/{catName}/{cat2Name}/{cat3Code}(catName=${category.categoryEngName}, cat2Name=${category2.categoryEngName}, cat3Code=${subCategory.id})}"
-                                                       th:classappend="${catLevel3 == subCategory.id} ? 'side-side-current' : ''"
-                                                       th:text="${subCategory.categoryName}"></a>
-                                                </li>
-                                            </th:block>
-                                        </ul>
+                                <th:block th:unless="${category2.subCategory.size() == 0}">
+                                    <th:block th:each="category3 : ${category2.subCategory}">
+                                        <th:block th:if="${category3.id == catLevel3}">
+                                            <a th:if="${category3.subCategory.size() == 0}"
+                                               th:href="@{/{catName}/{catName2}/{cat3Code}(catName=${category.categoryEngName}, catName2=${category2.categoryEngName}, cat3Code=${catLevel3})}"
+                                               class="side-current-a"
+                                               th:text="${category2.categoryName}"></a>
+
+                                            <a th:unless="${category3.subCategory.size() == 0}"
+                                               th:href="@{/{catName}/{catName2}/{cat3Code}(sub=${category3.subCategory[0].categoryEngName},
+                                                                catName=${category.categoryEngName}, catName2=${category2.categoryEngName}, cat3Code=${catLevel3})}"
+                                               class="side-current-a"
+                                               th:text="${category2.categoryName}"></a>
+
+                                            <ul>
+                                                <th:block th:each="subCategory : ${category2.subCategory}">
+                                                    <li>
+                                                        <a th:if="${subCategory.subCategory.size() == 0}"
+                                                           th:href="@{/{catName}/{catName2}/{cat3Code}(catName=${category.categoryEngName}, catName2=${category2.categoryEngName}, cat3Code=${subCategory.id})}"
+                                                           th:classappend="${catLevel3 == subCategory.id} ? 'side-side-current' : ''"
+                                                           th:text="${subCategory.categoryName}"></a>
+
+                                                        <a th:unless="${subCategory.subCategory.size() == 0}"
+                                                           th:href="@{/{catName}/{catName2}/{cat3Code}(sub=${subCategory.subCategory[0].categoryEngName},
+                                                                        catName=${category.categoryEngName}, catName2=${category2.categoryEngName}, cat3Code=${subCategory.id})}"
+                                                           th:classappend="${catLevel3 == subCategory.id} ? 'side-side-current' : ''"
+                                                           th:text="${subCategory.categoryName}"></a>
+                                                    </li>
+                                                </th:block>
+                                            </ul>
+                                        </th:block>
                                     </th:block>
-
-                                </li>
-                            </th:block>
-
-                            <th:block th:unless="${catLevel2 == category2.id}">
-                                <li>
-                                    <a th:href="@{/{catName}/{cat2Name}/{cat3id}(catName=${category.categoryEngName}, cat2Name=${category2.categoryEngName}, cat3id=${category2.firstSubCategoryId})}"
-                                       th:text="${category2.categoryName}"></a>
-                                </li>
-                            </th:block>
-
+                                </th:block>
+                            </li>
                         </th:block>
+
+                        <th:block th:unless="${catLevel2 == category2.id}">
+                            <li>
+                                <th:block th:if="${category2.subCategory.size() == 0}">
+                                    <a th:href="@{/{catName}/{cat2Name}(catName=${category.categoryEngName}, cat2Name=${category2.categoryEngName})}"
+                                       th:text="${category2.categoryName}"></a>
+                                </th:block>
+
+                                <th:block th:unless="${category2.subCategory.size() == 0}">
+                                    <th:block th:each="category3 : ${category2.subCategory}">
+                                        <th:block th:if="${category3.id == category2.firstSubCategoryId}">
+                                            <a th:if="${category3.subCategory.size() == 0}"
+                                               th:href="@{/{catName}/{cat2Name}/{cat3id}(catName=${category.categoryEngName}, cat2Name=${category2.categoryEngName}, cat3id=${category2.firstSubCategoryId})}"
+                                               th:text="${category2.categoryName}"></a>
+
+                                            <a th:unless="${category3.subCategory.size() == 0}"
+                                               th:href="@{/{catName}/{cat2Name}/{cat3id}(sub=${category3.subCategory[0].categoryEngName},
+                                                            catName=${category.categoryEngName}, cat2Name=${category2.categoryEngName}, cat3id=${category2.firstSubCategoryId})}"
+                                               th:text="${category2.categoryName}"></a>
+                                        </th:block>
+                                    </th:block>
+                                </th:block>
+                            </li>
+                        </th:block>
+
                     </th:block>
                 </th:block>
             </ul>
         </th:block>
     </th:block>
 </article>
+
+</html>
