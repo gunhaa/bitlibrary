@@ -1,7 +1,7 @@
 package bitcopark.library.entity.member;
 
 import bitcopark.library.entity.Book.BookBorrow;
-import bitcopark.library.entity.Book.BookFavorite;
+import bitcopark.library.entity.Book.BookLike;
 import bitcopark.library.entity.Class.ClassApplicant;
 import bitcopark.library.entity.LibrarySeatBooking.SeatReservation;
 import bitcopark.library.entity.Board.Board;
@@ -47,7 +47,7 @@ public class Member extends BaseAuditEntity {
 
     @OneToMany(mappedBy = "member", orphanRemoval = true)
 //    @Builder.Default
-    private List<BookFavorite> bookFavoriteList = new ArrayList<>();
+    private List<BookLike> bookFavoriteList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", orphanRemoval = true)
 //    @Builder.Default

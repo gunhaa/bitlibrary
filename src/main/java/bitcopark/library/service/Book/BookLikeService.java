@@ -1,9 +1,9 @@
 package bitcopark.library.service.Book;
 
 import bitcopark.library.entity.Book.Book;
-import bitcopark.library.entity.Book.BookFavorite;
+import bitcopark.library.entity.Book.BookLike;
 import bitcopark.library.entity.member.Member;
-import bitcopark.library.repository.Book.BookFavoriteRepository;
+import bitcopark.library.repository.Book.BookLikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class BookFavoriteService {
+public class BookLikeService {
 
-    private final BookFavoriteRepository bookFavoriteRepository;
+    private final BookLikeRepository bookFavoriteRepository;
 
     @Transactional
-    public BookFavorite addBookFavorite(Book book, Member member){
-        BookFavorite bookFavorite = BookFavorite.builder()
+    public BookLike addBookLike(Book book, Member member){
+        BookLike bookFavorite = BookLike.builder()
                 .book(book)
                 .member(member)
                 .build();

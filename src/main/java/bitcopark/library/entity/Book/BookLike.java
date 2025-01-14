@@ -2,7 +2,6 @@ package bitcopark.library.entity.Book;
 
 import bitcopark.library.entity.Audit.BaseAuditEntity;
 import bitcopark.library.entity.member.Member;
-import bitcopark.library.entity.Audit.CreatedAuditEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,11 +10,11 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class BookFavorite extends BaseAuditEntity {
+public class BookLike extends BaseAuditEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "bookfavorite_id")
+    @Column(name = "bookLike_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

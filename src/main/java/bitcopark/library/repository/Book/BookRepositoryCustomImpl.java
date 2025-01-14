@@ -2,9 +2,7 @@ package bitcopark.library.repository.Book;
 
 import bitcopark.library.entity.Book.QBook;
 import bitcopark.library.entity.Book.QBookBorrow;
-import bitcopark.library.entity.Book.QBookFavorite;
 import bitcopark.library.entity.Book.QBookReservation;
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;

@@ -7,7 +7,7 @@ const params = new URL(location.href).searchParams;
 const options = document.querySelectorAll("#key > option");
 
 // 임시
-const loginMemberNo = 3;
+const loginMemberNo = 1;
 
 
 let key;
@@ -71,7 +71,7 @@ if(searchBtn != null){
 
 function search(query, key){
 //    fetch("/search/books/v1?query=" + query + "&key=" + key)
-    fetch(`/search/books/v1?query=${query}&key=${key}`)
+    fetch(`/search/books/v1?query=${query}&key=${key}&memberId=${loginMemberNo}`)
     .then(resp => resp.json())
     .then(result => {
         showBookList(result);
@@ -126,6 +126,8 @@ function showBookList(result){
     const bList = result.bookList;
     const lList = result.likeList;
 
+    console.log(lList);
+
     queryResult.innerText = ""
     
     if(bList.length == 0){
@@ -147,9 +149,9 @@ function showBookList(result){
         bookInfo.classList.add("book-info");
 
         const span = document.createElement("span");
-        if(lList.indexOf(b.bookNo) == -1){
-            span.innerText = "☆";
 
+        if(lList.findIndex(item => item.isbn === b.isbn) === -1){
+            span.innerText = "☆";
         }else{
             span.innerText = "★";
         }

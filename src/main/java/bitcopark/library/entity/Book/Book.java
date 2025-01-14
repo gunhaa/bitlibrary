@@ -32,7 +32,7 @@ public class Book {
     private BookSupple bookSupple;
 
     @OneToMany(mappedBy = "book")
-    private List<BookFavorite> bookFavoriteList = new ArrayList<>();
+    private List<BookLike> bookLikeList = new ArrayList<>();
 
     @OneToMany(mappedBy = "book")
     private List<BookBorrow> bookBorrowList = new ArrayList<>();

@@ -12,12 +12,11 @@ import bitcopark.library.repository.Book.BookRepository;
 import bitcopark.library.repository.Member.MemberRepository;
 import bitcopark.library.service.Board.CategoryService;
 import bitcopark.library.service.Book.BookBorrowService;
-import bitcopark.library.service.Book.BookFavoriteService;
+import bitcopark.library.service.Book.BookLikeService;
 import bitcopark.library.service.Book.BookReservationService;
 import bitcopark.library.service.Book.BookService;
 import bitcopark.library.service.Member.MemberService;
 import jakarta.annotation.PostConstruct;
-import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -53,7 +52,7 @@ public class tempInitGenerate {
 
         private final BookBorrowService bookBorrowService;
 
-        private final BookFavoriteService bookFavoriteService;
+        private final BookLikeService bookFavoriteService;
 
         private final BookReservationService bookReservationService;
 
@@ -161,12 +160,12 @@ public class tempInitGenerate {
 
 
             // 책 좋아요
-            bookFavoriteService.addBookFavorite(명품_인생을_살아라, member1);
-            bookFavoriteService.addBookFavorite(백범일지, member1);
-            bookFavoriteService.addBookFavorite(백범일지, member2);
-            bookFavoriteService.addBookFavorite(디셉션_포인트, member1);
-            bookFavoriteService.addBookFavorite(디셉션_포인트, member2);
-            bookFavoriteService.addBookFavorite(디셉션_포인트, member3);
+            bookFavoriteService.addBookLike(명품_인생을_살아라, member1);
+            bookFavoriteService.addBookLike(백범일지, member1);
+            bookFavoriteService.addBookLike(백범일지, member2);
+            bookFavoriteService.addBookLike(디셉션_포인트, member1);
+            bookFavoriteService.addBookLike(디셉션_포인트, member2);
+            bookFavoriteService.addBookLike(디셉션_포인트, member3);
 
             // 책 대여
             bookBorrowService.registerBookRental(member1, 백범일지);

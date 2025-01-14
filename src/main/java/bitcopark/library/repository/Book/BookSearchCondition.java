@@ -6,4 +6,5 @@ import lombok.Data;
 public class BookSearchCondition {
     private String query;
     private searchType key;
+    private Long memberId;
 }

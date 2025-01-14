@@ -1,12 +1,13 @@
 package bitcopark.library.service.Book;
 
 import bitcopark.library.entity.Book.Book;
+import bitcopark.library.entity.Book.BookLike;
 import bitcopark.library.entity.Book.BookState;
 import bitcopark.library.entity.Book.BookSupple;
+import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BookTitleNotFoundException;
-import bitcopark.library.repository.Book.BookRepository;
-import bitcopark.library.repository.Book.BookSearchCondition;
-import bitcopark.library.repository.Book.BookSearchDto;
+import bitcopark.library.repository.Book.*;
+import bitcopark.library.repository.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,20 +21,21 @@ import java.util.List;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final BookLikeRepository bookLikeRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
     public BooklistAndLikelistDTO searchBooklistAndLikelist(BookSearchCondition bookSearchCondition){
         List<BookSearchDto> books = bookRepository.findAllBooks(bookSearchCondition);
 
-        // 좋아요 로직 추가 필요
-        //bookRepository.findLikeMembers(memberNo);
+        Member findMember = memberRepository.findById(bookSearchCondition.getMemberId()).orElseThrow(() -> new IllegalArgumentException("memberId를 찾을 수 없습니다."));
+        List<BookLikeDto> bookLikeListByMemberId = bookLikeRepository.findBookLikeListByMemberId(findMember.getId());
 
-        System.out.println("books.size() = " + books.size());
-        for (BookSearchDto book : books) {
-            System.out.println("book = " + book);
+        for (BookLikeDto bookLikeDto : bookLikeListByMemberId) {
+            System.out.println("bookLikeDto.getIsbn() = " + bookLikeDto.getIsbn());
         }
 
-        return new BooklistAndLikelistDTO(books, new ArrayList<>());
+        return new BooklistAndLikelistDTO(books, bookLikeListByMemberId);
     }
 
     @Transactional
