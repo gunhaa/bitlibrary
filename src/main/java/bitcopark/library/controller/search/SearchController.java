@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SearchController {
 
-    @GetMapping(value = {"/{catLevel1:search}/{catLevel2}/{catLevel3}" , "/{catLevel1:search}/{catLevel2}/"})
+    @GetMapping(value = {"/{catLevel1:search}/{catLevel2}/{catLevel3}" , "/{catLevel1:search}/{catLevel2}"})
     public String search(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
                          @PathVariable(name = "catLevel1") String catLevel1,
                          @PathVariable(name = "catLevel2") String catLevel2,
