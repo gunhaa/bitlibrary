@@ -1,18 +1,16 @@
+const params = new URL(location.href).searchParams;
 const libNav = document.querySelectorAll(".nav-area > a");
 
-for(let i = 1; i <= libNav.length; i++){
-    if(params.get("m") == null){
-        libNav[0].classList.add("selected");
+for(let i = 0; i < libNav.length; i++){
+    const subCategory = libNav[i].getAttribute("href").split("=")[1];
 
-    }else{
-        if(params.get("m") == i){
-            libNav[i - 1].classList.add("selected");
-        }
+    if(params.get("sub") == subCategory){
+        libNav[i].classList.add("selected");
     }
 }
 
-function bookcancel(rNo){
-    fetch("/bookcancel",{
+function bookCancel(rNo){
+    fetch("/book",{
         method : "DELETE",
         headers : {"Content-Type" : "application/json"},
         body : rNo
@@ -29,8 +27,8 @@ function bookcancel(rNo){
     .catch(e=>console.log(e))
 }
 
-function reservcancel(rNo){
-    fetch("/reservcancel",{
+function reservCancel(rNo){
+    fetch("/reserv",{
         method : "DELETE",
         headers : {"Content-Type" : "application/json"},
         body : rNo
@@ -47,8 +45,8 @@ function reservcancel(rNo){
     .catch(e=>console.log(e))
 }
 
-function classcancel(boardNo){
-    fetch("/classcancel",{
+function classCancel(boardNo){
+    fetch("/class",{
         method : "DELETE",
         headers : {"Content-Type" : "application/json"},
         body : boardNo
@@ -65,8 +63,8 @@ function classcancel(boardNo){
     .catch(e=>console.log(e))
 }
 
-function bookmarkcancel(bookNo){
-    fetch("/bookmarkcancel",{
+function bookmarkCancel(bookNo){
+    fetch("/bookmark",{
         method : "DELETE",
         headers : {"Content-Type" : "application/json"},
         body : bookNo
