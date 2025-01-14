@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class BooklistAndLikelistDTO {
+public class SearchBooklistAndLikelistDTO {
     private final List<BookSearchDto> bookList;
     private final List<BookLikeDto> likeList;
 }

@@ -103,14 +103,18 @@ if(searchDetailBtn != null){
                 limit = o.value;
             }
         }
+// 원본
+//        fetch("/book/search?query=" + inputDetail[0].value +
+//            "&author=" + inputDetail[1].value +
+//            "&pub=" + inputDetail[2].value +
+//            "&startYear=" + inputDetail[3].value +
+//            "&endYear=" + inputDetail[4].value +
+//            "&limit=" + limit +
+//            "&memberNo=" + loginMemberNo)
 
-        fetch("/book/search?query=" + inputDetail[0].value + 
-            "&author=" + inputDetail[1].value +
-            "&pub=" + inputDetail[2].value +
-            "&startYear=" + inputDetail[3].value +
-            "&endYear=" + inputDetail[4].value +
-            "&limit=" + limit +
-            "&memberNo=" + loginMemberNo)
+        const url = `/search/books/detail/v1?query=${inputDetail[0].value}&author=${inputDetail[1].value}&pub=${inputDetail[2].value}&startYear=${inputDetail[3].value}&endYear=${inputDetail[4].value}&size=${limit}&memberId=${loginMemberNo}`;
+
+        fetch(url)
         .then(resp=>resp.json())
         .then(result=>{
             showBookList(result);
@@ -370,16 +374,6 @@ function bookLike(el, isbn, memberId){
     .catch(e=>console.log(e))
 
 }
-
-// swiper
-/*const sampleSlider = new Swiper('.sample', {
-    slidesPerView: 3,
-    spaceBetween: 10,
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
-    }
-})*/
 
 /* 초기화 버튼 */
 if(resetBtn != null){

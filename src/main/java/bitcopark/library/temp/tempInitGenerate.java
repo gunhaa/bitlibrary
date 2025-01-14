@@ -136,6 +136,11 @@ public class tempInitGenerate {
 
             Book 명품_인생을_살아라 = bookService.registerNewBook("박은몽 글", "명품 인생을 살아라", "대교베텔스만", "2008", "9788957592472", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F762800%3Ftimestamp%3D20220904155651", BookState.P, BookSupple.N);
             Book 백범일지 = bookService.registerNewBook("김구 저", "백범일지", "돌베개", "2008", "9788971992258", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F994701%3Ftimestamp%3D20240727112932", BookState.P, BookSupple.N);
+
+            for(int i=0; i<32; i++){
+                bookService.registerNewBook("김구 저", "백범일지"+i, "돌베개", "2008", "9788971992258", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F994701%3Ftimestamp%3D20240727112932", BookState.P, BookSupple.N);
+            }
+
             Book 디셉션_포인트 = bookService.registerNewBook("댄 브라운 지음", "디셉션 포인트", "대교베텔스만", "2006", "9788957591574", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F762541%3Ftimestamp%3D20220825213715", BookState.I, BookSupple.N);
             bookService.registerNewBook("김상현 지음", "정약용 살인사건", "중앙M&B(랜덤하우스중앙)", "2006", "9788959864706", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F814870%3Ftimestamp%3D20211204201827", BookState.P, BookSupple.N);
             bookService.registerNewBook("황농문 지음", "몰입", "랜덤하우스코리아", "2007", "9788925514826", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F411705%3Ftimestamp%3D20240430112710", BookState.I, BookSupple.N);

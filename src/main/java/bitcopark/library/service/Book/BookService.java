@@ -1,7 +1,7 @@
 package bitcopark.library.service.Book;
 
+import bitcopark.library.controller.search.BookSearchDetailCondition;
 import bitcopark.library.entity.Book.Book;
-import bitcopark.library.entity.Book.BookLike;
 import bitcopark.library.entity.Book.BookState;
 import bitcopark.library.entity.Book.BookSupple;
 import bitcopark.library.entity.member.Member;
@@ -9,10 +9,10 @@ import bitcopark.library.exception.BookTitleNotFoundException;
 import bitcopark.library.repository.Book.*;
 import bitcopark.library.repository.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,17 +25,26 @@ public class BookService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public BooklistAndLikelistDTO searchBooklistAndLikelist(BookSearchCondition bookSearchCondition){
-        List<BookSearchDto> books = bookRepository.findAllBooks(bookSearchCondition);
+    public SearchBooklistAndLikelistDTO searchBooklistAndLikelist(BookSearchCondition bookSearchCondition){
 
-        Member findMember = memberRepository.findById(bookSearchCondition.getMemberId()).orElseThrow(() -> new IllegalArgumentException("memberId를 찾을 수 없습니다."));
-        List<BookLikeDto> bookLikeListByMemberId = bookLikeRepository.findBookLikeListByMemberId(findMember.getId());
+        List<BookSearchDto> books = bookRepository.findSearchConditionBooks(bookSearchCondition);
+        List<BookLikeDto> bookLikeListByMemberId = getBookLikeDto(bookSearchCondition.getMemberId());
 
-        for (BookLikeDto bookLikeDto : bookLikeListByMemberId) {
-            System.out.println("bookLikeDto.getIsbn() = " + bookLikeDto.getIsbn());
-        }
+        return new SearchBooklistAndLikelistDTO(books, bookLikeListByMemberId);
+    }
 
-        return new BooklistAndLikelistDTO(books, bookLikeListByMemberId);
+    @Transactional
+    public SearchBooklistAndLikelistDTO searchDetailBooklistAndLikelist(BookSearchDetailCondition bookSearchDetailCondition) {
+
+        List<BookSearchDto> books = bookRepository.findSearchDetailConditionBooks(bookSearchDetailCondition);
+        List<BookLikeDto> bookLikeListByMemberId = getBookLikeDto(bookSearchDetailCondition.getMemberId());
+
+        return new SearchBooklistAndLikelistDTO(books, bookLikeListByMemberId);
+    }
+
+    private List<BookLikeDto> getBookLikeDto(Long bookSearchDetailCondition) {
+        Member findMember = memberRepository.findById(bookSearchDetailCondition).orElseThrow(() -> new IllegalArgumentException("memberId를 찾을 수 없습니다."));
+        return bookLikeRepository.findBookLikeListByMemberId(findMember.getId());
     }
 
     @Transactional

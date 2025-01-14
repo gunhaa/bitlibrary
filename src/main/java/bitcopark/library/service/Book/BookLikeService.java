@@ -37,14 +37,12 @@ public class BookLikeService {
     }
 
     private LikeStatus addBookLike(LikeCondition condition) {
-        System.out.println("add 실행");
         Result result = findMemberAndBook(condition);
         addBookLike(result.findMember(), result.findBook());
         return LikeStatus.LIKED;
     }
 
     private LikeStatus deleteBookLike(LikeCondition condition) {
-        System.out.println("delete 실행");
         Result result = findMemberAndBook(condition);
         bookLikeRepository.deleteByMemberAndBook(result.findMember(), result.findBook());
         return LikeStatus.NOT_LIKED;

@@ -1,13 +1,18 @@
 package bitcopark.library.repository.Book;
 
+import bitcopark.library.controller.search.BookSearchDetailCondition;
 import bitcopark.library.entity.Book.QBook;
 import bitcopark.library.entity.Book.QBookBorrow;
 import bitcopark.library.entity.Book.QBookReservation;
+import com.querydsl.core.QueryModifiers;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -18,11 +23,57 @@ public class BookRepositoryCustomImpl implements BookRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<BookSearchDto> findAllBooks(BookSearchCondition bookSearchCondition) {
+    public List<BookSearchDto> findSearchConditionBooks(BookSearchCondition bookSearchCondition) {
         QBook book = QBook.book;
         QBookBorrow bookBorrow = QBookBorrow.bookBorrow;
         QBookReservation bookReservation = QBookReservation.bookReservation;
         // 수정필요
+        return getBookSearchDtoJPAQuery(book, bookReservation, bookBorrow)
+                .where(
+                        keyContain(bookSearchCondition)
+                )
+                .fetch();
+    }
+
+    @Override
+    public List<BookSearchDto> findSearchDetailConditionBooks(BookSearchDetailCondition bookSearchDetailCondition) {
+        QBook book = QBook.book;
+        QBookBorrow bookBorrow = QBookBorrow.bookBorrow;
+        QBookReservation bookReservation = QBookReservation.bookReservation;
+
+        return getBookSearchDtoJPAQuery(book, bookReservation, bookBorrow)
+                .where(
+                    queryContain(bookSearchDetailCondition.getQuery()),
+                    authorContain(bookSearchDetailCondition.getAuthor()),
+                    pubContain(bookSearchDetailCondition.getPub()),
+                    pubGoe(bookSearchDetailCondition.getStartYear()),
+                    pubLoe(bookSearchDetailCondition.getEndYear())
+                )
+                .limit(bookSearchDetailCondition.getSize())
+                .fetch();
+    }
+
+    private BooleanExpression queryContain(String query) {
+        return StringUtils.hasText(query) ? QBook.book.title.contains(query) : null;
+    }
+
+    private BooleanExpression authorContain(String author) {
+        return StringUtils.hasText(author) ? QBook.book.author.contains(author) : null;
+    }
+
+    private BooleanExpression pubContain(String pub) {
+        return StringUtils.hasText(pub) ? QBook.book.publisher.contains(pub) : null;
+    }
+
+    private BooleanExpression pubLoe(String endYear) {
+        return StringUtils.hasText(endYear) ? QBook.book.publicationDate.loe(endYear) : null;
+    }
+
+    private BooleanExpression pubGoe(String startYear) {
+        return StringUtils.hasText(startYear) ? QBook.book.publicationDate.goe(startYear) : null;
+    }
+
+    private JPAQuery<BookSearchDto> getBookSearchDtoJPAQuery(QBook book, QBookReservation bookReservation, QBookBorrow bookBorrow) {
         return queryFactory.select(new QBookSearchDto(
                         book.author,
                         book.title,
@@ -42,52 +93,14 @@ public class BookRepositoryCustomImpl implements BookRepositoryCustom {
                 .from(book)
                 .leftJoin(book.bookBorrowList, bookBorrow)
                 .leftJoin(book.bookReservationList, bookReservation)
-                .where(
-                        keyEq(bookSearchCondition)
-                )
-                .fetch();
-
-        /*
-                return queryFactory.select(new QBookSearchDto(
-                        book.author,
-                        book.title,
-                        book.publisher,
-                        book.publicationDate,
-                        book.isbn,
-                        book.thumbnail,
-                        book.bookState,
-                        book.bookSupple,
-//                        (JPAExpressions
-//                                .select(bookBorrow.count())
-//                                .from(bookBorrow)
-//                                .where(bookBorrow.book.id.eq(book.id))
-//                        ),
-                        bookBorrow.count(),
-                        bookBorrow.returnDueDate
-                        ),
-//                        (JPAExpressions
-//                                .select(bookFavorite.count())
-//                                .from(bookFavorite)
-//                                .where(bookFavorite.book.id.eq(book.id))
-//                        )
-                    bookFavorite.count()
-                )
-                .from(book)
-                .leftJoin(book.bookBorrowList, bookBorrow)
-                .leftJoin(book.bookFavoriteList, bookFavorite)
-                .where(
-                        keyEq(bookSearchCondition)
-                )
-                .fetch();
-
-
-        */
-
+                .groupBy(book);
     }
 
-    private BooleanExpression keyEq(BookSearchCondition bookSearchCondition) {
+
+    private BooleanExpression keyContain(BookSearchCondition bookSearchCondition) {
         return switch (bookSearchCondition.getKey()) {
-            case ta -> QBook.book.title.contains(bookSearchCondition.getQuery()).or(QBook.book.author.contains(bookSearchCondition.getQuery()));
+            case ta ->
+                    QBook.book.title.contains(bookSearchCondition.getQuery()).or(QBook.book.author.contains(bookSearchCondition.getQuery()));
             case t -> QBook.book.title.contains(bookSearchCondition.getQuery());
             case a -> QBook.book.author.contains(bookSearchCondition.getQuery());
         };
