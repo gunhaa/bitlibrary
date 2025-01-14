@@ -11,6 +11,7 @@ public class CategoryStrategyFactory {
             case "시설안내" -> new FacilityStrategy();
             case "통합자료 검색" -> new SearchStrategy();
             case "희망 도서 신청" -> new RequestBookStrategy();
+            case "나의 도서관" -> new MyLibraryStrategy();
             default -> new MainStrategy();
         };
     }
