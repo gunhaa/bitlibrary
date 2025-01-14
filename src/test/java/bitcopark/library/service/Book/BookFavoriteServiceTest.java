@@ -1,20 +1,19 @@
 package bitcopark.library.service.Book;
 
 import bitcopark.library.entity.Book.Book;
-import bitcopark.library.entity.Book.BookFavorite;
+import bitcopark.library.entity.Book.BookLike;
 import bitcopark.library.entity.Book.BookState;
 import bitcopark.library.entity.Book.BookSupple;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
-import bitcopark.library.repository.Book.BookFavoriteRepository;
+import bitcopark.library.repository.Book.BookLikeRepository;
 import bitcopark.library.service.Member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -30,10 +29,10 @@ class BookFavoriteServiceTest {
     private BookService bookService;
 
     @Autowired
-    private BookFavoriteService bookFavoriteService;
+    private BookLikeService bookFavoriteService;
 
     @Autowired
-    private BookFavoriteRepository bookFavoriteRepository;
+    private BookLikeRepository bookFavoriteRepository;
 
     private Member member;
     private Book book;
@@ -41,10 +40,10 @@ class BookFavoriteServiceTest {
     @Test
     public void 즐겨찾기_등록(){
         //when
-        bookFavoriteService.addBookFavorite(book, member);
+        bookFavoriteService.addBookLike(member, book);
 
         //then
-        List<BookFavorite> findBookFavorites = bookFavoriteRepository.findByMember(member);
+        List<BookLike> findBookFavorites = bookFavoriteRepository.findByMember(member);
 
         Assertions.assertThat(findBookFavorites.size()).isEqualTo(1);
 

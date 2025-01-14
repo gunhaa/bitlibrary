@@ -33,8 +33,7 @@
              id="query"
              name="query"
              placeholder="도서를 검색해 주세요"
-             th:value="${param.query}"
-             onkeyup="if(window.event.keyCode==13){searchKeyword()}"/>
+             th:value="${param.query}"/>
 
       <button id="searchBtn">
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -84,7 +83,8 @@
 <!-- 로그인 미개발-->
 <!--로그인 멤버 넘겨야함-->
 <!--</script>-->
-<script th:inline="javascript">
+<script>
+
 </script>
 
 <script src="/js/search/search.js"></script>

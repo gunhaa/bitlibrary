@@ -7,11 +7,21 @@ const params = new URL(location.href).searchParams;
 const options = document.querySelectorAll("#key > option");
 
 // 임시
-const loginMemberNo = 10;
+const loginMemberNo = 1;
 
 
 let key;
 
+
+// ---- temp ----
+
+function getSelectedKey() {
+    const select = document.getElementById('key');
+    return select.value; // 현재 선택된 option의 value 반환
+}
+
+
+//
 const sidelow = document.querySelectorAll(".side-side-current a");
 for(let i=0; i<sidelow.length; i++){
     if(sidelow[i].getAttribute("href") == location.pathname){
@@ -25,19 +35,27 @@ if(params.get("query") != null){
 
 if(searchBtn != null){
 
-    searchBtn.addEventListener("click", ()=>{
-        
-        if(query.value.trim().length != 0){
-            
-            for(let o of options){
-                if(o.selected){
+    searchBtn.addEventListener("click", handleSearch);
+    query.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") { // Enter 키일 경우
+            handleSearch();
+        }
+    });
+
+    function handleSearch() {
+        if (query.value.trim().length != 0) {
+            let key = "";
+
+            for (let o of options) {
+                if (o.selected) {
                     key = o.value;
+                    break; // 선택된 값이 하나면 루프 종료
                 }
             }
 
             search(query.value, key);
         }
-    })
+    }
 
 }
 // 원본 loginMember는 왜 있음?
@@ -53,7 +71,7 @@ if(searchBtn != null){
 
 function search(query, key){
 //    fetch("/search/books/v1?query=" + query + "&key=" + key)
-    fetch(`/search/books/v1?query=${query}&key=${key}`)
+    fetch(`/search/books/v1?query=${query}&key=${key}&memberId=${loginMemberNo}`)
     .then(resp => resp.json())
     .then(result => {
         showBookList(result);
@@ -85,14 +103,18 @@ if(searchDetailBtn != null){
                 limit = o.value;
             }
         }
+// 원본
+//        fetch("/book/search?query=" + inputDetail[0].value +
+//            "&author=" + inputDetail[1].value +
+//            "&pub=" + inputDetail[2].value +
+//            "&startYear=" + inputDetail[3].value +
+//            "&endYear=" + inputDetail[4].value +
+//            "&limit=" + limit +
+//            "&memberNo=" + loginMemberNo)
 
-        fetch("/book/search?query=" + inputDetail[0].value + 
-            "&author=" + inputDetail[1].value +
-            "&pub=" + inputDetail[2].value +
-            "&startYear=" + inputDetail[3].value +
-            "&endYear=" + inputDetail[4].value +
-            "&limit=" + limit +
-            "&memberNo=" + loginMemberNo)
+        const url = `/search/books/detail/v1?query=${inputDetail[0].value}&author=${inputDetail[1].value}&pub=${inputDetail[2].value}&startYear=${inputDetail[3].value}&endYear=${inputDetail[4].value}&size=${limit}&memberId=${loginMemberNo}`;
+
+        fetch(url)
         .then(resp=>resp.json())
         .then(result=>{
             showBookList(result);
@@ -129,14 +151,14 @@ function showBookList(result){
         bookInfo.classList.add("book-info");
 
         const span = document.createElement("span");
-        if(lList.indexOf(b.bookNo) == -1){
-            span.innerText = "☆";
 
+        if(lList.findIndex(item => item.isbn === b.isbn) === -1){
+            span.innerText = "☆";
         }else{
             span.innerText = "★";
         }
 
-        span.setAttribute("onclick", `bookLike(this, ${b.bookNo}, "${loginMemberNo}")`);
+        span.setAttribute("onclick", `bookLike(this, ${b.isbn}, "${loginMemberNo}")`);
 
         const p1 = document.createElement("p");
         p1.innerText = `${b.bookTitle}`;
@@ -251,9 +273,6 @@ function showBookList(result){
 
 const modal = document.getElementById("popup_layer");
 function showModal(book){
-    console.log(book);
-    console.log(typeof book.thumbnail);
-    console.log(book.thumbnail);
     modal.style.display = "block";
     const img = document.querySelector(".popup_content_left > img");
     img.setAttribute("src", book.thumbnail);
@@ -266,7 +285,7 @@ function showModal(book){
     detail[5].innerText = `ISBN : ${book.isbn}`;
 
     const confirmBtn = document.getElementById("confirm_btn");
-    confirmBtn.setAttribute("onclick", "addReservation(" + book.bookNo + ")");
+    confirmBtn.setAttribute("onclick", "addReservation(" + book.isbn + ")");
 }
 
 const cancelBtn = document.getElementById("cancel_btn");
@@ -274,7 +293,7 @@ cancelBtn.addEventListener("click", ()=>{
     modal.style.display = "none";
 })
 
-function addReservation(bookNo){
+function addReservation(isbn){
 
     if(loginMemberNo == ""){
         alert("로그인 후 이용해주세요");
@@ -282,16 +301,29 @@ function addReservation(bookNo){
         return;
     }
 
-    fetch("/book/resv?bookNo=" + bookNo + "&memberNo=" + loginMemberNo)
-    .then(resp=>resp.text())
-    .then(result=>{
+    const url = `/search/books/reservation/v1`;
+    const data = {
+        isbn: isbn,
+        memberId: loginMemberNo
+    };
 
-        if(result == -1){
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(resp=>resp.json())
+    .then(result => {
+
+
+        if(result === "ALREADY_RESERVED"){
             alert("이미 예약한 도서입니다");
-        }else if(result > 0){
-            alert("예약 성공!!");
-        }else{
-            alert("예약 실패 ㅠㅠ");
+        }else if(result === "SUCCESS"){
+            alert("예약 성공");
+        }else {
+            alert("오류 발생");
         }
 
         modal.style.display = "none";
@@ -300,54 +332,48 @@ function addReservation(bookNo){
     .catch(e=>console.log)
 }
 
-function bookLike(el, bookNo, memberNo){
+let likeStatus;
+function bookLike(el, isbn, memberId){
 
-    if(memberNo == ""){
+    if(memberId == ""){
         alert("로그인 후 이용해주세요.");
         return;
     }
 
-    let check;
     if(el.innerText == "☆"){
-        check = 0;
+        likeStatus = 0;
     }else{
-        check = 1;
+        likeStatus = 1;
     }
 
-    const obj = {
-        bookNo : bookNo,
-        memberNo : memberNo,
-        check : check
+    const data = {
+        isbn : isbn,
+        memberId : memberId,
+        likeStatus : likeStatus
     };
 
-    fetch("/book/like", {
+    fetch("/search/books/like/v1", {
         method : "POST",
         headers : {"Content-Type" : "application/json"},
-        body : JSON.stringify(obj)
+        body : JSON.stringify(data)
     })
-    .then(resp => resp.text())
+    .then(resp => resp.json())
     .then(result => {
-        if(result > 0){
-            if(check == 0){
-                el.innerText = "★";
-            }else{
-                el.innerText = "☆";
-            }
+
+        console.log(result);
+
+        if(result == "LIKED"){
+            el.innerText = "★";
+            likeStatus = 1;
+        }else if(result == "NOT_LIKED"){
+            el.innerText = "☆";
+            likeStatus = 0;
         }
+
     })
     .catch(e=>console.log(e))
 
 }
-
-// swiper
-/*const sampleSlider = new Swiper('.sample', {
-    slidesPerView: 3,
-    spaceBetween: 10,
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
-    }
-})*/
 
 /* 초기화 버튼 */
 if(resetBtn != null){

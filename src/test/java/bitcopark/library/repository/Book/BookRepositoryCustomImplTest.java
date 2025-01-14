@@ -23,7 +23,7 @@ public class BookRepositoryCustomImplTest {
 
 
         //when
-        List<BookSearchDto> BookDto = bookRepository.findAllBooks(new BookSearchCondition());
+        List<BookSearchDto> BookDto = bookRepository.findSearchConditionBooks(new BookSearchCondition());
 
         //then
 
