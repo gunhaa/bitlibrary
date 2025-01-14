@@ -160,12 +160,12 @@ public class tempInitGenerate {
 
 
             // 책 좋아요
-            bookFavoriteService.addBookLike(명품_인생을_살아라, member1);
-            bookFavoriteService.addBookLike(백범일지, member1);
-            bookFavoriteService.addBookLike(백범일지, member2);
-            bookFavoriteService.addBookLike(디셉션_포인트, member1);
-            bookFavoriteService.addBookLike(디셉션_포인트, member2);
-            bookFavoriteService.addBookLike(디셉션_포인트, member3);
+            bookFavoriteService.addBookLike(member1, 명품_인생을_살아라);
+            bookFavoriteService.addBookLike(member1, 백범일지);
+            bookFavoriteService.addBookLike(member2, 백범일지);
+            bookFavoriteService.addBookLike(member1, 디셉션_포인트);
+            bookFavoriteService.addBookLike(member2, 디셉션_포인트);
+            bookFavoriteService.addBookLike(member3, 디셉션_포인트);
 
             // 책 대여
             bookBorrowService.registerBookRental(member1, 백범일지);

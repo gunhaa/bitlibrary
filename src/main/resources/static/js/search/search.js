@@ -126,8 +126,6 @@ function showBookList(result){
     const bList = result.bookList;
     const lList = result.likeList;
 
-    console.log(lList);
-
     queryResult.innerText = ""
     
     if(bList.length == 0){
@@ -155,8 +153,7 @@ function showBookList(result){
         }else{
             span.innerText = "★";
         }
-//원본
-//        span.setAttribute("onclick", `bookLike(this, ${b.bookNo}, "${loginMemberNo}")`);
+
         span.setAttribute("onclick", `bookLike(this, ${b.isbn}, "${loginMemberNo}")`);
 
         const p1 = document.createElement("p");
@@ -300,8 +297,6 @@ function addReservation(isbn){
         return;
     }
 
-//    fetch("/book/resv?bookNo=" + bookNo + "&memberNo=" + loginMemberNo)
-//    fetch(`/search/books/reservation/v1?isbn=${isbn}&memberNo=${loginMemberNo}`)
     const url = `/search/books/reservation/v1`;
     const data = {
         isbn: isbn,
@@ -333,40 +328,44 @@ function addReservation(isbn){
     .catch(e=>console.log)
 }
 
-function bookLike(el, bookNo, memberNo){
+let likeStatus;
+function bookLike(el, isbn, memberId){
 
-    if(memberNo == ""){
+    if(memberId == ""){
         alert("로그인 후 이용해주세요.");
         return;
     }
 
-    let check;
     if(el.innerText == "☆"){
-        check = 0;
+        likeStatus = 0;
     }else{
-        check = 1;
+        likeStatus = 1;
     }
 
-    const obj = {
-        bookNo : bookNo,
-        memberNo : memberNo,
-        check : check
+    const data = {
+        isbn : isbn,
+        memberId : memberId,
+        likeStatus : likeStatus
     };
 
-    fetch("/book/like", {
+    fetch("/search/books/like/v1", {
         method : "POST",
         headers : {"Content-Type" : "application/json"},
-        body : JSON.stringify(obj)
+        body : JSON.stringify(data)
     })
-    .then(resp => resp.text())
+    .then(resp => resp.json())
     .then(result => {
-        if(result > 0){
-            if(check == 0){
-                el.innerText = "★";
-            }else{
-                el.innerText = "☆";
-            }
+
+        console.log(result);
+
+        if(result == "LIKED"){
+            el.innerText = "★";
+            likeStatus = 1;
+        }else if(result == "NOT_LIKED"){
+            el.innerText = "☆";
+            likeStatus = 0;
         }
+
     })
     .catch(e=>console.log(e))
 

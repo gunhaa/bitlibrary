@@ -40,7 +40,7 @@ class BookFavoriteServiceTest {
     @Test
     public void 즐겨찾기_등록(){
         //when
-        bookFavoriteService.addBookLike(book, member);
+        bookFavoriteService.addBookLike(member, book);
 
         //then
         List<BookLike> findBookFavorites = bookFavoriteRepository.findByMember(member);
