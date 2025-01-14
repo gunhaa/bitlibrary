@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Java Library - 즐겨찾기</title>
+
+	<link rel="stylesheet" href="/css/main-style.css">
+	<link rel="stylesheet" href="/css/common/sideMenu.css">
+	<link rel="stylesheet" href="/css/my/list-style.css">
+</head>
+<body>
+<!-- Header Include -->
+<div th:replace="~{/common/header :: header}"></div>
+
+<section class="container">
+	<!-- Side Menu Include -->
+	<div th:replace="~{/intro/sideMenu :: sideMenu}"></div>
+
+	<section class="list-area">
+		<h1>즐겨찾기</h1>
+		<table id="list-table">
+			<thead>
+			<tr>
+				<th>도서명</th>
+				<th>저자</th>
+				<th>발행처</th>
+				<th style="width: 80px;">발행년도</th>
+				<th>ISBN</th>
+				<th style="width: 80px;">즐겨찾기</th>
+			</tr>
+			</thead>
+			<tbody>
+			<!--<th:block th:if="${#lists.isEmpty(books)}">
+				<tr>
+					<th style="height: 100px;" colspan="6">즐겨찾기 내역이 없습니다</th>
+				</tr>
+			</th:block>
+
+			<th:block th:unless="${#lists.isEmpty(books)}">
+				<th:block th:each="book : ${books}">
+					<tr>
+						<td><a th:href="@{'/search/books/31?query=' + ${book.title} + '&key=t'}" th:text="${b.title}"></a></td>
+						<td th:text="${book.author}"></td>
+						<td th:text="${book.publisher}"></td>
+						<td th:text="${book.publicationDate}"></td>
+						<td th:text="${book.isbn}"></td>
+						<td><span th:onclick="'bookmarkCancel(' + ${book.BOOK_NO} + ')'" class="bookMarkStar">★</span></td>
+					</tr>
+				</th:block>
+			</th:block>-->
+			</tbody>
+		</table>
+	</section>
+</section>
+
+<!-- Footer Include -->
+<div th:replace="~{/common/footer :: footer}"></div>
+<script src="/js/my/library.js"></script>
+</body>
+</html>
