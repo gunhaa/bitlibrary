@@ -15,7 +15,7 @@
                             <th:block th:if="${catLevel2 == category2.id}">
 
                                 <li class="side-current">
-                                    <a th:href="@{/intro/{catName}/{cat3Code}(catName=${category2.categoryEngName}, cat3Code=${catLevel3})}"
+                                    <a th:href="@{/{catName}/{catName2}/{cat3Code}(catName=${category.categoryEngName}, catName2=${category2.categoryEngName}, cat3Code=${catLevel3})}"
                                        class="side-current-a"
                                        th:text="${category2.categoryName}"></a>
 
