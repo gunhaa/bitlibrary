@@ -21,7 +21,7 @@ public class IntroController {
 
     private final CategoryRepository categoryRepository;
 
-    @GetMapping(value = {"/{catLevel1:intro}/{catLevel2}/{catLevel3}", "/{catLevel1:intro}/{catLevel2}/"})
+    @GetMapping(value = {"/{catLevel1:intro}/{catLevel2}/{catLevel3}", "/{catLevel1:intro}/{catLevel2}"})
     public String intro(Model model , @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
                         ,@PathVariable(name = "catLevel1") String catLevel1
                         ,@PathVariable(name = "catLevel2") String catLevel2
