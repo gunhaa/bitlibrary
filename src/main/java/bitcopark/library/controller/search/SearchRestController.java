@@ -2,8 +2,8 @@ package bitcopark.library.controller.search;
 
 import bitcopark.library.repository.Book.BookSearchCondition;
 import bitcopark.library.service.Book.*;
+import bitcopark.library.service.Member.BookRequestService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -13,6 +13,7 @@ public class SearchRestController {
     private final BookService bookService;
     private final BookReservationService bookReservationService;
     private final BookLikeService bookLikeService;
+    private final BookRequestService bookRequestService;
 
     @GetMapping("/{catLevel1:search}/books/v1")
     public SearchBooklistAndLikelistDTO search(BookSearchCondition bookSearchCondition){
@@ -32,5 +33,10 @@ public class SearchRestController {
     @PostMapping("/{catLevel1:search}/books/like/v1")
     public LikeStatus like(@RequestBody LikeCondition condition){
         return bookLikeService.toggleLike(condition);
+    }
+
+    @PostMapping("/{catLevel1:search}/book-req/apply/v1")
+    public BookRequestResponseDto bookRequestApply(@RequestBody BookRequestCondition applyCondition){
+        return bookRequestService.registerBookRequest(applyCondition);
     }
 }

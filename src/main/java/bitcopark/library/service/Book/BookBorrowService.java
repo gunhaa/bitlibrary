@@ -1,7 +1,7 @@
 package bitcopark.library.service.Book;
 
-import bitcopark.library.entity.Book.Book;
-import bitcopark.library.entity.Book.BookBorrow;
+import bitcopark.library.entity.book.Book;
+import bitcopark.library.entity.book.BookBorrow;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.repository.Book.BookBorrowRepository;
 import lombok.RequiredArgsConstructor;

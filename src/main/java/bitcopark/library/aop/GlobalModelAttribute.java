@@ -1,6 +1,6 @@
 package bitcopark.library.aop;
 
-import bitcopark.library.entity.Board.Category;
+import bitcopark.library.entity.board.Category;
 import bitcopark.library.repository.Board.CategoryRepository;
 import bitcopark.library.service.Board.CategoryService;
 import jakarta.servlet.ServletContext;

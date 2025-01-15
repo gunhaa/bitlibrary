@@ -41,7 +41,10 @@ public class SearchController {
     }
 
     @GetMapping("/{catLevel1:search}/{catLevel2:book-req}/apply")
-    public String bookReqApply(){
+    public String bookReqApply(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
+                               @PathVariable(name = "catLevel1") String catLevel1,
+                               @PathVariable(name = "catLevel2") String catLevel2){
+        setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
         return "search/bookRequestForm";
     }
 }

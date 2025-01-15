@@ -1,12 +1,12 @@
 package bitcopark.library.entity.member;
 
-import bitcopark.library.entity.Book.BookBorrow;
-import bitcopark.library.entity.Book.BookLike;
-import bitcopark.library.entity.Class.ClassApplicant;
-import bitcopark.library.entity.LibrarySeatBooking.SeatReservation;
-import bitcopark.library.entity.Board.Board;
-import bitcopark.library.entity.Board.Reply;
-import bitcopark.library.entity.Audit.BaseAuditEntity;
+import bitcopark.library.entity.book.BookBorrow;
+import bitcopark.library.entity.book.BookLike;
+import bitcopark.library.entity.clazz.ClassApplicant;
+import bitcopark.library.entity.librarySeatBooking.SeatReservation;
+import bitcopark.library.entity.board.Board;
+import bitcopark.library.entity.board.Reply;
+import bitcopark.library.entity.audit.BaseAuditEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -60,6 +60,9 @@ public class Member extends BaseAuditEntity {
     @OneToMany(mappedBy = "member", orphanRemoval = true)
 //    @Builder.Default
     private List<SeatReservation> seatReservationList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", orphanRemoval = true)
+    private List<BookRequest> bookRequestList = new ArrayList<>();
 
     // member/admin만 파라미터로 받아서 하나의 메서드로 통합
     public static Member createMember(String email, String name, String phoneNumber, MemberGender gender, int birth, Address address) {

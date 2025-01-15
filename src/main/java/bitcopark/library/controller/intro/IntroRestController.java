@@ -1,6 +1,6 @@
 package bitcopark.library.controller.intro;
 
-import bitcopark.library.entity.OrphanTable.Calendar;
+import bitcopark.library.entity.orphanTable.Calendar;
 import bitcopark.library.service.OrphanTable.CalendarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

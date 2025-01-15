@@ -1,9 +1,9 @@
 package bitcopark.library.service.Board;
 
-import bitcopark.library.entity.Board.Board;
-import bitcopark.library.entity.Board.BoardDelFlag;
-import bitcopark.library.entity.Board.Category;
-import bitcopark.library.entity.Board.SecretFlag;
+import bitcopark.library.entity.board.Board;
+import bitcopark.library.entity.board.BoardDelFlag;
+import bitcopark.library.entity.board.Category;
+import bitcopark.library.entity.board.SecretFlag;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BoardNotFoundException;
 import bitcopark.library.repository.Board.BoardRepository;

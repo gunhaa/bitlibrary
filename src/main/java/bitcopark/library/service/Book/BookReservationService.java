@@ -1,8 +1,8 @@
 package bitcopark.library.service.Book;
 
 import bitcopark.library.controller.search.ReservationCondition;
-import bitcopark.library.entity.Book.Book;
-import bitcopark.library.entity.Book.BookReservation;
+import bitcopark.library.entity.book.Book;
+import bitcopark.library.entity.book.BookReservation;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.repository.Book.BookRepository;
 import bitcopark.library.repository.Book.BookReservationRepository;

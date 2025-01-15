@@ -1,7 +1,7 @@
 package bitcopark.library.aop;
 
-import bitcopark.library.entity.Board.Board;
-import bitcopark.library.entity.Board.Category;
+import bitcopark.library.entity.board.Board;
+import bitcopark.library.entity.board.Category;
 import lombok.Data;
 
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
 package bitcopark.library.service.Class;
 
-import bitcopark.library.entity.Class.ClassApplicant;
-import bitcopark.library.entity.Board.Board;
-import bitcopark.library.entity.Board.Category;
-import bitcopark.library.entity.Board.SecretFlag;
+import bitcopark.library.entity.clazz.ClassApplicant;
+import bitcopark.library.entity.board.Board;
+import bitcopark.library.entity.board.Category;
+import bitcopark.library.entity.board.SecretFlag;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;

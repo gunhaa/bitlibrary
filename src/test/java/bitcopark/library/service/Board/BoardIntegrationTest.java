@@ -1,6 +1,6 @@
 package bitcopark.library.service.Board;
 
-import bitcopark.library.entity.Board.*;
+import bitcopark.library.entity.board.*;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;

@@ -4,10 +4,7 @@ import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.categoryStrategy.CategoryRouter;
 import bitcopark.library.categoryStrategy.CategoryStrategy;
 import bitcopark.library.categoryStrategy.CategoryStrategyFactory;
-import bitcopark.library.entity.Book.Book;
-import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.CategoryNotFoundException;
-import bitcopark.library.service.Book.BookLikeService;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -31,15 +28,12 @@ public class ControllerUtils {
                 .findFirst().orElseThrow(CategoryNotFoundException::new);
     }
 
-    public static CategoryRouter setCategoryAndRoute(Model model, List<CategoryDTO> categoryDTOList, String catLevel1, String catLevel2){
+    public static void setCategoryInModel(Model model, List<CategoryDTO> categoryDTOList, String catLevel1, String catLevel2){
         CategoryDTO categoryLevel1 = ControllerUtils.getCategoryByCategoryEngName(categoryDTOList, catLevel1);
         model.addAttribute("catLevel1", categoryLevel1.getId());
 
         CategoryDTO categoryLevel2 = ControllerUtils.getCategoryByCategoryEngName(categoryDTOList, catLevel2);
         model.addAttribute("catLevel2", categoryLevel2.getId());
-
-        CategoryStrategy strategy = CategoryStrategyFactory.getStrategy(categoryLevel2);
-        return new CategoryRouter(strategy);
     }
 
     public static CategoryRouterResult setCategoryAndRoute(Model model, List<CategoryDTO> categoryDTOList, String catLevel1, String catLevel2, String catLevel3){

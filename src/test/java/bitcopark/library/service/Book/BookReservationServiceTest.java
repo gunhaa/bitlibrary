@@ -1,9 +1,9 @@
 package bitcopark.library.service.Book;
 
-import bitcopark.library.entity.Book.Book;
-import bitcopark.library.entity.Book.BookReservation;
-import bitcopark.library.entity.Book.BookState;
-import bitcopark.library.entity.Book.BookSupple;
+import bitcopark.library.entity.book.Book;
+import bitcopark.library.entity.book.BookReservation;
+import bitcopark.library.entity.book.BookState;
+import bitcopark.library.entity.book.BookSupple;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;

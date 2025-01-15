@@ -2,8 +2,8 @@ package bitcopark.library.service.Book;
 
 import bitcopark.library.controller.search.LikeCondition;
 import bitcopark.library.controller.search.LikeStatus;
-import bitcopark.library.entity.Book.Book;
-import bitcopark.library.entity.Book.BookLike;
+import bitcopark.library.entity.book.Book;
+import bitcopark.library.entity.book.BookLike;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.repository.Book.BookLikeRepository;
 import bitcopark.library.repository.Book.BookRepository;

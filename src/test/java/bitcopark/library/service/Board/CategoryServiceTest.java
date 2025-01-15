@@ -1,7 +1,7 @@
 package bitcopark.library.service.Board;
 
 import bitcopark.library.aop.CategoryDTO;
-import bitcopark.library.entity.Board.Category;
+import bitcopark.library.entity.board.Category;
 import bitcopark.library.exception.CategoryNotFoundException;
 import bitcopark.library.repository.Board.CategoryRepository;
 import org.junit.jupiter.api.Assertions;

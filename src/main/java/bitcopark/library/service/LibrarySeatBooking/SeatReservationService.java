@@ -1,6 +1,6 @@
 package bitcopark.library.service.LibrarySeatBooking;
 
-import bitcopark.library.entity.LibrarySeatBooking.SeatReservation;
+import bitcopark.library.entity.librarySeatBooking.SeatReservation;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.repository.LibrarySeatBooking.SeatReservationRepository;
 import lombok.RequiredArgsConstructor;
