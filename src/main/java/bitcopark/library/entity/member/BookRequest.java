@@ -25,7 +25,7 @@ public class BookRequest extends BaseAuditEntity {
     private BookRequestApprove bookRequestApprove;
 
     private LocalDate publicationDate;
-    private String reason;
+    private String opinion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

@@ -39,22 +39,23 @@ requestBtn.addEventListener("click", ()=>{
     requestBtn.setAttribute("disabled", "disabled");
 
     const data = {
-        reqTitle : input[0].value,
-        memberNo : loginMemberNo,
+        title : input[0].value,
+        memberId : loginMemberNo,
         bookTitle : input[2].value,
         bookAuthor : input[3].value,
-        bookPub : input[4].value,
-        bookPubDate : input[5].value,
-        reqOpinion : document.getElementById("opinion").value
+        bookPublisher : input[4].value,
+        bookPublicationDate : input[5].value,
+        opinion : document.getElementById("opinion").value
     };
 
-    fetch("/book/2/2", {
+    fetch("/search/book-req/apply/v1", {
         method : "POST",
         headers : {"Content-Type" : "application/json"},
         body : JSON.stringify(data)
     })
-    .then(resp=>resp.text())
+    .then(resp=>resp.json())
     .then(result=>{
+        console.log(result);
         if(result > 0){
             popUpLayer.style.display = "block";
         }
