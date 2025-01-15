@@ -5,6 +5,7 @@ import bitcopark.library.categoryStrategy.CategoryRouter;
 import bitcopark.library.categoryStrategy.CategoryStrategy;
 import bitcopark.library.categoryStrategy.CategoryStrategyFactory;
 import bitcopark.library.controller.util.ControllerUtils;
+import bitcopark.library.controller.util.ControllerUtils.CategoryRouterResult;
 import bitcopark.library.repository.Board.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+
+import static bitcopark.library.controller.util.ControllerUtils.setCategoryAndRoute;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,19 +30,10 @@ public class IntroController {
                         ,@PathVariable(name = "catLevel2") String catLevel2
                         ,@PathVariable(name = "catLevel3", required = false) String catLevel3){
 
-        CategoryDTO categoryLevel1 = ControllerUtils.getCategoryByCategoryEngName(categoryDTOList, catLevel1);
-        model.addAttribute("catLevel1", categoryLevel1.getId());
+        CategoryRouterResult categoryRouterResult = setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, catLevel3);
 
-        CategoryDTO categoryLevel2 = ControllerUtils.getCategoryByCategoryEngName(categoryDTOList, catLevel2);
-        model.addAttribute("catLevel2", categoryLevel2.getId());
-
-        CategoryDTO categoryLevel3 = ControllerUtils.getCategoryByCategoryId(categoryDTOList, catLevel3);
-        if(categoryLevel3 != null) {
-            model.addAttribute("catLevel3", Integer.parseInt(catLevel3));
-        }
-
-        CategoryStrategy strategy = CategoryStrategyFactory.getStrategy(categoryLevel2);
-        CategoryRouter router = new CategoryRouter(strategy);
+        CategoryRouter router = categoryRouterResult.router();
+        CategoryDTO categoryLevel3 = categoryRouterResult.categoryLevel3();
 
         return router.routing(categoryLevel3);
     }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="requestModal">
+    <div id="popup_layer">
+        <div class="popup_box_res">
+            <div class="popup_header">
+                <!-- p 태그를 사용 -->
+                <p><b>희망 도서 신청</b></p>
+            </div>
+
+            <!-- 팝업 컨텐츠 영역 -->
+            <div class="popup_content">
+                <!-- p 태그를 사용 -->
+                <div class="popup_content_mid">
+                    <p>도서 신청이 완료되었습니다!</p>
+                </div>
+                <!-- 팝업 버튼 영역 -->
+                <div class="popup_btn">
+                    <button id="confirm_btn"
+                            th:onclick="'location.href=' + @{/book/2}">확인
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
