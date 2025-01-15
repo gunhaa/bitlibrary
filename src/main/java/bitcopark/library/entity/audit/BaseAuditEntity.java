@@ -23,6 +23,6 @@ public abstract class BaseAuditEntity {
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @Column(name = "lastmodified_date")
+    @Column(name = "lastModified_date")
     private LocalDateTime lastModifiedDate;
 }
