@@ -31,15 +31,12 @@ public class ControllerUtils {
                 .findFirst().orElseThrow(CategoryNotFoundException::new);
     }
 
-    public static CategoryRouter setCategoryAndRoute(Model model, List<CategoryDTO> categoryDTOList, String catLevel1, String catLevel2){
+    public static void setCategoryInModel(Model model, List<CategoryDTO> categoryDTOList, String catLevel1, String catLevel2){
         CategoryDTO categoryLevel1 = ControllerUtils.getCategoryByCategoryEngName(categoryDTOList, catLevel1);
         model.addAttribute("catLevel1", categoryLevel1.getId());
 
         CategoryDTO categoryLevel2 = ControllerUtils.getCategoryByCategoryEngName(categoryDTOList, catLevel2);
         model.addAttribute("catLevel2", categoryLevel2.getId());
-
-        CategoryStrategy strategy = CategoryStrategyFactory.getStrategy(categoryLevel2);
-        return new CategoryRouter(strategy);
     }
 
     public static CategoryRouterResult setCategoryAndRoute(Model model, List<CategoryDTO> categoryDTOList, String catLevel1, String catLevel2, String catLevel3){
