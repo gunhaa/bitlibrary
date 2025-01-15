@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library - 클래스 신청현황</title>
+
+	<link rel="stylesheet" href="/css/main-style.css">
+	<link rel="stylesheet" href="/css/common/sideMenu.css">
+	<link rel="stylesheet" href="/css/my/list-style.css">
+</head>
+<body>
+<!-- Header Include -->
+<div th:replace="~{/common/header :: header}"></div>
+
+<section class="container">
+	<!-- Side Menu Include -->
+	<div th:replace="~{/intro/sideMenu :: sideMenu}"></div>
+
+    <section class="list-area">
+        <h1>예약 및 신청</h1>
+		<div class="nav-area">
+			<a href="/study/my-library/34?sub=seat-reservation-status">좌석 예약현황</a>
+			<a href="/study/my-library/34?sub=space-reservation-status">공간 예약현황</a>
+			<a href="/study/my-library/34?sub=class-application-status">클래스 신청현황</a>
+		</div>
+        <table id="list-table">
+            <thead>
+            <tr>
+                <th>클래스명</th>
+                <th style="width: 230px;">클래스 시작/종료일</th>
+                <th style="width: 230px;">신청기간</th>
+                <th style="width: 70px;">취소</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:if="${#lists.isEmpty(boards)}">
+                <tr>
+                    <th style="height: 100px;" colspan="4">신청 내역이 없습니다</th>
+                </tr>
+            </th:block>
+
+            <th:block th:unless="${#lists.isEmpty(boards)}">
+                <th:block th:each="board : ${boards}">
+                    <tr>
+                        <td><a href="/community/edu-culture-program/${board.id}">${board.title}</a></td>
+                        <td th:text="${board.startDate} ~ ${board.endDate}"></td>
+                        <td th:text="${board.recruitmentStartDate} ~ ${board.recruitmentEndDate}"></td>
+                        <td><button onclick="classCancel(${l.BOARD_NO})">취소</button></td>
+                    </tr>
+                </th:block>
+            </th:block>
+            </tbody>
+        </table>
+    </section>
+</section>
+
+<!-- Footer Include -->
+<div th:replace="~{/common/footer :: footer}"></div>
+<script src="/js/my/library.js"></script>
+</body>
+</html>

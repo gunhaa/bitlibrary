@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library - 좌석 예약현황</title>
+
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/common/sideMenu.css">
+    <link rel="stylesheet" href="/css/my/list-style.css">
+</head>
+<body>
+<!-- Header Include -->
+<div th:replace="~{/common/header :: header}"></div>
+
+<section class="container">
+    <!-- Side Menu Include -->
+    <div th:replace="~{/intro/sideMenu :: sideMenu}"></div>
+
+    <section class="list-area">
+        <h1>예약 및 신청</h1>
+        <div class="nav-area">
+            <a href="/study/my-library/34?sub=seat-reservation-status">좌석 예약현황</a>
+            <a href="/study/my-library/34?sub=space-reservation-status">공간 예약현황</a>
+            <a href="/study/my-library/34?sub=class-application-status">클래스 신청현황</a>
+        </div>
+        <table id="list-table">
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>구분</th>
+                <th>예약일</th>
+                <th>예약시간</th>
+                <th>취소</th>
+            </tr>
+            </thead>
+        </table>
+    </section>
+</section>
+
+<!-- Footer Include -->
+<div th:replace="~{/common/footer :: footer}"></div>
+<script src="/js/my/library.js"></script>
+</body>
+</html>

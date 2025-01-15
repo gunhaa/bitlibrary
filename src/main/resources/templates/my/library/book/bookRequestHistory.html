@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library - 신청내역</title>
+
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/common/sideMenu.css">
+    <link rel="stylesheet" href="/css/my/list-style.css">
+</head>
+<body>
+<!-- Header Include -->
+<div th:replace="~{/common/header :: header}"></div>
+
+<section class="container">
+    <!-- Side Menu Include -->
+    <div th:replace="~{/intro/sideMenu :: sideMenu}"></div>
+
+    <section class="list-area">
+        <h1>도서현황</h1>
+        <div class="nav-area">
+            <a th:href="@{/study/my-library/33(sub=books-on-loan)}">대출중인 도서</a>
+            <a th:href="@{/study/my-library/33(sub=previous-loan-history)}">이전 대출내역</a>
+            <a th:href="@{/study/my-library/33(sub=reservation-history)}">예약내역</a>
+            <a th:href="@{/study/my-library/33(sub=application-history)}">신청내역</a>
+        </div>
+        <p>신청내역</p>
+        <p>대출중인 도서 : <span th:text="${#lists.size(bookRequests)}"></span>권</p>
+        <table id="list-table">
+            <thead>
+            <tr>
+                <th style="width: 100px;">신청번호</th>
+                <th>신청 도서명</th>
+                <th>저자</th>
+                <th>출판사</th>
+                <th style="width: 100px;">신청상태</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:if="${#lists.isEmpty(bookRequests)}">
+                <tr>
+                    <th style="height: 100px;" colspan="5">신청 내역이 없습니다</th>
+                </tr>
+            </th:block>
+
+            <th:block th:unless="${#lists.isEmpty(bookRequests)}">
+                <tr th:each="bookRequest : ${bookRequests}">
+                    <td th:text="${bookRequest.id}"></td>
+                    <td th:text="${bookRequest.title}"></td>
+                    <td th:text="${bookRequest.author}"></td>
+                    <td th:text="${bookRequest.publisher"></td>
+                    <td>
+                        <span th:if="${bookRequest.status == W}" th:text="대기"></span>
+                        <span th:if="${bookRequest.status == Y}" th:text="승인"></span>
+                        <span th:if="${bookRequest.status == N}" th:text="거절"></span>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </section>
+</section>
+
+<!-- Footer Include -->
+<div th:replace="~{/common/footer :: footer}"></div>
+<script src="/js/my/library.js"></script>
+</body>
+</html>

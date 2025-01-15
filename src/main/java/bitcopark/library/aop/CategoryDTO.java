@@ -16,6 +16,7 @@ public class CategoryDTO {
     private List<Board> boardList = new ArrayList<>();
     private String categoryEngName;
     private Long firstSubCategoryId;
+    private String subCategoryEngName;
 
     public CategoryDTO(Long id, String categoryName, Category parentCategory, List<Category> subCategory, List<Board> boardList, String categoryEngName, Long firstSubCategoryId) {
         this.id = id;
