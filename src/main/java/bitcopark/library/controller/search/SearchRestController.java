@@ -36,9 +36,7 @@ public class SearchRestController {
     }
 
     @PostMapping("/{catLevel1:search}/book-req/apply/v1")
-    public void bookRequestApply(@RequestBody ApplyCondition applyCondition){
-
-        System.out.println("applyCondition = " + applyCondition);
-
+    public BookRequestResponseDto bookRequestApply(@RequestBody BookRequestCondition applyCondition){
+        return bookRequestService.registerBookRequest(applyCondition);
     }
 }

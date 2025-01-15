@@ -5,9 +5,9 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class ApplyCondition {
+public class BookRequestCondition {
 
-    private String title;
+    private String requestTitle;
     private Long memberId;
     private String bookTitle;
     private String bookAuthor;

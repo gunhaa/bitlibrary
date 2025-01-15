@@ -39,7 +39,7 @@ requestBtn.addEventListener("click", ()=>{
     requestBtn.setAttribute("disabled", "disabled");
 
     const data = {
-        title : input[0].value,
+        requestTitle : input[0].value,
         memberId : loginMemberNo,
         bookTitle : input[2].value,
         bookAuthor : input[3].value,
@@ -56,7 +56,7 @@ requestBtn.addEventListener("click", ()=>{
     .then(resp=>resp.json())
     .then(result=>{
         console.log(result);
-        if(result > 0){
+        if(result.success === true){
             popUpLayer.style.display = "block";
         }
     })

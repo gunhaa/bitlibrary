@@ -17,9 +17,10 @@ public class BookRequest extends BaseAuditEntity {
     @GeneratedValue
     @Column(name = "bookRequest_id")
     private Long id;
-    private String author;
+    private String RequestTitle;
+    private String bookTitle;
     private String publisher;
-    private String title;
+    private String author;
 
     @Enumerated(EnumType.STRING)
     private BookRequestApprove bookRequestApprove;
@@ -30,4 +31,6 @@ public class BookRequest extends BaseAuditEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+
 }
