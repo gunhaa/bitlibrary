@@ -1,7 +1,7 @@
 package bitcopark.library.service.Class;
 
-import bitcopark.library.entity.Class.ClassApplicant;
-import bitcopark.library.entity.Board.Board;
+import bitcopark.library.entity.clazz.ClassApplicant;
+import bitcopark.library.entity.board.Board;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.repository.Class.ClassApplicantRepository;
 import lombok.RequiredArgsConstructor;

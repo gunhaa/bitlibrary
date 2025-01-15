@@ -1,6 +1,6 @@
 package bitcopark.library.controller.intro;
 
-import bitcopark.library.entity.OrphanTable.CalendarType;
+import bitcopark.library.entity.orphanTable.CalendarType;
 import lombok.Data;
 
 import java.time.LocalDate;

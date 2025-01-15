@@ -1,4 +1,7 @@
 
+// 임시 loginMember
+const loginMemberNo = 1;
+
 const requestBtn = document.getElementById("request-btn");
 document.getElementById('currentDate').value= new Date().toISOString().slice(0, 10);
 
@@ -35,7 +38,7 @@ requestBtn.addEventListener("click", ()=>{
 
     requestBtn.setAttribute("disabled", "disabled");
 
-    const obj = {
+    const data = {
         reqTitle : input[0].value,
         memberNo : loginMemberNo,
         bookTitle : input[2].value,
@@ -48,7 +51,7 @@ requestBtn.addEventListener("click", ()=>{
     fetch("/book/2/2", {
         method : "POST",
         headers : {"Content-Type" : "application/json"},
-        body : JSON.stringify(obj)
+        body : JSON.stringify(data)
     })
     .then(resp=>resp.text())
     .then(result=>{

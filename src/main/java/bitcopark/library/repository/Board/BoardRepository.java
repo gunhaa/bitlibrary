@@ -1,7 +1,7 @@
 package bitcopark.library.repository.Board;
 
-import bitcopark.library.entity.Board.Board;
-import bitcopark.library.entity.Board.BoardDelFlag;
+import bitcopark.library.entity.board.Board;
+import bitcopark.library.entity.board.BoardDelFlag;
 import bitcopark.library.entity.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 

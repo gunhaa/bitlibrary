@@ -1,4 +1,4 @@
-package bitcopark.library.entity.Board;
+package bitcopark.library.entity.board;
 
 public enum BoardDelFlag {
 

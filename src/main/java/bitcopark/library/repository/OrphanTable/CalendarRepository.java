@@ -1,7 +1,7 @@
 package bitcopark.library.repository.OrphanTable;
 
-import bitcopark.library.entity.OrphanTable.Calendar;
-import bitcopark.library.entity.OrphanTable.CalendarType;
+import bitcopark.library.entity.orphanTable.Calendar;
+import bitcopark.library.entity.orphanTable.CalendarType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

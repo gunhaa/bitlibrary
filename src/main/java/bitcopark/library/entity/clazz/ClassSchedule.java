@@ -1,6 +1,6 @@
-package bitcopark.library.entity.Class;
+package bitcopark.library.entity.clazz;
 
-import bitcopark.library.entity.Board.Board;
+import bitcopark.library.entity.board.Board;
 import jakarta.persistence.*;
 import lombok.*;
 

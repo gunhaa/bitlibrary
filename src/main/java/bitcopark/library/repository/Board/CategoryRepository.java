@@ -1,6 +1,6 @@
 package bitcopark.library.repository.Board;
 
-import bitcopark.library.entity.Board.Category;
+import bitcopark.library.entity.board.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

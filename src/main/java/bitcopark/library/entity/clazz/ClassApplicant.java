@@ -1,6 +1,6 @@
-package bitcopark.library.entity.Class;
-import bitcopark.library.entity.Audit.BaseAuditEntity;
-import bitcopark.library.entity.Board.Board;
+package bitcopark.library.entity.clazz;
+import bitcopark.library.entity.audit.BaseAuditEntity;
+import bitcopark.library.entity.board.Board;
 import bitcopark.library.entity.member.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

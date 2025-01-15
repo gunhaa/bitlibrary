@@ -4,10 +4,7 @@ import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.categoryStrategy.CategoryRouter;
 import bitcopark.library.categoryStrategy.CategoryStrategy;
 import bitcopark.library.categoryStrategy.CategoryStrategyFactory;
-import bitcopark.library.entity.Book.Book;
-import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.CategoryNotFoundException;
-import bitcopark.library.service.Book.BookLikeService;
 import org.springframework.ui.Model;
 
 import java.util.List;

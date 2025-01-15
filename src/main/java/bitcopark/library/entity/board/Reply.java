@@ -1,8 +1,8 @@
-package bitcopark.library.entity.Board;
+package bitcopark.library.entity.board;
 
 
 import bitcopark.library.entity.member.Member;
-import bitcopark.library.entity.Audit.BaseAuditEntity;
+import bitcopark.library.entity.audit.BaseAuditEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

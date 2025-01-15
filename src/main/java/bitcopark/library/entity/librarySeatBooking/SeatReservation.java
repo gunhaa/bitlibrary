@@ -1,4 +1,4 @@
-package bitcopark.library.entity.LibrarySeatBooking;
+package bitcopark.library.entity.librarySeatBooking;
 
 import bitcopark.library.entity.member.Member;
 import jakarta.persistence.*;

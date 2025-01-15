@@ -1,12 +1,12 @@
 package bitcopark.library.entity.member;
 
-import bitcopark.library.entity.Book.BookBorrow;
-import bitcopark.library.entity.Book.BookLike;
-import bitcopark.library.entity.Class.ClassApplicant;
-import bitcopark.library.entity.LibrarySeatBooking.SeatReservation;
-import bitcopark.library.entity.Board.Board;
-import bitcopark.library.entity.Board.Reply;
-import bitcopark.library.entity.Audit.BaseAuditEntity;
+import bitcopark.library.entity.book.BookBorrow;
+import bitcopark.library.entity.book.BookLike;
+import bitcopark.library.entity.clazz.ClassApplicant;
+import bitcopark.library.entity.librarySeatBooking.SeatReservation;
+import bitcopark.library.entity.board.Board;
+import bitcopark.library.entity.board.Reply;
+import bitcopark.library.entity.audit.BaseAuditEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,7 +1,7 @@
 package bitcopark.library.repository.Book;
 
-import bitcopark.library.entity.Book.BookState;
-import bitcopark.library.entity.Book.BookSupple;
+import bitcopark.library.entity.book.BookState;
+import bitcopark.library.entity.book.BookSupple;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 

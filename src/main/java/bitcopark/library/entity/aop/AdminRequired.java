@@ -1,4 +1,4 @@
-package bitcopark.library.entity.AOP;
+package bitcopark.library.entity.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

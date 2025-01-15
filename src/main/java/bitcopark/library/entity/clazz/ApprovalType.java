@@ -1,4 +1,4 @@
-package bitcopark.library.entity.Class;
+package bitcopark.library.entity.clazz;
 
 public enum ApprovalType {
 

@@ -1,7 +1,7 @@
 package bitcopark.library.service;
 
-import bitcopark.library.entity.OrphanTable.Calendar;
-import bitcopark.library.entity.OrphanTable.CalendarType;
+import bitcopark.library.entity.orphanTable.Calendar;
+import bitcopark.library.entity.orphanTable.CalendarType;
 import bitcopark.library.repository.OrphanTable.CalendarRepository;
 import bitcopark.library.service.OrphanTable.CalendarService;
 import org.assertj.core.api.Assertions;

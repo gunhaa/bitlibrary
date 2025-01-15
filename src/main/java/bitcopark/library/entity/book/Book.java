@@ -1,4 +1,4 @@
-package bitcopark.library.entity.Book;
+package bitcopark.library.entity.book;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

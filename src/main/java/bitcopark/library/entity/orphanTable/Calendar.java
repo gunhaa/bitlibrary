@@ -1,4 +1,4 @@
-package bitcopark.library.entity.OrphanTable;
+package bitcopark.library.entity.orphanTable;
 
 import jakarta.persistence.*;
 import lombok.*;

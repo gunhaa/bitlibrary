@@ -1,15 +1,14 @@
 package bitcopark.library.service.Book;
 
 import bitcopark.library.controller.search.BookSearchDetailCondition;
-import bitcopark.library.entity.Book.Book;
-import bitcopark.library.entity.Book.BookState;
-import bitcopark.library.entity.Book.BookSupple;
+import bitcopark.library.entity.book.Book;
+import bitcopark.library.entity.book.BookState;
+import bitcopark.library.entity.book.BookSupple;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BookTitleNotFoundException;
 import bitcopark.library.repository.Book.*;
 import bitcopark.library.repository.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

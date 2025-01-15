@@ -1,11 +1,9 @@
 package bitcopark.library.repository.Book;
 
 import bitcopark.library.controller.search.BookSearchDetailCondition;
-import bitcopark.library.entity.Book.QBook;
-import bitcopark.library.entity.Book.QBookBorrow;
-import bitcopark.library.entity.Book.QBookReservation;
-import com.querydsl.core.QueryModifiers;
-import com.querydsl.core.types.Predicate;
+import bitcopark.library.entity.book.QBook;
+import bitcopark.library.entity.book.QBookBorrow;
+import bitcopark.library.entity.book.QBookReservation;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
