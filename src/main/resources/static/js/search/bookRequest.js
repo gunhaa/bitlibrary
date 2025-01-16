@@ -39,7 +39,7 @@ requestBtn.addEventListener("click", ()=>{
     requestBtn.setAttribute("disabled", "disabled");
 
     const data = {
-        requestTitle : input[0].value,
+        isbn : input[0].value,
         memberId : loginMemberNo,
         bookTitle : input[2].value,
         bookAuthor : input[3].value,

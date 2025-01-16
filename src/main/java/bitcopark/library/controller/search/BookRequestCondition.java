@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Data
 public class BookRequestCondition {
 
-    private String requestTitle;
+    private String isbn;
     private Long memberId;
     private String bookTitle;
     private String bookAuthor;

@@ -23,7 +23,7 @@ public class BookRequestService {
     public BookRequest createBookRequest(BookRequestCondition bookRequestCondition){
         Member findMember = memberRepository.findById(bookRequestCondition.getMemberId()).orElseThrow(() -> new IllegalArgumentException("invalid memberId"));
         BookRequest bookRequest = BookRequest.builder()
-                .RequestTitle(bookRequestCondition.getRequestTitle())
+                .isbn(bookRequestCondition.getIsbn())
                 .bookTitle(bookRequestCondition.getBookTitle())
                 .publisher(bookRequestCondition.getBookPublisher())
                 .author(bookRequestCondition.getBookAuthor())
@@ -50,7 +50,7 @@ public class BookRequestService {
 
     }
 
-    public BookRequestListDto getBookRequestList(Pageable page) {
+    public BookRequestPageDto getBookRequestList(Pageable page) {
         bookRequestRepository.getBookRequestPage(page);
         return null;
     }
