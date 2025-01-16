@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     confirmBtn.addEventListener("click", function () {
         popUpLayer.style.display = 'none'; // 모달 닫기
-        location.href="/book/2/1";
+        location.href="/search/book-req/list";
 
     });
 
@@ -39,7 +39,7 @@ requestBtn.addEventListener("click", ()=>{
     requestBtn.setAttribute("disabled", "disabled");
 
     const data = {
-        requestTitle : input[0].value,
+        isbn : input[0].value,
         memberId : loginMemberNo,
         bookTitle : input[2].value,
         bookAuthor : input[3].value,

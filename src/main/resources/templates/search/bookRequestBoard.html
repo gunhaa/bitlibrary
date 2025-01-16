@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library</title>
+    <link rel="stylesheet" href="/css/search/bookRequest-style.css">
+    <link rel="stylesheet" href="/css/common/sideMenu.css">
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/board/reviewList-style.css">
+</head>
+<body>
+<!-- Header Include -->
+<div th:replace="~{common/header :: header}"></div>
+
+<section class="main">
+    <!-- Side Menu Include -->
+    <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
+
+    <section class="main-content">
+        <div class="main-title">신청 내역</div>
+        <hr class="titleLine"/>
+        <section class="body-content">
+            <section class="board-list">
+                <div class="list-wrapper">
+                    <table class="list-table">
+                        <thead>
+                        <tr>
+                            <th>isbn</th>
+                            <th>책 제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                            <th>승인여부</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <th:block th:if="${#lists.isEmpty(page.content)}">
+                            <tr>
+                                <th colspan="5">게시글이 존재하지 않습니다.</th>
+                            </tr>
+                        </th:block>
+
+                        <th:block th:unless="${page.content == null || #lists.isEmpty(page.content)}">
+
+                            <th:block th:each="content : ${page.content}">
+                                <tr>
+                                    <td th:text="${content.isbn}"></td>
+                                    <td><a th:href="@{/book/2/1/{isbn}(isbn=${content.isbn})?cp=${page.number}}"
+                                           th:text="${content.bookTitle}"></a></td>
+                                    <td th:text="${#strings.substring(content.name, 0, 1)} + '*' + ${#strings.substring(content.name, 2)}"></td>
+                                    <td th:text="${content.bookRequestCreatedDate}"></td>
+                                    <td>
+                                        <span th:if="${content.bookRequestApprove == 'W'}">대기중</span>
+                                        <span th:if="${content.bookRequestApprove == 'Y'}">승인</span>
+                                        <span th:if="${content.bookRequestApprove == 'N'}">거절</span>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <th:block th:if="${page.totalElements > 0}">
+                    <div class="pagination-area">
+                        <ul class="pagination">
+                            <!-- First Page -->
+                            <li>
+                                <a th:href="@{/book/2/1(cp=1)}">&lt;&lt;</a>
+                            </li>
+
+                            <!-- Previous Page -->
+                            <li>
+                                <a th:href="@{/book/2/1(cp=${page.number > 0 ? page.number - 1 : 0})}">&lt;</a>
+                            </li>
+
+                            <!-- Page Numbers -->
+                            <th:block th:each="i : ${#numbers.sequence(page.number - 2, page.number + 2)}">
+                                <th:block th:if="${i > 0 and i <= page.totalPages}">
+                                    <th:block th:if="${i == page.number + 1}">
+                                        <li><a class="current" th:text="${i}"></a></li>
+                                    </th:block>
+                                    <th:block th:if="${i != page.number + 1}">
+                                        <li><a th:href="@{/book/2/1(cp=${i})}" th:text="${i}"></a></li>
+                                    </th:block>
+                                </th:block>
+                            </th:block>
+
+                            <!-- Next Page -->
+                            <li>
+                                <a th:href="@{/book/2/1(cp=${page.number < page.totalPages - 1 ? page.number + 1 : page.number})}">&gt;</a>
+                            </li>
+
+                            <!-- Last Page -->
+                            <li>
+                                <a th:href="@{/book/2/1(cp=${page.totalPages})}">&gt;&gt;</a>
+                            </li>
+                        </ul>
+                    </div>
+                </th:block>
+
+
+                <!-- Button Area -->
+                <th:block th:if="${loginMember != null}">
+                    <div class="btn-area">
+                        <button id="writeBtn" th:onclick="|location.href='/book/2/2/'|">신청</button>
+                    </div>
+                </th:block>
+            </section>
+        </section>
+    </section>
+</section>
+
+<!-- Footer Include -->
+<div th:replace="~{common/footer :: footer}"></div>
+</body>
+</html>
