@@ -5,6 +5,7 @@ import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookState;
 import bitcopark.library.entity.book.BookSupple;
 import bitcopark.library.entity.member.Address;
+import bitcopark.library.entity.member.BookRequestApprove;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
 import bitcopark.library.repository.Board.CategoryRepository;
@@ -15,12 +16,15 @@ import bitcopark.library.service.Book.BookBorrowService;
 import bitcopark.library.service.Book.BookLikeService;
 import bitcopark.library.service.Book.BookReservationService;
 import bitcopark.library.service.Book.BookService;
+import bitcopark.library.service.Member.BookRequestService;
 import bitcopark.library.service.Member.MemberService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 @Profile("local")
 @Component
@@ -48,13 +52,14 @@ public class tempInitGenerate {
         private final CategoryRepository categoryRepository;
 
         private final BookService bookService;
-        private final BookRepository bookRepository;
 
         private final BookBorrowService bookBorrowService;
 
         private final BookLikeService bookFavoriteService;
 
         private final BookReservationService bookReservationService;
+
+        private final BookRequestService bookRequestService;
 
         @Transactional
         public void init() {
@@ -164,7 +169,7 @@ public class tempInitGenerate {
             Member member5 = memberService.joinMember("test5@email.com", "member5", "01055556666", MemberGender.MALE, 950505, new Address("55667", "E동"));
 
 
-            // 책 좋아요
+            // 책 좋아요ㅠ
             bookFavoriteService.addBookLike(member1, 명품_인생을_살아라);
             bookFavoriteService.addBookLike(member1, 백범일지);
             bookFavoriteService.addBookLike(member2, 백범일지);
@@ -182,6 +187,12 @@ public class tempInitGenerate {
             bookReservationService.registerBookReservation(member1, 디셉션_포인트);
             bookReservationService.registerBookReservation(member2, 디셉션_포인트);
             bookReservationService.registerBookReservation(member3, 디셉션_포인트);
+
+            //책 요청
+            for(int i=0; i<300; i++){
+                bookRequestService.createBookRequest(1L, "1234567890"+i, "bookTitle"+i, "출판사"+i, "작가"+i, BookRequestApprove.W, LocalDate.now(), "의견"+i);
+            }
+
 
         }
 
