@@ -5,7 +5,9 @@ import bitcopark.library.categoryStrategy.CategoryRouter;
 import bitcopark.library.service.Member.BookRequestPageDto;
 import bitcopark.library.service.Member.BookRequestService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,13 +44,15 @@ public class SearchController {
     public String bookReqList(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
                               @PathVariable(name = "catLevel1") String catLevel1,
                               @PathVariable(name = "catLevel2") String catLevel2,
-                              @RequestParam(required = false) Pageable page) {
+                              @PageableDefault(page = 0, size = 10) Pageable pageable) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
-        BookRequestPageDto bookRequestListDto = bookRequestService.getBookRequestList(page);
+        Page<BookRequestPageDto> bookRequestPageDto = bookRequestService.getBookRequestPage(pageable);
         // Session에서 memberId얻어와서 DTO 객체에 추가
         // 임시 1번 부여
 //        bookRequestListDto.setMemberId(1L);
-        System.out.println("page = " + page);
+        model.addAttribute("page", bookRequestPageDto);
+        System.out.println("pageable = " + pageable);
+        System.out.println("bookRequestPageDto = " + bookRequestPageDto);
         return "search/requestHistory";
     }
 
