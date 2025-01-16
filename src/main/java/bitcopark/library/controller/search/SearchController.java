@@ -4,6 +4,8 @@ import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.categoryStrategy.CategoryRouter;
 import bitcopark.library.service.Member.BookRequestPageDto;
 import bitcopark.library.service.Member.BookRequestService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,12 +49,11 @@ public class SearchController {
                               @PageableDefault(page = 0, size = 10) Pageable pageable) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
         Page<BookRequestPageDto> bookRequestPageDto = bookRequestService.getBookRequestPage(pageable);
-        // Session에서 memberId얻어와서 DTO 객체에 추가
-        // 임시 1번 부여
-//        bookRequestListDto.setMemberId(1L);
+        // Session에서 memberId얻어와서 DTO 객체에 추가해야함
         model.addAttribute("page", bookRequestPageDto);
         System.out.println("pageable = " + pageable);
         System.out.println("bookRequestPageDto = " + bookRequestPageDto);
+
         return "search/requestHistory";
     }
 

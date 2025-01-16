@@ -18,7 +18,7 @@ public class BookRequestPageDto {
     private String bookTitle;
     private BookRequestApprove bookRequestApprove;
     private String bookRequestOpinion;
-    private LocalDate bookRequestCreatedDate;
+    private String bookRequestCreatedDate;
 
     @QueryProjection
     public BookRequestPageDto(String isbn, String name, String bookTitle, BookRequestApprove bookRequestApprove, String bookRequestOpinion, LocalDateTime bookRequestCreatedDate) {
@@ -28,7 +28,7 @@ public class BookRequestPageDto {
         this.bookTitle = bookTitle;
         this.bookRequestApprove = bookRequestApprove;
         this.bookRequestOpinion = bookRequestOpinion;
-        this.bookRequestCreatedDate = bookRequestCreatedDate.toLocalDate();
+        this.bookRequestCreatedDate = bookRequestCreatedDate.toLocalDate().toString();
     }
 
 }

@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     confirmBtn.addEventListener("click", function () {
         popUpLayer.style.display = 'none'; // 모달 닫기
-        location.href="/book/2/1";
+        location.href="/search/book-req/list";
 
     });
 
