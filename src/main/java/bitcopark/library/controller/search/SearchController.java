@@ -5,7 +5,11 @@ import bitcopark.library.categoryStrategy.CategoryRouter;
 import bitcopark.library.categoryStrategy.CategoryStrategy;
 import bitcopark.library.categoryStrategy.CategoryStrategyFactory;
 import bitcopark.library.controller.util.ControllerUtils;
+import bitcopark.library.entity.member.BookRequest;
+import bitcopark.library.service.Member.BookRequestListDto;
+import bitcopark.library.service.Member.BookRequestService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +24,8 @@ import static bitcopark.library.controller.util.ControllerUtils.*;
 @Controller
 @RequiredArgsConstructor
 public class SearchController {
+
+    private final BookRequestService bookRequestService;
 
     @GetMapping(value = {"/{catLevel1:search}/{catLevel2}/{catLevel3}", "/{catLevel1:search}/{catLevel2}"})
     public String search(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
@@ -40,8 +46,13 @@ public class SearchController {
     public String bookReqList(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
                               @PathVariable(name = "catLevel1") String catLevel1,
                               @PathVariable(name = "catLevel2") String catLevel2,
-                              @RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
+                              @RequestParam(required = false) Pageable page) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
+        System.out.println("page = " + page);
+        BookRequestListDto bookRequestListDto = bookRequestService.getBookRequestList(page);
+        // Session에서 memberId얻어와서 DTO 객체에 추가
+        // 임시 1번 부여
+//        bookRequestListDto.setMemberId(1L);
         return "search/requestHistory";
     }
 

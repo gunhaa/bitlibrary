@@ -8,6 +8,7 @@ import bitcopark.library.entity.member.Member;
 import bitcopark.library.repository.Member.BookRequestRepository;
 import bitcopark.library.repository.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,4 +50,8 @@ public class BookRequestService {
 
     }
 
+    public BookRequestListDto getBookRequestList(Pageable page) {
+        bookRequestRepository.getBookRequestPage(page);
+        return null;
+    }
 }
