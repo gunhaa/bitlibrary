@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -34,21 +35,6 @@ public class BookRequestController {
         Page<BookRequestPageDto> bookRequestPageDto = bookRequestService.getBookRequestPage(pageable);
         // Session에서 memberId얻어와서 DTO 객체에 추가해야함
         model.addAttribute("page", bookRequestPageDto);
-        System.out.println("pageable = " + pageable);
-        System.out.println("bookRequestPageDto = " + bookRequestPageDto);
-
-
-//        // ObjectMapper를 사용하여 JSON 변환
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        String pageJson = null;
-//        try {
-//            pageJson = objectMapper.writeValueAsString(bookRequestPageDto);
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-//
-//        System.out.println("bookRequestPageDto = " + bookRequestPageDto);
-//        System.out.println("pageJson = " + pageJson); // JSON 확인을 위한 출력
 
         return "search/bookRequestBoard";
     }
@@ -61,4 +47,16 @@ public class BookRequestController {
         return "search/bookRequestForm";
     }
 
+    @GetMapping("/{catLevel1:search}/{catLevel2:book-req}/list/{isbn}")
+    public String bookRequestBoardDetail(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
+                                         @PathVariable(name = "catLevel1") String catLevel1,
+                                         @PathVariable(name = "catLevel2") String catLevel2,
+                                         @RequestParam(required = false) String page,
+                                         @PathVariable String isbn) {
+        setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
+
+        System.out.println("isbn = " + isbn);
+        System.out.println("page = " + page);
+        return "search/bookRequestDetail";
+    }
 }
