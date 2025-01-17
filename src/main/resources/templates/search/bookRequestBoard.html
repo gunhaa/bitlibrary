@@ -45,14 +45,14 @@
                             <th:block th:each="content : ${page.content}">
                                 <tr>
                                     <td th:text="${content.isbn}"></td>
-                                    <td><a th:href="@{/book/2/1/{isbn}(isbn=${content.isbn})?cp=${page.number}}"
+                                    <td><a th:href="@{/book/2/1/{isbn}(isbn=${content.isbn}?page=${page.number})}"
                                            th:text="${content.bookTitle}"></a></td>
                                     <td th:text="${#strings.substring(content.name, 0, 1)} + '*' + ${#strings.substring(content.name, 2)}"></td>
                                     <td th:text="${content.bookRequestCreatedDate}"></td>
                                     <td>
-                                        <span th:if="${content.bookRequestApprove == 'W'}">대기중</span>
-                                        <span th:if="${content.bookRequestApprove == 'Y'}">승인</span>
-                                        <span th:if="${content.bookRequestApprove == 'N'}">거절</span>
+                                        <span th:if="${content.bookRequestApprove == T(bitcopark.library.entity.member.BookRequestApprove).W}">대기중</span>
+                                        <span th:if="${content.bookRequestApprove == T(bitcopark.library.entity.member.BookRequestApprove).Y}">승인</span>
+                                        <span th:if="${content.bookRequestApprove == T(bitcopark.library.entity.member.BookRequestApprove).N}">거절</span>
                                     </td>
                                 </tr>
                             </th:block>
