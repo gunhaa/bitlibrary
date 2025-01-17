@@ -24,18 +24,18 @@
                     <tbody>
                     <tr class="request-tr">
                         <th>신청 상태</th>
-                        <td>temp</td>
-<!--                        <td th:text="${bookReq.requestTitle}"></td>-->
+                        <td th:if="${bookRequestDetail.bookRequestApprove == T(bitcopark.library.entity.member.BookRequestApprove).W}">대기중</td>
+                        <td th:if="${bookRequestDetail.bookRequestApprove == T(bitcopark.library.entity.member.BookRequestApprove).Y}">승인</td>
+                        <td th:if="${bookRequestDetail.bookRequestApprove == T(bitcopark.library.entity.member.BookRequestApprove).N}">거절</td>
                     </tr>
                     <tr>
                         <th>신청일자</th>
-                        <td>temp</td>
-<!--                        <td th:text="${bookReq.requestDate}"></td>-->
+                        <td th:text="${bookRequestDetail.bookRequestCreatedDate}"></td>
                     </tr>
                     <tr>
                         <th>신청자</th>
                         <td>
-                            <span>temp</span>
+                            <span th:text="${bookRequestDetail.name}"></span>
                         </td>
 <!--                        <td>-->
 <!--									<span th:if="${loginMember.authority == 1}">-->
@@ -49,27 +49,28 @@
                     </tr>
                     <tr>
                         <th>희망 도서명</th>
-                        <td>temp</td>
+                        <td th:text="${bookRequestDetail.bookTitle}"></td>
+
 <!--                        <td th:text="${bookReq.bookTitle}"></td>-->
                     </tr>
                     <tr>
                         <th>저자</th>
-                        <td>temp</td>
+                        <td th:text="${bookRequestDetail.bookAuthor}"></td>
 <!--                        <td th:text="${bookReq.bookAuthor}"></td>-->
                     </tr>
                     <tr>
                         <th>출판사</th>
-                        <td>temp</td>
+                        <td th:text="${bookRequestDetail.bookPublisher}"></td>
 <!--                        <td th:text="${bookReq.bookPub}"></td>-->
                     </tr>
                     <tr>
                         <th>출판 연도</th>
-                        <td>temp</td>
+                        <td th:text="${bookRequestDetail.bookPublicationDate}"></td>
 <!--                        <td th:text="${bookReq.bookPubDate}"></td>-->
                     </tr>
                     <tr>
                         <th class="opinion">추천의견</th>
-                        <td>temp</td>
+                        <td th:text="${bookRequestDetail.opinion}"></td>
 <!--                        <td th:text="${bookReq.requestOpinion}"></td>-->
                     </tr>
                     </tbody>

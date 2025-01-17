@@ -52,8 +52,9 @@ public class BookRequestController {
                                          @PathVariable String isbn) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
         BookRequestDetailDto bookRequestDetailDto = bookRequestService.getBookRequestDetailsByIsbn(isbn);
-        System.out.println("isbn = " + isbn);
-        System.out.println("bookRequestDetailDto = " + bookRequestDetailDto);
+        // 임시 번호 1번 부여
+        bookRequestDetailDto.setMemberId(1L);
+
         model.addAttribute("bookRequestDetail" , bookRequestDetailDto);
         return "search/bookRequestDetail";
     }
