@@ -3,6 +3,8 @@ package bitcopark.library.controller.search;
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.service.Member.BookRequestPageDto;
 import bitcopark.library.service.Member.BookRequestService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +36,19 @@ public class BookRequestController {
         model.addAttribute("page", bookRequestPageDto);
         System.out.println("pageable = " + pageable);
         System.out.println("bookRequestPageDto = " + bookRequestPageDto);
+
+
+//        // ObjectMapper를 사용하여 JSON 변환
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String pageJson = null;
+//        try {
+//            pageJson = objectMapper.writeValueAsString(bookRequestPageDto);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println("bookRequestPageDto = " + bookRequestPageDto);
+//        System.out.println("pageJson = " + pageJson); // JSON 확인을 위한 출력
 
         return "search/bookRequestBoard";
     }

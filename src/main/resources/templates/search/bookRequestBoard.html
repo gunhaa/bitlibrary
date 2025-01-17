@@ -11,11 +11,9 @@
     <link rel="stylesheet" href="/css/board/reviewList-style.css">
 </head>
 <body>
-<!-- Header Include -->
 <div th:replace="~{common/header :: header}"></div>
 
 <section class="main">
-    <!-- Side Menu Include -->
     <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
 
     <section class="main-content">
@@ -63,47 +61,41 @@
                     </table>
                 </div>
 
-                <!-- Pagination -->
                 <th:block th:if="${page.totalElements > 0}">
                     <div class="pagination-area">
                         <ul class="pagination">
-                            <!-- First Page -->
                             <li>
-                                <a th:href="@{/book/2/1(cp=1)}">&lt;&lt;</a>
+                                <a th:href="@{/search/book-req/list(page=0)}">&lt;&lt;</a>
                             </li>
 
-                            <!-- Previous Page -->
                             <li>
-                                <a th:href="@{/book/2/1(cp=${page.number > 0 ? page.number - 1 : 0})}">&lt;</a>
+                                <a th:href="@{/search/book-req/list(page=${page.number > 0 ? page.number - 1 : 0})}">&lt;</a>
                             </li>
 
-                            <!-- Page Numbers -->
                             <th:block th:each="i : ${#numbers.sequence(page.number - 2, page.number + 2)}">
-                                <th:block th:if="${i > 0 and i <= page.totalPages}">
-                                    <th:block th:if="${i == page.number + 1}">
-                                        <li><a class="current" th:text="${i}"></a></li>
+                                <th:block th:if="${i >= 0 and i < page.totalPages}">
+                                    <th:block th:if="${i == page.number}">
+                                        <li><a class="current" th:text="${i + 1}"></a></li>
                                     </th:block>
-                                    <th:block th:if="${i != page.number + 1}">
-                                        <li><a th:href="@{/book/2/1(cp=${i})}" th:text="${i}"></a></li>
+                                    <th:block th:if="${i != page.number}">
+                                        <li><a th:href="@{/search/book-req/list(page=${i})}" th:text="${i + 1}"></a></li>
                                     </th:block>
                                 </th:block>
                             </th:block>
 
-                            <!-- Next Page -->
                             <li>
-                                <a th:href="@{/book/2/1(cp=${page.number < page.totalPages - 1 ? page.number + 1 : page.number})}">&gt;</a>
+                                <a th:href="@{/search/book-req/list(page=${page.number < page.totalPages - 1 ? page.number + 1 : page.number})}">&gt;</a>
                             </li>
 
-                            <!-- Last Page -->
                             <li>
-                                <a th:href="@{/book/2/1(cp=${page.totalPages})}">&gt;&gt;</a>
+                                <a th:href="@{/search/book-req/list(page=${page.totalPages - 1})}">&gt;&gt;</a>
                             </li>
                         </ul>
                     </div>
                 </th:block>
 
 
-                <!-- Button Area -->
+
                 <th:block th:if="${loginMember != null}">
                     <div class="btn-area">
                         <button id="writeBtn" th:onclick="|location.href='/book/2/2/'|">신청</button>
@@ -114,7 +106,6 @@
     </section>
 </section>
 
-<!-- Footer Include -->
 <div th:replace="~{common/footer :: footer}"></div>
 </body>
 </html>
