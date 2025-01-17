@@ -30,7 +30,6 @@ public class BookRequestRepositoryCustomImpl implements BookRequestRepositoryCus
                         member.name,
                         bookRequest.bookTitle,
                         bookRequest.bookRequestApprove,
-                        bookRequest.opinion,
                         bookRequest.createdDate
                 ))
                 .from(bookRequest)

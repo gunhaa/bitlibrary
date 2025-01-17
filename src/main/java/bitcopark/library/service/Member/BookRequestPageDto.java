@@ -17,17 +17,15 @@ public class BookRequestPageDto {
     private String name;
     private String bookTitle;
     private BookRequestApprove bookRequestApprove;
-    private String bookRequestOpinion;
     private String bookRequestCreatedDate;
 
     @QueryProjection
-    public BookRequestPageDto(String isbn, String name, String bookTitle, BookRequestApprove bookRequestApprove, String bookRequestOpinion, LocalDateTime bookRequestCreatedDate) {
+    public BookRequestPageDto(String isbn, String name, String bookTitle, BookRequestApprove bookRequestApprove, LocalDateTime bookRequestCreatedDate) {
         this.isbn = isbn;
         // isbn hashing 알고리즘 추가 예정?
         this.name = name;
         this.bookTitle = bookTitle;
         this.bookRequestApprove = bookRequestApprove;
-        this.bookRequestOpinion = bookRequestOpinion;
         this.bookRequestCreatedDate = bookRequestCreatedDate.toLocalDate().toString();
     }
 
