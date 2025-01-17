@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library</title>
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/common/sideMenu.css">
+    <link rel="stylesheet" href="/css/common/modal.css">
+    <link rel="stylesheet" href="/css/search/bookRequest-style.css">
+</head>
+<body>
+<div th:replace="~{common/header :: header}"></div>
+
+<section class="main">
+    <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
+
+    <section class="main-content">
+        <div class="main-title">신청 정보</div>
+        <hr class="titleLine" />
+        <section class="body-content">
+            <div class="request-form">
+                <table>
+                    <tbody>
+                    <tr class="request-tr">
+                        <th>신청 상태</th>
+                        <td th:if="${bookRequestDetail.bookRequestApprove == T(bitcopark.library.entity.member.BookRequestApprove).W}">대기중</td>
+                        <td th:if="${bookRequestDetail.bookRequestApprove == T(bitcopark.library.entity.member.BookRequestApprove).Y}">승인</td>
+                        <td th:if="${bookRequestDetail.bookRequestApprove == T(bitcopark.library.entity.member.BookRequestApprove).N}">거절</td>
+                    </tr>
+                    <tr>
+                        <th>신청일자</th>
+                        <td th:text="${bookRequestDetail.bookRequestCreatedDate}"></td>
+                    </tr>
+                    <tr>
+                        <th>신청자</th>
+                        <td>
+                            <span th:text="${bookRequestDetail.name}"></span>
+                        </td>
+<!--                        <td>-->
+<!--									<span th:if="${loginMember.authority == 1}">-->
+<!--										<span th:text="${#strings.substring(bookReq.memberName, 0, 1)}">*</span>-->
+<!--										<span th:if="${#strings.length(bookReq.memberName) > 2}"-->
+<!--                                              th:text="${#strings.substring(bookReq.memberName, 2)}"></span>-->
+<!--									</span>-->
+<!--                            <span th:if="${loginMember.authority == 2}"-->
+<!--                                  th:text="${bookReq.memberName}"></span>-->
+<!--                        </td>-->
+                    </tr>
+                    <tr>
+                        <th>희망 도서명</th>
+                        <td th:text="${bookRequestDetail.bookTitle}"></td>
+
+<!--                        <td th:text="${bookReq.bookTitle}"></td>-->
+                    </tr>
+                    <tr>
+                        <th>저자</th>
+                        <td th:text="${bookRequestDetail.bookAuthor}"></td>
+<!--                        <td th:text="${bookReq.bookAuthor}"></td>-->
+                    </tr>
+                    <tr>
+                        <th>출판사</th>
+                        <td th:text="${bookRequestDetail.bookPublisher}"></td>
+<!--                        <td th:text="${bookReq.bookPub}"></td>-->
+                    </tr>
+                    <tr>
+                        <th>출판 연도</th>
+                        <td th:text="${bookRequestDetail.bookPublicationDate}"></td>
+<!--                        <td th:text="${bookReq.bookPubDate}"></td>-->
+                    </tr>
+                    <tr>
+                        <th class="opinion">추천의견</th>
+                        <td th:text="${bookRequestDetail.opinion}"></td>
+<!--                        <td th:text="${bookReq.requestOpinion}"></td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn-area">
+<!--					<span th:if="${loginMember.memberNo == bookReq.memberNo}">-->
+<!--						<button id="updateBtn">수정</button>-->
+<!--					</span>-->
+
+<!--                <span th:if="${loginMember.memberNo == bookReq.memberNo or loginMember.authority == 2}">-->
+<!--						<button id="deleteBtn">삭제</button>-->
+<!--					</span>-->
+
+<!--                <span th:if="${loginMember.authority == 2}">-->
+<!--						<button id="approvalBtn">승인</button>-->
+<!--						<button id="declinedBtn">거절</button>-->
+<!--                </span>-->
+
+                <button id="goToListBtn">목록으로</button>
+            </div>
+        </section>
+    </section>
+</section>
+
+<div th:replace="~{common/footer}"></div>
+
+<!-- login member와 requestNo js에 넘기고있음 추가 필요-->
+<script src="/js/search/bookRequestDetail.js"></script>
+</body>
+</html>

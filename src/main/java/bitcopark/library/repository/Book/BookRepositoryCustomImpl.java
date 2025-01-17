@@ -1,6 +1,6 @@
 package bitcopark.library.repository.Book;
 
-import bitcopark.library.controller.search.BookSearchDetailCondition;
+import bitcopark.library.controller.book.BookSearchDetailCondition;
 import bitcopark.library.entity.book.QBook;
 import bitcopark.library.entity.book.QBookBorrow;
 import bitcopark.library.entity.book.QBookReservation;

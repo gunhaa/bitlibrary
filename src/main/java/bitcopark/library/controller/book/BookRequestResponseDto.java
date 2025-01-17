@@ -1,4 +1,4 @@
-package bitcopark.library.controller.search;
+package bitcopark.library.controller.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

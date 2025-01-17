@@ -1,10 +1,9 @@
-package bitcopark.library.controller.search;
+package bitcopark.library.controller.book;
 
 import bitcopark.library.aop.CategoryDTO;
-import bitcopark.library.service.Member.BookRequestPageDto;
-import bitcopark.library.service.Member.BookRequestService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import bitcopark.library.service.Book.BookRequestDetailDto;
+import bitcopark.library.service.Book.BookRequestPageDto;
+import bitcopark.library.service.Book.BookRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,21 +33,6 @@ public class BookRequestController {
         Page<BookRequestPageDto> bookRequestPageDto = bookRequestService.getBookRequestPage(pageable);
         // Session에서 memberId얻어와서 DTO 객체에 추가해야함
         model.addAttribute("page", bookRequestPageDto);
-        System.out.println("pageable = " + pageable);
-        System.out.println("bookRequestPageDto = " + bookRequestPageDto);
-
-
-//        // ObjectMapper를 사용하여 JSON 변환
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        String pageJson = null;
-//        try {
-//            pageJson = objectMapper.writeValueAsString(bookRequestPageDto);
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-//
-//        System.out.println("bookRequestPageDto = " + bookRequestPageDto);
-//        System.out.println("pageJson = " + pageJson); // JSON 확인을 위한 출력
 
         return "search/bookRequestBoard";
     }
@@ -61,4 +45,17 @@ public class BookRequestController {
         return "search/bookRequestForm";
     }
 
+    @GetMapping("/{catLevel1:search}/{catLevel2:book-req}/list/{isbn}")
+    public String bookRequestBoardDetail(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
+                                         @PathVariable(name = "catLevel1") String catLevel1,
+                                         @PathVariable(name = "catLevel2") String catLevel2,
+                                         @PathVariable String isbn) {
+        setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
+        BookRequestDetailDto bookRequestDetailDto = bookRequestService.getBookRequestDetailsByIsbn(isbn);
+        // 임시 번호 1번 부여
+        bookRequestDetailDto.setMemberId(1L);
+
+        model.addAttribute("bookRequestDetail" , bookRequestDetailDto);
+        return "search/bookRequestDetail";
+    }
 }

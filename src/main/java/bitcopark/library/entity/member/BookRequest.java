@@ -17,7 +17,10 @@ public class BookRequest extends BaseAuditEntity {
     @GeneratedValue
     @Column(name = "bookRequest_id")
     private Long id;
+
+    @Column(unique = true)
     private String isbn;
+
     private String bookTitle;
     private String publisher;
     private String author;
