@@ -84,8 +84,9 @@ public class BookRequestService {
         return bookRequestRepository.getBookRequestPage(pageable);
     }
 
+    @Transactional
     public BookRequestDetailDto getBookRequestDetailsByIsbn(String isbn) {
-
-        return null;
+        // logic
+        return bookRequestRepository.getBookRequestDetail(isbn);
     }
 }

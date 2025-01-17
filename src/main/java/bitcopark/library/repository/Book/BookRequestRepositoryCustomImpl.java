@@ -2,8 +2,10 @@ package bitcopark.library.repository.Book;
 
 import bitcopark.library.entity.member.QBookRequest;
 import bitcopark.library.entity.member.QMember;
+import bitcopark.library.service.Book.BookRequestDetailDto;
 import bitcopark.library.service.Book.BookRequestPageDto;
-import bitcopark.library.service.Member.QBookRequestPageDto;
+import bitcopark.library.service.Book.QBookRequestDetailDto;
+import bitcopark.library.service.Book.QBookRequestPageDto;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +45,28 @@ public class BookRequestRepositoryCustomImpl implements BookRequestRepositoryCus
                 .from(bookRequest);
 
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
+    }
+
+    @Override
+    public BookRequestDetailDto getBookRequestDetail(String isbn) {
+        QBookRequest bookRequest = QBookRequest.bookRequest;
+        QMember member = QMember.member;
+
+        return queryFactory.select(new QBookRequestDetailDto(
+                        bookRequest.bookRequestApprove,
+                        bookRequest.createdDate,
+                        member.name,
+                        bookRequest.bookTitle,
+                        bookRequest.author,
+                        bookRequest.publisher,
+                        bookRequest.publicationDate,
+                        bookRequest.opinion
+                ))
+                .from(bookRequest)
+                .leftJoin(bookRequest.member, member)
+                .where(
+                        bookRequest.isbn.eq(isbn)
+                )
+                .fetchOne();
     }
 }

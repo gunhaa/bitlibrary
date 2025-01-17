@@ -1,6 +1,7 @@
 package bitcopark.library.controller.book;
 
 import bitcopark.library.aop.CategoryDTO;
+import bitcopark.library.service.Book.BookRequestDetailDto;
 import bitcopark.library.service.Book.BookRequestPageDto;
 import bitcopark.library.service.Book.BookRequestService;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +51,10 @@ public class BookRequestController {
                                          @PathVariable(name = "catLevel2") String catLevel2,
                                          @PathVariable String isbn) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
-        bookRequestService.getBookRequestDetailsByIsbn(isbn);
+        BookRequestDetailDto bookRequestDetailDto = bookRequestService.getBookRequestDetailsByIsbn(isbn);
+        System.out.println("isbn = " + isbn);
+        System.out.println("bookRequestDetailDto = " + bookRequestDetailDto);
+        model.addAttribute("bookRequestDetail" , bookRequestDetailDto);
         return "search/bookRequestDetail";
     }
 }
