@@ -1,9 +1,8 @@
-package bitcopark.library.repository.Member;
+package bitcopark.library.repository.Book;
 
-import bitcopark.library.entity.book.QBook;
 import bitcopark.library.entity.member.QBookRequest;
 import bitcopark.library.entity.member.QMember;
-import bitcopark.library.service.Member.BookRequestPageDto;
+import bitcopark.library.service.Book.BookRequestPageDto;
 import bitcopark.library.service.Member.QBookRequestPageDto;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;

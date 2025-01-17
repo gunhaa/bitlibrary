@@ -1,8 +1,11 @@
 package bitcopark.library.controller.search;
 
+import bitcopark.library.controller.book.BookRequestCondition;
+import bitcopark.library.controller.book.BookRequestResponseDto;
+import bitcopark.library.controller.book.BookSearchDetailCondition;
 import bitcopark.library.repository.Book.BookSearchCondition;
 import bitcopark.library.service.Book.*;
-import bitcopark.library.service.Member.BookRequestService;
+import bitcopark.library.service.Book.BookRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

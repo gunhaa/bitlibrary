@@ -1,8 +1,6 @@
-package bitcopark.library.controller.search;
+package bitcopark.library.controller.book;
 
 import lombok.Data;
-
-import java.time.LocalDate;
 
 @Data
 public class BookSearchDetailCondition {

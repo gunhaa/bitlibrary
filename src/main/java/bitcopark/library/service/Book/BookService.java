@@ -1,6 +1,6 @@
 package bitcopark.library.service.Book;
 
-import bitcopark.library.controller.search.BookSearchDetailCondition;
+import bitcopark.library.controller.book.BookSearchDetailCondition;
 import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookState;
 import bitcopark.library.entity.book.BookSupple;

@@ -1,11 +1,11 @@
-package bitcopark.library.service.Member;
+package bitcopark.library.service.Book;
 
-import bitcopark.library.controller.search.BookRequestCondition;
-import bitcopark.library.controller.search.BookRequestResponseDto;
+import bitcopark.library.controller.book.BookRequestCondition;
+import bitcopark.library.controller.book.BookRequestResponseDto;
 import bitcopark.library.entity.member.BookRequest;
 import bitcopark.library.entity.member.BookRequestApprove;
 import bitcopark.library.entity.member.Member;
-import bitcopark.library.repository.Member.BookRequestRepository;
+import bitcopark.library.repository.Book.BookRequestRepository;
 import bitcopark.library.repository.Member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -82,5 +82,10 @@ public class BookRequestService {
 
     public Page<BookRequestPageDto> getBookRequestPage(Pageable pageable) {
         return bookRequestRepository.getBookRequestPage(pageable);
+    }
+
+    public BookRequestDetailDto getBookRequestDetailsByIsbn(String isbn) {
+
+        return null;
     }
 }

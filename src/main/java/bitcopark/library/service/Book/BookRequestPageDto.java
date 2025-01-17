@@ -1,10 +1,9 @@
-package bitcopark.library.service.Member;
+package bitcopark.library.service.Book;
 
 import bitcopark.library.entity.member.BookRequestApprove;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data

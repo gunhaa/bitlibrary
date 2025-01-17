@@ -1,10 +1,8 @@
-package bitcopark.library.controller.search;
+package bitcopark.library.controller.book;
 
 import bitcopark.library.aop.CategoryDTO;
-import bitcopark.library.service.Member.BookRequestPageDto;
-import bitcopark.library.service.Member.BookRequestService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import bitcopark.library.service.Book.BookRequestPageDto;
+import bitcopark.library.service.Book.BookRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -51,12 +48,9 @@ public class BookRequestController {
     public String bookRequestBoardDetail(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
                                          @PathVariable(name = "catLevel1") String catLevel1,
                                          @PathVariable(name = "catLevel2") String catLevel2,
-                                         @RequestParam(required = false) String page,
                                          @PathVariable String isbn) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
-
-        System.out.println("isbn = " + isbn);
-        System.out.println("page = " + page);
+        bookRequestService.getBookRequestDetailsByIsbn(isbn);
         return "search/bookRequestDetail";
     }
 }
