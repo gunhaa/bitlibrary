@@ -31,7 +31,7 @@ if(deleteBtn != null){
 const goToListBtn = document.getElementById("goToListBtn");
 
 goToListBtn.addEventListener("click", ()=>{
-    location.href = "/book/2/1" + location.search;
+    location.href = "/search/book-req/list" + location.search;
 })
 
 const approvalBtn = document.getElementById("approvalBtn");
