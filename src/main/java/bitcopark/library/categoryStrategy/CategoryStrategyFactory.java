@@ -12,6 +12,10 @@ public class CategoryStrategyFactory {
             case "통합자료 검색" -> new SearchStrategy();
             case "희망 도서 신청" -> new RequestBookStrategy();
             case "나의 도서관" -> new MyLibraryStrategy();
+            case "공지사항" -> new NoticeStrategy();
+            case "문의사항" -> new InquiriesStrategy();
+            case "자주 묻는 질문" -> new FaqStrategy();
+            case "책 후기 나눠요" -> new BookReviewStrategy();
             default -> new MainStrategy();
         };
     }
