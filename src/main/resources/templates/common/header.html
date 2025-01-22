@@ -68,15 +68,15 @@
                 </div>
                 <div th:if="${loginMember != null}">
                     <!-- 로그인 O -->
-                    <label for="headerMenuToggle" th:text="${loginMember.memberName}">
+                    <label for="headerMenuToggle" th:text="${loginMember.name}">
                         <i class="fa-solid fa-caret-down"></i>
                     </label>
                     <input type="checkbox" id="headerMenuToggle">
                     <div class="header-menu">
-                        <div th:if="${loginMember.authority == 1}">
+                        <div th:if="${loginMember.authority == 'MEMBER'}">
                             <a th:href="@{/myPage/info}">내 정보</a>
                         </div>
-                        <div th:if="${loginMember.authority == 2}">
+                        <div th:if="${loginMember.authority == 'ADMIN'}">
                             <a th:href="@{/admin/1}">관리자</a>
                         </div>
                         <a th:href="@{/member/logout}">로그아웃</a>
