@@ -8,8 +8,12 @@ import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BoardNotFoundException;
 import bitcopark.library.repository.Board.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -41,4 +45,7 @@ public class BoardService {
 
     }
 
+    public Page<Board> selectBoardList(Long id, Pageable pageable) {
+        return boardRepository.findByCategoryId(id, pageable);
+    }
 }
