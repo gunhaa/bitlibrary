@@ -14,13 +14,13 @@
       <form action="/member/login" method="POST" class="main-login-form">
         <!-- 아이디 입력 (쿠키값을 사용하여 자동 입력) -->
 <!--        <input type="text" name="memberEmail" placeholder="아이디 입력" th:value="${#cookies.saveId.value}" />-->
-        <input type="text" name="memberEmail" placeholder="아이디 입력"/>
-        <input type="password" name="memberPw" placeholder="비밀번호 입력" />
+        <input type="text" name="email" placeholder="아이디 입력"/>
+        <input type="password" name="password" placeholder="비밀번호 입력" />
 
         <div class="main-saveId">
           <!-- 아이디 저장 체크박스 (쿠키 값이 있을 경우 checked) -->
 <!--          <input type="checkbox" name="saveId" id="saveId" th:checked="${#strings.isNotEmpty(#cookies.saveId.value)}" />-->
-          <input type="checkbox" name="saveId" id="saveId"/>
+          <input type="checkbox" name="saveId" id="saveId" th:checked="${saveId != null}"/>
           <label for="saveId">아이디 저장</label>
         </div>
 

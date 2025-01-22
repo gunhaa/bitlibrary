@@ -27,7 +27,7 @@
     <!-- 타임리프 조건문으로 메시지 출력 -->
     <div th:if="${not #strings.isEmpty(message)}">
         <script>
-            alert([[${message}]]);
+            alert(`[[${message}]]`);
         </script>
     </div>
 </div>
