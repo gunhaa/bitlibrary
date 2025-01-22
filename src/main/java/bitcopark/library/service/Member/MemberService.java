@@ -1,5 +1,7 @@
 package bitcopark.library.service.Member;
 
+import bitcopark.library.dto.LoginRequestDTO;
+import bitcopark.library.dto.LoginResponseDTO;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
@@ -9,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -17,11 +22,11 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Member joinMember(String email, String name, String phoneNumber, MemberGender gender, int birth, Address address){
+    public Member joinMember(String email, String password, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address){
 
         validateDuplicateMember(email);
 
-        Member member = Member.createMember(email, name, phoneNumber, gender, birth, address);
+        Member member = Member.createMember(email, password, name, phoneNumber, gender, birthDate, address);
 
         memberRepository.save(member);
 
@@ -29,11 +34,11 @@ public class MemberService {
     }
 
     @Transactional
-    public Member joinAdmin(String email, String name, String phoneNumber, MemberGender gender, int birth, Address address){
+    public Member joinAdmin(String email, String password, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address){
 
         validateDuplicateMember(email);
 
-        Member member = Member.createAdmin(email, name, phoneNumber, gender, birth, address);
+        Member member = Member.createAdmin(email, password, name, phoneNumber, gender, birthDate, address);
 
         memberRepository.save(member);
 
@@ -46,4 +51,8 @@ public class MemberService {
         }
     }
 
+    public Optional<LoginResponseDTO> login(LoginRequestDTO request) {
+        return memberRepository.findByEmailAndPassword(request.getEmail(), request.getPassword())
+                .map(LoginResponseDTO::new);
+    }
 }
