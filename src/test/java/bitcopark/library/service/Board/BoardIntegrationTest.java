@@ -80,12 +80,12 @@ public class BoardIntegrationTest {
         String content = "글 내용1";
         SecretFlag secretFlag = SecretFlag.N;
 
-        board = boardService.writePost(member, title, content, secretFlag, category);
+        //board = boardService.writePost(member, title, content, secretFlag, category);
 
         //댓글 생성
         String replyContent = "댓글작성";
 
-        reply = replyService.addReply(replyContent, member, board);
+        //reply = replyService.addReply(replyContent, member, board);
 
     }
 

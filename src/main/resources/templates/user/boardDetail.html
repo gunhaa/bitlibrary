@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library - [[${cateName}]]</title>
+
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/board/boardDetail-style.css">
+    <link rel="stylesheet" href="/css/board/comment.css">
+</head>
+<body>
+
+<!-- header -->
+<div th:replace="~{common/header :: header}"></div>
+
+<section class="main-content-suround-section">
+    <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
+
+    <!-- 공지사항 목록 -->
+    <section class="content-suround-section">
+        <div class="content-title">[[${cateName}]]</div>
+        <div class="title-line"></div>
+
+        <!-- 게시글 상세 화면 -->
+        <section class="board-detail">
+            <!-- 제목 -->
+            <h1 th:if="${board.secretFlag.toString() == 'Y'}" class="board-title"><i class="fa-solid fa-lock"></i> ${board.boardTitle}</h1>
+            <h1 th:unless="${board.secretFlag.toString() == 'Y'}" class="board-title">${board.boardTitle}</h1>
+
+            <!-- 작성자 / 작성일 / 조회수 -->
+            <div class="board-nav">
+                <div class="member-name">
+                    <span th:if="${cateCode == 16}" th:text="${board.memberName.substring(0, 1) + '*' + board.memberName.substring(board.memberName.length())}"></span>
+                    <span th:unless="${cateCode == 16}">${board.memberName}</span>
+                </div>
+
+                <div class="board-info">
+                    <!-- 최초 작성일 -->
+                    <p><span>작성일</span>&nbsp;${board.boardCreateDate}</p>
+                    <!-- 게시글 수정 시 마지작 수정일로 변경되어 반영됨 -->
+                    <p th:if="${board.lastModifiedDate != null}"><span>수정일</span>&nbsp;${board.boardUpdateDate}</p>
+                    <p><span>조회수</span>&nbsp;${board.readCount}</p>
+                </div>
+
+            </div>
+
+            <!-- 이미지 보여지는 영역 -->
+            <!-- 썸네일 X -->
+                <div th:if="${#lists.size(board.boardImgList) > 0}" class="img-box">
+                    <div th:each="image : ${board.boardImgList}" class="boardImg">
+                        <img src="${image.imagePath + image.imageReName}"/>
+                        <a th:href="${image.imagePath + image.imageReName}" th:download="${image.imageOriginal}">다운로드</a>
+                    </div>
+                </div>
+                <hr>
+            <!-- 게시글 내용 -->
+            <div class="board-content">${board.boardContent}</div>
+
+            <!-- 버튼 영역 -->
+            <div class="btn-area">
+                <th:block th:if="${session.loginMember.id == board.member.id}">
+                    <button id="updateBtn">수정</button>
+                    <button id="deleteBtn">삭제</button>
+                </th:block>
+                <!-- 목록으로 -->
+                <button id="listBtn">목록으로</button>
+            </div>
+        </section>
+
+        <!-- comment.jsp 연결 -->
+        <th:block th:if="${cateCode == 16 || cateCode == 18}">
+            <div th:replace="~{board/comment :: comment}"></div>
+        </th:block>
+
+    </section>
+</section>
+
+
+<!-- footer -->
+<div th:replace="~{common/footer :: footer}"></div>
+
+<script>
+    const boardNo = [["${board.boardNo}"]];
+    const loginMemberNo = [["${loginMember.memberNo}"]];
+    const cateEngName = [["${cateEngName}"]];
+    const li = document.querySelectorAll(".side-menu > li");
+</script>
+
+
+<!-- boardDetail.js 연결 -->
+<script src="/js/board/boardDetail.js"></script>
+<!-- comment.js 연결 -->
+<script src="/js/board/comment.js"></script>
+</body>
+</html>

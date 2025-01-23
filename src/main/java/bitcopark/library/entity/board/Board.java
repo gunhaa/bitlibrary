@@ -68,7 +68,4 @@ public class Board extends BaseAuditEntity {
         this.boardDelFlag = this.boardDelFlag == BoardDelFlag.Y ? BoardDelFlag.N :  BoardDelFlag.Y;
         return this.boardDelFlag;
     }
-
-
-
 }
