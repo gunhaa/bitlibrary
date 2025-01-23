@@ -3,7 +3,7 @@ package bitcopark.library.service.Book;
 import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookBorrow;
 import bitcopark.library.entity.member.Member;
-import bitcopark.library.repository.Book.BookBorrowRepository;
+import bitcopark.library.repository.book.BookBorrowRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

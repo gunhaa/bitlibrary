@@ -1,10 +1,9 @@
 package bitcopark.library.service.Member;
 
 import bitcopark.library.entity.member.Address;
-import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
 import bitcopark.library.exception.EmailDuplicateException;
-import bitcopark.library.repository.Member.MemberRepository;
+import bitcopark.library.repository.member.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

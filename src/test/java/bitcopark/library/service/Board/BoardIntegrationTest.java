@@ -4,7 +4,7 @@ import bitcopark.library.entity.board.*;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
-import bitcopark.library.repository.Board.BoardRepository;
+import bitcopark.library.repository.board.BoardRepository;
 import bitcopark.library.service.Member.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

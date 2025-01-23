@@ -2,7 +2,7 @@ package bitcopark.library.service.OrphanTable;
 
 import bitcopark.library.entity.orphanTable.Calendar;
 import bitcopark.library.entity.orphanTable.CalendarType;
-import bitcopark.library.repository.OrphanTable.CalendarRepository;
+import bitcopark.library.repository.orphanTable.CalendarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -3,7 +3,7 @@ package bitcopark.library.service.Class;
 import bitcopark.library.entity.clazz.ClassApplicant;
 import bitcopark.library.entity.board.Board;
 import bitcopark.library.entity.member.Member;
-import bitcopark.library.repository.Class.ClassApplicantRepository;
+import bitcopark.library.repository.clazz.ClassApplicantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

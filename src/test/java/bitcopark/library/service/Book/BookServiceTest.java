@@ -4,7 +4,7 @@ import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookState;
 import bitcopark.library.entity.book.BookSupple;
 import bitcopark.library.exception.BookTitleNotFoundException;
-import bitcopark.library.repository.Book.BookRepository;
+import bitcopark.library.repository.book.BookRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

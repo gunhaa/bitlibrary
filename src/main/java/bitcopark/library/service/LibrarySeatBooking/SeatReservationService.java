@@ -2,7 +2,7 @@ package bitcopark.library.service.LibrarySeatBooking;
 
 import bitcopark.library.entity.librarySeatBooking.SeatReservation;
 import bitcopark.library.entity.member.Member;
-import bitcopark.library.repository.LibrarySeatBooking.SeatReservationRepository;
+import bitcopark.library.repository.librarySeatBooking.SeatReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

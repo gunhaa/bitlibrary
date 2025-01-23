@@ -6,7 +6,7 @@ import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
 import bitcopark.library.exception.EmailDuplicateException;
-import bitcopark.library.repository.Member.MemberRepository;
+import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +26,7 @@ public class MemberService {
 
         validateDuplicateMember(email);
 
-        Member member = Member.createMember(email, password, name, phoneNumber, gender, birthDate, address);
+        Member member = Member.createMember(email, name, phoneNumber, gender, birthDate, address);
 
         memberRepository.save(member);
 
@@ -38,7 +38,7 @@ public class MemberService {
 
         validateDuplicateMember(email);
 
-        Member member = Member.createAdmin(email, password, name, phoneNumber, gender, birthDate, address);
+        Member member = Member.createAdmin(email, name, phoneNumber, gender, birthDate, address);
 
         memberRepository.save(member);
 
