@@ -4,6 +4,7 @@ import bitcopark.library.jwt.MemberDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -18,12 +19,22 @@ public class CustomOAuth2User implements OAuth2User {
 
     @Override
     public Map<String, Object> getAttributes() {
-        return Map.of();
+        return null;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+
+        Collection<GrantedAuthority> collection = new ArrayList<>();
+
+        collection.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return memberDto.getRole();
+            }
+        });
+
+        return collection;
     }
 
     // id값 반환
@@ -31,4 +42,9 @@ public class CustomOAuth2User implements OAuth2User {
     public String getName() {
         return memberDto.getEmail();
     }
+
+    public String getUsername(){
+        return memberDto.getUsername();
+    }
+
 }
