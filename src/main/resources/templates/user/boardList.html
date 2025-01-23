@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Library - ${cateName}</title>
+    <title>Java Library - [[${cateName}]]</title>
 
     <link rel="stylesheet" href="/css/main-style.css">
     <link rel="stylesheet" href="/css/board/boardList-style.css">
@@ -65,18 +65,18 @@
                         <tr th:each="board : ${boardPage.content}">
                             <td>${board.boardNo}</td>
                             <td>
-                                <i th:if="${board.boardSecretFlag == 'Y'" class="fa-solid fa-lock"></i>
+                                <i th:if="${board.boardSecretFlag == 'Y'}" class="fa-solid fa-lock"></i>
                                 <a href="/user/${cateCode}/${board.boardNo}(cp=${boardPage.getPageNumber()}, keyword=${keyword}, query=${query})">${board.boardTitle}</a>
                                 <span th:if="${cateCode == 16 || cateCode == 18}">
                                     [${board.commentCount}]
                                 </span>
                             </td>
                             <td>
-                                <span th:if="$cateCode == 16}" th:text="${board.memberName.substring(0, 1) + '*' + board.memberName.substring(board.memberName.length())}"></span>
-                                <span th:unless>${board.memberName}</span>
+                                <span th:if="${cateCode == 16}" th:text="${board.memberName.substring(0, 1) + '*' + board.memberName.substring(board.memberName.length())}"></span>
+                                <span th:unless="${cateCode == 16}">${board.memberName}</span>
                             </td>
                             <td>
-                                <span th:if="${board.boardUpdateDate != null ">${board.boardUpdateDate}</span>
+                                <span th:if="${board.boardUpdateDate != null }">${board.boardUpdateDate}</span>
                                 <span th:unless>${board.boardCreateDate}</span>
                             </td>
                             <td>${board.readCount}</td>
@@ -95,6 +95,12 @@
                     <button th:if="$loginMember.authority == 'MEMBER'}">글쓰기</button>
                 </th:block>
             </div>-->
+
+            <!--<div th:if="${loginMember != null}" class="btn-area">-->
+                <!-- 공지사항 : 관리자에게만 보임 -->
+                <button id="writeBtn" <!--th:if="${cateCode == 15 and loginMember.authority.toString() == 'ADMIN'}"-->>글쓰기</button>
+                <!--<button id="writeBtn" th:if="${cateCode != 15 and loginMember.authority.toString() == 'MEMBER'}">글쓰기</button>-->
+            <!--</div>-->
 
             <!-- pagination -->
             <div th:unless="${#lists.isEmpty(boardPage.content)}" class="pagination-area">
@@ -141,7 +147,11 @@
 <div th:replace="~{common/footer :: footer}"></div>
 
 <!-- boardList.js 연결 -->
-<script src="/resources/js/board/boardList.js"></script>
+<script>
+    const cateEngName = "[[${cateEngName}]]";
+</script>
+
+<script src="/js/board/boardList.js"></script>
 
 </body>
 </html>

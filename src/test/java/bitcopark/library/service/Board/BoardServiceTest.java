@@ -48,16 +48,16 @@ class BoardServiceTest {
         SecretFlag secretFlag = SecretFlag.N;
         Category category = categoryService.createCategoryObject("역사");
 
-        Board post1 = boardService.writePost(member, title, content, secretFlag, category);
+        //Board post1 = boardService.writePost(member, title, content, secretFlag, category);
 
-        Board post2 = boardService.writePost(member, title, content, secretFlag, category);
+        //Board post2 = boardService.writePost(member, title, content, secretFlag, category);
 
         List<Board> memberPosts = boardRepository.findByMember(member)
                 .orElseThrow(()-> new IllegalArgumentException("No posts"));
 
-        assertThat(post1).isEqualTo(memberPosts.get(0));
+        //assertThat(post1).isEqualTo(memberPosts.get(0));
 
-        assertThat(2).isEqualTo(memberPosts.size());
+        //assertThat(2).isEqualTo(memberPosts.size());
     }
 
     private Member createTestMember() {

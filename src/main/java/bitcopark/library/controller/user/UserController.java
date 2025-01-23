@@ -2,7 +2,10 @@ package bitcopark.library.controller.user;
 
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.controller.util.ControllerUtils;
+import bitcopark.library.dto.BoardRequestDTO;
+import bitcopark.library.dto.LoginResponseDTO;
 import bitcopark.library.entity.board.Board;
+import bitcopark.library.entity.board.BoardImg;
 import bitcopark.library.entity.board.Category;
 import bitcopark.library.service.Board.BoardService;
 import bitcopark.library.service.Board.CategoryService;
@@ -11,10 +14,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static bitcopark.library.controller.util.ControllerUtils.setCategoryAndRoute;
@@ -50,12 +53,63 @@ public class UserController {
         // pagination
         Page<Board> boardPage = boardService.selectBoardList(category.getId(), pageable);
 
-        System.out.println("boardPage = " + boardPage);
         // model addAttribute
         model.addAttribute("boardPage", boardPage);
         model.addAttribute("cateCode", category.getId());
         model.addAttribute("cateName", category.getCategoryName());
+        model.addAttribute("cateEngName", category.getCategoryEngName());
 
         return "user/boardList";
+    }
+
+    @GetMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/insert")
+    public String selectPlatform(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+            , @PathVariable(name = "catLevel1") String catLevel1
+            , @PathVariable(name = "catLevel2") String catLevel2) {
+
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
+
+        Category category = categoryService.getIdByEngName(catLevel2);
+
+        model.addAttribute("cateEngName", category.getCategoryEngName());
+
+        if( category.getId() == 16 ){
+            return "user/qnaWrite";
+        }
+
+        return "user/boardWrite";
+    }
+
+    @PostMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/insert")
+    public String insertBoard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+            , @PathVariable(name = "catLevel1") String catLevel1
+            , @PathVariable(name = "catLevel2") String catLevel2
+            , @RequestParam(name = "files", required = false) MultipartFile[] files
+            , BoardRequestDTO boardRequestDTO
+            , @SessionAttribute LoginResponseDTO loginMember) {
+
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
+
+        // logic
+        Category category = categoryService.getIdByEngName(catLevel2);
+        model.addAttribute("cateCode", category.getId());
+
+        Board board = boardService.writePost(loginMember, boardRequestDTO, category);
+
+        System.out.println("board = " + board);
+
+        model.addAttribute("board", board);
+
+        if (files != null && files.length > 0) {
+            List<BoardImg> boardImgList = new ArrayList<>();
+            for( int i = 0; i < files.length; i++ ) {
+                if (!files[i].isEmpty()) {
+                    BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), i);
+                    boardImgList.add(boardImg);
+                }
+            }
+            model.addAttribute("boardImgList", boardImgList);
+        }
+        return "user/boardDetail";
     }
 }

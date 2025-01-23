@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library - [[${cateName}]]</title>
+
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/board/qnaWrite-style.css">
+</head>
+<body>
+
+<!-- header -->
+<div th:replace="~{common/header :: header}"></div>
+
+<section class="main-content-suround-section">
+    <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
+    <!-- 공지사항 목록 -->
+    <section class="content-suround-section">
+        <div class="content-title">[[${cateName}]]</div>
+        <div class="title-line"></div>
+
+        <!-- 게시글 작성 화면 -->
+        <form action="@{/user/{cateEngName}/insert(cateEngName=${cateEngName})}" method="POST" class="board-write" id="boardWriteFrm">
+            <!-- 제목 -->
+            <h1 class="board-title">
+                <input type="text" name="boardTitle" placeholder="제목 입력">
+            </h1>
+
+            <!-- 작성자 이름 영역 -->
+            <div class="member-name"><h3>${loginMember.memberName}</h3></div>
+
+            <!-- 공개/비공개 -->
+            <div class="board-type">
+                <span>공개 여부</span>
+                <input type="radio" name="boardSecretFlag" id="public" value="N">
+                <label for="public">공개</label>
+
+                <input type="radio" name="boardSecretFlag" id="private" value="Y">
+                <label for="private">비공개</label>
+            </div>
+
+
+            <!-- 내용 -->
+            <div class="board-content">
+                <textarea name="boardContent"></textarea>
+            </div>
+
+            <!-- 버튼 영역 -->
+            <div class="btn-area">
+                <button type="button" onclick="location.href='/user/${cateEngName}'">취소</button>
+                <button type="submit" id="writeBtn">등록</button>
+            </div>
+
+        </form>
+    </section>
+
+
+</section>
+
+<!-- footer -->
+<div th:replace="~{common/footer :: footer}"></div>
+
+<script src="/js/board/boardWrite.js"></script>
+
+<script>
+    const cateEngName = "[[${cateEngName}]]";
+</script>
+
+</body>
+</html>

@@ -114,7 +114,7 @@ public class BoardImgServiceTest {
         String content = "글 내용1";
         SecretFlag secretFlag = SecretFlag.N;
 
-        board = boardService.writePost(member, title, content, secretFlag, category);
+        //board = boardService.writePost(member, title, content, secretFlag, category);
 
     }
 

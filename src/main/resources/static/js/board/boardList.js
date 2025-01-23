@@ -4,9 +4,10 @@ if(writeBtn != null){
 
     // 글쓰기 버튼 클릭 
     writeBtn.addEventListener("click", ()=>{
-        
+
+        console.log('in');
                         // /board2/15(or 16 or 18)/insert
-        location.href = `/board2/${cateCode}/insert`;
+        location.href = `/user/${cateEngName}/insert`;
         
     })
 }

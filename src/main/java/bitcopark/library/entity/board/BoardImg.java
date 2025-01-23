@@ -3,6 +3,8 @@ package bitcopark.library.entity.board;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,8 +19,7 @@ public class BoardImg {
 
     private String originalImg;
 
-    @Builder.Default
-    private String renameImg = createRenameImg();
+    private String renameImg;
 
     private int orderImg;
 
@@ -26,11 +27,18 @@ public class BoardImg {
     @JoinColumn(name = "board_id")
     private Board board;
 
-    private static String createRenameImg(){
+    public void createRenameImg(){
         // need rename logic
-        return "rename";
+        String extension = "";
+
+        int dotIdx = builder().originalImg.lastIndexOf(".");
+
+        if( dotIdx != -1 ) {
+            extension = builder().originalImg.substring(dotIdx);
+        }
+
+        String newFileName = UUID.randomUUID().toString();
+
+        renameImg = newFileName + extension;
     }
-
-
-
 }

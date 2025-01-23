@@ -1,12 +1,13 @@
 package bitcopark.library.service.Board;
 
-import bitcopark.library.entity.board.Board;
-import bitcopark.library.entity.board.BoardDelFlag;
-import bitcopark.library.entity.board.Category;
-import bitcopark.library.entity.board.SecretFlag;
+import bitcopark.library.dto.BoardRequestDTO;
+import bitcopark.library.dto.LoginResponseDTO;
+import bitcopark.library.entity.board.*;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BoardNotFoundException;
+import bitcopark.library.repository.board.BoardImgRepository;
 import bitcopark.library.repository.board.BoardRepository;
+import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,18 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final BoardImgRepository boardImgRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
-    public Board writePost(Member member, String title, String content, SecretFlag secretFlag, Category category){
-        Board board = Board.builder()
-                .member(member)
-                .title(title)
-                .content(content)
-                .secretFlag(secretFlag)
-                .category(category)
-                .build();
-        boardRepository.save(board);
-        return board;
+    public Board writePost(LoginResponseDTO memberDTO, BoardRequestDTO boardRequestDTO, Category category){
+        Member member = memberRepository.findById(memberDTO.getId()).orElseThrow(() -> new IllegalArgumentException("not found member" + memberDTO.getId()));
+
+        return boardRepository.save(boardRequestDTO.toEntity(member,category));
     }
 
     // AOP같은 로직을 통한 인증 필요
@@ -45,5 +42,18 @@ public class BoardService {
 
     public Page<Board> selectBoardList(Long id, Pageable pageable) {
         return boardRepository.findByCategoryId(id, pageable);
+    }
+
+    public BoardImg insertBoardImg(Board board, String originalName, int orderImg) {
+        BoardImg boardImg = BoardImg.builder()
+                .originalImg(originalName)
+                .board(board)
+                .orderImg(orderImg)
+                .build();
+
+        boardImg.createRenameImg();
+        boardImgRepository.save(boardImg);
+
+        return boardImg;
     }
 }
