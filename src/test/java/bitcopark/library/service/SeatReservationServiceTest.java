@@ -4,7 +4,7 @@ import bitcopark.library.entity.librarySeatBooking.SeatReservation;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
-import bitcopark.library.repository.LibrarySeatBooking.SeatReservationRepository;
+import bitcopark.library.repository.librarySeatBooking.SeatReservationRepository;
 import bitcopark.library.service.LibrarySeatBooking.SeatReservationService;
 import bitcopark.library.service.Member.MemberService;
 import org.assertj.core.api.Assertions;

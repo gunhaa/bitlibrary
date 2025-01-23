@@ -2,7 +2,7 @@ package bitcopark.library.service.Board;
 
 import bitcopark.library.entity.board.Board;
 import bitcopark.library.entity.board.BoardImg;
-import bitcopark.library.repository.Board.BoardImgRepository;
+import bitcopark.library.repository.board.BoardImgRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

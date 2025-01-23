@@ -7,7 +7,7 @@ import bitcopark.library.entity.board.SecretFlag;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
-import bitcopark.library.repository.Board.BoardImgRepository;
+import bitcopark.library.repository.board.BoardImgRepository;
 import bitcopark.library.service.Member.MemberService;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;

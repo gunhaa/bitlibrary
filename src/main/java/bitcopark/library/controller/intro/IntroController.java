@@ -2,11 +2,8 @@ package bitcopark.library.controller.intro;
 
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.categoryStrategy.CategoryRouter;
-import bitcopark.library.categoryStrategy.CategoryStrategy;
-import bitcopark.library.categoryStrategy.CategoryStrategyFactory;
-import bitcopark.library.controller.util.ControllerUtils;
 import bitcopark.library.controller.util.ControllerUtils.CategoryRouterResult;
-import bitcopark.library.repository.Board.CategoryRepository;
+import bitcopark.library.repository.board.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

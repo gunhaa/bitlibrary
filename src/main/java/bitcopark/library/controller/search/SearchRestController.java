@@ -3,7 +3,7 @@ package bitcopark.library.controller.search;
 import bitcopark.library.controller.book.BookRequestCondition;
 import bitcopark.library.controller.book.BookRequestResponseDto;
 import bitcopark.library.controller.book.BookSearchDetailCondition;
-import bitcopark.library.repository.Book.BookSearchCondition;
+import bitcopark.library.repository.book.BookSearchCondition;
 import bitcopark.library.service.Book.*;
 import bitcopark.library.service.Book.BookRequestService;
 import lombok.RequiredArgsConstructor;

@@ -3,7 +3,7 @@ package bitcopark.library.service.Board;
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.entity.board.Category;
 import bitcopark.library.exception.CategoryNotFoundException;
-import bitcopark.library.repository.Board.CategoryRepository;
+import bitcopark.library.repository.board.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

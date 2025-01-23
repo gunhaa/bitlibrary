@@ -7,7 +7,7 @@ import bitcopark.library.entity.book.BookSupple;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
-import bitcopark.library.repository.Book.BookLikeRepository;
+import bitcopark.library.repository.book.BookLikeRepository;
 import bitcopark.library.service.Member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

@@ -7,7 +7,7 @@ import bitcopark.library.entity.board.SecretFlag;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
-import bitcopark.library.repository.Class.ClassApplicantRepository;
+import bitcopark.library.repository.clazz.ClassApplicantRepository;
 import bitcopark.library.service.Board.BoardService;
 import bitcopark.library.service.Board.CategoryService;
 import bitcopark.library.service.Member.MemberService;

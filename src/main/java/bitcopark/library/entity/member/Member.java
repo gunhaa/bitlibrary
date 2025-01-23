@@ -27,7 +27,6 @@ public class Member extends BaseAuditEntity {
     @Column(name = "member_id")
     private Long id;
     private String email;
-    private String password;
     private String name;
     private String phoneNumber;
 
@@ -42,8 +41,7 @@ public class Member extends BaseAuditEntity {
     @Enumerated(STRING)
     private MemberDelFlag delFlag;
 
-    @Enumerated(STRING)
-    private MemberAuthority authority;
+    private String authority;
 
     @OneToMany(mappedBy = "member", orphanRemoval = true)
     //    @Builder.Default
@@ -72,38 +70,47 @@ public class Member extends BaseAuditEntity {
     @OneToMany(mappedBy = "member", orphanRemoval = true)
     private List<BookRequest> bookRequestList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", orphanRemoval = true)
+    private List<BookLike> bookLikeList = new ArrayList<>();
+
+
+    public static Member createOAuth2Member(String email, String name, String authority) {
+        Member member = new Member();
+        member.email = email;
+        member.name = name;
+        member.delFlag = MemberDelFlag.N;
+        member.authority = authority;
+
+        return member;
+    }
+
     // member/admin만 파라미터로 받아서 하나의 메서드로 통합
-    public static Member createMember(String email, String password, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address) {
+    public static Member createMember(String email, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address) {
         Member member = new Member();
         member.email = email;
-        member.password = password;
         member.name = name;
         member.phoneNumber = phoneNumber;
         member.gender = gender;
         member.birthDate = birthDate;
         member.address = address;
         member.delFlag = MemberDelFlag.N;
-        member.authority = MemberAuthority.MEMBER;
+        member.authority = "ROLE_USER";
 
         return member;
     }
 
-    public static Member createAdmin(String email, String password, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address) {
+    public static Member createAdmin(String email, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address) {
         Member member = new Member();
         member.email = email;
-        member.password = password;
         member.name = name;
         member.phoneNumber = phoneNumber;
         member.gender = gender;
         member.birthDate = birthDate;
         member.address = address;
         member.delFlag = MemberDelFlag.N;
-        member.authority = MemberAuthority.ADMIN;
+        member.authority = "ROLE_ADMIN";
 
         return member;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

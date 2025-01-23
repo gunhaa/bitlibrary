@@ -37,46 +37,46 @@ public class MemberController {
         return "member/login";
     }
 
-    @PostMapping("/login")
-    public String login(LoginRequestDTO inputMember,
-                        Model model,
-                        @RequestHeader(value = "referer") String referer,
-                        @RequestParam(value = "saveId", required = false) String saveId,
-                        HttpServletResponse resp,
-                        RedirectAttributes ra) {
-
-        Optional<LoginResponseDTO> loginResponse = memberService.login(inputMember);
-
-        if (loginResponse.isEmpty()) {
-            ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다");
-            return "redirect:" + referer;
-        }
-
-        LoginResponseDTO loginMember = loginResponse.get();
-
-        if (loginMember.getDelFlag() == MemberDelFlag.Y) {
-            ra.addFlashAttribute("message", "탈퇴된 회원입니다");
-            return "redirect:" + referer;
-        }
-
-        model.addAttribute("loginMember", loginMember);
-
-        setLoginCookie(resp, loginMember.getEmail(), saveId);
-
-        ra.addFlashAttribute("message", "로그인 성공!!");
-        return "redirect:/";
-    }
-
-    private void setLoginCookie(HttpServletResponse resp, String memberEmail, String saveId) {
-        Cookie cookie = new Cookie("saveId", memberEmail);
-
-        if (saveId != null) {
-            cookie.setMaxAge(60 * 60 * 24 * 30);
-        } else {
-            cookie.setMaxAge(0);
-        }
-
-        cookie.setPath("/");
-        resp.addCookie(cookie);
-    }
+//    @PostMapping("/login")
+//    public String login(LoginRequestDTO inputMember,
+//                        Model model,
+//                        @RequestHeader(value = "referer") String referer,
+//                        @RequestParam(value = "saveId", required = false) String saveId,
+//                        HttpServletResponse resp,
+//                        RedirectAttributes ra) {
+//
+//        Optional<LoginResponseDTO> loginResponse = memberService.login(inputMember);
+//
+//        if (loginResponse.isEmpty()) {
+//            ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다");
+//            return "redirect:" + referer;
+//        }
+//
+//        LoginResponseDTO loginMember = loginResponse.get();
+//
+//        if (loginMember.getDelFlag() == MemberDelFlag.Y) {
+//            ra.addFlashAttribute("message", "탈퇴된 회원입니다");
+//            return "redirect:" + referer;
+//        }
+//
+//        model.addAttribute("loginMember", loginMember);
+//
+//        setLoginCookie(resp, loginMember.getEmail(), saveId);
+//
+//        ra.addFlashAttribute("message", "로그인 성공!!");
+//        return "redirect:/";
+//    }
+//
+//    private void setLoginCookie(HttpServletResponse resp, String memberEmail, String saveId) {
+//        Cookie cookie = new Cookie("saveId", memberEmail);
+//
+//        if (saveId != null) {
+//            cookie.setMaxAge(60 * 60 * 24 * 30);
+//        } else {
+//            cookie.setMaxAge(0);
+//        }
+//
+//        cookie.setPath("/");
+//        resp.addCookie(cookie);
+//    }
 }

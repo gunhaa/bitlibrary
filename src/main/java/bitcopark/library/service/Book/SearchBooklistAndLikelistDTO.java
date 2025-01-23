@@ -1,7 +1,7 @@
 package bitcopark.library.service.Book;
 
-import bitcopark.library.repository.Book.BookLikeDto;
-import bitcopark.library.repository.Book.BookSearchDto;
+import bitcopark.library.repository.book.BookLikeDto;
+import bitcopark.library.repository.book.BookSearchDto;
 import lombok.Data;
 
 import java.util.List;

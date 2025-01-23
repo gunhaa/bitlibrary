@@ -7,7 +7,7 @@ import bitcopark.library.entity.board.SecretFlag;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
-import bitcopark.library.repository.Board.ReplyRepository;
+import bitcopark.library.repository.board.ReplyRepository;
 import bitcopark.library.service.Member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

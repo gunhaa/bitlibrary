@@ -3,11 +3,14 @@ package bitcopark.library.service.Member;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
-import bitcopark.library.repository.Member.MemberRepository;
+import bitcopark.library.repository.member.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -42,7 +45,7 @@ class MemberServiceTest {
         String name = "member1";
         String phoneNumber = "01012345678";
         MemberGender gender = MemberGender.MALE;
-        int birth = 911111;
+        LocalDate birth = LocalDate.now();
         String zipcode = "12345";
         String detailed = "D동";
         Address address = new Address(zipcode, detailed);
