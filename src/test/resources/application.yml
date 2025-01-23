@@ -1,12 +1,6 @@
 spring:
   profiles:
     active: test
-#  mvc:
-#    pathmatch:
-#     use-trailing-slash-match: true
-       #  mvc:
-       #    pathmatch:
-      #      matching-strategy: ant_path_matcher
   thymeleaf:
     cache: false
   datasource:
