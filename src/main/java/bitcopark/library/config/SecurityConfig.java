@@ -3,6 +3,7 @@ package bitcopark.library.config;
 import bitcopark.library.jwt.JwtFilter;
 import bitcopark.library.jwt.JwtUtil;
 import bitcopark.library.oauth2.CustomFailHandler;
+import bitcopark.library.oauth2.CustomLogoutFilter;
 import bitcopark.library.oauth2.CustomOAuth2UserService;
 import bitcopark.library.oauth2.CustomSuccessHandler;
 import bitcopark.library.repository.jwt.RefreshRepository;
@@ -26,6 +27,7 @@ public class SecurityConfig {
     private final CustomFailHandler customFailHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final RefreshRepository refreshRepository;
+    private final CustomLogoutFilter customLogoutFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
