@@ -2,7 +2,10 @@ package bitcopark.library.config;
 
 import bitcopark.library.jwt.JwtFilter;
 import bitcopark.library.jwt.JwtUtil;
+import bitcopark.library.oauth2.CustomFailHandler;
+import bitcopark.library.oauth2.CustomOAuth2UserService;
 import bitcopark.library.oauth2.CustomSuccessHandler;
+import bitcopark.library.repository.jwt.RefreshRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +23,9 @@ public class SecurityConfig {
 
     private final JwtUtil jwtUtil;
     private final CustomSuccessHandler customSuccessHandler;
+    private final CustomFailHandler customFailHandler;
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final RefreshRepository refreshRepository;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

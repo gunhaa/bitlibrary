@@ -1,10 +1,8 @@
 package bitcopark.library.oauth2;
 
 import bitcopark.library.entity.jwt.RefreshToken;
-import bitcopark.library.entity.member.Member;
 import bitcopark.library.jwt.JwtUtil;
 import bitcopark.library.repository.jwt.RefreshRepository;
-import bitcopark.library.repository.member.MemberRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +25,6 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
     private final JwtUtil jwtUtil;
     private final RefreshRepository refreshRepository;
-    private final MemberRepository memberRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -47,13 +43,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         saveRefreshToken(username, email, refresh, 86400000L);
 
-        // 로그인 성공시 가입이 안된 이메일이라면 가입시킨다.
-        boolean isExist = memberRepository.existsByEmail(email);
 
-        if(!isExist){
-            Member oAuth2Member = Member.createOAuth2Member(email, username);
-            memberRepository.save(oAuth2Member);
-        }
 
         response.setHeader("access", access);
         response.addCookie(createCookie("refresh", refresh));

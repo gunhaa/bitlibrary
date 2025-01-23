@@ -42,7 +42,7 @@ public class Member extends BaseAuditEntity {
     private MemberDelFlag delFlag;
 
     @Enumerated(STRING)
-    private MemberAuthority authority;
+    private String authority;
 
     @OneToMany(mappedBy = "member", orphanRemoval = true)
     //    @Builder.Default
@@ -72,12 +72,12 @@ public class Member extends BaseAuditEntity {
     private List<BookRequest> bookRequestList = new ArrayList<>();
 
 
-    public static Member createOAuth2Member(String email, String name) {
+    public static Member createOAuth2Member(String email, String name, String authority) {
         Member member = new Member();
         member.email = email;
         member.name = name;
         member.delFlag = MemberDelFlag.N;
-        member.authority = MemberAuthority.MEMBER;
+        member.authority = authority;
 
         return member;
     }
@@ -92,7 +92,7 @@ public class Member extends BaseAuditEntity {
         member.birthDate = birthDate;
         member.address = address;
         member.delFlag = MemberDelFlag.N;
-        member.authority = MemberAuthority.MEMBER;
+        member.authority = "ROLE_USER";
 
         return member;
     }
@@ -106,7 +106,7 @@ public class Member extends BaseAuditEntity {
         member.birthDate = birthDate;
         member.address = address;
         member.delFlag = MemberDelFlag.N;
-        member.authority = MemberAuthority.ADMIN;
+        member.authority = "ROLE_ADMIN";
 
         return member;
     }
