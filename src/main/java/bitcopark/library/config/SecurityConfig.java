@@ -27,7 +27,6 @@ public class SecurityConfig {
     private final CustomFailHandler customFailHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final RefreshRepository refreshRepository;
-    private final CustomLogoutFilter customLogoutFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

@@ -51,8 +51,8 @@ public class MemberService {
         }
     }
 
-    public Optional<LoginResponseDTO> login(LoginRequestDTO request) {
-        return memberRepository.findByEmailAndPassword(request.getEmail(), request.getPassword())
-                .map(LoginResponseDTO::new);
-    }
+//    public Optional<LoginResponseDTO> login(LoginRequestDTO request) {
+//        return memberRepository.findByEmailAndPassword(request.getEmail(), request.getPassword())
+//                .map(LoginResponseDTO::new);
+//    }
 }

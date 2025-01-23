@@ -41,7 +41,6 @@ public class Member extends BaseAuditEntity {
     @Enumerated(STRING)
     private MemberDelFlag delFlag;
 
-    @Enumerated(STRING)
     private String authority;
 
     @OneToMany(mappedBy = "member", orphanRemoval = true)
@@ -70,6 +69,9 @@ public class Member extends BaseAuditEntity {
 
     @OneToMany(mappedBy = "member", orphanRemoval = true)
     private List<BookRequest> bookRequestList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", orphanRemoval = true)
+    private List<BookLike> bookLikeList = new ArrayList<>();
 
 
     public static Member createOAuth2Member(String email, String name, String authority) {

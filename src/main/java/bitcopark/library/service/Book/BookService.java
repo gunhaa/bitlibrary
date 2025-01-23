@@ -57,8 +57,6 @@ public class BookService {
 
     public Book findBookByTitleOrThrow(String title) {
         return bookRepository.findByTitle(title)
-                // client exception 발생시 로그를 남겨, 그 파일을 남기는 방식을 찾을 것
-                // 이건 찾아봐야할듯
                 .orElseThrow(() -> new BookTitleNotFoundException("책 제목을 찾을 수 없습니다: " + title));
     }
 

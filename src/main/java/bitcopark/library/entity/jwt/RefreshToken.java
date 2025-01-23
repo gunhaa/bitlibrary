@@ -1,5 +1,6 @@
 package bitcopark.library.entity.jwt;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -20,6 +21,8 @@ public class RefreshToken {
 
     private String username;
     private String email;
+
+    @Column(length = 400)
     private String refreshToken;
     private String expiration;
 

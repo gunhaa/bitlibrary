@@ -27,7 +27,7 @@ public class LoginResponseDTO {
         this.phoneNumber = member.getPhoneNumber();
         this.birthDate = member.getBirthDate();
         this.address = member.getAddress();
-        this.authority = member.getAuthority();
+//        this.authority = member.getAuthority();
         this.delFlag = member.getDelFlag();
     }
 }

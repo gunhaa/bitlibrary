@@ -17,7 +17,7 @@ public interface BookLikeRepository extends JpaRepository<BookLike, Long> {
     @Modifying
     void deleteByMemberAndBook(Member member, Book book);
 
-    @Query("select new bitcopark.library.repository.Book.BookLikeDto(b.isbn) from BookLike bl join bl.book b where bl.member.id = :memberId")
+    @Query("select new bitcopark.library.repository.book.BookLikeDto(b.isbn) from BookLike bl join bl.book b where bl.member.id = :memberId")
     List<BookLikeDto> findBookLikeListByMemberId(@Param("memberId") Long MemberId);
 
 }
