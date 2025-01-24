@@ -33,7 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
         } catch(ExpiredJwtException e){
             PrintWriter writer = response.getWriter();
             writer.print("access token expired");
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
 

@@ -21,7 +21,7 @@ import java.util.Iterator;
 
 @Component
 @RequiredArgsConstructor
-public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final JwtUtil jwtUtil;
     private final RefreshRepository refreshRepository;
@@ -43,15 +43,22 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         saveRefreshToken(username, email, refresh, 86400000L);
 
-        response.setHeader("access", access);
-        response.addCookie(createCookie("refresh", refresh));
+        response.addCookie(createAccessCookie("access", access));
+        response.addCookie(createRefreshCookie("refresh", refresh));
         response.setStatus(HttpStatus.OK.value());
 
         response.sendRedirect("http://localhost:8080/");
 
     }
 
-    private Cookie createCookie(String key, String value) {
+    private Cookie createAccessCookie(String key, String value){
+        Cookie cookie = new Cookie(key, value);
+        cookie.setMaxAge(600);
+        cookie.setPath("/");
+        return cookie;
+    }
+
+    private Cookie createRefreshCookie(String key, String value) {
         Cookie cookie = new Cookie(key, value);
         cookie.setMaxAge(24*60*60);
         cookie.setPath("/");
