@@ -1,5 +1,6 @@
 package bitcopark.library.entity.jwt;
 
+import bitcopark.library.entity.audit.CreatedAuditEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RefreshToken {
+public class RefreshToken extends CreatedAuditEntity {
 
     @GeneratedValue
     @Id
