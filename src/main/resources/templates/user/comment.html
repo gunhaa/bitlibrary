@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="commentArea">
+        <div class="comment-list-area">
+            <ul th:each="comment : ${board.commentList}" id="commentList">
+                <li class="comment-row">
+                    <p class="comment-writer">
+                        <span>${comment.memberName}</span>
+                        <span class="comment-date">${comment.commentCreateDate}</span>
+                    </p>
+
+                    <p class="comment-content">${comment.commentContent}</p>
+
+                    <div th:if="${session.loginMember.id == comment.memberNo}" class="comment-btn-area">
+                        <button onclick="showUpdateComment(${comment.commentNo}, this)">수정</button>
+                        <button onclick="deleteComment(${comment.commentNo})">삭제</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <%-- 문의사항 : 관리자만 보임 --%> >
+        <th:block th:if="${cateCode == 16 and session.loginMember.autority.toString() == 'ADMIN'}">
+            <div class="comment-write-area">
+                <textarea id="commentContent"></textarea>
+                <button id="commentAdd">등록</button>
+            </div>
+        </th:block>
+        <th:block th:unless="${cateCode == 16 and session.loginMember.autority.toString() == 'ADMIN'}">
+            <div class="comment-write-area">
+                <textarea id="commentContent"></textarea>
+                <button id="commentAdd">등록</button>
+            </div>
+        </th:block>
+    </div>
+</body>
+</html>
+
+
