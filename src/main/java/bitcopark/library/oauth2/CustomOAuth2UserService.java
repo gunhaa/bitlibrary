@@ -33,17 +33,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             return null;
         }
 
-        String username = oAuth2Response.getProvider()+" "+oAuth2Response.getProviderId();
+        String name = oAuth2Response.getProvider()+" "+oAuth2Response.getProviderId();
         String email = oAuth2Response.getEmail();
 
-        // 로그인 성공시 가입이 안된 이메일이라면 가입시킨다.
-        boolean isExist = memberRepository.existsByEmail(email);
+        // 로그인 성공시 가입이 안된 name이면 가입시킨다.
+        boolean isExist = memberRepository.existsByName(name);
 
         if(!isExist){
-            Member oAuth2Member = Member.createOAuth2Member(email, username, "ROLE_USER");
+            Member oAuth2Member = Member.createOAuth2Member(email, name, "ROLE_USER");
             memberRepository.save(oAuth2Member);
         }
 
-        return new CustomOAuth2User(new MemberDto(email,username,"ROLE_USER"));
+        return new CustomOAuth2User(new MemberDto(email,name,"ROLE_USER"));
     }
 }

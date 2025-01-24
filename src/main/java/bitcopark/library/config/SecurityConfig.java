@@ -2,10 +2,10 @@ package bitcopark.library.config;
 
 import bitcopark.library.jwt.JwtFilter;
 import bitcopark.library.jwt.JwtUtil;
-import bitcopark.library.oauth2.CustomFailHandler;
+import bitcopark.library.oauth2.CustomLoginFailHandler;
 import bitcopark.library.oauth2.CustomLogoutFilter;
 import bitcopark.library.oauth2.CustomOAuth2UserService;
-import bitcopark.library.oauth2.CustomSuccessHandler;
+import bitcopark.library.oauth2.CustomLoginSuccessHandler;
 import bitcopark.library.repository.jwt.RefreshRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,8 +23,8 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 public class SecurityConfig {
 
     private final JwtUtil jwtUtil;
-    private final CustomSuccessHandler customSuccessHandler;
-    private final CustomFailHandler customFailHandler;
+    private final CustomLoginSuccessHandler customLoginSuccessHandler;
+    private final CustomLoginFailHandler customLoginFailHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final RefreshRepository refreshRepository;
 
@@ -49,11 +49,11 @@ public class SecurityConfig {
         });
 
         http.oauth2Login((oauth2) ->
-                oauth2.loginPage("/login")
+                oauth2.loginPage("/")
                         .userInfoEndpoint((userInfoEndpointConfig) ->
                                 userInfoEndpointConfig.userService(customOAuth2UserService))
-                        .successHandler(customSuccessHandler)
-                        .failureHandler(customFailHandler)
+                        .successHandler(customLoginSuccessHandler)
+                        .failureHandler(customLoginFailHandler)
                 );
 
 
