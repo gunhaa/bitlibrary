@@ -49,7 +49,7 @@ public class UserController {
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
         // logic
-        Category category = categoryService.getIdByEngName(catLevel2);
+        Category category = categoryService.getCategoryEngName(catLevel2);
         // pagination
         Page<Board> boardPage = boardService.selectBoardList(category.getId(), pageable);
 
@@ -69,7 +69,7 @@ public class UserController {
 
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
-        Category category = categoryService.getIdByEngName(catLevel2);
+        Category category = categoryService.getCategoryEngName(catLevel2);
 
         model.addAttribute("cateEngName", category.getCategoryEngName());
 
@@ -91,7 +91,7 @@ public class UserController {
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
         // logic
-        Category category = categoryService.getIdByEngName(catLevel2);
+        Category category = categoryService.getCategoryEngName(catLevel2);
         model.addAttribute("cateCode", category.getId());
 
         Board board = boardService.writePost(loginMember, boardRequestDTO, category);
