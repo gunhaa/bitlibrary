@@ -8,21 +8,6 @@
 
 <body>
   <section class="main-login-area" th:fragment="mainLogin">
-    <!-- 로그인 안 됐을 때 -->
-<!--    <div th:if="${empty loginMember}">-->
-<!--      <article class="main-login-title">회원 로그인</article>-->
-<!--      <form action="/member/login" method="POST" class="main-login-form">-->
-<!--        &lt;!&ndash; 아이디 입력 (쿠키값을 사용하여 자동 입력) &ndash;&gt;-->
-<!--&lt;!&ndash;        <input type="text" name="memberEmail" placeholder="아이디 입력" th:value="${#cookies.saveId.value}" />&ndash;&gt;-->
-<!--        <input type="text" name="email" placeholder="아이디 입력"/>-->
-<!--        <input type="password" name="password" placeholder="비밀번호 입력" />-->
-
-<!--        <div class="main-saveId">-->
-<!--          &lt;!&ndash; 아이디 저장 체크박스 (쿠키 값이 있을 경우 checked) &ndash;&gt;-->
-<!--&lt;!&ndash;          <input type="checkbox" name="saveId" id="saveId" th:checked="${#strings.isNotEmpty(#cookies.saveId.value)}" />&ndash;&gt;-->
-<!--          <input type="checkbox" name="saveId" id="saveId" th:checked="${saveId != null}"/>-->
-<!--          <label for="saveId">아이디 저장</label>-->
-<!--        </div>-->
 
         <a href="/oauth2/authorization/google" class="main-login-btn-area">
           <img src="/images/login/google_login.png" class="loginBtn">
@@ -32,14 +17,6 @@
           <img src="/images/login/naver_login.png" class="loginBtn">
         </a>
 
-<!--        <div class="main-my-area">-->
-<!--          <a href="/member/findId"><span>ID 찾기</span></a>-->
-<!--          <span>|</span>-->
-<!--          <a href="/oauth2/authorization/google"><span>구글 로그인</span></a>-->
-<!--          <span>|</span>-->
-<!--          <a href="/oauth2/authorization/naver"><span>네이버 로그인</span></a>-->
-<!--        </div>-->
-      </form>
     <!--    임시 주석-->
 
     <!-- 로그인 됐을 때 -->

@@ -23,7 +23,7 @@ public class RefreshToken extends CreatedAuditEntity {
     private String username;
     private String email;
 
-    @Column(length = 400)
+    @Column(length = 300)
     private String refreshToken;
     private String expiration;
 
