@@ -21,6 +21,7 @@ public class StudyRestController {
     private final BookReservationService bookReservationService;
     private final SeatReservationService seatReservationService;
     private final ClassApplicantService classApplicantService;
+    private final BookLikeService bookLikeService;
 
     @DeleteMapping("/reservation/book/{id}")
     public ResponseEntity<Void> cancelBookReservation(@PathVariable Long id, Principal principal) {
@@ -37,6 +38,12 @@ public class StudyRestController {
     @DeleteMapping("/applicant/class/{id}")
     public ResponseEntity<Void> cancelClassApplicant(@PathVariable Long id, Principal principal) {
         classApplicantService.delete(id, principal.getName());
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/like/book/{id}")
+    public ResponseEntity<Void> cancelBookLike(@PathVariable Long id, Principal principal) {
+        bookLikeService.delete(id, principal.getName());
         return ResponseEntity.ok().build();
     }
 }

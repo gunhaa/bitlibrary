@@ -54,6 +54,17 @@ public class BookLikeService {
         return new Result(findMember, findBook);
     }
 
+    @Transactional
+    public void delete(Long id, String email) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("not found member: " + id));
+
+        BookLike bookLike = bookLikeRepository.findByIdAndMember(id, member)
+                .orElseThrow(() -> new IllegalArgumentException("not found bookLike: " + id));
+
+        bookLikeRepository.delete(bookLike);
+    }
+
     private record Result(Member findMember, Book findBook) {
     }
 
