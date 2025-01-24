@@ -2,7 +2,7 @@ package bitcopark.library.categoryStrategy;
 
 import bitcopark.library.aop.CategoryDTO;
 
-public class MyLibraryStrategy implements CategoryStrategy {
+public class StudyStrategy implements CategoryStrategy {
     @Override
     public String routing(CategoryDTO categoryLevel3) {
         return switch (categoryLevel3.getCategoryName()) {

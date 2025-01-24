@@ -43,4 +43,15 @@ public class BookReservationService {
         registerBookReservation(findMember, findBook);
         return ReservationStatus.SUCCESS;
     }
+
+    @Transactional
+    public void delete(Long id, String email) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("not found member: " + id));
+
+        BookReservation bookReservation = bookReservationRepository.findByIdAndMember(id, member)
+                .orElseThrow(() -> new IllegalArgumentException("not found bookReservation: " + id));
+
+        bookReservationRepository.delete(bookReservation);
+    }
 }

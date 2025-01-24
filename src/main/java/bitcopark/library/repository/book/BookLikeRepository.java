@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookLikeRepository extends JpaRepository<BookLike, Long> {
 
@@ -20,4 +21,5 @@ public interface BookLikeRepository extends JpaRepository<BookLike, Long> {
     @Query("select new bitcopark.library.repository.book.BookLikeDto(b.isbn) from BookLike bl join bl.book b where bl.member.id = :memberId")
     List<BookLikeDto> findBookLikeListByMemberId(@Param("memberId") Long MemberId);
 
+    Optional<BookLike> findByIdAndMember(Long id, Member member);
 }
