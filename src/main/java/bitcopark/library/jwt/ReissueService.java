@@ -21,6 +21,7 @@ public class ReissueService {
 
     private final JwtUtil jwtUtil;
     private final RefreshRepository refreshRepository;
+    private final RefreshTokenBlackListRepository refreshTokenBlackListRepository;
 
     @Transactional
     public ResponseEntity<?> verifyAndReissueRefreshToken(HttpServletRequest request, HttpServletResponse response){
