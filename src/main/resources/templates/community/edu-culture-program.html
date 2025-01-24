@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library - 교육문화 프로그램</title>
+
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/common/sideMenu.css">
+    <link rel="stylesheet" href="/css/scheduling/class-board.css">
+    <link rel="stylesheet" href="/css/scheduling/modal.css">
+    <script src="https://kit.fontawesome.com/f4e088b372.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div th:replace="~{common/header :: header}"></div>
+
+<section class="main-content-suround-section">
+    <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
+
+    <!-- 공지사항 목록 -->
+    <section class="content-suround-section">
+        <div class="content-title">교육문화 프로그램</div>
+        <div class="title-line"></div>
+
+        <!-- 검색창 -->
+        <form action="${cateCode}" method="get" id="boardSearch">
+            <div class="search-area">
+                <select name="key" id="searchKey">
+                    <option value="t">제목</option>
+                    <option value="c">내용</option>
+                    <option value="tc">제목+내용</option>
+                </select>
+
+                <input type="text" name="query" id="query" placeholder="검색어 입력">
+
+                <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </form>
+
+        <!-- 게시글 목록 -->
+        <section class="board-list">
+            <div class="list-wrapper">
+                <table class="list-table">
+                    <thead>
+                    <tr>
+                        <th>상태</th>
+                        <th>제목</th>
+                        <th>모집기간</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <!-- 게시글 조회 시 글 목록 존재 X -->
+                        <th:block th:if="${#lists.isEmpty(boardPage.content)}">
+                            <tr>
+                                <th colspan="5">게시글이 존재하지 않습니다.</th>
+                            </tr>
+                        </th:block>
+
+                        <th:block th:unless="${#lists.isEmpty(boardPage.content)}">
+                            <tr th:each="board : ${boardPage.content}">
+                                <th:block th:if="${applicantCount >= board.classSchedule.maxParticipants}">
+                                    <td>인원마감</td>
+                                </th:block>
+                                <th:block th:if="${applicantCount < board.classSchedule.maxParticipants}">
+                                    <th:block th:if="${sysdate < board.classSchedule.recruitmentStartDt}">
+                                        <td>신청대기</td>
+                                    </th:block>
+                                    <th:block th:if="${sysdate >= board.classSchedule.recruitmentStartDt and sysdate < board.classSchedule.recruitmentEndDt}">
+                                        <td>신청가능</td>
+                                    </th:block>
+                                    <th:block th:if="${sysdate >= board.classSchedule.recruitmentEndDt}">
+                                        <td>기간마감</td>
+                                    </th:block>
+                                </th:block>
+                                <td>
+                                    <a href="/community/${cateEngName}/${board.id}(cp=${boardPage.getPageNumber()}, key=${keyword}, query=${query})">${classBoard.boardTitle}</a>
+                                </td>
+                                <td>${classBoard.recruitmentStartDt} ~ ${classBoard.recruitmentEndDt}</td>
+                            </tr>
+                        </th:block>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 관리자에게만 보이는 글쓰기 버튼 -->
+            <div th:if="${session.loginMember != null and session.loginMember.authority.toString == 'ADMIN'}" class="btn-area">
+                <button id="writeBtn">글쓰기</button>
+            </div>
+
+            <!-- pagination -->
+            <div th:unless="${#lists.isEmpty(boardPage.content)}" class="pagination-area">
+                <ul class="pagination">
+                    <!-- 첫 페이지로 이동 : << -->
+                    <li><a th:href="@{${boardPage.firstPageable().toUri()}}">&lt;&lt;</a></li>
+
+                    <!-- 이전 목록 마지막 페이지로 이동 : < -->
+                    <li>
+                        <a th:if="${boardPage.hasPrevious()}"
+                           th:href="@{${boardPage.previousPageable().toUri()}}"
+                           th:remove="${!boardPage.hasPrevious()}">&lt;</a>
+                    </li>
+
+                    <!-- 특정 페이지로 이동 -->
+                    <th:block th:each="i : ${#numbers.sequence(0, boardPage.totalPages - 1)}">
+                        <th:block th:if="${i == boardPage.number}">
+                            <!-- 현재 페이지 -->
+                            <li><a class="current" th:text="${i + 1}"></a></li>
+                        </th:block>
+                        <th:block th:if="${i != boardPage.number}">
+                            <!-- 현재 페이지 제외한 나머지 -->
+                            <li>
+                                <a th:href="@{/board?page=${i}}" th:text="${i + 1}"></a>
+                            </li>
+                        </th:block>
+                    </th:block>
+
+                    <!-- 다음 목록 시작 페이지로 이동 : > -->
+                    <li>
+                        <a th:if="${boardPage.hasNext()}"
+                           th:href="@{${boardPage.nextPageable().toUri()}}"
+                           th:remove="${!boardPage.hasNext()}">&gt;</a>
+                    </li>
+
+                    <!-- 마지막 페이지로 이동 : >> -->
+                    <li><a th:href="@{${boardPage.lastPageable().toUri()}}">&gt;&gt;</a></li>
+                </ul>
+            </div>
+
+        </section>
+    </section>
+</section>
+
+<div th:replace="~{common/footer :: footer}"></div>
+
+<script src="/js/scheduling/class-board.js"></script>
+
+</body>
+
+</html>

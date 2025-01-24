@@ -2,9 +2,9 @@ package bitcopark.library.categoryStrategy;
 
 import bitcopark.library.aop.CategoryDTO;
 
-public class SeminarRoom implements CategoryStrategy{
+public class ReadingRoomStrategy implements CategoryStrategy{
     @Override
     public String routing(CategoryDTO categoryLevel3) {
-        return "community/seminar-room";
+        return "community/reading-room";
     }
 }

@@ -66,13 +66,13 @@
                             <td>${board.boardNo}</td>
                             <td>
                                 <i th:if="${board.boardSecretFlag == 'Y'}" class="fa-solid fa-lock"></i>
-                                <a href="/user/${cateCode}/${board.boardNo}(cp=${boardPage.getPageNumber()}, keyword=${keyword}, query=${query})">${board.boardTitle}</a>
+                                <a href="/user/${cateCode}/${board.id}(cp=${boardPage.getPageNumber()}, keyword=${keyword}, query=${query})">${board.boardTitle}</a>
                                 <span th:if="${cateCode == 16 || cateCode == 18}">
                                     [${board.commentCount}]
                                 </span>
                             </td>
                             <td>
-                                <span th:if="${cateCode == 16}" th:text="${board.memberName.substring(0, 1) + '*' + board.memberName.substring(board.memberName.length())}"></span>
+                                <span th:if="${cateCode == 16}" th:text="${board.member.name.substring(0, 1) + '*' + board.member.name.substring(board.memberName.length())}"></span>
                                 <span th:unless="${cateCode == 16}">${board.memberName}</span>
                             </td>
                             <td>

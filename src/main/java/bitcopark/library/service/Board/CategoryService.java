@@ -76,7 +76,7 @@ public class CategoryService {
         return firstCategoryId;
     }
 
-    public Category getIdByEngName(String engName) {
+    public Category getCategoryEngName(String engName) {
         return categoryRepository.findByCategoryEngName(engName).orElseThrow(() -> new CategoryNotFoundException("존재하지 않는 카테고리 입니다  : " + engName));
     }
 }

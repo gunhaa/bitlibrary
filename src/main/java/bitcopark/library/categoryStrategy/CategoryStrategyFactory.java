@@ -16,6 +16,9 @@ public class CategoryStrategyFactory {
             case "문의사항" -> new InquiriesStrategy();
             case "자주 묻는 질문" -> new FaqStrategy();
             case "책 후기 나눠요" -> new BookReviewStrategy();
+            case "교육문화 프로그램" -> new EduCultureProgramStrategy();
+            case "열람실" -> new ReadingRoomStrategy();
+            case "세미나실" -> new SeminarRoomStrategy();
             default -> new MainStrategy();
         };
     }
