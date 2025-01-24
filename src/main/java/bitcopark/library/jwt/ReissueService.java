@@ -1,6 +1,7 @@
 package bitcopark.library.jwt;
 
 import bitcopark.library.entity.jwt.RefreshToken;
+import bitcopark.library.entity.jwt.RefreshTokenBlackList;
 import bitcopark.library.repository.jwt.RefreshRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
@@ -70,8 +71,11 @@ public class ReissueService {
         refreshRepository.deleteByRefreshToken(refreshToken);
         saveRefreshToken(username, newRefresh, email, 86400000L);
 
-        // 스케줄 작업을 통해 만료시간이 지난 토큰은 주기적으로 삭제하는 것을 추가 구현해야한다.
-        // 서버측에서 발급했던 Refresh들을 기억한 뒤 블랙리스트 처리를 진행하는 로직을 작성해야 한다.
+        RefreshTokenBlackList refreshTokenBlackList = RefreshTokenBlackList.createRefreshTokenBlackList(refreshToken);
+        refreshTokenBlackListRepository.save(refreshTokenBlackList);
+
+        // 스케줄 작업을 통해 만료시간이 지난 토큰은 주기적으로 삭제하는 것을 추가 구현해야한다
+
 
         response.addCookie(createCookie("refreshToken", newRefresh));
         response.setHeader("access", newAccess);
