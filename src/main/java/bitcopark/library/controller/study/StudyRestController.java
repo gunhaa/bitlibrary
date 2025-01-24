@@ -19,10 +19,17 @@ import java.security.Principal;
 public class StudyRestController {
 
     private final BookReservationService bookReservationService;
+    private final SeatReservationService seatReservationService;
 
     @DeleteMapping("/reservation/book/{id}")
     public ResponseEntity<Void> cancelBookReservation(@PathVariable Long id, Principal principal) {
         bookReservationService.delete(id, principal.getName());
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/reservation/seat/{id}")
+    public ResponseEntity<Void> cancelSeatReservation(@PathVariable Long id, Principal principal) {
+        seatReservationService.delete(id, principal.getName());
         return ResponseEntity.ok().build();
     }
 }
