@@ -8,6 +8,9 @@ import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.BookRequestApprove;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
+import bitcopark.library.jwt.JwtUtil;
+import bitcopark.library.jwt.MemberDto;
+import bitcopark.library.oauth2.CustomOAuth2User;
 import bitcopark.library.repository.board.CategoryRepository;
 import bitcopark.library.repository.member.MemberRepository;
 import bitcopark.library.service.Board.CategoryService;
@@ -20,6 +23,9 @@ import bitcopark.library.service.Member.MemberService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,6 +65,8 @@ public class tempInitGenerate {
         private final BookReservationService bookReservationService;
 
         private final BookRequestService bookRequestService;
+
+        private final JwtUtil jwtUtil;
 
         @Transactional
         public void init() {
@@ -167,6 +175,20 @@ public class tempInitGenerate {
             Member member4 = memberService.joinMember("test4@email.com", "p", "member4", "01033334444", MemberGender.FEMALE, LocalDate.of(1994, 04, 04), new Address("33445", "A동"));
             Member member5 = memberService.joinMember("test5@email.com", "p", "member5", "01055556666", MemberGender.MALE, LocalDate.of(1995, 05, 05), new Address("55667", "E동"));
 
+
+            String email = member1.getEmail();
+            String username = member1.getName();
+            String role = member1.getAuthority();
+
+            MemberDto memberDto = new MemberDto(email,username,role);
+            CustomOAuth2User customOAuth2User = new CustomOAuth2User(memberDto);
+
+            Authentication authToken = new UsernamePasswordAuthenticationToken(customOAuth2User, null, customOAuth2User.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authToken);
+
+            String access = jwtUtil.createJwt("access", customOAuth2User.getUsername(), customOAuth2User.getName(), role, 600000L);
+
+            System.out.println("access = " + access);
 
             // 책 좋아요ㅠ
             bookFavoriteService.addBookLike(member1, 명품_인생을_살아라);
