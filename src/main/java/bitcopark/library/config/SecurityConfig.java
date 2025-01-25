@@ -7,6 +7,8 @@ import bitcopark.library.oauth2.CustomLogoutFilter;
 import bitcopark.library.oauth2.CustomOAuth2UserService;
 import bitcopark.library.oauth2.CustomLoginSuccessHandler;
 import bitcopark.library.repository.jwt.RefreshRepository;
+import bitcopark.library.repository.member.MemberRepository;
+import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +29,7 @@ public class SecurityConfig {
     private final CustomLoginFailHandler customLoginFailHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final RefreshRepository refreshRepository;
+    private final ServletContext servletContext;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
