@@ -26,8 +26,6 @@ import java.io.PrintWriter;
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
-    private final ServletContext servletContext;
-    private final MemberRepository memberRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -38,6 +36,10 @@ public class JwtFilter extends OncePerRequestFilter {
         // 4. 없다면 loginMember에는 아무 값이 들어가지 않는다.
         // 모든 경우 유효하지 않다면 다음 필터로 넘긴다
         // 유효한 경우 loginMember를 부여한다.
+        /* 시나리오
+         처음에 사이트에 들어왔을때, 메인페이지 로그인 검증이 access토큰 체크하고 있으면 로그인member라는 attributes를 뷰템플릿에 준다.
+         , access토큰에 문제있으면 refresh토큰을 이용해 재발급해 로그인멤버를 넣어주는데 이 로직이면 리프레시 토큰이 유효한 하루는 로그아웃이 되지 않는다
+        */
 
         String accessToken = null;
         String refreshToken = null;
@@ -51,6 +53,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
             }
         }
+
+        System.out.println("accessToken = " + accessToken);
 
         // 없다면 해당 필터는 건너뛴다
         if(accessToken==null){
@@ -68,6 +72,7 @@ public class JwtFilter extends OncePerRequestFilter {
             } catch(ExpiredJwtException e){
                 
                 // 만료되었다면 refresh토큰 로직 점검 후 새로운 토큰 발급로직 추가
+                // refresh토큰으로 인한 로직 실패 시 다음 필터로 넘김
                 filterChain.doFilter(request, response);
                 return;
             }
@@ -84,9 +89,15 @@ public class JwtFilter extends OncePerRequestFilter {
         String username = jwtUtil.getUsername(accessToken);
         String role = jwtUtil.getRole(accessToken);
 
-        Member loginMember = memberRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("unValid email"));
+        System.out.println("email = " + email);
+        System.out.println("username = " + username);
+        System.out.println("role = " + role);
 
-        servletContext.setAttribute("loginMember", loginMember);
+        String name = username.split(" ")[2];
+
+        LoginMemberDTO loginMemberDTO = new LoginMemberDTO(email, name,role);
+
+        request.setAttribute("loginMember", loginMemberDTO);
 
         MemberDto memberDto = new MemberDto(email,username,role);
         CustomOAuth2User customOAuth2User = new CustomOAuth2User(memberDto);

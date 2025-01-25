@@ -73,10 +73,10 @@
                     </label>
                     <input type="checkbox" id="headerMenuToggle">
                     <div class="header-menu">
-                        <div th:if="${loginMember.authority == 'MEMBER'}">
+                        <div th:if="${loginMember.role == 'ROLE_USER'}">
                             <a th:href="@{/myPage/info}">내 정보</a>
                         </div>
-                        <div th:if="${loginMember.authority == 'ADMIN'}">
+                        <div th:if="${loginMember.role == 'ROLE_ADMIN'}">
                             <a th:href="@{/admin/1}">관리자</a>
                         </div>
                         <a th:href="@{/member/logout}">로그아웃</a>

@@ -7,6 +7,7 @@ import bitcopark.library.oauth2.CustomLogoutFilter;
 import bitcopark.library.oauth2.CustomOAuth2UserService;
 import bitcopark.library.oauth2.CustomLoginSuccessHandler;
 import bitcopark.library.repository.jwt.RefreshRepository;
+import bitcopark.library.repository.member.MemberRepository;
 import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -44,7 +45,7 @@ public class SecurityConfig {
                                 .anyRequest().permitAll()
                 );
 
-        http.addFilterBefore(new JwtFilter(jwtUtil, servletContext), OAuth2LoginAuthenticationFilter.class);
+        http.addFilterBefore(new JwtFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
 
         http.sessionManagement((session)->{
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
