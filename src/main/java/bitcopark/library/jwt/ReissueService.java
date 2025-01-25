@@ -31,7 +31,7 @@ public class ReissueService {
         Cookie[] cookies = request.getCookies();
         if(cookies!=null){
             for(Cookie cookie : cookies){
-                if(cookie.getName().equals("refreshToken")){
+                if(cookie.getName().equals("refresh")){
                     refreshToken=cookie.getValue();
                 }
             }
@@ -82,6 +82,9 @@ public class ReissueService {
 
         return new ResponseEntity<>("refreshToken token issued",HttpStatus.OK);
     }
+
+
+
 
     private Cookie createCookie(String key, String value) {
         Cookie cookie = new Cookie(key, value);

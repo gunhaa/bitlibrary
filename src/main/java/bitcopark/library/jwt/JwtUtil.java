@@ -1,5 +1,6 @@
 package bitcopark.library.jwt;
 
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,18 @@ public class JwtUtil {
 
     public JwtUtil(@Value("${spring.jwt.secret}")String secret){
         secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
+    }
+
+    public Boolean verifyJwt(String token) {
+        try {
+            Jwts.parser()
+                    .verifyWith(secretKey)
+                    .build()
+                    .parseSignedClaims(token);
+            return true;
+        } catch (JwtException e) {
+            return false;
+        }
     }
 
     public String getEmail(String token){

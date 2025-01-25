@@ -7,6 +7,7 @@ import bitcopark.library.oauth2.CustomLogoutFilter;
 import bitcopark.library.oauth2.CustomOAuth2UserService;
 import bitcopark.library.oauth2.CustomLoginSuccessHandler;
 import bitcopark.library.repository.jwt.RefreshRepository;
+import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,7 @@ public class SecurityConfig {
     private final CustomLoginFailHandler customLoginFailHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final RefreshRepository refreshRepository;
+    private final ServletContext servletContext;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -42,7 +44,7 @@ public class SecurityConfig {
                                 .anyRequest().permitAll()
                 );
 
-        http.addFilterBefore(new JwtFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
+        http.addFilterBefore(new JwtFilter(jwtUtil, servletContext), OAuth2LoginAuthenticationFilter.class);
 
         http.sessionManagement((session)->{
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
