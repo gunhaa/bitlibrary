@@ -18,6 +18,7 @@ import java.util.Date;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Deprecated
 public class ReissueService {
 
     private final JwtUtil jwtUtil;

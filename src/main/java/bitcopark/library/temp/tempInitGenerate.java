@@ -176,21 +176,21 @@ public class tempInitGenerate {
             Member member5 = memberService.joinMember("test5@email.com", "p", "member5", "01055556666", MemberGender.MALE, LocalDate.of(1995, 05, 05), new Address("55667", "E동"));
 
 
-            String email = member1.getEmail();
-            String username = member1.getName();
-            String role = member1.getAuthority();
+//            String email = member1.getEmail();
+//            String username = member1.getName();
+//            String role = member1.getAuthority();
+//
+//            MemberDto memberDto = new MemberDto(email,username,role);
+//            CustomOAuth2User customOAuth2User = new CustomOAuth2User(memberDto);
+//
+//            Authentication authToken = new UsernamePasswordAuthenticationToken(customOAuth2User, null, customOAuth2User.getAuthorities());
+//            SecurityContextHolder.getContext().setAuthentication(authToken);
+//
+//            String access = jwtUtil.createJwt("access", customOAuth2User.getUsername(), customOAuth2User.getName(), role, 600000L);
+//
+//            System.out.println("access = " + access);
 
-            MemberDto memberDto = new MemberDto(email,username,role);
-            CustomOAuth2User customOAuth2User = new CustomOAuth2User(memberDto);
-
-            Authentication authToken = new UsernamePasswordAuthenticationToken(customOAuth2User, null, customOAuth2User.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authToken);
-
-            String access = jwtUtil.createJwt("access", customOAuth2User.getUsername(), customOAuth2User.getName(), role, 600000L);
-
-            System.out.println("access = " + access);
-
-            // 책 좋아요ㅠ
+            // 책 좋아요
             bookFavoriteService.addBookLike(member1, 명품_인생을_살아라);
             bookFavoriteService.addBookLike(member1, 백범일지);
             bookFavoriteService.addBookLike(member2, 백범일지);

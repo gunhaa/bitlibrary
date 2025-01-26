@@ -2,6 +2,7 @@ package bitcopark.library.config;
 
 import bitcopark.library.jwt.JwtFilter;
 import bitcopark.library.jwt.JwtUtil;
+import bitcopark.library.jwt.RefreshTokenBlackListRepository;
 import bitcopark.library.oauth2.CustomLoginFailHandler;
 import bitcopark.library.oauth2.CustomLogoutFilter;
 import bitcopark.library.oauth2.CustomOAuth2UserService;
@@ -29,7 +30,7 @@ public class SecurityConfig {
     private final CustomLoginFailHandler customLoginFailHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final RefreshRepository refreshRepository;
-    private final ServletContext servletContext;
+    private final RefreshTokenBlackListRepository refreshTokenBlackListRepository;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -45,7 +46,7 @@ public class SecurityConfig {
                                 .anyRequest().permitAll()
                 );
 
-        http.addFilterBefore(new JwtFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
+        http.addFilterBefore(new JwtFilter(jwtUtil, refreshRepository, refreshTokenBlackListRepository), OAuth2LoginAuthenticationFilter.class);
 
         http.sessionManagement((session)->{
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);

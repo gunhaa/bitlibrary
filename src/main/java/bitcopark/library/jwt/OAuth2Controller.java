@@ -53,6 +53,7 @@ public class OAuth2Controller {
     }
 
 
+    @Deprecated
     @PostMapping("/OAuth2/reissue")
     @ResponseBody
     public ResponseEntity<?> reissue(HttpServletRequest request, HttpServletResponse response){
