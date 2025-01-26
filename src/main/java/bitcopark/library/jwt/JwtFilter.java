@@ -65,18 +65,18 @@ public class JwtFilter extends OncePerRequestFilter {
 
 
         if(jwtUtil.verifyJwt(accessToken) || jwtUtil.getCategory(accessToken).equals("access")){
-            
+
             try{
                 jwtUtil.isExpired(accessToken);
 
             } catch(ExpiredJwtException e){
-                
+
                 // 만료되었다면 refresh토큰 로직 점검 후 새로운 토큰 발급로직 추가
                 // refresh토큰으로 인한 로직 실패 시 다음 필터로 넘김
                 filterChain.doFilter(request, response);
                 return;
             }
-            
+
         } else {
             // 잘못된 접근이므로 로그인 안된 상태로 넘김
             filterChain.doFilter(request, response);
@@ -107,4 +107,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.startsWith("/css/") || path.startsWith("/js/") || path.startsWith("/images/");
+    }
+
 }

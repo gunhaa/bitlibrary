@@ -13,6 +13,6 @@ public class CustomLoginFailHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, org.springframework.security.core.AuthenticationException exception) throws IOException, ServletException {
-        response.setStatus(401);
+        response.sendRedirect("http://localhost:8080/");
     }
 }
