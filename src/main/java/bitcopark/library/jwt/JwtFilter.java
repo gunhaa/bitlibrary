@@ -81,7 +81,7 @@ public class JwtFilter extends OncePerRequestFilter {
                     String role = jwtUtil.getRole(refreshToken);
 
                     String newAccess = jwtUtil.createJwt("access", username, email, role, 600000L);
-                    String newRefresh = jwtUtil.createJwt("refreshToken", username, email, role, 86400000L);
+                    String newRefresh = jwtUtil.createJwt("refresh", username, email, role, 86400000L);
 
                     refreshRepository.deleteByRefreshToken(refreshToken);
                     saveRefreshToken(username, newRefresh, email, 86400000L);

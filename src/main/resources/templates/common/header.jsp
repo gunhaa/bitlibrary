@@ -75,7 +75,8 @@
         
                 <c:otherwise>
                     <!-- 로그인 O -->
-                    <label for="headerMenuToggle"> ${loginMember.memberName}
+                    <label for="headerMenuToggle">
+                     ${loginMember.memberName}
                         <i class="fa-solid fa-caret-down"></i>
                     </label>
         
