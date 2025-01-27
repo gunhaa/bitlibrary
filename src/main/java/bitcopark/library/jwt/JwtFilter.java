@@ -36,18 +36,6 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        // 1. access 토큰 확인
-        // 2. 있고 유효하다면 loginMember 변수에 객체를 레포지토리에서 조회해서 넣는다
-        // 3. 있는데 유효하지 않다면 refresh토큰을 통해 reissue를 시도한다
-        // 4. 없다면 loginMember에는 아무 값이 들어가지 않는다.
-        // 모든 경우 유효하지 않다면 다음 필터로 넘긴다
-        // 유효한 경우 loginMember를 부여한다.
-        /* 시나리오
-         처음에 사이트에 들어왔을때, 메인페이지 로그인 검증이 access토큰 체크하고 있으면 로그인member라는 attributes를 뷰템플릿에 준다.
-         , access토큰에 문제있으면 refresh토큰을 이용해 재발급해 로그인멤버를 넣어주는데 이 로직이면 리프레시 토큰이 유효한 하루는 로그아웃이 되지 않는다
-         문제가 있는 모든 토큰은 제거한다.
-        */
-
         String accessToken = null;
         String refreshToken = null;
         Cookie[] cookies = request.getCookies();
@@ -93,7 +81,7 @@ public class JwtFilter extends OncePerRequestFilter {
                     String role = jwtUtil.getRole(refreshToken);
 
                     String newAccess = jwtUtil.createJwt("access", username, email, role, 600000L);
-                    String newRefresh = jwtUtil.createJwt("refreshToken", username, email, role, 86400000L);
+                    String newRefresh = jwtUtil.createJwt("refresh", username, email, role, 86400000L);
 
                     refreshRepository.deleteByRefreshToken(refreshToken);
                     saveRefreshToken(username, newRefresh, email, 86400000L);
@@ -105,6 +93,8 @@ public class JwtFilter extends OncePerRequestFilter {
                     response.addCookie(createRefreshCookie("refresh", newRefresh));
                     //로그인 멤버 추가, 세션 부여
                     setLoginMemberAndGetSession(request, response, filterChain, accessToken);
+                    filterChain.doFilter(request, response);
+                    return;
                     
                 }catch(ExpiredJwtException e){
                     removeRefreshToken(response);
@@ -142,6 +132,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         //로그인 멤버 추가, 세션 부여
         setLoginMemberAndGetSession(request, response, filterChain, accessToken);
+        filterChain.doFilter(request, response);
     }
 
     private Cookie createAccessCookie(String key, String value){

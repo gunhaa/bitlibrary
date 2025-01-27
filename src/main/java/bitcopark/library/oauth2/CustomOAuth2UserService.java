@@ -36,7 +36,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String name = oAuth2Response.getProvider()+" "+oAuth2Response.getProviderId()+" "+oAuth2Response.getName();
         String email = oAuth2Response.getEmail();
 
-        // 로그인 성공시 가입이 안된 name이면 가입시킨다.
         boolean isExist = memberRepository.existsByName(name);
 
         if(!isExist){

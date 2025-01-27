@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Java Library</title>
     <link rel="stylesheet" th:href="@{/css/main-style.css}">
-<!--    <script>-->
-<!--        (() => {-->
-<!--            var link = document.createElement('link');-->
-<!--            link.rel = "shortcut icon";-->
-<!--            link.href = "/images/logo.png";-->
-<!--            document.head.appendChild(link);-->
-<!--        })();-->
-<!--    </script>-->
+    <!--    <script>-->
+    <!--        (() => {-->
+    <!--            var link = document.createElement('link');-->
+    <!--            link.rel = "shortcut icon";-->
+    <!--            link.href = "/images/logo.png";-->
+    <!--            document.head.appendChild(link);-->
+    <!--        })();-->
+    <!--    </script>-->
 </head>
 <div th:fragment="header">
-<body>
+    <body>
     <header>
         <nav>
             <ul>
@@ -55,7 +55,8 @@
                 <li>
                     <a th:href="@{/study/my-library/33?sub=books-on-loan}" th:onclick="|alertMsg();|">내 서재</a>
                     <ul>
-                        <li><a th:href="@{/study/my-library/33?sub=books-on-loan}" th:onclick="|alertMsg();|">나의 도서관</a></li>
+                        <li><a th:href="@{/study/my-library/33?sub=books-on-loan}" th:onclick="|alertMsg();|">나의 도서관</a>
+                        </li>
                         <li><a th:href="@{/study/member-info/36}" th:onclick="|alertMsg();|">회원정보</a></li>
                     </ul>
                 </li>
@@ -68,17 +69,14 @@
                 </div>
                 <div th:if="${loginMember != null}">
                     <!-- 로그인 O -->
-                    <label for="headerMenuToggle" th:text="${loginMember.name}">
+                    <label for="headerMenuToggle">
+                        [[${loginMember.name}]]
                         <i class="fa-solid fa-caret-down"></i>
                     </label>
                     <input type="checkbox" id="headerMenuToggle">
                     <div class="header-menu">
-                        <div th:if="${loginMember.role == 'ROLE_USER'}">
-                            <a th:href="@{/myPage/info}">내 정보</a>
-                        </div>
-                        <div th:if="${loginMember.role == 'ROLE_ADMIN'}">
-                            <a th:href="@{/admin/1}">관리자</a>
-                        </div>
+                        <a th:if="${loginMember.role == 'ROLE_USER'}" th:href="@{/myPage/info}">내 정보</a>
+                        <a th:if="${loginMember.role == 'ROLE_ADMIN'}" th:href="@{/admin/1}">관리자</a>
                         <a th:href="@{/member/logout}">로그아웃</a>
                     </div>
                 </div>
@@ -86,12 +84,12 @@
         </nav>
         <div></div>
     </header>
-<!-- 임시 제거 (무슨 조건인지 모르겠음)-->
-<!--    <div th:if="${#request.servletPath != '/'}" class="library-book">-->
+    <!-- 임시 제거 (무슨 조건인지 모르겠음)-->
+    <!--    <div th:if="${#request.servletPath != '/'}" class="library-book">-->
     <div class="library-book">
         <img th:src="@{/images/library_book.png}">
     </div>
-<!--    </div>-->
+    <!--    </div>-->
 
     <script src="https://kit.fontawesome.com/58046189b2.js" crossorigin="anonymous"></script>
     <script>
@@ -110,6 +108,6 @@
             document.head.appendChild(link);
         })();
     </script>
-</body>
+    </body>
 </div>
 </html>
