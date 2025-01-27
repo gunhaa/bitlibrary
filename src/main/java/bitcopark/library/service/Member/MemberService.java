@@ -6,6 +6,7 @@ import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
 import bitcopark.library.exception.EmailDuplicateException;
+import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -55,4 +56,9 @@ public class MemberService {
 //        return memberRepository.findByEmailAndPassword(request.getEmail(), request.getPassword())
 //                .map(LoginResponseDTO::new);
 //    }
+
+    public void getBookStatus(LoginMemberDTO loginMember) {
+
+    }
+
 }

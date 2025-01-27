@@ -78,7 +78,7 @@ public class ReissueService {
         // 스케줄 작업을 통해 만료시간이 지난 토큰은 주기적으로 삭제하는 것을 추가 구현해야한다
 
 
-        response.addCookie(createCookie("refreshToken", newRefresh));
+        response.addCookie(createCookie("refresh", newRefresh));
         response.setHeader("access", newAccess);
 
         return new ResponseEntity<>("refreshToken token issued",HttpStatus.OK);

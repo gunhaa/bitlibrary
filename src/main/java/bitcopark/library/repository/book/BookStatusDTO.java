@@ -6,12 +6,12 @@ import lombok.Data;
 @Data
 public class BookStatusDTO {
 
-    private String bookBorrowCount;
-    private String bookReservationCount;
-    private String bookOverdueCount;
+    private Long bookBorrowCount;
+    private Long bookReservationCount;
+    private Long bookOverdueCount;
 
     @QueryProjection
-    public BookStatusDTO(String bookBorrowCount, String bookReservationCount, String bookOverdueCount) {
+    public BookStatusDTO(Long bookBorrowCount, Long bookReservationCount, Long bookOverdueCount) {
         this.bookBorrowCount = bookBorrowCount;
         this.bookReservationCount = bookReservationCount;
         this.bookOverdueCount = bookOverdueCount;

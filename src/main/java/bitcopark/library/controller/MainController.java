@@ -2,9 +2,11 @@ package bitcopark.library.controller;
 
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.jwt.LoginMemberDTO;
+import bitcopark.library.service.Member.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,16 +19,17 @@ import java.util.Calendar;
 import java.util.List;
 
 @Controller
-@Slf4j
+@RequiredArgsConstructor
 public class MainController {
 
-    @GetMapping("/")
-    public String mainPage(@RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMemberDTO, Model model){
-//        Calendar calendar = Calendar.getInstance();
-//        int dayOfWeek = (calendar.get(Calendar.DAY_OF_WEEK) - 1) % 7;
-//        model.addAttribute("dayOfWeek", dayOfWeek);
-        model.addAttribute("loginMember", loginMemberDTO);
+    private final MemberService memberService;
 
+    @GetMapping("/")
+    public String mainPage(@RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMember, Model model){
+        model.addAttribute("loginMember", loginMember);
+        if(loginMember != null){
+            memberService.getBookStatus(loginMember);
+        }
         return "common/main";
     }
 
