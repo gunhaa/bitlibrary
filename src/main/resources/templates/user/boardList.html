@@ -86,21 +86,11 @@
                 </table>
             </div>
 
-            <!--<div class="btn-area">
-                <%&#45;&#45; 공지사항 : 관리자에게만 보임 &#45;&#45;%>
-                <th:block th:if="cateCode == 15">
-                    <button th:if="$loginMember.authority == 'ADMIN'}">글쓰기</button>
-                </th:block>
-                <th:block th:unless="cateCode == 15">
-                    <button th:if="$loginMember.authority == 'MEMBER'}">글쓰기</button>
-                </th:block>
-            </div>-->
-
-            <!--<div th:if="${loginMember != null}" class="btn-area">-->
+            <div th:if="${loginMember != null}" class="btn-area">
                 <!-- 공지사항 : 관리자에게만 보임 -->
-                <button id="writeBtn" <!--th:if="${cateCode == 15 and loginMember.authority.toString() == 'ADMIN'}"-->>글쓰기</button>
-                <!--<button id="writeBtn" th:if="${cateCode != 15 and loginMember.authority.toString() == 'MEMBER'}">글쓰기</button>-->
-            <!--</div>-->
+                <button id="writeBtn" th:if="${cateCode == 15 and loginMember.role == 'ROLE_ADMIN'}">글쓰기</button>
+                <button id="writeBtn" th:if="${cateCode != 15 and loginMember.role == 'ROLE_MEMBER'}">글쓰기</button>
+            </div>
 
             <!-- pagination -->
             <div th:unless="${#lists.isEmpty(boardPage.content)}" class="pagination-area">

@@ -5,6 +5,7 @@ import bitcopark.library.dto.LoginResponseDTO;
 import bitcopark.library.entity.board.*;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BoardNotFoundException;
+import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.repository.board.BoardImgRepository;
 import bitcopark.library.repository.board.BoardRepository;
 import bitcopark.library.repository.member.MemberRepository;
@@ -24,8 +25,10 @@ public class BoardService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Board writePost(LoginResponseDTO memberDTO, BoardRequestDTO boardRequestDTO, Category category){
-        Member member = memberRepository.findById(memberDTO.getId()).orElseThrow(() -> new IllegalArgumentException("not found member" + memberDTO.getId()));
+    public Board writePost(LoginMemberDTO memberDTO, BoardRequestDTO boardRequestDTO, Category category){
+        Long id = memberRepository.findMemberIdByName(memberDTO.getEmail());
+
+        Member member = memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found member" + id));
 
         return boardRepository.save(boardRequestDTO.toEntity(member,category));
     }

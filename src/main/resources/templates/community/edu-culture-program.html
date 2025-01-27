@@ -78,7 +78,7 @@
                                 <td>
                                     <a href="/community/${cateEngName}/${board.id}(cp=${boardPage.getPageNumber()}, key=${keyword}, query=${query})">${classBoard.boardTitle}</a>
                                 </td>
-                                <td>${classBoard.recruitmentStartDt} ~ ${classBoard.recruitmentEndDt}</td>
+                                <td>[[${classBoard.recruitmentStartDt}]] ~ [[${classBoard.recruitmentEndDt}]]</td>
                             </tr>
                         </th:block>
                     </tbody>
@@ -86,7 +86,7 @@
             </div>
 
             <!-- 관리자에게만 보이는 글쓰기 버튼 -->
-            <div th:if="${session.loginMember != null and session.loginMember.authority.toString == 'ADMIN'}" class="btn-area">
+            <div th:if="${loginMember != null and loginMember.role == 'ROLE_ADMIN'}" class="btn-area">
                 <button id="writeBtn">글쓰기</button>
             </div>
 
