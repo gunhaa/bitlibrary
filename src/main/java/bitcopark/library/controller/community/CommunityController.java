@@ -2,8 +2,12 @@ package bitcopark.library.controller.community;
 
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.controller.util.ControllerUtils;
+import bitcopark.library.dto.BoardRequestDTO;
+import bitcopark.library.dto.ClassScheduleRequestDTO;
 import bitcopark.library.entity.board.Board;
+import bitcopark.library.entity.board.BoardImg;
 import bitcopark.library.entity.board.Category;
+import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.service.Board.BoardService;
 import bitcopark.library.service.Board.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +15,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static bitcopark.library.controller.util.ControllerUtils.setCategoryAndRoute;
@@ -37,12 +41,12 @@ public class CommunityController {
     }
 
     @GetMapping(value="{catLevel1:community}/{catLevel2:edu-culture-program}")
-    public String eduCommunity(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> catagoryDTOList
+    public String eduCommunity(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
             , @PathVariable(name = "catLevel1") String catLevel1
             , @PathVariable(name = "catLevel2") String catLevel2
             , Pageable pageable) {
 
-        setCategoryAndRoute(model, catagoryDTOList, catLevel1, catLevel2, null);
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
         Category category = categoryService.getCategoryEngName(catLevel2);
 
@@ -52,4 +56,45 @@ public class CommunityController {
 
         return "community/edu-culture-program";
     }
+
+    @GetMapping(value="{catLevel1:community}/{catLevel2:edu-culture-program}/insert")
+    public String selectPlatform(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+            , @PathVariable(name = "catLevel1") String catLevel1
+            , @PathVariable(name = "catLevel2") String catLevel2) {
+
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
+
+        return "community/eduCultureProgramWrite";
+    }
+    @PostMapping(value="{catLevel1:community}/{catLevel2:edu-culture-program}/insert")
+    public String insertBoard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+            , @PathVariable(name = "catLevel1") String catLevel1
+            , @PathVariable(name = "catLevel2") String catLevel2
+            , @RequestParam(name = "files", required = false) MultipartFile[] files
+            , BoardRequestDTO boardRequestDTO
+            , ClassScheduleRequestDTO classRequestDTO
+            , @RequestParam(value="loginMember", required = false)LoginMemberDTO loginMemberDTO) {
+
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
+
+        Category category = categoryService.getCategoryEngName(catLevel2);
+
+        Board board = boardService.writePost(loginMemberDTO, boardRequestDTO, category);
+
+        model.addAttribute("board", board);
+
+        if (files != null && files.length > 0) {
+            List<BoardImg> boardImgList = new ArrayList<>();
+            for( int i = 0; i < files.length; i++ ) {
+                if (!files[i].isEmpty()) {
+                    BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), i);
+                    boardImgList.add(boardImg);
+                }
+            }
+            model.addAttribute("boardImgList", boardImgList);
+        }
+
+        return "community/eduCultureProgramDetail";
+    }
+
 }

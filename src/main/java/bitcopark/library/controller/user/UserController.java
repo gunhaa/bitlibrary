@@ -7,6 +7,7 @@ import bitcopark.library.dto.LoginResponseDTO;
 import bitcopark.library.entity.board.Board;
 import bitcopark.library.entity.board.BoardImg;
 import bitcopark.library.entity.board.Category;
+import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.service.Board.BoardService;
 import bitcopark.library.service.Board.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -86,7 +87,7 @@ public class UserController {
             , @PathVariable(name = "catLevel2") String catLevel2
             , @RequestParam(name = "files", required = false) MultipartFile[] files
             , BoardRequestDTO boardRequestDTO
-            , @SessionAttribute LoginResponseDTO loginMember) {
+            , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember) {
 
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
@@ -95,8 +96,6 @@ public class UserController {
         model.addAttribute("cateCode", category.getId());
 
         Board board = boardService.writePost(loginMember, boardRequestDTO, category);
-
-        System.out.println("board = " + board);
 
         model.addAttribute("board", board);
 

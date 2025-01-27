@@ -25,13 +25,13 @@
         </div>
 
         <%-- 문의사항 : 관리자만 보임 --%> >
-        <th:block th:if="${cateCode == 16 and session.loginMember.autority.toString() == 'ADMIN'}">
+        <th:block th:if="${cateCode == 16 and loginMember.role == 'ROLE_ADMIN'}">
             <div class="comment-write-area">
                 <textarea id="commentContent"></textarea>
                 <button id="commentAdd">등록</button>
             </div>
         </th:block>
-        <th:block th:unless="${cateCode == 16 and session.loginMember.autority.toString() == 'ADMIN'}">
+        <th:block th:unless="${cateCode == 16 and loginMember.role == 'ROLE_ADMIN'}">
             <div class="comment-write-area">
                 <textarea id="commentContent"></textarea>
                 <button id="commentAdd">등록</button>
