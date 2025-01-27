@@ -6,6 +6,7 @@ import bitcopark.library.dto.OAuth2Response;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.jwt.MemberDto;
 import bitcopark.library.repository.member.MemberRepository;
+import bitcopark.library.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
+    private final MemberService memberService;
     private final MemberRepository memberRepository;
 
     @Override
@@ -39,8 +41,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         boolean isExist = memberRepository.existsByName(name);
 
         if(!isExist){
-            Member oAuth2Member = Member.createOAuth2Member(email, name, "ROLE_USER");
-            memberRepository.save(oAuth2Member);
+            memberService.joinOAuth2Member(email, name, "ROLE_USER");
         }
 
         return new CustomOAuth2User(new MemberDto(email,name,"ROLE_USER"));
