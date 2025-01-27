@@ -2,6 +2,7 @@ package bitcopark.library.controller;
 
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.jwt.LoginMemberDTO;
+import bitcopark.library.repository.book.BookStatusDTO;
 import bitcopark.library.service.Member.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,7 +29,9 @@ public class MainController {
     public String mainPage(@RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMember, Model model){
         model.addAttribute("loginMember", loginMember);
         if(loginMember != null){
-            memberService.getBookStatus(loginMember);
+            // 테스트 필요
+            BookStatusDTO bookStatus = memberService.getBookStatus(loginMember);
+            model.addAttribute("bookStatus", bookStatus);
         }
         return "common/main";
     }

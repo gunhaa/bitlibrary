@@ -17,24 +17,22 @@ import java.time.LocalDate;
 public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
-    private final MemberRepository memberRepository;
 
     @Override
-    public BookStatusDTO findBookStatus(LoginMemberDTO loginMember) {
+    public BookStatusDTO findBookStatus(Member loginMember) {
         QMember member = QMember.member;
         QBookBorrow bookBorrow = QBookBorrow.bookBorrow;
         QBookReservation bookReservation = QBookReservation.bookReservation;
-        Member findMember = memberRepository.findByEmail(loginMember.getEmail()).orElseThrow(() -> new IllegalArgumentException("not valid email"));
         return queryFactory.select(new QBookStatusDTO(
                                 (JPAExpressions
                                         .select(bookBorrow.count())
                                         .from(bookBorrow)
-                                        .where(bookBorrow.member.eq(findMember), bookBorrow.returnDate.isNull())
+                                        .where(bookBorrow.member.eq(loginMember), bookBorrow.returnDate.isNull())
                                 ),
                                 (JPAExpressions
                                         .select(bookReservation.count())
                                         .from(bookReservation)
-                                        .where(bookReservation.member.eq(findMember))
+                                        .where(bookReservation.member.eq(loginMember))
                                 ),
                                 (JPAExpressions
                                         .select(bookBorrow.count())

@@ -7,6 +7,7 @@ import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
 import bitcopark.library.exception.EmailDuplicateException;
 import bitcopark.library.jwt.LoginMemberDTO;
+import bitcopark.library.repository.book.BookStatusDTO;
 import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -57,8 +58,10 @@ public class MemberService {
 //                .map(LoginResponseDTO::new);
 //    }
 
-    public void getBookStatus(LoginMemberDTO loginMember) {
-
+    public BookStatusDTO getBookStatus(LoginMemberDTO loginMember) {
+        Member findMember = memberRepository.findByEmail(loginMember.getEmail()).orElseThrow(() -> new IllegalArgumentException("not valid email"));
+        BookStatusDTO bookStatus = memberRepository.findBookStatus(findMember);
+        return bookStatus;
     }
 
 }
