@@ -15,8 +15,16 @@ public class BookBorrowService {
 
     private final BookBorrowRepository bookBorrowRepository;
 
+    
     @Transactional
     public BookBorrow registerBookRental(Member member, Book book){
+        
+        Boolean isBorrowed = bookBorrowRepository.existsByBook(book);
+
+        if(isBorrowed){
+            return null;
+        }
+
         BookBorrow bookBorrow = BookBorrow.builder()
                 .member(member)
                 .book(book)

@@ -6,9 +6,6 @@ const resetBtn = document.getElementById("refresh-btn");
 const params = new URL(location.href).searchParams;
 const options = document.querySelectorAll("#key > option");
 
-// 임시
-const loginMemberNo = 1;
-
 
 let key;
 
@@ -71,7 +68,7 @@ if(searchBtn != null){
 
 function search(query, key){
 //    fetch("/search/books/v1?query=" + query + "&key=" + key)
-    fetch(`/search/books/v1?query=${query}&key=${key}&memberId=${loginMemberNo}`)
+    fetch(`/search/books/v1?query=${query}&key=${key}`)
     .then(resp => resp.json())
     .then(result => {
         showBookList(result);
