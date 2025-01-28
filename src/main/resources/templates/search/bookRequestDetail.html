@@ -51,43 +51,41 @@
                         <th>희망 도서명</th>
                         <td th:text="${bookRequestDetail.bookTitle}"></td>
 
-<!--                        <td th:text="${bookReq.bookTitle}"></td>-->
                     </tr>
                     <tr>
                         <th>저자</th>
                         <td th:text="${bookRequestDetail.bookAuthor}"></td>
-<!--                        <td th:text="${bookReq.bookAuthor}"></td>-->
                     </tr>
                     <tr>
                         <th>출판사</th>
                         <td th:text="${bookRequestDetail.bookPublisher}"></td>
-<!--                        <td th:text="${bookReq.bookPub}"></td>-->
                     </tr>
                     <tr>
                         <th>출판 연도</th>
                         <td th:text="${bookRequestDetail.bookPublicationDate}"></td>
-<!--                        <td th:text="${bookReq.bookPubDate}"></td>-->
                     </tr>
                     <tr>
                         <th class="opinion">추천의견</th>
                         <td th:text="${bookRequestDetail.opinion}"></td>
-<!--                        <td th:text="${bookReq.requestOpinion}"></td>-->
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div class="btn-area">
-                <th:block th:if="${loginMember != null && loginMember.email == bookRequestDetail.email}">
-                    <button id="updateBtn">수정</button>
-                    <button id="deleteBtn">삭제</button>-
-                </th:block>
-<!--                <span th:if="${loginMember.memberNo == bookReq.memberNo or loginMember.authority == 2}">-->
-<!--						<button id="deleteBtn">삭제</button>-->
-<!--					</span>-->
 
-                <th:block th:if="${loginMember != null && loginMember.role == 'ROLE_ADMIN'}">
-						<button id="approvalBtn">승인</button>
-						<button id="declinedBtn">거절</button>
+                <th:block th:if="${loginMember != null}">
+                    <th:block th:if="${loginMember.email == bookRequestDetail.email}">
+                        <button id="updateBtn">수정</button>
+                    </th:block>
+
+                    <th:block th:if="${loginMember.email == bookRequestDetail.email || loginMember.role == 'ROLE_ADMIN'}">
+                        <button id="deleteBtn">삭제</button>
+                    </th:block>
+
+                    <th:block th:if="${loginMember.role == 'ROLE_ADMIN'}">
+                        <button id="approvalBtn">승인</button>
+                        <button id="declinedBtn">거절</button>
+                    </th:block>
                 </th:block>
 
                 <button id="goToListBtn">목록으로</button>

@@ -56,8 +56,6 @@ public class BookRequestController {
                                          @RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMember) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
         BookRequestDetailDto bookRequestDetailDto = bookRequestService.getBookRequestDetailsByIsbn(isbn);
-        System.out.println("loginMember.getRole() = " + loginMember.getRole());
-        System.out.println("loginMember.getEmail() = " + loginMember.getEmail());
 
         if(loginMember != null) {
             bookRequestDetailDto.setLoginMemberEmail(loginMember.getEmail());

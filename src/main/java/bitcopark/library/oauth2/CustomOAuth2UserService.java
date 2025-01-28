@@ -40,8 +40,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String name = oAuth2Response.getProvider()+" "+oAuth2Response.getProviderId()+" "+oAuth2Response.getName();
         String email = oAuth2Response.getEmail();
 
-//        boolean isExist = memberRepository.existsByName(name);
-
         Optional<Member> findMember = memberRepository.findByName(name);
 
         if(findMember.isEmpty()){
