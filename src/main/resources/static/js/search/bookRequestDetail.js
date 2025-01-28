@@ -2,7 +2,7 @@ const updateBtn = document.getElementById("updateBtn");
 
 if(updateBtn != null){
     updateBtn.addEventListener("click",() => {
-        location.href = location.pathname.replace("book", "book2") + "/update" + location.search;
+        location.href = location.pathname + "/update" + location.search;
     })
 }
 
@@ -11,17 +11,29 @@ const deleteBtn = document.getElementById("deleteBtn");
 if(deleteBtn != null){
     deleteBtn.addEventListener("click", () => {
         if(confirm("정말 삭제하시겠습니까?")){
-            fetch("/book2/delete", {
-                method : "POST",
+
+            const url = window.location.pathname;
+            const isbn = url.split('/')[4];
+
+            const data = {
+                isbn : isbn
+            };
+
+            fetch("/search/book-req/delete/v1", {
+                method : "DELETE",
                 headers : {"Content-Type" : "application/json"},
-                body : requestNo
+                body : JSON.stringify(data)
             })
             .then(resp => resp.text())
             .then(result => {
-                if(result > 0){
-                    alert("삭제되었습니다.");
-                    location.href = "/book/2/1" + location.search;
-                }
+                console.log(result);
+//                const currentUrl = new URL(window.location.href);
+//
+//                const path = currentUrl.pathname.split('/').pop();
+//
+//                currentUrl.pathname = path.join('/');
+//
+//                window.location.href = currentUrl.toString();
             })
             .catch(e => console.log(e))
         }

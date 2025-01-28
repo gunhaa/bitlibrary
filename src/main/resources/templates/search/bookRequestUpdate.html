@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library</title>
+    <link rel="stylesheet" th:href="@{/css/main-style.css}">
+    <link rel="stylesheet" th:href="@{/css/common/sideMenu.css}">
+    <link rel="stylesheet" th:href="@{/css/common/modal.css}">
+    <link rel="stylesheet" th:href="@{/css/search/bookRequest-style.css}">
+</head>
+<body>
+<!-- 공통 헤더 -->
+<div th:replace="~{common/header :: header}"></div>
+
+<section class="main">
+    <!-- 사이드 메뉴 -->
+    <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
+
+    <section class="main-content">
+        <div class="main-title">신청 양식</div>
+        <hr class="titleLine" />
+        <section class="body-content">
+            <div class="request-form">
+                <table>
+                    <tbody>
+                    <tr class="request-tr">
+                        <th>제목</th>
+                        <td>
+                            <input type="text" maxlength="300" th:value="${bookRequestDetail.bookTitle}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>신청일자</th>
+                        <td>
+                            <input type="date" id="currentDate" th:value="${bookRequestDetail.bookRequestCreatedDate}" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>신청자</th>
+                        <td th:text="${bookRequestDetail.email}"></td>
+                    </tr>
+                    <tr>
+                        <th>희망 도서명</th>
+                        <td>
+                            <input type="text" th:value="${bookRequestDetail.bookTitle}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>저자</th>
+                        <td>
+                            <input type="text" th:value="${bookRequestDetail.bookAuthor}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>출판사</th>
+                        <td>
+                            <input type="text" th:value="${bookRequestDetail.bookPublisher}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>출판 연도</th>
+                        <td>
+                            <input type="date" id="publishDate" th:value="${bookRequestDetail.bookPublicationDate}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="opinion">추천의견</th>
+                        <td>
+                            <textarea id="opinion" cols="20" th:text="${bookRequestDetail.opinion}"></textarea>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn-area">
+                <!-- 버튼 경로에 파라미터 포함 -->
+                <button th:onclick="|location.href='/book/2/1?cp=${cp}'|">취소</button>
+                <button id="updateBtn">수정</button>
+            </div>
+        </section>
+    </section>
+</section>
+
+<div th:replace="~{common/footer :: footer}"></div>
+
+<script th:src="@{/js/search/bookRequestUpdate.js}"></script>
+</body>
+</html>

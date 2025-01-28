@@ -1,20 +1,25 @@
 package bitcopark.library.service.Book;
 
+import bitcopark.library.controller.book.BookDeleteDto;
 import bitcopark.library.controller.book.BookRequestCondition;
 import bitcopark.library.controller.book.BookRequestResponseDto;
 import bitcopark.library.entity.member.BookRequest;
 import bitcopark.library.entity.member.BookRequestApprove;
 import bitcopark.library.entity.member.Member;
+import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.repository.book.BookRepository;
 import bitcopark.library.repository.book.BookRequestRepository;
 import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -91,5 +96,26 @@ public class BookRequestService {
     public BookRequestDetailDto getBookRequestDetailsByIsbn(String isbn) {
         // logic
         return bookRequestRepository.getBookRequestDetail(isbn);
+    }
+
+    @Transactional
+    public ResponseEntity<?> deleteBookRequest(BookDeleteDto bookDeleteDto, LoginMemberDTO loginMember) {
+
+        if(loginMember.getRole().equals("ROLE_ADMIN")){
+            System.out.println("관리자여서 삭제 실행");
+            bookRequestRepository.deleteByIsbn(bookDeleteDto.getIsbn());
+            return new ResponseEntity<>("bookRequest delete success", HttpStatus.OK);
+        }
+
+        BookRequest findByEmail = bookRequestRepository.findByEmail(loginMember.getEmail()).orElseThrow(() -> new IllegalArgumentException("not valid email"));
+        BookRequest findByIsbn = bookRequestRepository.findByIsbn(bookDeleteDto.getIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
+
+        if(findByEmail == findByIsbn){
+            System.out.println("같은 객체가 발견되어 삭제 실행");
+            bookRequestRepository.deleteByIsbn(bookDeleteDto.getIsbn());
+            return new ResponseEntity<>("bookRequest delete success", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("not valid request", HttpStatus.BAD_REQUEST);
     }
 }

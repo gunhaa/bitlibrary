@@ -24,7 +24,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Member joinMember(String email, String password, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address){
+    public Member joinMember(String email, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address){
 
         validateDuplicateMember(email);
 
@@ -36,7 +36,7 @@ public class MemberService {
     }
 
     @Transactional
-    public Member joinAdmin(String email, String password, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address){
+    public Member joinAdmin(String email, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address){
 
         validateDuplicateMember(email);
 
