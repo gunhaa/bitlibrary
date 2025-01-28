@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class LikeCondition {
 
-    private Long memberId;
+    private String email;
     private String isbn;
     private LikeStatus likeStatus;
 

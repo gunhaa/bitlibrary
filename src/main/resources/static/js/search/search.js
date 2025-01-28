@@ -109,7 +109,7 @@ if(searchDetailBtn != null){
 //            "&limit=" + limit +
 //            "&memberNo=" + loginMemberNo)
 
-        const url = `/search/books/detail/v1?query=${inputDetail[0].value}&author=${inputDetail[1].value}&pub=${inputDetail[2].value}&startYear=${inputDetail[3].value}&endYear=${inputDetail[4].value}&size=${limit}&memberId=${loginMemberNo}`;
+        const url = `/search/books/detail/v1?query=${inputDetail[0].value}&author=${inputDetail[1].value}&pub=${inputDetail[2].value}&startYear=${inputDetail[3].value}&endYear=${inputDetail[4].value}&size=${limit}`;
 
         fetch(url)
         .then(resp=>resp.json())
@@ -295,12 +295,6 @@ cancelBtn.addEventListener("click", ()=>{
 
 function addReservation(isbn){
 
-    if(loginMemberNo == ""){
-        alert("로그인 후 이용해주세요");
-        modal.style.display = "none";
-        return;
-    }
-
     const url = `/search/books/reservation/v1`;
     const data = {
         isbn: isbn,
@@ -335,11 +329,6 @@ function addReservation(isbn){
 let likeStatus;
 function bookLike(el, isbn, memberId){
 
-    if(memberId == ""){
-        alert("로그인 후 이용해주세요.");
-        return;
-    }
-
     if(el.innerText == "☆"){
         likeStatus = 0;
     }else{
@@ -348,7 +337,6 @@ function bookLike(el, isbn, memberId){
 
     const data = {
         isbn : isbn,
-        memberId : memberId,
         likeStatus : likeStatus
     };
 

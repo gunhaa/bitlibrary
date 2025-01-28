@@ -5,6 +5,7 @@ import bitcopark.library.controller.book.BookRequestResponseDto;
 import bitcopark.library.entity.member.BookRequest;
 import bitcopark.library.entity.member.BookRequestApprove;
 import bitcopark.library.entity.member.Member;
+import bitcopark.library.repository.book.BookRepository;
 import bitcopark.library.repository.book.BookRequestRepository;
 import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class BookRequestService {
 
     private final BookRequestRepository bookRequestRepository;
     private final MemberRepository memberRepository;
+    private final BookRepository bookRepository;
 
     public BookRequest createBookRequest(Long memberId, String isbn, String bookTitle, String bookPublisher,
                                          String bookAuthor, BookRequestApprove bookRequestApprove,
@@ -47,7 +49,8 @@ public class BookRequestService {
 
 
     public BookRequest createBookRequest(BookRequestCondition bookRequestCondition){
-        Member findMember = memberRepository.findById(bookRequestCondition.getMemberId())
+
+        Member findMember = memberRepository.findByEmail(bookRequestCondition.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("invalid memberId"));
 
         BookRequest bookRequest = BookRequest.builder()
@@ -68,16 +71,16 @@ public class BookRequestService {
 
     @Transactional
     public BookRequestResponseDto registerBookRequest(BookRequestCondition bookRequestCondition){
-        // 게시글 변환로직
-
-        // 쿼리 실행
         try {
+            boolean isExist = bookRepository.existsByIsbn(bookRequestCondition.getIsbn());
+            if(isExist){
+                return new BookRequestResponseDto(false, "Book exist");
+            }
             createBookRequest(bookRequestCondition);
             return new BookRequestResponseDto(true, "Book Request Success");
         } catch (Exception e){
             return new BookRequestResponseDto(false, "Book Request fail");
         }
-
     }
 
     public Page<BookRequestPageDto> getBookRequestPage(Pageable pageable) {
