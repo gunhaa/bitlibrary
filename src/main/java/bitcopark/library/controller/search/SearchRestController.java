@@ -22,12 +22,19 @@ public class SearchRestController {
     @GetMapping("/{catLevel1:search}/books/v1")
     public SearchBooklistAndLikelistDTO search(BookSearchCondition bookSearchCondition,
                                                @RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMember){
+
+        if(loginMember == null){
+            return bookService.searchBooklistAndLikelist(bookSearchCondition);
+        }
         return bookService.searchBooklistAndLikelist(bookSearchCondition, loginMember);
     }
 
     @GetMapping("/{catLevel1:search}/books/detail/v1")
     public SearchBooklistAndLikelistDTO searchDetail(BookSearchDetailCondition bookSearchDetailCondition,
                                                      @RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMember){
+        if(loginMember == null){
+            return bookService.searchDetailBooklistAndLikelist(bookSearchDetailCondition);
+        }
         return bookService.searchDetailBooklistAndLikelist(bookSearchDetailCondition, loginMember);
     }
 

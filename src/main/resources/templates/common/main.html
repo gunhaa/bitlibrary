@@ -14,37 +14,31 @@
     <link rel="stylesheet" href="/css/search/mainSearch.css" th:href="@{/css/search/mainSearch.css}">
 </head>
 <body>
-<!-- Header Include -->
-<div th:replace="common/header :: header"></div>
+<div th:replace="~{common/header :: header}"></div>
 
-<!-- Search Include -->
-<div th:replace="search/mainSearch :: mainSearch"></div>
+<div th:replace="~{search/mainSearch :: mainSearch}"></div>
 
 <section class="main-page-suround-area-section">
     <article class="main-class-login-area">
-        <!-- Slide Class Include -->
-        <div th:replace="community/slideClass :: slideClass"></div>
-        <!-- Login Include -->
-        <div th:replace="member/mainLogin :: mainLogin"></div>
+        <div th:replace="~{community/slideClass :: slideClass}"></div>
+        <div th:replace="~{member/mainLogin :: mainLogin}"></div>
     </article>
 
     <!-- 이용시간 및 달력 -->
-    <div th:replace="intro/main_cal_hours :: mainCalHours"></div>
+    <div th:replace="~{intro/main_cal_hours :: mainCalHours}"></div>
 
     <article class="main-food-notice-area">
         <!-- 오늘의 메뉴 -->
 <!--    main 컨트롤러에서 food 리스트 반환해야함    -->
-        <div th:replace="food/mainFood :: mainFood"></div>
+        <div th:replace="~{food/mainFood :: mainFood}"></div>
         <!-- 공지사항 -->
 <!--    컨트롤러에서 boardList 반환해야함, 처리해야함-->
-        <div th:replace="user/mainNotice :: mainNotice"></div>
+        <div th:replace="~{user/mainNotice :: mainNotice}"></div>
     </article>
 </section>
 
-<!-- 달력 일정 모달 -->
-<div th:replace="intro/main_cal_modal :: mainCalModal"></div>
+<div th:replace="~{intro/main_cal_modal :: mainCalModal}"></div>
 
-<!-- Footer Include -->
-<div th:replace="common/footer :: footer"></div>
+<div th:replace="~{common/footer :: footer}"></div>
 </body>
 </html>

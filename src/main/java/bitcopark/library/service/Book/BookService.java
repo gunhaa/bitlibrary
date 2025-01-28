@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +24,22 @@ public class BookService {
     private final BookRepository bookRepository;
     private final BookLikeRepository bookLikeRepository;
     private final MemberRepository memberRepository;
+
+    @Transactional
+    public SearchBooklistAndLikelistDTO searchBooklistAndLikelist(BookSearchCondition bookSearchCondition){
+
+        List<BookSearchDto> books = bookRepository.findSearchConditionBooks(bookSearchCondition);
+
+        return new SearchBooklistAndLikelistDTO(books, null);
+    }
+
+    @Transactional
+    public SearchBooklistAndLikelistDTO searchDetailBooklistAndLikelist(BookSearchDetailCondition bookSearchDetailCondition) {
+
+        List<BookSearchDto> books = bookRepository.findSearchDetailConditionBooks(bookSearchDetailCondition);
+
+        return new SearchBooklistAndLikelistDTO(books, null);
+    }
 
     @Transactional
     public SearchBooklistAndLikelistDTO searchBooklistAndLikelist(BookSearchCondition bookSearchCondition, LoginMemberDTO loginMemberDTO){

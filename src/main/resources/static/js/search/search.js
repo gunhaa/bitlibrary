@@ -149,13 +149,16 @@ function showBookList(result){
 
         const span = document.createElement("span");
 
-        if(lList.findIndex(item => item.isbn === b.isbn) === -1){
-            span.innerText = "☆";
-        }else{
-            span.innerText = "★";
+        if(lList != null){
+            if(lList.findIndex(item => item.isbn === b.isbn) === -1){
+                span.innerText = "☆";
+            }else{
+                span.innerText = "★";
+            }
         }
 
-        span.setAttribute("onclick", `bookLike(this, ${b.isbn}, "${loginMemberNo}")`);
+//        span.setAttribute("onclick", `bookLike(this, ${b.isbn}, "${loginMemberNo}")`);
+        span.setAttribute("onclick", `bookLike(this, ${b.isbn})`);
 
         const p1 = document.createElement("p");
         p1.innerText = `${b.bookTitle}`;
