@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,6 @@ public class BookRequestController {
                                    @PageableDefault(page = 0, size = 10) Pageable pageable) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
         Page<BookRequestPageDto> bookRequestPageDto = bookRequestService.getBookRequestPage(pageable);
-        // Session에서 memberId얻어와서 DTO 객체에 추가해야함
         model.addAttribute("page", bookRequestPageDto);
 
         return "search/bookRequestBoard";
@@ -82,8 +83,15 @@ public class BookRequestController {
 
     @PostMapping("/{catLevel1:search}/book-req/apply/v1")
     @ResponseBody
-    public BookRequestResponseDto bookRequestApply(@RequestBody BookRequestCondition applyCondition,@RequestAttribute("loginMember")LoginMemberDTO loginMember){
+    public BookRequestResponseDto bookRequestApply(@RequestBody BookRequestCondition applyCondition, @RequestAttribute("loginMember")LoginMemberDTO loginMember){
         applyCondition.setEmail(loginMember.getEmail());
         return bookRequestService.registerBookRequest(applyCondition);
     }
+
+    @DeleteMapping("/{catLevel1:search}/book-req/delete/v1")
+    @ResponseBody
+    public ResponseEntity<?> bookRequestDelete(@RequestBody BookDeleteDto bookDeleteDto, @RequestAttribute("loginMember")LoginMemberDTO loginMember){
+        return bookRequestService.deleteBookRequest(bookDeleteDto, loginMember);
+    }
+
 }

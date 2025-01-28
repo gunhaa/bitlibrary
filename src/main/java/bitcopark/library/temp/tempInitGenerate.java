@@ -172,9 +172,13 @@ public class tempInitGenerate {
             Member member2 = memberService.joinMember("test2@email.com",  "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fC8pxQ 황건하2", "01087654321", MemberGender.FEMALE, LocalDate.of(1992, 02, 02), new Address("54321", "C동"));
             Member member3 = memberService.joinMember("test3@email.com",  "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fB8pxQ 황건하3", "01011112222", MemberGender.MALE, LocalDate.of(1993, 03, 03), new Address("11223", "B동"));
 
-            String email = "wh8299@naver.com";
-            String name = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
-            Member OAuthNaverGunha = memberService.joinOAuth2Member(email, name, "ROLE_ADMIN");
+            String naverEmail = "wh8299@naver.com";
+            String naverName = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
+            Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, "ROLE_ADMIN");
+
+            String googleEmail = "wh8299@gmail.com";
+            String googleName = "google 108061151955961388292 황건하";
+            Member OAuthGoogleGunha = memberService.joinOAuth2Member(googleEmail, googleName, "ROLE_USER");
 
             // 책 좋아요
             bookFavoriteService.addBookLike(member1, 명품_인생을_살아라);
