@@ -49,7 +49,7 @@ public class BookLikeService {
     }
 
     private Result findMemberAndBook(LikeCondition condition) {
-        Member findMember = memberRepository.findById(condition.getMemberId()).orElseThrow(() -> new IllegalArgumentException("not valid memberId"));
+        Member findMember = memberRepository.findByEmail(condition.getEmail()).orElseThrow(() -> new IllegalArgumentException("not valid email"));
         Book findBook = bookRepository.findByIsbn(condition.getIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
         return new Result(findMember, findBook);
     }

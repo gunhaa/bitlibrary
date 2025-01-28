@@ -44,7 +44,8 @@ public class SearchRestController {
     }
 
     @PostMapping("/{catLevel1:search}/books/like/v1")
-    public LikeStatus like(@RequestBody LikeCondition condition){
+    public LikeStatus like(@RequestBody LikeCondition condition, @RequestAttribute("loginMember") LoginMemberDTO loginMember){
+        condition.setEmail(loginMember.getEmail());
         return bookLikeService.toggleLike(condition);
     }
 

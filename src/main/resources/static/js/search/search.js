@@ -335,11 +335,6 @@ function addReservation(isbn){
 let likeStatus;
 function bookLike(el, isbn, memberId){
 
-    if(memberId == ""){
-        alert("로그인 후 이용해주세요.");
-        return;
-    }
-
     if(el.innerText == "☆"){
         likeStatus = 0;
     }else{
@@ -348,7 +343,6 @@ function bookLike(el, isbn, memberId){
 
     const data = {
         isbn : isbn,
-        memberId : memberId,
         likeStatus : likeStatus
     };
 
