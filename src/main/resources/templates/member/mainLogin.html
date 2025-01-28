@@ -29,15 +29,15 @@
             <table>
                 <tr>
                     <td>도서대출현황</td>
-                    <td th:text="0">대출현황</td>
+                    <td th:text="${bookStatus.bookBorrowCount}">대출현황</td>
                 </tr>
                 <tr class="second-tr">
                     <td>도서예약현황</td>
-                    <td th:text="0">예약현황</td>
+                    <td th:text="${bookStatus.bookReservationCount}">예약현황</td>
                 </tr>
                 <tr>
                     <td>연체도서</td>
-                    <td th:text="0">연체도서</td>
+                    <td th:text="${bookStatus.bookOverdueCount}">연체도서</td>
                 </tr>
             </table>
             <div class="main-login-btn-area main-logout-btn-area">

@@ -175,20 +175,9 @@ public class tempInitGenerate {
             Member member4 = memberService.joinMember("test4@email.com", "p", "member4", "01033334444", MemberGender.FEMALE, LocalDate.of(1994, 04, 04), new Address("33445", "A동"));
             Member member5 = memberService.joinMember("test5@email.com", "p", "member5", "01055556666", MemberGender.MALE, LocalDate.of(1995, 05, 05), new Address("55667", "E동"));
 
-
-//            String email = member1.getEmail();
-//            String username = member1.getName();
-//            String role = member1.getAuthority();
-//
-//            MemberDto memberDto = new MemberDto(email,username,role);
-//            CustomOAuth2User customOAuth2User = new CustomOAuth2User(memberDto);
-//
-//            Authentication authToken = new UsernamePasswordAuthenticationToken(customOAuth2User, null, customOAuth2User.getAuthorities());
-//            SecurityContextHolder.getContext().setAuthentication(authToken);
-//
-//            String access = jwtUtil.createJwt("access", customOAuth2User.getUsername(), customOAuth2User.getName(), role, 600000L);
-//
-//            System.out.println("access = " + access);
+            String email = "wh8299@naver.com";
+            String name = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
+            Member OAuthNaverGunha = memberService.joinOAuth2Member(email, name, "ROLE_USER");
 
             // 책 좋아요
             bookFavoriteService.addBookLike(member1, 명품_인생을_살아라);
@@ -202,7 +191,11 @@ public class tempInitGenerate {
             bookBorrowService.registerBookRental(member1, 백범일지);
             bookBorrowService.registerBookRental(member1, 디셉션_포인트);
 
+            bookBorrowService.registerBookRental(OAuthNaverGunha, 디셉션_포인트);
+            bookBorrowService.registerBookRental(OAuthNaverGunha, 백범일지);
+
             //책 예약
+            bookReservationService.registerBookReservation(OAuthNaverGunha, 백범일지);
             bookReservationService.registerBookReservation(member1, 백범일지);
             bookReservationService.registerBookReservation(member2, 백범일지);
             bookReservationService.registerBookReservation(member1, 디셉션_포인트);

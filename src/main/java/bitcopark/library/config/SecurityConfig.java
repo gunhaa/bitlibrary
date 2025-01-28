@@ -42,7 +42,9 @@ public class SecurityConfig {
         http.httpBasic((auth)->auth.disable());
 
         http.authorizeHttpRequests((auth)->
-                        auth.requestMatchers("/study").hasAuthority("ROLE_USER")
+                        auth.requestMatchers("/study/**").authenticated()
+                                .requestMatchers("/api/study/**").authenticated()
+                                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                                 .anyRequest().permitAll()
                 );
 
@@ -61,7 +63,7 @@ public class SecurityConfig {
                 );
 
 
-        http.addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshRepository), LogoutFilter.class);
+        //http.addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshRepository), LogoutFilter.class);
 
         return http.build();
     }

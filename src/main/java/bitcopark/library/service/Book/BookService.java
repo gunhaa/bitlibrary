@@ -6,12 +6,14 @@ import bitcopark.library.entity.book.BookState;
 import bitcopark.library.entity.book.BookSupple;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BookTitleNotFoundException;
+import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.repository.book.*;
 import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,22 +29,38 @@ public class BookService {
     public SearchBooklistAndLikelistDTO searchBooklistAndLikelist(BookSearchCondition bookSearchCondition){
 
         List<BookSearchDto> books = bookRepository.findSearchConditionBooks(bookSearchCondition);
-        List<BookLikeDto> bookLikeListByMemberId = getBookLikeDto(bookSearchCondition.getMemberId());
 
-        return new SearchBooklistAndLikelistDTO(books, bookLikeListByMemberId);
+        return new SearchBooklistAndLikelistDTO(books, null);
     }
 
     @Transactional
     public SearchBooklistAndLikelistDTO searchDetailBooklistAndLikelist(BookSearchDetailCondition bookSearchDetailCondition) {
 
         List<BookSearchDto> books = bookRepository.findSearchDetailConditionBooks(bookSearchDetailCondition);
-        List<BookLikeDto> bookLikeListByMemberId = getBookLikeDto(bookSearchDetailCondition.getMemberId());
+
+        return new SearchBooklistAndLikelistDTO(books, null);
+    }
+
+    @Transactional
+    public SearchBooklistAndLikelistDTO searchBooklistAndLikelist(BookSearchCondition bookSearchCondition, LoginMemberDTO loginMemberDTO){
+
+        List<BookSearchDto> books = bookRepository.findSearchConditionBooks(bookSearchCondition);
+        List<BookLikeDto> bookLikeListByMemberId = findBookLikeList(loginMemberDTO.getEmail());
 
         return new SearchBooklistAndLikelistDTO(books, bookLikeListByMemberId);
     }
 
-    private List<BookLikeDto> getBookLikeDto(Long bookSearchDetailCondition) {
-        Member findMember = memberRepository.findById(bookSearchDetailCondition).orElseThrow(() -> new IllegalArgumentException("memberId를 찾을 수 없습니다."));
+    @Transactional
+    public SearchBooklistAndLikelistDTO searchDetailBooklistAndLikelist(BookSearchDetailCondition bookSearchDetailCondition, LoginMemberDTO loginMemberDTO) {
+
+        List<BookSearchDto> books = bookRepository.findSearchDetailConditionBooks(bookSearchDetailCondition);
+        List<BookLikeDto> bookLikeListByMemberId = findBookLikeList(loginMemberDTO.getEmail());
+
+        return new SearchBooklistAndLikelistDTO(books, bookLikeListByMemberId);
+    }
+
+    private List<BookLikeDto> findBookLikeList(String email) {
+        Member findMember = memberRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("memberId를 찾을 수 없습니다."));
         return bookLikeRepository.findBookLikeListByMemberId(findMember.getId());
     }
 

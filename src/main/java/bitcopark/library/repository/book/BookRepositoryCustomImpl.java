@@ -85,7 +85,7 @@ public class BookRepositoryCustomImpl implements BookRepositoryCustom {
                         (JPAExpressions
                                 .select(bookBorrow.returnDueDate)
                                 .from(bookBorrow)
-                                .where(bookBorrow.book.id.eq(book.id).and(bookBorrow.returnDate.isNull()))
+                                .where(bookBorrow.book.eq(book).and(bookBorrow.returnDate.isNull()))
                         )
                 ))
                 .from(book)
