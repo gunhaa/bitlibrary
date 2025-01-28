@@ -109,7 +109,7 @@ if(searchDetailBtn != null){
 //            "&limit=" + limit +
 //            "&memberNo=" + loginMemberNo)
 
-        const url = `/search/books/detail/v1?query=${inputDetail[0].value}&author=${inputDetail[1].value}&pub=${inputDetail[2].value}&startYear=${inputDetail[3].value}&endYear=${inputDetail[4].value}&size=${limit}&memberId=${loginMemberNo}`;
+        const url = `/search/books/detail/v1?query=${inputDetail[0].value}&author=${inputDetail[1].value}&pub=${inputDetail[2].value}&startYear=${inputDetail[3].value}&endYear=${inputDetail[4].value}&size=${limit}`;
 
         fetch(url)
         .then(resp=>resp.json())
@@ -294,12 +294,6 @@ cancelBtn.addEventListener("click", ()=>{
 })
 
 function addReservation(isbn){
-
-    if(loginMemberNo == ""){
-        alert("로그인 후 이용해주세요");
-        modal.style.display = "none";
-        return;
-    }
 
     const url = `/search/books/reservation/v1`;
     const data = {
