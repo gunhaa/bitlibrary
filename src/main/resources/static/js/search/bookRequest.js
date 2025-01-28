@@ -3,7 +3,6 @@
 const requestBtn = document.getElementById("request-btn");
 document.getElementById('currentDate').value= new Date().toISOString().slice(0, 10);
 
-// 신청하기 버튼 클릭 시 모달을 여는 코드
 const popUpLayer = document.getElementById("popup_layer");
 document.addEventListener("DOMContentLoaded", function () {
     const confirmBtn = document.getElementById("confirm_btn");
@@ -13,14 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
         location.href="/search/book-req/list";
     });
 
-    // 모달 외부 클릭 시 닫기
-    /*window.addEventListener("click", function (e) {
-        if (e.target === popUpLayer) {
-            popUpLayer.style.display = 'none';
-        }
-    });*/
-   
- 
 });
 
 requestBtn.addEventListener("click", ()=>{
@@ -32,8 +23,6 @@ requestBtn.addEventListener("click", ()=>{
             return;
         }
     }
-
-    requestBtn.setAttribute("disabled", "disabled");
 
     const data = {
         isbn : input[0].value,
