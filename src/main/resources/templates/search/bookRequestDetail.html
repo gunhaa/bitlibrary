@@ -35,7 +35,7 @@
                     <tr>
                         <th>신청자</th>
                         <td>
-                            <span th:text="${bookRequestDetail.name}"></span>
+                            <span th:text="${bookRequestDetail.email}"></span>
                         </td>
 <!--                        <td>-->
 <!--									<span th:if="${loginMember.authority == 1}">-->
@@ -77,18 +77,18 @@
                 </table>
             </div>
             <div class="btn-area">
-<!--					<span th:if="${loginMember.memberNo == bookReq.memberNo}">-->
-<!--						<button id="updateBtn">수정</button>-->
-<!--					</span>-->
-
+                <th:block th:if="${loginMember != null && loginMember.email == bookRequestDetail.email}">
+                    <button id="updateBtn">수정</button>
+                    <button id="deleteBtn">삭제</button>-
+                </th:block>
 <!--                <span th:if="${loginMember.memberNo == bookReq.memberNo or loginMember.authority == 2}">-->
 <!--						<button id="deleteBtn">삭제</button>-->
 <!--					</span>-->
 
-<!--                <span th:if="${loginMember.authority == 2}">-->
-<!--						<button id="approvalBtn">승인</button>-->
-<!--						<button id="declinedBtn">거절</button>-->
-<!--                </span>-->
+                <th:block th:if="${loginMember != null && loginMember.role == 'ROLE_ADMIN'}">
+						<button id="approvalBtn">승인</button>
+						<button id="declinedBtn">거절</button>
+                </th:block>
 
                 <button id="goToListBtn">목록으로</button>
             </div>

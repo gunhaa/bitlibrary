@@ -28,7 +28,7 @@ public class BookRequestRepositoryCustomImpl implements BookRequestRepositoryCus
         QMember member = QMember.member;
         List<BookRequestPageDto> content = queryFactory.select(new QBookRequestPageDto(
                         bookRequest.isbn,
-                        member.name,
+                        member.email,
                         bookRequest.bookTitle,
                         bookRequest.bookRequestApprove,
                         bookRequest.createdDate
@@ -55,7 +55,7 @@ public class BookRequestRepositoryCustomImpl implements BookRequestRepositoryCus
         return queryFactory.select(new QBookRequestDetailDto(
                         bookRequest.bookRequestApprove,
                         bookRequest.createdDate,
-                        member.name,
+                        member.email,
                         bookRequest.bookTitle,
                         bookRequest.author,
                         bookRequest.publisher,

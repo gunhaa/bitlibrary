@@ -2,7 +2,7 @@ const updateBtn = document.getElementById("updateBtn");
 
 if(updateBtn != null){
     updateBtn.addEventListener("click",() => {
-        location.href = location.pathname.replace("book", "book2") + "/update" + location.search;
+        location.href = location.pathname + "/update" + location.search;
     })
 }
 

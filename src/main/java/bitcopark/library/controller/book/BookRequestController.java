@@ -52,14 +52,34 @@ public class BookRequestController {
     public String bookRequestBoardDetail(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
                                          @PathVariable(name = "catLevel1") String catLevel1,
                                          @PathVariable(name = "catLevel2") String catLevel2,
-                                         @PathVariable String isbn) {
+                                         @PathVariable String isbn,
+                                         @RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMember) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
         BookRequestDetailDto bookRequestDetailDto = bookRequestService.getBookRequestDetailsByIsbn(isbn);
-        // 임시 번호 1번 부여
-        bookRequestDetailDto.setMemberId(1L);
+        System.out.println("loginMember.getRole() = " + loginMember.getRole());
+        System.out.println("loginMember.getEmail() = " + loginMember.getEmail());
 
+        if(loginMember != null) {
+            bookRequestDetailDto.setLoginMemberEmail(loginMember.getEmail());
+        }
         model.addAttribute("bookRequestDetail" , bookRequestDetailDto);
         return "search/bookRequestDetail";
+    }
+
+    @GetMapping("/{catLevel1:search}/{catLevel2:book-req}/list/{isbn}/update")
+    public String bookRequestBoardUpdate(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
+                                         @PathVariable(name = "catLevel1") String catLevel1,
+                                         @PathVariable(name = "catLevel2") String catLevel2,
+                                         @PathVariable String isbn,
+                                         @RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMember) {
+        setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
+        BookRequestDetailDto bookRequestDetailDto = bookRequestService.getBookRequestDetailsByIsbn(isbn);
+
+        if(loginMember != null) {
+            bookRequestDetailDto.setLoginMemberEmail(loginMember.getEmail());
+        }
+        model.addAttribute("bookRequestDetail" , bookRequestDetailDto);
+        return "search/bookRequestUpdate";
     }
 
     @PostMapping("/{catLevel1:search}/book-req/apply/v1")

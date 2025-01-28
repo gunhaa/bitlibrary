@@ -14,6 +14,8 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
@@ -38,12 +40,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String name = oAuth2Response.getProvider()+" "+oAuth2Response.getProviderId()+" "+oAuth2Response.getName();
         String email = oAuth2Response.getEmail();
 
-        boolean isExist = memberRepository.existsByName(name);
+//        boolean isExist = memberRepository.existsByName(name);
 
-        if(!isExist){
+        Optional<Member> findMember = memberRepository.findByName(name);
+
+        if(findMember.isEmpty()){
             memberService.joinOAuth2Member(email, name, "ROLE_USER");
+            return new CustomOAuth2User(new MemberDto(email, name, "ROLE_USER"));
         }
 
-        return new CustomOAuth2User(new MemberDto(email,name,"ROLE_USER"));
+        return new CustomOAuth2User(new MemberDto(email,name,findMember.get().getAuthority()));
     }
 }
