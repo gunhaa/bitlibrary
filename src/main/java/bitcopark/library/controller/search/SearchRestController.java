@@ -4,6 +4,7 @@ import bitcopark.library.controller.book.BookRequestCondition;
 import bitcopark.library.controller.book.BookRequestResponseDto;
 import bitcopark.library.controller.book.BookSearchDetailCondition;
 import bitcopark.library.jwt.LoginMemberDTO;
+import bitcopark.library.repository.book.BookRequestRepository;
 import bitcopark.library.repository.book.BookSearchCondition;
 import bitcopark.library.service.Book.*;
 import bitcopark.library.service.Book.BookRequestService;
@@ -49,8 +50,4 @@ public class SearchRestController {
         return bookLikeService.toggleLike(condition);
     }
 
-    @PostMapping("/{catLevel1:search}/book-req/apply/v1")
-    public BookRequestResponseDto bookRequestApply(@RequestBody BookRequestCondition applyCondition){
-        return bookRequestService.registerBookRequest(applyCondition);
-    }
 }

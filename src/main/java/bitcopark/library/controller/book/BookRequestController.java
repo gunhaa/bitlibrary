@@ -1,6 +1,7 @@
 package bitcopark.library.controller.book;
 
 import bitcopark.library.aop.CategoryDTO;
+import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.service.Book.BookRequestDetailDto;
 import bitcopark.library.service.Book.BookRequestPageDto;
 import bitcopark.library.service.Book.BookRequestService;
@@ -10,9 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,10 +39,14 @@ public class BookRequestController {
     @GetMapping("/{catLevel1:search}/{catLevel2:book-req}/apply")
     public String bookReqApply(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
                                @PathVariable(name = "catLevel1") String catLevel1,
-                               @PathVariable(name = "catLevel2") String catLevel2) {
+                               @PathVariable(name = "catLevel2") String catLevel2,
+                               @RequestAttribute LoginMemberDTO loginMember) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
+        model.addAttribute("loginMember", loginMember);
         return "search/bookRequestForm";
     }
+
+
 
     @GetMapping("/{catLevel1:search}/{catLevel2:book-req}/list/{isbn}")
     public String bookRequestBoardDetail(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
@@ -57,5 +60,12 @@ public class BookRequestController {
 
         model.addAttribute("bookRequestDetail" , bookRequestDetailDto);
         return "search/bookRequestDetail";
+    }
+
+    @PostMapping("/{catLevel1:search}/book-req/apply/v1")
+    @ResponseBody
+    public BookRequestResponseDto bookRequestApply(@RequestBody BookRequestCondition applyCondition,@RequestAttribute("loginMember")LoginMemberDTO loginMember){
+        applyCondition.setEmail(loginMember.getEmail());
+        return bookRequestService.registerBookRequest(applyCondition);
     }
 }

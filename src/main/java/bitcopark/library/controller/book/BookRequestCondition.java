@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class BookRequestCondition {
 
     private String isbn;
-    private Long memberId;
+    private String email;
     private String bookTitle;
     private String bookAuthor;
     private String bookPublisher;

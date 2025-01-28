@@ -32,8 +32,7 @@
           </tr>
           <tr>
             <th>신청자</th>
-            <td>로그인된 사용자 이름</td>
-<!--            <td th:text="${loginMember.memberName}">로그인된 사용자 이름</td>-->
+            <td th:text="${loginMember.name}">로그인된 사용자 이름</td>
           </tr>
           <tr>
             <th>희망 도서명</th>
@@ -66,11 +65,9 @@
 </section>
 
 <!-- 공통 Request Modal -->
-<div th:replace="search/requestModal :: requestModal"></div>
+<div th:replace="~{search/requestModal :: requestModal}"></div>
 <!-- 공통 Footer -->
 <div th:replace="~{common/footer :: footer}"></div>
-
-<!-- js loginMember const 변수 삽입필요-->
 
 <script th:src="@{/js/search/bookRequest.js}"></script>
 </body>
