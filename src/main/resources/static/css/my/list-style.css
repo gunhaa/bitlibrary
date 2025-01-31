@@ -9,10 +9,16 @@
 	width: 200px;
 }
 
+.side-menu-article{
+    float: left;
+    width: 200px;
+    margin: 0;
+}
+
 .list-area{
 	float: right;
 	width: 774px;
-	margin-top: 70px;
+	margin-top: 50px;
 }
 
 .list-area > h1{
@@ -37,7 +43,7 @@
 
 }
 
-.nav-area > a{
+.nav-area > button{
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -49,7 +55,7 @@
 	cursor: pointer;
 }
 
-.nav-area > .selected{
+.nav-area > .select{
 	background-color: #8FB788;
 	color: white;
 }

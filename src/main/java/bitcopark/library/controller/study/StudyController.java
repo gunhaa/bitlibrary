@@ -23,21 +23,14 @@ import static bitcopark.library.controller.util.ControllerUtils.setCategoryAndRo
 @RequiredArgsConstructor
 public class StudyController {
 
-
     @GetMapping(value = {"/{catLevel1:study}/{catLevel2}/{catLevel3}", "/{catLevel1:study}/{catLevel2}/"})
     public String study(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
                         @PathVariable String catLevel1,
                         @PathVariable String catLevel2,
-                        @PathVariable(required = false) String catLevel3,
-                        @RequestParam(value = "sub", required = false) String subCategoryEngName) {
+                        @PathVariable(required = false) String catLevel3) {
 
-        CategoryRouterResult categoryRouterResult = setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, catLevel3);
-
-        CategoryRouter router = categoryRouterResult.router();
-        CategoryDTO categoryLevel3 = categoryRouterResult.categoryLevel3();
-        categoryLevel3.setSubCategoryEngName(subCategoryEngName);
-
-        return router.routing(categoryLevel3);
+        CategoryRouterResult result = setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, catLevel3);
+        return result.router().routing(result.categoryLevel3());
     }
 
 }
