@@ -16,4 +16,6 @@ public interface BookBorrowRepository extends JpaRepository<BookBorrow, Long> {
     Boolean existsByBook(Book book);
 
     List<BookBorrow> findByReturnDateIsNullAndMember(Member member);
+
+    Page<BookBorrow> findByReturnDateIsNotNullAndMember(Member member, Pageable pageable);
 }

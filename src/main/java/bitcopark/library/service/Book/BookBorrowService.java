@@ -48,4 +48,15 @@ public class BookBorrowService {
         return bookBorrowRepository.findByReturnDateIsNullAndMember(member)
                 .stream().map(BookLoanResponse::new).toList();
     }
+
+    public Page<BookLoanHistoryResponse> getBookLoanHistory(String email, Pageable pageable) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("not found member: " + email));
+
+        Page<BookBorrow> loanHistory = bookBorrowRepository.findByReturnDateIsNotNullAndMember(member, pageable);
+
+        List<BookLoanHistoryResponse> dtoList = loanHistory.getContent().stream().map(BookLoanHistoryResponse::new).toList();
+
+        return new PageImpl<>(dtoList, pageable, loanHistory.getTotalElements());
+    }
 }
