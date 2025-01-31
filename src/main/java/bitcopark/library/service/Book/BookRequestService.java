@@ -3,6 +3,7 @@ package bitcopark.library.service.Book;
 import bitcopark.library.controller.book.BookDeleteDto;
 import bitcopark.library.controller.book.BookRequestCondition;
 import bitcopark.library.controller.book.BookRequestResponseDto;
+import bitcopark.library.dto.BookApplicationResponse;
 import bitcopark.library.entity.member.BookRequest;
 import bitcopark.library.entity.member.BookRequestApprove;
 import bitcopark.library.entity.member.Member;
@@ -12,6 +13,7 @@ import bitcopark.library.repository.book.BookRequestRepository;
 import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -117,5 +120,16 @@ public class BookRequestService {
         }
 
         return new ResponseEntity<>("not valid request", HttpStatus.BAD_REQUEST);
+    }
+
+    public Page<BookApplicationResponse> getBookApplications(String email, Pageable pageable) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("not found member: " + email));
+
+        Page<BookRequest> bookApplications = bookRequestRepository.findByMember(member, pageable);
+
+        List<BookApplicationResponse> dtoList = bookApplications.getContent().stream().map(BookApplicationResponse::new).toList();
+
+        return new PageImpl<>(dtoList, pageable, bookApplications.getTotalElements());
     }
 }
