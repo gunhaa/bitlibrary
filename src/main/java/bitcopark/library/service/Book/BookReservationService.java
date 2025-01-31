@@ -57,4 +57,12 @@ public class BookReservationService {
 
         bookReservationRepository.delete(bookReservation);
     }
+
+    public List<BookReservationResponse> getBookReservations(String email) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("not found member: " + email));
+
+        return bookReservationRepository.findByMember(member)
+                .stream().map(BookReservationResponse::new).toList();
+    }
 }

@@ -41,6 +41,11 @@ public class StudyRestController {
         return bookBorrowService.getBookLoanHistory(loginMember.getEmail(), pageable);
     }
 
+    @GetMapping("/books/reservation")
+    public List<BookReservationResponse> getBookReservations(@RequestAttribute LoginMemberDTO loginMember) {
+        return bookReservationService.getBookReservations(loginMember.getEmail());
+    }
+
     @DeleteMapping("/reservation/book")
     public ResponseEntity<Void> cancelBookReservation(@RequestBody Long id, @RequestAttribute LoginMemberDTO loginMember) {
         bookReservationService.delete(id, loginMember.getEmail());
