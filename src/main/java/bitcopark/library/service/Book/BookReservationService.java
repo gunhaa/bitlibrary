@@ -1,6 +1,7 @@
 package bitcopark.library.service.Book;
 
 import bitcopark.library.controller.search.ReservationCondition;
+import bitcopark.library.dto.BookReservationResponse;
 import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookReservation;
 import bitcopark.library.entity.member.Member;
@@ -10,6 +11,8 @@ import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -47,7 +50,7 @@ public class BookReservationService {
     @Transactional
     public void delete(Long id, String email) {
         Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("not found member: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("not found member: " + email));
 
         BookReservation bookReservation = bookReservationRepository.findByIdAndMember(id, member)
                 .orElseThrow(() -> new IllegalArgumentException("not found bookReservation: " + id));

@@ -28,7 +28,7 @@ public class SeatReservationService {
     @Transactional
     public void delete(Long id, String email) {
         Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("not found member: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("not found member: " + email));
 
         SeatReservation seatReservation = seatReservationRepository.findByIdAndMember(id, member)
                 .orElseThrow(() -> new IllegalArgumentException("not found seatReservation: " + id));
