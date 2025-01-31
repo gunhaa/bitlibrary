@@ -1,12 +1,20 @@
 package bitcopark.library.service.Book;
 
+import bitcopark.library.dto.BookLoanHistoryResponse;
+import bitcopark.library.dto.BookLoanResponse;
 import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookBorrow;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.repository.book.BookBorrowRepository;
+import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -14,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookBorrowService {
 
     private final BookBorrowRepository bookBorrowRepository;
+    private final MemberRepository memberRepository;
 
     
     @Transactional
@@ -32,4 +41,11 @@ public class BookBorrowService {
         return bookBorrowRepository.save(bookBorrow);
     }
 
+    public List<BookLoanResponse> getCurrentlyBorrowedBooks(String email) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("not found member: " + email));
+
+        return bookBorrowRepository.findByReturnDateIsNullAndMember(member)
+                .stream().map(BookLoanResponse::new).toList();
+    }
 }
