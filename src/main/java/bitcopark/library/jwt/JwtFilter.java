@@ -57,7 +57,7 @@ public class JwtFilter extends OncePerRequestFilter {
             }
             // refresh토큰 테스트 후 재발급 로직 실행
             // 문제있는 refresh토큰을 가지고있다면 refresh토큰을 제거하고 다음 필터로 넘긴다.
-            if (jwtUtil.verifyJwt(refreshToken) || jwtUtil.getCategory(refreshToken).equals("refresh")) {
+            if (jwtUtil.verifyJwt(refreshToken) && jwtUtil.getCategory(refreshToken).equals("refresh")) {
                 try {
 
                     // DB 확인
@@ -92,7 +92,7 @@ public class JwtFilter extends OncePerRequestFilter {
                     response.addCookie(createAccessCookie("access", newAccess));
                     response.addCookie(createRefreshCookie("refresh", newRefresh));
                     //로그인 멤버 추가, 세션 부여
-                    setLoginMemberAndGetSession(request, response, filterChain, accessToken);
+                    setLoginMemberAndGetSession(request, response, filterChain, newAccess);
                     filterChain.doFilter(request, response);
                     return;
                     
@@ -111,7 +111,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         // 문제가 있는 access 토큰이라면 그것을 제거한다.
-        if (jwtUtil.verifyJwt(accessToken) || jwtUtil.getCategory(accessToken).equals("access")) {
+        if (jwtUtil.verifyJwt(accessToken) && jwtUtil.getCategory(accessToken).equals("access")) {
 
             try {
                 // 필요없는 로직일 수 있다
