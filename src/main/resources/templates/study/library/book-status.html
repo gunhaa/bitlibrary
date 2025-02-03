@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="/css/main-style.css">
     <link rel="stylesheet" href="/css/common/sideMenu.css">
-    <link rel="stylesheet" href="/css/my/list-style.css">
+    <link rel="stylesheet" href="/css/study/list-style.css">
 </head>
 <body>
 <!-- Header Include -->
@@ -25,20 +25,19 @@
             <button id="btnBookReservations">예약내역</button>
             <button id="btnBookApplications">신청내역</button>
         </div>
-        <p id="list-name"></p>
         <table id="list-table">
             <thead></thead>
             <tbody></tbody>
         </table>
         <div class="pagination-area">
-            <ul class="pagination" id="pagination">
-            </ul>
+            <ul class="pagination" id="pagination"></ul>
         </div>
     </section>
 </section>
 
 <!-- Footer Include -->
 <div th:replace="~{/common/footer :: footer}"></div>
-<script src="/js/my/library.js"></script>
+<script src="/js/study/book-status.js"></script>
+<script src="/js/study/fetchdata-table.js"></script>
 </body>
 </html>
