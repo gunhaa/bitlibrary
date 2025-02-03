@@ -1,9 +1,6 @@
 package bitcopark.library.controller.study;
 
-import bitcopark.library.dto.BookApplicationResponse;
-import bitcopark.library.dto.BookLoanHistoryResponse;
-import bitcopark.library.dto.BookLoanResponse;
-import bitcopark.library.dto.BookReservationResponse;
+import bitcopark.library.dto.*;
 import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.service.Book.BookBorrowService;
 import bitcopark.library.service.Book.BookLikeService;
@@ -51,25 +48,46 @@ public class StudyRestController {
         return bookRequestService.getBookApplications(loginMember.getEmail(), pageable);
     }
 
-    @DeleteMapping("/reservation/book")
+    @GetMapping("/seats/reservation")
+    public List<SeatReservationResponse> getSeatReservations(@RequestAttribute LoginMemberDTO loginMember) {
+        return seatReservationService.getSeatReservations(loginMember.getEmail());
+    }
+
+    @GetMapping("/rooms/reservation")
+    public List<RoomReservationResponse> getRoomReservations(@RequestAttribute LoginMemberDTO loginMember) {
+        return seatReservationService.getRoomReservations(loginMember.getEmail());
+    }
+
+    @GetMapping("/classes/applicant")
+    public List<ClassApplicantResponse> getClassApplicants(@RequestAttribute LoginMemberDTO loginMember) {
+        return classApplicantService.getClassApplicants(loginMember.getEmail());
+    }
+
+    @DeleteMapping("/book/reservation")
     public ResponseEntity<Void> cancelBookReservation(@RequestBody Long id, @RequestAttribute LoginMemberDTO loginMember) {
         bookReservationService.delete(id, loginMember.getEmail());
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/reservation/seat")
+    @DeleteMapping("/seat/reservation")
     public ResponseEntity<Void> cancelSeatReservation(@RequestBody Long id, @RequestAttribute LoginMemberDTO loginMember) {
         seatReservationService.delete(id, loginMember.getEmail());
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/applicant/class")
+    @DeleteMapping("/room/reservation")
+    public ResponseEntity<Void> cancelRoomReservation(@RequestBody Long id, @RequestAttribute LoginMemberDTO loginMember) {
+        seatReservationService.delete(id, loginMember.getEmail());
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/class/applicant")
     public ResponseEntity<Void> cancelClassApplicant(@RequestBody Long id, @RequestAttribute LoginMemberDTO loginMember) {
         classApplicantService.delete(id, loginMember.getEmail());
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/like/book")
+    @DeleteMapping("/book/like")
     public ResponseEntity<Void> cancelBookLike(@PathVariable Long id, @RequestAttribute LoginMemberDTO loginMember) {
         bookLikeService.delete(id, loginMember.getEmail());
         return ResponseEntity.noContent().build();

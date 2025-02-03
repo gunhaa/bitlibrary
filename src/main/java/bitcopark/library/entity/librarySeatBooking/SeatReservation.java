@@ -1,5 +1,6 @@
 package bitcopark.library.entity.librarySeatBooking;
 
+import bitcopark.library.entity.audit.CreatedAuditEntity;
 import bitcopark.library.entity.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class SeatReservation {
+public class SeatReservation extends CreatedAuditEntity {
 
     @Id
     @GeneratedValue
@@ -24,9 +25,6 @@ public class SeatReservation {
 
     private int seatNo;
 
-    @Builder.Default
-    private LocalDateTime reservationStart = LocalDateTime.now();
-
+    private LocalDateTime reservationStart;
     private LocalDateTime reservationEnd;
-
 }
