@@ -25,9 +25,9 @@
                 <table>
                     <tbody>
                     <tr class="request-tr">
-                        <th>제목</th>
+                        <th>isbn</th>
                         <td>
-                            <input type="text" maxlength="300" th:value="${bookRequestDetail.bookTitle}" />
+                            <input type="text" maxlength="300" th:value="${bookRequestDetail.isbn}" />
                         </td>
                     </tr>
                     <tr>
@@ -38,7 +38,7 @@
                     </tr>
                     <tr>
                         <th>신청자</th>
-                        <td th:text="${bookRequestDetail.email}"></td>
+                        <td id="requestEmail" th:text="${bookRequestDetail.email}"></td>
                     </tr>
                     <tr>
                         <th>희망 도서명</th>
@@ -85,6 +85,6 @@
 
 <div th:replace="~{common/footer :: footer}"></div>
 
-<script th:src="@{/js/search/bookRequestUpdate.js}"></script>
+<script src="/js/search/bookRequestUpdate.js"></script>
 </body>
 </html>

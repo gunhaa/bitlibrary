@@ -6,6 +6,7 @@ import bitcopark.library.service.Book.BookRequestDetailDto;
 import bitcopark.library.service.Book.BookRequestPageDto;
 import bitcopark.library.service.Book.QBookRequestDetailDto;
 import bitcopark.library.service.Book.QBookRequestPageDto;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -60,7 +61,8 @@ public class BookRequestRepositoryCustomImpl implements BookRequestRepositoryCus
                         bookRequest.author,
                         bookRequest.publisher,
                         bookRequest.publicationDate,
-                        bookRequest.opinion
+                        bookRequest.opinion,
+                        bookRequest.isbn
                 ))
                 .from(bookRequest)
                 .leftJoin(bookRequest.member, member)
@@ -69,4 +71,5 @@ public class BookRequestRepositoryCustomImpl implements BookRequestRepositoryCus
                 )
                 .fetchOne();
     }
+
 }

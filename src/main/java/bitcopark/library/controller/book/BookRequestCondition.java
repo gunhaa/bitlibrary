@@ -15,4 +15,7 @@ public class BookRequestCondition {
     private LocalDate bookPublicationDate;
     private String opinion;
 
+    // bookRequestUpdate에서 사용
+    private String prevIsbn;
+
 }

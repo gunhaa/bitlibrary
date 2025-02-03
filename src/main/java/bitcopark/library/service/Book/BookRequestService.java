@@ -1,5 +1,6 @@
 package bitcopark.library.service.Book;
 
+import bitcopark.library.controller.book.BookApproveDto;
 import bitcopark.library.controller.book.BookDeleteDto;
 import bitcopark.library.controller.book.BookRequestCondition;
 import bitcopark.library.controller.book.BookRequestResponseDto;
@@ -22,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -97,15 +97,53 @@ public class BookRequestService {
 
     @Transactional
     public BookRequestDetailDto getBookRequestDetailsByIsbn(String isbn) {
-        // logic
         return bookRequestRepository.getBookRequestDetail(isbn);
+    }
+
+    @Transactional
+    public ResponseEntity<?> updateBookRequest(BookRequestCondition updateCondition, LoginMemberDTO loginMember) {
+
+        if(loginMember.getEmail().equals(updateCondition.getEmail())){
+
+            if(bookRequestRepository.existsByIsbn(updateCondition.getIsbn())){
+               return new ResponseEntity<>("bookRequest isbn exist" ,HttpStatus.BAD_REQUEST);
+            }
+
+            BookRequest findByIsbn = bookRequestRepository.findByIsbn(updateCondition.getPrevIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
+            findByIsbn.bookRequestStatusUpdate(updateCondition);
+            return new ResponseEntity<>("bookRequest update success", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("not valid request", HttpStatus.BAD_REQUEST);
+    }
+
+
+    @Transactional
+    public ResponseEntity<?> approveStatusChangeBookRequest(BookApproveDto bookApproveDto, LoginMemberDTO loginMember) {
+
+        if(loginMember.getRole().equals("ROLE_ADMIN")){
+            BookRequest findByIsbn = bookRequestRepository.findByIsbn(bookApproveDto.getIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
+            String approvalStatus = bookApproveDto.getApproval();
+            findByIsbn.bookApprovalStatusChange(approvalStatus);
+            return new ResponseEntity<>("bookRequest status change success", HttpStatus.OK);
+        }
+
+        BookRequest findByEmail = bookRequestRepository.findByEmail(loginMember.getEmail()).orElseThrow(() -> new IllegalArgumentException("not valid email"));
+        BookRequest findByIsbn = bookRequestRepository.findByIsbn(bookApproveDto.getIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
+
+        if(findByEmail == findByIsbn){
+            String approvalStatus = bookApproveDto.getApproval();
+            findByEmail.bookApprovalStatusChange(approvalStatus);
+            return new ResponseEntity<>("bookRequest status change success", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("not valid request", HttpStatus.BAD_REQUEST);
     }
 
     @Transactional
     public ResponseEntity<?> deleteBookRequest(BookDeleteDto bookDeleteDto, LoginMemberDTO loginMember) {
 
         if(loginMember.getRole().equals("ROLE_ADMIN")){
-            System.out.println("관리자여서 삭제 실행");
             bookRequestRepository.deleteByIsbn(bookDeleteDto.getIsbn());
             return new ResponseEntity<>("bookRequest delete success", HttpStatus.OK);
         }
@@ -114,7 +152,6 @@ public class BookRequestService {
         BookRequest findByIsbn = bookRequestRepository.findByIsbn(bookDeleteDto.getIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
 
         if(findByEmail == findByIsbn){
-            System.out.println("같은 객체가 발견되어 삭제 실행");
             bookRequestRepository.deleteByIsbn(bookDeleteDto.getIsbn());
             return new ResponseEntity<>("bookRequest delete success", HttpStatus.OK);
         }
@@ -132,4 +169,7 @@ public class BookRequestService {
 
         return new PageImpl<>(dtoList, pageable, bookApplications.getTotalElements());
     }
+
+
+
 }

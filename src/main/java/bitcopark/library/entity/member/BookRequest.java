@@ -1,5 +1,6 @@
 package bitcopark.library.entity.member;
 
+import bitcopark.library.controller.book.BookRequestCondition;
 import bitcopark.library.entity.audit.BaseAuditEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,4 +37,22 @@ public class BookRequest extends BaseAuditEntity {
     private Member member;
 
 
+    public void bookApprovalStatusChange(String approval){
+        if(approval.equals("Y")){
+            this.bookRequestApprove = BookRequestApprove.Y;
+        } else if(approval.equals("N")){
+            this.bookRequestApprove = BookRequestApprove.N;
+        } else if(approval.equals("W")){
+            this.bookRequestApprove = BookRequestApprove.W;
+        }
+    }
+
+    public void bookRequestStatusUpdate(BookRequestCondition bookRequestCondition){
+        this.isbn = bookRequestCondition.getIsbn();
+        this.bookTitle = bookRequestCondition.getBookTitle();
+        this.author = bookRequestCondition.getBookAuthor();
+        this.publisher = bookRequestCondition.getBookPublisher();
+        this.publicationDate = bookRequestCondition.getBookPublicationDate();
+        this.opinion = bookRequestCondition.getOpinion();
+    }
 }

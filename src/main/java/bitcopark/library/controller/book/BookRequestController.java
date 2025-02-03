@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,7 +56,6 @@ public class BookRequestController {
                                          @RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMember) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
         BookRequestDetailDto bookRequestDetailDto = bookRequestService.getBookRequestDetailsByIsbn(isbn);
-
         if(loginMember != null) {
             bookRequestDetailDto.setLoginMemberEmail(loginMember.getEmail());
         }
@@ -77,6 +75,7 @@ public class BookRequestController {
         if(loginMember != null) {
             bookRequestDetailDto.setLoginMemberEmail(loginMember.getEmail());
         }
+
         model.addAttribute("bookRequestDetail" , bookRequestDetailDto);
         return "search/bookRequestUpdate";
     }
@@ -94,4 +93,15 @@ public class BookRequestController {
         return bookRequestService.deleteBookRequest(bookDeleteDto, loginMember);
     }
 
+    @PostMapping("/{catLevel1:search}/book-req/approve/toggle/v1")
+    @ResponseBody
+    public ResponseEntity<?> bookRequestApproveStatusChange(@RequestBody BookApproveDto bookApproveDto, @RequestAttribute("loginMember")LoginMemberDTO loginMember){
+        return bookRequestService.approveStatusChangeBookRequest(bookApproveDto, loginMember);
+    }
+
+    @PostMapping("/{catLevel1:search}/book-req/update/v1")
+    @ResponseBody
+    public ResponseEntity<?> bookRequestUpdate(@RequestBody BookRequestCondition updateCondition, @RequestAttribute("loginMember")LoginMemberDTO loginMember){
+        return bookRequestService.updateBookRequest(updateCondition, loginMember);
+    }
 }
