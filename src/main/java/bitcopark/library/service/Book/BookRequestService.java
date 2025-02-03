@@ -97,9 +97,26 @@ public class BookRequestService {
 
     @Transactional
     public BookRequestDetailDto getBookRequestDetailsByIsbn(String isbn) {
-        // logic
         return bookRequestRepository.getBookRequestDetail(isbn);
     }
+
+    @Transactional
+    public ResponseEntity<?> updateBookRequest(BookRequestCondition updateCondition, LoginMemberDTO loginMember) {
+
+        if(loginMember.getEmail().equals(updateCondition.getEmail())){
+
+            if(bookRequestRepository.existsByIsbn(updateCondition.getIsbn())){
+               return new ResponseEntity<>("bookRequest isbn exist" ,HttpStatus.BAD_REQUEST);
+            }
+
+            BookRequest findByIsbn = bookRequestRepository.findByIsbn(updateCondition.getPrevIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
+            findByIsbn.bookRequestStatusUpdate(updateCondition);
+            return new ResponseEntity<>("bookRequest update success", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("not valid request", HttpStatus.BAD_REQUEST);
+    }
+
 
     @Transactional
     public ResponseEntity<?> approveStatusChangeBookRequest(BookApproveDto bookApproveDto, LoginMemberDTO loginMember) {
@@ -152,6 +169,7 @@ public class BookRequestService {
 
         return new PageImpl<>(dtoList, pageable, bookApplications.getTotalElements());
     }
+
 
 
 }

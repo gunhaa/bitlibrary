@@ -56,7 +56,6 @@ public class BookRequestController {
                                          @RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMember) {
         setCategoryInModel(model, categoryDTOList, catLevel1, catLevel2);
         BookRequestDetailDto bookRequestDetailDto = bookRequestService.getBookRequestDetailsByIsbn(isbn);
-
         if(loginMember != null) {
             bookRequestDetailDto.setLoginMemberEmail(loginMember.getEmail());
         }
@@ -76,6 +75,7 @@ public class BookRequestController {
         if(loginMember != null) {
             bookRequestDetailDto.setLoginMemberEmail(loginMember.getEmail());
         }
+
         model.addAttribute("bookRequestDetail" , bookRequestDetailDto);
         return "search/bookRequestUpdate";
     }
@@ -99,4 +99,9 @@ public class BookRequestController {
         return bookRequestService.approveStatusChangeBookRequest(bookApproveDto, loginMember);
     }
 
+    @PostMapping("/{catLevel1:search}/book-req/update/v1")
+    @ResponseBody
+    public ResponseEntity<?> bookRequestUpdate(@RequestBody BookRequestCondition updateCondition, @RequestAttribute("loginMember")LoginMemberDTO loginMember){
+        return bookRequestService.updateBookRequest(updateCondition, loginMember);
+    }
 }

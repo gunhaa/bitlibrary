@@ -1,5 +1,6 @@
 package bitcopark.library.entity.member;
 
+import bitcopark.library.controller.book.BookRequestCondition;
 import bitcopark.library.entity.audit.BaseAuditEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,5 +45,14 @@ public class BookRequest extends BaseAuditEntity {
         } else if(approval.equals("W")){
             this.bookRequestApprove = BookRequestApprove.W;
         }
+    }
+
+    public void bookRequestStatusUpdate(BookRequestCondition bookRequestCondition){
+        this.isbn = bookRequestCondition.getIsbn();
+        this.bookTitle = bookRequestCondition.getBookTitle();
+        this.author = bookRequestCondition.getBookAuthor();
+        this.publisher = bookRequestCondition.getBookPublisher();
+        this.publicationDate = bookRequestCondition.getBookPublicationDate();
+        this.opinion = bookRequestCondition.getOpinion();
     }
 }

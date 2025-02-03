@@ -19,9 +19,10 @@ public class BookRequestDetailDto {
     private LocalDate bookPublicationDate;
     private String opinion;
     private String loginMemberEmail;
+    private String isbn;
 
     @QueryProjection
-    public BookRequestDetailDto(BookRequestApprove bookRequestApprove, LocalDateTime bookRequestCreatedDate, String email, String bookTitle, String bookAuthor, String bookPublisher, LocalDate bookPublicationDate, String opinion) {
+    public BookRequestDetailDto(BookRequestApprove bookRequestApprove, LocalDateTime bookRequestCreatedDate, String email, String bookTitle, String bookAuthor, String bookPublisher, LocalDate bookPublicationDate, String opinion, String isbn) {
         this.bookRequestApprove = bookRequestApprove;
         this.bookRequestCreatedDate = bookRequestCreatedDate.toLocalDate();
         this.email = email;
@@ -30,5 +31,6 @@ public class BookRequestDetailDto {
         this.bookPublisher = bookPublisher;
         this.bookPublicationDate = bookPublicationDate;
         this.opinion = opinion;
+        this.isbn = isbn;
     }
 }

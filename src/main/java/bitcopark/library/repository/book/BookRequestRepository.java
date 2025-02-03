@@ -15,6 +15,8 @@ public interface BookRequestRepository extends JpaRepository<BookRequest, Long>,
     @Query("select bq from BookRequest bq join fetch bq.member m where m.email = :email")
     Optional<BookRequest> findByEmail(String email);
 
+    boolean existsByIsbn(String isbn);
+
     Optional<BookRequest> findByIsbn(String isbn);
 
     @Transactional
