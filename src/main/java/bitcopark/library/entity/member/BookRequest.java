@@ -36,4 +36,13 @@ public class BookRequest extends BaseAuditEntity {
     private Member member;
 
 
+    public void bookApprovalStatusChange(String approval){
+        if(approval.equals("Y")){
+            this.bookRequestApprove = BookRequestApprove.Y;
+        } else if(approval.equals("N")){
+            this.bookRequestApprove = BookRequestApprove.N;
+        } else if(approval.equals("W")){
+            this.bookRequestApprove = BookRequestApprove.W;
+        }
+    }
 }

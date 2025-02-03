@@ -26,14 +26,19 @@ if(deleteBtn != null){
             })
             .then(resp => resp.text())
             .then(result => {
-                console.log(result);
-//                const currentUrl = new URL(window.location.href);
-//
-//                const path = currentUrl.pathname.split('/').pop();
-//
-//                currentUrl.pathname = path.join('/');
-//
-//                window.location.href = currentUrl.toString();
+
+                if(result == "bookRequest delete success"){
+
+                    if (document.referrer) {
+                        window.location.href = document.referrer;
+                    } else {
+                        history.back();
+                    }
+
+                } else if (result == "not valid request"){
+                    alert("삭제 중 문제가 발생하였습니다. 다시 시도해주세요");
+                }
+
             })
             .catch(e => console.log(e))
         }
@@ -50,25 +55,35 @@ const approvalBtn = document.getElementById("approvalBtn");
 if(approvalBtn != null){
     approvalBtn.addEventListener("click", ()=>{
 
-        const obj = {
-            requestNo : requestNo,
+        const url = window.location.pathname;
+        const isbn = url.split('/')[4];
+
+        const data = {
+            isbn : isbn,
             approval : "Y"
         };
 
         if(confirm("승인하시겠습니까?")){
-            fetch("/book2/admin/approve", {
+            fetch("/search/book-req/approve/toggle/v1", {
                 method : "POST",
                 headers : {"Content-Type" : "application/json"},
-                body : JSON.stringify(obj)
+                body : JSON.stringify(data)
             })
             .then(resp => resp.text())
             .then(result => {
-                if(result > 0){
-                    alert("도서 신청 승인 완료");
-                    location.replace("/book/2/1" + location.search)
-                }else{
-                    alert("도서 신청 승인 실패 ㅠㅠ")
+                console.log(result);
+                if(result == "bookRequest status change success"){
+
+                    if (document.referrer) {
+                        window.location.href = document.referrer;
+                    } else {
+                        history.back();
+                    }
+
+                } else if (result == "not valid request"){
+                    alert("삭제 중 문제가 발생하였습니다. 다시 시도해주세요");
                 }
+
             })
             .catch(e => console.log(e))
         }
@@ -79,27 +94,35 @@ const declinedBtn = document.getElementById("declinedBtn");
 if(declinedBtn != null){
     declinedBtn.addEventListener("click", ()=>{
 
-        const obj = {
-            requestNo : requestNo,
+        const url = window.location.pathname;
+        const isbn = url.split('/')[4];
+
+        const data = {
+            isbn : isbn,
             approval : "N"
         };
 
         if(confirm("거절하시겠습니까?")){
-            fetch("/book2/admin/approve", {
+            fetch("/search/book-req/approve/toggle/v1", {
                 method : "POST",
                 headers : {"Content-Type" : "application/json"},
-                body : JSON.stringify(obj)
+                body : JSON.stringify(data)
             })
             .then(resp => resp.text())
             .then(result => {
-                if(result > 0){
-                    if(result > 0){
-                        alert("도서 신청 거절 완료");
-                        location.replace("/book/2/1" + location.search)
-                    }else{
-                        alert("도서 신청 거절 실패 ㅠㅠ")
+                console.log(result);
+                if(result == "bookRequest status change success"){
+
+                    if (document.referrer) {
+                        window.location.href = document.referrer;
+                    } else {
+                        history.back();
                     }
+
+                } else if (result == "not valid request"){
+                    alert("삭제 중 문제가 발생하였습니다. 다시 시도해주세요");
                 }
+
             })
             .catch(e => console.log(e))
         }

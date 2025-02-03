@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,6 +91,12 @@ public class BookRequestController {
     @ResponseBody
     public ResponseEntity<?> bookRequestDelete(@RequestBody BookDeleteDto bookDeleteDto, @RequestAttribute("loginMember")LoginMemberDTO loginMember){
         return bookRequestService.deleteBookRequest(bookDeleteDto, loginMember);
+    }
+
+    @PostMapping("/{catLevel1:search}/book-req/approve/toggle/v1")
+    @ResponseBody
+    public ResponseEntity<?> bookRequestApproveStatusChange(@RequestBody BookApproveDto bookApproveDto, @RequestAttribute("loginMember")LoginMemberDTO loginMember){
+        return bookRequestService.approveStatusChangeBookRequest(bookApproveDto, loginMember);
     }
 
 }
