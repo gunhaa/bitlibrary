@@ -1,13 +1,16 @@
 package bitcopark.library.service.Class;
 
-import bitcopark.library.entity.clazz.ClassApplicant;
+import bitcopark.library.dto.ClassApplicantResponse;
 import bitcopark.library.entity.board.Board;
+import bitcopark.library.entity.clazz.ClassApplicant;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.repository.clazz.ClassApplicantRepository;
 import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +38,13 @@ public class ClassApplicantService {
                 .orElseThrow(() -> new IllegalArgumentException("not found classApplicant: " + id));
 
         classApplicantRepository.delete(classApplicant);
+    }
+
+    public List<ClassApplicantResponse> getClassApplicants(String email) {
+        Member member = memberRepository.findByEmail(email).
+                orElseThrow(() -> new IllegalArgumentException("not found member: " + email));
+
+        return classApplicantRepository.findByMember(member)
+                .stream().map(ClassApplicantResponse::new).toList();
     }
 }

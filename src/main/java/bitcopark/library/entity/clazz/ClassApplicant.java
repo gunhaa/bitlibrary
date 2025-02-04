@@ -3,13 +3,11 @@ import bitcopark.library.entity.audit.BaseAuditEntity;
 import bitcopark.library.entity.board.Board;
 import bitcopark.library.entity.member.Member;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class ClassApplicant extends BaseAuditEntity {
