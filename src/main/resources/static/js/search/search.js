@@ -9,9 +9,6 @@ const options = document.querySelectorAll("#key > option");
 
 let key;
 
-
-// ---- temp ----
-
 function getSelectedKey() {
     const select = document.getElementById('key');
     return select.value; // 현재 선택된 option의 value 반환
@@ -55,19 +52,8 @@ if(searchBtn != null){
     }
 
 }
-// 원본 loginMember는 왜 있음?
-//function search(query, key){
-//    fetch("/book/search?query=" + query +
-//        "&key=" + key + "&memberNo=" + loginMemberNo)
-//    .then(resp => resp.json())
-//    .then(result => {
-//        showBookList(result);
-//    })
-//    .catch(e => console.log(e))
-//}
 
 function search(query, key){
-//    fetch("/search/books/v1?query=" + query + "&key=" + key)
     fetch(`/search/books/v1?query=${query}&key=${key}`)
     .then(resp => resp.json())
     .then(result => {

@@ -24,14 +24,11 @@
         <div th:replace="~{member/mainLogin :: mainLogin}"></div>
     </article>
 
-    <!-- 이용시간 및 달력 -->
     <div th:replace="~{intro/main_cal_hours :: mainCalHours}"></div>
 
     <article class="main-food-notice-area">
-        <!-- 오늘의 메뉴 -->
 <!--    main 컨트롤러에서 food 리스트 반환해야함    -->
         <div th:replace="~{food/mainFood :: mainFood}"></div>
-        <!-- 공지사항 -->
 <!--    컨트롤러에서 boardList 반환해야함, 처리해야함-->
         <div th:replace="~{user/mainNotice :: mainNotice}"></div>
     </article>

@@ -74,19 +74,27 @@
     </div>
   </section>
 </section>
-<!--추가 해야함 오류 있음-->
 <div th:replace="~{search/searchModal :: searchModal}"></div>
 
 <div th:replace="~{common/footer :: footer}"></div>
 
-<!--<script>-->
-<!-- 로그인 미개발-->
-<!--로그인 멤버 넘겨야함-->
-<!--</script>-->
-<script>
-
-</script>
 
 <script src="/js/search/search.js"></script>
+
+<script>
+  const searchBookList = /*[[${searchBookList}]]*/ [];
+    window.onload = () => {
+    if (searchBookList) {
+      console.log("함수 실행");
+      const params = new URLSearchParams(window.location.search);
+
+      const query = params.get("query");
+      const key = params.get("key");
+
+      search(query, key);
+    }
+  };
+</script>
+
 </body>
 </html>

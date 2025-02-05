@@ -3,11 +3,9 @@
 <div id="popup_layer" th:fragment="searchModal">
     <div class="popup_box_res">
         <div class="popup_header">
-            <!-- 안에 p 태그로 -->
             <p>도서 예약</p>
         </div>
         <div th:fragment="searchModal">
-            <!-- 팝업 컨텐츠 영역 -->
             <div class="popup_content">
                 <div class="popup_content_top">
                     <div id="message_box" th:text="${message}"></div> <!-- 메시지 내용 -->
@@ -28,7 +26,6 @@
                     </div>
                 </div>
 
-                <!-- 팝업 버튼 영역 -->
                 <div class="popup_btn">
                     <button id="confirm_btn">확인</button>
                     <button id="cancel_btn">취소</button>
