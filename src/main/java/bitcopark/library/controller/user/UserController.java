@@ -11,6 +11,7 @@ import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.service.Board.BoardService;
 import bitcopark.library.service.Board.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,15 +103,24 @@ public class UserController {
         model.addAttribute("board", board);
 
         if (files != null && files.length > 0) {
-            List<BoardImg> boardImgList = new ArrayList<>();
-            for( int i = 0; i < files.length; i++ ) {
-                if (!files[i].isEmpty()) {
-                    BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), i);
-                    boardImgList.add(boardImg);
+            try{
+                String path = new ClassPathResource("static/").getFile().getAbsolutePath();
+                List<BoardImg> boardImgList = new ArrayList<>();
+
+                for( int i = 0; i < files.length; i++ ) {
+                    if (!files[i].isEmpty()) {
+                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), i);
+                        files[i].transferTo(new File(path + boardImg.getRenameImg()));
+                        boardImgList.add(boardImg);
+                    }
                 }
+
+                model.addAttribute("boardImgList", boardImgList);
+            }catch(IOException e){
+
             }
-            model.addAttribute("boardImgList", boardImgList);
         }
+
         return "user/boardDetail";
     }
 }

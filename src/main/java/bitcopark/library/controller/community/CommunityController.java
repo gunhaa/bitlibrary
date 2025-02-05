@@ -7,10 +7,13 @@ import bitcopark.library.dto.ClassScheduleRequestDTO;
 import bitcopark.library.entity.board.Board;
 import bitcopark.library.entity.board.BoardImg;
 import bitcopark.library.entity.board.Category;
+import bitcopark.library.entity.clazz.ClassSchedule;
 import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.service.Board.BoardService;
 import bitcopark.library.service.Board.CategoryService;
+import bitcopark.library.service.Class.ClassScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +34,7 @@ public class CommunityController {
 
     private final BoardService boardService;
     private final CategoryService categoryService;
+    private final ClassScheduleService classScheduleService;
 
     @GetMapping(value="{catLevel1:community}/{catLevel2:reading-room|seminar-room}")
     public String community(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
@@ -66,6 +72,7 @@ public class CommunityController {
 
         return "community/eduCultureProgramWrite";
     }
+
     @PostMapping(value="{catLevel1:community}/{catLevel2:edu-culture-program}/insert")
     public String insertBoard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
             , @PathVariable(name = "catLevel1") String catLevel1
@@ -80,19 +87,29 @@ public class CommunityController {
         Category category = categoryService.getCategoryEngName(catLevel2);
 
         Board board = boardService.writePost(loginMemberDTO, boardRequestDTO, category);
-
         model.addAttribute("board", board);
 
         if (files != null && files.length > 0) {
-            List<BoardImg> boardImgList = new ArrayList<>();
-            for( int i = 0; i < files.length; i++ ) {
-                if (!files[i].isEmpty()) {
-                    BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), i);
-                    boardImgList.add(boardImg);
+            try{
+                String path = new ClassPathResource("static/").getFile().getAbsolutePath();
+                List<BoardImg> boardImgList = new ArrayList<>();
+
+                for( int i = 0; i < files.length; i++ ) {
+                    if (!files[i].isEmpty()) {
+                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), i);
+                        files[i].transferTo(new File(path + boardImg.getRenameImg()));
+                        boardImgList.add(boardImg);
+                    }
                 }
+
+                model.addAttribute("boardImgList", boardImgList);
+            }catch(IOException e){
+
             }
-            model.addAttribute("boardImgList", boardImgList);
         }
+
+        ClassSchedule classSchedule = classScheduleService.registClassSchedule(board, classRequestDTO);
+        model.addAttribute("classSchedule", classSchedule);
 
         return "community/eduCultureProgramDetail";
     }
