@@ -2,9 +2,6 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-# Gradle 실행을 위한 환경 변수 설정 (옵션)
-ENV GRADLE_USER_HOME=/app/.gradle
-
 # 소스 코드 복사
 COPY . .
 
