@@ -12,4 +12,4 @@ RUN chmod +x ./gradlew
 RUN ./gradlew build -x test
 
 # 빌드된 JAR 파일을 실행
-CMD ["java", "-jar", "build/libs/web-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/build/libs/library-0.0.1-SNAPSHOT.jar"]

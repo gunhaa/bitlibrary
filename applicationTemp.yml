@@ -1,13 +1,15 @@
+server:
+  port: 8080
 spring:
   profiles:
     active: local
   thymeleaf:
     cache: false
   datasource:
-    url: jdbc:mysql://mysql-container:3306/bitlibrary
-    username: root
-    password: bitlibrary1549
     driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+    url: jdbc:mysql://mysql-container:3306/bitlibrary
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,6 +17,7 @@ spring:
       hibernate:
         format_sql: true
         use_sql_comments: true
+        dialect: org.hibernate.dialect.MySQLDialect
   security:
     oauth2:
       client:
