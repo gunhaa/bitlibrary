@@ -21,6 +21,8 @@ public class BoardImg {
 
     private String renameImg;
 
+    private String pathImg;
+
     private int orderImg;
 
     @ManyToOne(fetch = FetchType.LAZY)

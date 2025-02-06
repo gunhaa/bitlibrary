@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +43,10 @@ public class BoardService {
     @Transactional
     public void updatePost(LoginMemberDTO memberDTO, BoardRequestDTO boardRequestDTO, Category category) {
 
+    }
+
+    public Optional<Board> selectBoard(Long id) {
+        return boardRepository.findById(id);
     }
 
     // AOP같은 로직을 통한 인증 필요

@@ -22,7 +22,7 @@ public class Reply extends BaseAuditEntity {
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private ReplyDelFlag replyDelFlag = ReplyDelFlag.N;;
+    private ReplyDelFlag replyDelFlag = ReplyDelFlag.N;
 
     @JoinColumn(name = "member_id")
     @ManyToOne(fetch = FetchType.LAZY)

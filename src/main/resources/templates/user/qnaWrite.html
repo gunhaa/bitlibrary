@@ -24,7 +24,7 @@
         <form action="@{/user/{cateEngName}/insert(cateEngName=${cateEngName})}" method="POST" class="board-write" id="boardWriteFrm">
             <!-- 제목 -->
             <h1 class="board-title">
-                <input type="text" name="boardTitle" placeholder="제목 입력">
+                <input type="text" name="title" placeholder="제목 입력">
             </h1>
 
             <!-- 작성자 이름 영역 -->
@@ -33,17 +33,17 @@
             <!-- 공개/비공개 -->
             <div class="board-type">
                 <span>공개 여부</span>
-                <input type="radio" name="boardSecretFlag" id="public" value="N">
+                <input type="radio" name="secretFlag" id="public" value="N">
                 <label for="public">공개</label>
 
-                <input type="radio" name="boardSecretFlag" id="private" value="Y">
+                <input type="radio" name="secretFlag" id="private" value="Y">
                 <label for="private">비공개</label>
             </div>
 
 
             <!-- 내용 -->
             <div class="board-content">
-                <textarea name="boardContent"></textarea>
+                <textarea name="content"></textarea>
             </div>
 
             <!-- 버튼 영역 -->
