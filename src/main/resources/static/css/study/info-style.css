@@ -1,17 +1,18 @@
 .container{
-	display: flex;
-	justify-content: space-between;
 	width: 1024px;
 	margin: 20px auto;
 }
 
 .side-menu-article{
-	width: 200px;
+    float: left;
+    width: 200px;
+    margin: 0;
 }
 
 .container > section{
+	float: right;
 	width: 774px;
-	padding: 50px;
+	margin-top: 50px;
 }
 
 .myPage-title{

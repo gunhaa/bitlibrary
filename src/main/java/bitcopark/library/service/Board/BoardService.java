@@ -1,8 +1,11 @@
 package bitcopark.library.service.Board;
 
 import bitcopark.library.dto.BoardRequestDTO;
-import bitcopark.library.dto.LoginResponseDTO;
-import bitcopark.library.entity.board.*;
+import bitcopark.library.dto.MyBoardResponse;
+import bitcopark.library.entity.board.Board;
+import bitcopark.library.entity.board.BoardDelFlag;
+import bitcopark.library.entity.board.BoardImg;
+import bitcopark.library.entity.board.Category;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BoardNotFoundException;
 import bitcopark.library.jwt.LoginMemberDTO;
@@ -11,9 +14,12 @@ import bitcopark.library.repository.board.BoardRepository;
 import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -67,4 +73,14 @@ public class BoardService {
     }
 
 
+    public Page<MyBoardResponse> getMyBoards(String email, Pageable pageable) {
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("not found member" + email));
+
+        Page<Board> boardPage = boardRepository.findByMember(member, pageable);
+
+        List<MyBoardResponse> dtoList = boardPage.getContent().stream().map(MyBoardResponse::new).toList();
+
+        return new PageImpl<>(dtoList, pageable, boardPage.getTotalElements());
+    }
 }

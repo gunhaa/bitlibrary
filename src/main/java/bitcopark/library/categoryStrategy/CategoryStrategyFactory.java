@@ -19,6 +19,7 @@ public class CategoryStrategyFactory {
             case "교육문화 프로그램" -> new EduCultureProgramStrategy();
             case "열람실" -> new ReadingRoomStrategy();
             case "세미나실" -> new SeminarRoomStrategy();
+            case "회원정보" -> new MemberInfoStrategy();
             default -> new MainStrategy();
         };
     }

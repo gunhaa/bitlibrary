@@ -14,6 +14,8 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     Optional<List<Board>> findByMember(Member member);
 
+    Page<Board> findByMember(Member member, Pageable pageable);
+
     Optional<List<Board>> findByMemberAndBoardDelFlag(Member member, BoardDelFlag boardDelFlag);
 
     Optional<Board> findByMemberAndId(Member member, Long boardId);

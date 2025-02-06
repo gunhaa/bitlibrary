@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library - 도서현황</title>
+
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/common/sideMenu.css">
+    <link rel="stylesheet" href="/css/study/list-style.css">
+</head>
+<body>
+<!-- Header Include -->
+<div th:replace="~{/common/header :: header}"></div>
+
+<section class="container">
+    <!-- Side Menu Include -->
+    <div th:replace="~{/intro/sideMenu :: sideMenu}"></div>
+
+    <section class="list-area">
+        <h1>도서현황</h1>
+        <div class="nav-area">
+            <button id="btnBoard">게시글</button>
+            <button id="btnReply">댓글</button>
+        </div>
+        <table id="list-table">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+        <div class="pagination-area">
+            <ul class="pagination" id="pagination"></ul>
+        </div>
+    </section>
+</section>
+
+<!-- Footer Include -->
+<div th:replace="~{/common/footer :: footer}"></div>
+<script src="/js/study/member-info.js"></script>
+<script src="/js/study/fetchdata-table.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library - 도서현황</title>
+
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/common/sideMenu.css">
+    <link rel="stylesheet" href="/css/study/info-style.css">
+</head>
+<body>
+<!-- Header Include -->
+<div th:replace="~{/common/header :: header}"></div>
+
+<section class="container">
+    <!-- Side Menu Include -->
+    <div th:replace="~{/intro/sideMenu :: sideMenu}"></div>
+
+    <section class="myPage">
+
+        <h1 class="myPage-title">회원탈퇴</h1>
+
+        <form action="/api/study/member/secession" method="POST" name="myPageFrm" id="secessionFrm">
+
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="hidden" name="is_deleted" value="true">
+
+            <div class="myPage-row">
+                <label>탈퇴확인</label>
+                <input type="text" id="agree" placeholder='"탈퇴하겠습니다"를 입력해주세요'>
+            </div>
+
+            <button id="secession-btn" class="myPage-submit">탈퇴</button>
+            
+        </form>
+
+    </section>
+</section>
+
+<!-- Footer Include -->
+<div th:replace="~{/common/footer :: footer}"></div>
+<script src="/js/study/member-info.js"></script>
+</body>
+</html>

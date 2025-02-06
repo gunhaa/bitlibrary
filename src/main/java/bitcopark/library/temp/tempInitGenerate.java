@@ -102,7 +102,6 @@ public class tempInitGenerate {
                 categoryService.createNewCategoryWithParentCategory("카페", 맛있는_도서관, "cafe");
 
                 Category 나의_도서관 = categoryService.createNewCategoryWithParentCategory("나의 도서관", 내_서재, "my-library");
-                categoryService.createNewCategoryWithParentCategory("결제내역", 내_서재, "payment-history");
                 Category 회원정보 = categoryService.createNewCategoryWithParentCategory("회원정보", 내_서재, "member-info");
 
                 // 레벨 3 카테고리 생성
@@ -122,10 +121,7 @@ public class tempInitGenerate {
                 Category 예약_및_신청 = categoryService.createNewCategoryWithParentCategory("예약 및 신청", 나의_도서관, "reservation-and-requests");
                 categoryService.createNewCategoryWithParentCategory("즐겨찾기", 나의_도서관, "favorites");
 
-                categoryService.createNewCategoryWithParentCategory("내 정보", 회원정보, "my-info");
-                categoryService.createNewCategoryWithParentCategory("정보수정", 회원정보, "edit-info");
                 categoryService.createNewCategoryWithParentCategory("내 글 관리", 회원정보, "my-posts");
-                categoryService.createNewCategoryWithParentCategory("비밀번호 변경", 회원정보, "change-password");
                 categoryService.createNewCategoryWithParentCategory("회원탈퇴", 회원정보, "membership-cancellation");
 
                 // 레벨 4 카테고리 생성
@@ -137,10 +133,6 @@ public class tempInitGenerate {
                 categoryService.createNewCategoryWithParentCategory("좌석 예약현황", 예약_및_신청, "seat-reservation-status");
                 categoryService.createNewCategoryWithParentCategory("공간 예약현황", 예약_및_신청, "space-reservation-status");
                 categoryService.createNewCategoryWithParentCategory("클래스 신청현황", 예약_및_신청, "class-application-status");
-
-                categoryService.createNewCategoryWithParentCategory("게시글", 회원정보, "posts");
-                categoryService.createNewCategoryWithParentCategory("댓글", 회원정보, "comments");
-
             }
 
 
@@ -168,9 +160,9 @@ public class tempInitGenerate {
             bookService.registerNewBook("로버트 제임스 윌러 저", "메디슨 카운티의 다리", "시공사", "1994", "9791193783405", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F6626858%3Ftimestamp%3D20240621155506", BookState.P, BookSupple.N);
             bookService.registerNewBook("와다 히데키 지음", "남자는 왜? 여자는 왜?", "예문", "2002", "9791165042615", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F5910968%3Ftimestamp%3D20240522150401", BookState.P, BookSupple.N);
             // 테스트 멤버 생성
-            Member member1 = memberService.joinMember("test1@email.com",  "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fD8pxQ 황건하1", "01012345678", MemberGender.MALE, LocalDate.of(1991, 11, 11), new Address("12345", "D동"));
-            Member member2 = memberService.joinMember("test2@email.com",  "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fC8pxQ 황건하2", "01087654321", MemberGender.FEMALE, LocalDate.of(1992, 02, 02), new Address("54321", "C동"));
-            Member member3 = memberService.joinMember("test3@email.com",  "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fB8pxQ 황건하3", "01011112222", MemberGender.MALE, LocalDate.of(1993, 03, 03), new Address("11223", "B동"));
+            Member member1 = memberService.joinOAuth2Member("test1@email.com", "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하1", "ROLE_USER");
+            Member member2 = memberService.joinOAuth2Member("test2@email.com", "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하2", "ROLE_USER");
+            Member member3 = memberService.joinOAuth2Member("test3@email.com", "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하3", "ROLE_USER");
 
             String naverEmail = "wh8299@naver.com";
             String naverName = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
