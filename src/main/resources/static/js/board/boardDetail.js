@@ -4,7 +4,7 @@ const updateBtn = document.getElementById("updateBtn");
 if(updateBtn != null){
     
     updateBtn.addEventListener("click", ()=>{
-        location.href = location.pathname.replace("board", "board2") + '/update' + location.search;
+        location.href = "/user/" + cateEngName + '/update' + location.search;
     })
 }
 
@@ -16,7 +16,7 @@ if(deleteBtn != null){
     deleteBtn.addEventListener("click", ()=>{
 
         if(confirm("정말 삭제하시겠습니까?")){ 
-            location.href = location.pathname.replace("board", "board2") + '/delete';
+            location.href = "/user/" + cateEngName + '/delete';
         }
     })
 }
@@ -26,5 +26,5 @@ const listBtn = document.getElementById("listBtn");
 
 listBtn.addEventListener("click", ()=>{
 
-    location.href = "/board/" + cateCode + location.search
+    location.href = "/user/" + cateEngName + location.search;
 })
