@@ -27,7 +27,7 @@ services:
     image: spring-boot-bitlibrary
     container_name: spring-boot-container
     ports:
-      - "8080:8080"
+      - "7777:7777"
     environment:
       - JAVA_OPTS=-Xms256m -Xmx500m
     networks:
