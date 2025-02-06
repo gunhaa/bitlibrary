@@ -33,6 +33,11 @@ public class BoardService {
         return boardRepository.save(boardRequestDTO.toEntity(member,category));
     }
 
+    @Transactional
+    public void updatePost(LoginMemberDTO memberDTO, BoardRequestDTO boardRequestDTO, Category category) {
+
+    }
+
     // AOP같은 로직을 통한 인증 필요
     @Transactional
     public BoardDelFlag deletePost(Member member, Board board){
@@ -47,6 +52,7 @@ public class BoardService {
         return boardRepository.findByCategoryId(id, pageable);
     }
 
+    @Transactional
     public BoardImg insertBoardImg(Board board, String originalName, int orderImg) {
         BoardImg boardImg = BoardImg.builder()
                 .originalImg(originalName)
@@ -59,4 +65,6 @@ public class BoardService {
 
         return boardImg;
     }
+
+
 }
