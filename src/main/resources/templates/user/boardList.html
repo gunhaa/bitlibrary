@@ -89,7 +89,7 @@
             <div th:if="${loginMember != null}" class="btn-area">
                 <!-- 공지사항 : 관리자에게만 보임 -->
                 <button id="writeBtn" th:if="${cateCode == 15 and loginMember.role == 'ROLE_ADMIN'}">글쓰기</button>
-                <button id="writeBtn" th:if="${cateCode != 15 and loginMember.role == 'ROLE_MEMBER'}">글쓰기</button>
+                <button id="writeBtn" th:if="${cateCode != 15 and loginMember.role == 'ROLE_USER'}">글쓰기</button>
             </div>
 
             <!-- pagination -->

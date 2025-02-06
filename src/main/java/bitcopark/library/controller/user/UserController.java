@@ -34,6 +34,8 @@ public class UserController {
     private final BoardService boardService;
     private final CategoryService categoryService;
 
+    private final String IMG_UPLOAD_PATH = "static/images/board";
+
     @GetMapping(value="{catLevel1:user}/{catLevel2:faq}")
     public String user(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
             ,@PathVariable(name = "catLevel1") String catLevel1
@@ -48,7 +50,8 @@ public class UserController {
     public String board(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
             , @PathVariable(name = "catLevel1") String catLevel1
             , @PathVariable(name = "catLevel2") String catLevel2
-            , Pageable pageable){
+            , Pageable pageable
+            , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember){
 
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
@@ -56,6 +59,8 @@ public class UserController {
         Category category = categoryService.getCategoryEngName(catLevel2);
         // pagination
         Page<Board> boardPage = boardService.selectBoardList(category.getId(), pageable);
+
+        System.out.println("loginMember = " + loginMember);
 
         // model addAttribute
         model.addAttribute("boardPage", boardPage);
@@ -94,6 +99,7 @@ public class UserController {
 
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
+        System.out.println("inin");
         // logic
         Category category = categoryService.getCategoryEngName(catLevel2);
         model.addAttribute("cateCode", category.getId());
@@ -104,7 +110,7 @@ public class UserController {
 
         if (files != null && files.length > 0) {
             try{
-                String path = new ClassPathResource("static/").getFile().getAbsolutePath();
+                String path = new ClassPathResource(IMG_UPLOAD_PATH).getFile().getAbsolutePath();
                 List<BoardImg> boardImgList = new ArrayList<>();
 
                 for( int i = 0; i < files.length; i++ ) {
