@@ -102,9 +102,9 @@ public class UserController {
         // logic
         Category category = categoryService.getCategoryEngName(catLevel2);
         model.addAttribute("cateCode", category.getId());
+        model.addAttribute("cateEngName", category.getCategoryEngName());
 
         Board board = boardService.writePost(loginMember, boardRequestDTO, category);
-
         model.addAttribute("board", board);
 
         if (files != null && files.length > 0) {
@@ -139,6 +139,7 @@ public class UserController {
 
         Category category = categoryService.getCategoryEngName(catLevel2);
         model.addAttribute("cateCode", category.getId());
+        model.addAttribute("cateEngName", category.getCategoryEngName());
 
         Board board = boardService.selectBoard(boardId).get();
         model.addAttribute("board", board);
