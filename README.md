@@ -12,3 +12,12 @@
 ## 브랜치 전략
 - feature - 각 기능 또는 작업을 진행할 때는 feature에서 파일 관리
 - main - 기능 개발 테스트 완료 및 검증 후에 main 브랜치 병합
+
+## Build
+
+```shell
+# 도커로 빌드
+docker-compose up --build
+```
+https://okky.kr/articles/884329
+test2

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: bitlibrary
+    ports:
+      - "3306:3306"
+    networks:
+      - springboot-mysql-net
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: always
+#   필요시 health check logic 추가 필요함
+#    healthcheck:
+#      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+#      interval: 10s
+#      retries: 5
+#      start_period: 30s
+#      timeout: 10s
+
+  spring-boot:
+    build: .
+    image: spring-boot-bitlibrary
+    container_name: spring-boot-container
+    ports:
+      - "7777:7777"
+    environment:
+      - JAVA_OPTS=-Xms256m -Xmx500m
+    networks:
+      - springboot-mysql-net
+    depends_on:
+      - db
+    restart: always
+
+networks:
+  springboot-mysql-net:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
