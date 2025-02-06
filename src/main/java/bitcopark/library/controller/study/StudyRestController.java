@@ -2,6 +2,8 @@ package bitcopark.library.controller.study;
 
 import bitcopark.library.dto.*;
 import bitcopark.library.jwt.LoginMemberDTO;
+import bitcopark.library.service.Board.BoardService;
+import bitcopark.library.service.Board.ReplyService;
 import bitcopark.library.service.Book.BookBorrowService;
 import bitcopark.library.service.Book.BookLikeService;
 import bitcopark.library.service.Book.BookRequestService;
@@ -27,6 +29,8 @@ public class StudyRestController {
     private final SeatReservationService seatReservationService;
     private final ClassApplicantService classApplicantService;
     private final BookLikeService bookLikeService;
+    private final BoardService boardService;
+    private final ReplyService replyService;
 
     @GetMapping("/books/loans/current")
     public List<BookLoanResponse> getCurrentlyBorrowedBooks(@RequestAttribute LoginMemberDTO loginMember) {
@@ -61,6 +65,16 @@ public class StudyRestController {
     @GetMapping("/classes/applicant")
     public List<ClassApplicantResponse> getClassApplicants(@RequestAttribute LoginMemberDTO loginMember) {
         return classApplicantService.getClassApplicants(loginMember.getEmail());
+    }
+
+    @GetMapping("/boards")
+    public Page<MyBoardResponse> getMyBoards(@RequestAttribute LoginMemberDTO loginMember, Pageable pageable) {
+        return boardService.getMyBoards(loginMember.getEmail(), pageable);
+    }
+
+    @GetMapping("/replies")
+    public Page<MyReplyResponse> getMyReplies(@RequestAttribute LoginMemberDTO loginMember, Pageable pageable) {
+        return replyService.getMyReplies(loginMember.getEmail(), pageable);
     }
 
     @DeleteMapping("/book/reservation")
