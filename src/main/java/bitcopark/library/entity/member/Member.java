@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import static jakarta.persistence.EnumType.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"email", "name", "phoneNumber", "gender", "birthDate", "address", "delFlag", "authority"})
+@ToString(of = {"email", "name", "authority"})
 public class Member extends BaseAuditEntity {
 
     @Id
@@ -28,18 +29,9 @@ public class Member extends BaseAuditEntity {
     private Long id;
     private String email;
     private String name;
-    private String phoneNumber;
 
-    @Enumerated(STRING)
-    private MemberGender gender;
-
-    private LocalDate birthDate;
-
-    @Embedded
-    private Address address;
-
-    @Enumerated(STRING)
-    private MemberDelFlag delFlag;
+    private boolean is_deleted;
+    private LocalDateTime deleted_at;
 
     private String authority;
 
@@ -73,44 +65,12 @@ public class Member extends BaseAuditEntity {
     @OneToMany(mappedBy = "member", orphanRemoval = true)
     private List<BookLike> bookLikeList = new ArrayList<>();
 
-
     public static Member createOAuth2Member(String email, String name, String authority) {
         Member member = new Member();
         member.email = email;
         member.name = name;
-        member.delFlag = MemberDelFlag.N;
         member.authority = authority;
 
         return member;
     }
-
-    // member/admin만 파라미터로 받아서 하나의 메서드로 통합
-    public static Member createMember(String email, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address) {
-        Member member = new Member();
-        member.email = email;
-        member.name = name;
-        member.phoneNumber = phoneNumber;
-        member.gender = gender;
-        member.birthDate = birthDate;
-        member.address = address;
-        member.delFlag = MemberDelFlag.N;
-        member.authority = "ROLE_USER";
-
-        return member;
-    }
-
-    public static Member createAdmin(String email, String name, String phoneNumber, MemberGender gender, LocalDate birthDate, Address address) {
-        Member member = new Member();
-        member.email = email;
-        member.name = name;
-        member.phoneNumber = phoneNumber;
-        member.gender = gender;
-        member.birthDate = birthDate;
-        member.address = address;
-        member.delFlag = MemberDelFlag.N;
-        member.authority = "ROLE_ADMIN";
-
-        return member;
-    }
-
 }
