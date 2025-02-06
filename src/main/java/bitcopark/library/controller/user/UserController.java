@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static bitcopark.library.controller.util.ControllerUtils.setCategoryAndRoute;
 
@@ -98,7 +99,6 @@ public class UserController {
 
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
-        System.out.println("inin");
         // logic
         Category category = categoryService.getCategoryEngName(catLevel2);
         model.addAttribute("cateCode", category.getId());
@@ -125,6 +125,23 @@ public class UserController {
 
             }
         }
+
+        return "user/boardDetail";
+    }
+
+    @GetMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/{boardId}")
+    public String boardDetail(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+            , @PathVariable(name = "catLevel1") String catLevel1
+            , @PathVariable(name = "catLevel2") String catLevel2
+            , @PathVariable Long boardId) {
+
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
+
+        Category category = categoryService.getCategoryEngName(catLevel2);
+        model.addAttribute("cateCode", category.getId());
+
+        Board board = boardService.selectBoard(boardId).get();
+        model.addAttribute("board", board);
 
         return "user/boardDetail";
     }

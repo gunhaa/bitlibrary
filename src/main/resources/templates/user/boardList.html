@@ -63,23 +63,22 @@
                     </th:block>
                     <th:block th:unless="${#lists.isEmpty(boardPage.content)}">
                         <tr th:each="board : ${boardPage.content}">
-                            <td>${board.boardNo}</td>
+                            <td></td>
                             <td>
-                                <i th:if="${board.boardSecretFlag == 'Y'}" class="fa-solid fa-lock"></i>
-                                <a href="/user/${cateCode}/${board.id}(cp=${boardPage.getPageNumber()}, keyword=${keyword}, query=${query})">${board.boardTitle}</a>
+                                <i th:if="${board.secretFlag == 'Y'}" class="fa-solid fa-lock"></i>
+                                <a th:href="@{/user/{cateEngName}/{boardId}(cateEngName=${cateEngName}, boardId=${board.id}, cp=${boardPage.number}, keyword=${keyword}, query=${query})}">[[${board.title}]]</a>
                                 <span th:if="${cateCode == 16 || cateCode == 18}">
-                                    [${board.commentCount}]
+                                    [[${board.replyList.size}]]
                                 </span>
                             </td>
                             <td>
-                                <span th:if="${cateCode == 16}" th:text="${board.member.name.substring(0, 1) + '*' + board.member.name.substring(board.memberName.length())}"></span>
-                                <span th:unless="${cateCode == 16}">${board.memberName}</span>
+                                <span>[[${board.member.email}]]</span>
                             </td>
                             <td>
-                                <span th:if="${board.boardUpdateDate != null }">${board.boardUpdateDate}</span>
-                                <span th:unless>${board.boardCreateDate}</span>
+                                <span th:if="${board.lastModifiedDate != null }">[[${board.lastModifiedDate}]]</span>
+                                <span th:unless="${board.lastModifiedDate != null }">[[${board.createdDate}]]</span>
                             </td>
-                            <td>${board.readCount}</td>
+                            <td>[[${board.count}]]</td>
                         </tr>
                     </th:block>
                     </tbody>
@@ -96,13 +95,11 @@
             <div th:unless="${#lists.isEmpty(boardPage.content)}" class="pagination-area">
                 <ul class="pagination">
                     <!-- 첫 페이지로 이동 : << -->
-                    <li><a th:href="@{${boardPage.firstPageable().toUri()}}">&lt;&lt;</a></li>
+                    <li><a th:href="@{/user/{cateEngName}(cateEngName=${cateEngName}, page=0)}">&lt;&lt;</a></li>
 
                     <!-- 이전 목록 마지막 페이지로 이동 : < -->
                     <li>
-                        <a th:if="${boardPage.hasPrevious()}"
-                           th:href="@{${boardPage.previousPageable().toUri()}}"
-                           th:remove="${!boardPage.hasPrevious()}">&lt;</a>
+                        <a th:href="@{/user/{cateEngName}(cateEngName=${cateEngName}, page=${boardPage.number > 0 ? boardPage.number - 1 : 0})}">&lt;</a>
                     </li>
 
                     <!-- 특정 페이지로 이동 -->
@@ -114,20 +111,18 @@
                         <th:block th:if="${i != boardPage.number}">
                             <!-- 현재 페이지 제외한 나머지 -->
                             <li>
-                                <a th:href="@{/board?page=${i}}" th:text="${i + 1}"></a>
+                                <a th:href="@{/user/{cateEngName}(cateEngName=${cateEngName}, page=${i})" th:text="${i + 1}"></a>
                             </li>
                         </th:block>
                     </th:block>
 
                     <!-- 다음 목록 시작 페이지로 이동 : > -->
                     <li>
-                        <a th:if="${boardPage.hasNext()}"
-                           th:href="@{${boardPage.nextPageable().toUri()}}"
-                           th:remove="${!boardPage.hasNext()}">&gt;</a>
+                        <a th:href="@{/user/{cateEngName}(cateEngName=${cateEngName}, page=${boardPage.number < boardPage.totalPages - 1 ? boardPage.number + 1 : boardPage.number})}">&gt;</a>
                     </li>
 
                     <!-- 마지막 페이지로 이동 : >> -->
-                    <li><a th:href="@{${boardPage.lastPageable().toUri()}}">&gt;&gt;</a></li>
+                    <li><a th:href="@{/user/{cateEngName}(cateEngName=${cateEngName}, page=${boardPage.totalPages - 1})}">&gt;&gt;</a></li>
                 </ul>
             </div>
         </section>

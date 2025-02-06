@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<div th:fragment="comment">
     <div id="commentArea">
         <div class="comment-list-area">
-            <ul th:each="comment : ${board.commentList}" id="commentList">
+            <ul th:each="comment : ${board.replyList}" id="commentList">
                 <li class="comment-row">
                     <p class="comment-writer">
-                        <span>${comment.memberName}</span>
-                        <span class="comment-date">${comment.commentCreateDate}</span>
+                        <span>[[${comment.member.email}]]</span>
+                        <span class="comment-date">[[${comment.createdDate}]]</span>
                     </p>
 
-                    <p class="comment-content">${comment.commentContent}</p>
+                    <p class="comment-content">[[${comment.content}]]</p>
 
-                    <div th:if="${session.loginMember.id == comment.memberNo}" class="comment-btn-area">
+                    <div th:if="${loginMember.email == comment.member.email}" class="comment-btn-area">
                         <button onclick="showUpdateComment(${comment.commentNo}, this)">수정</button>
                         <button onclick="deleteComment(${comment.commentNo})">삭제</button>
                     </div>
@@ -24,7 +25,7 @@
             </ul>
         </div>
 
-        <%-- 문의사항 : 관리자만 보임 --%> >
+        <!--문의사항 : 관리자만 보임-->
         <th:block th:if="${cateCode == 16 and loginMember.role == 'ROLE_ADMIN'}">
             <div class="comment-write-area">
                 <textarea id="commentContent"></textarea>
@@ -38,6 +39,8 @@
             </div>
         </th:block>
     </div>
+</div>
+
 </body>
 </html>
 

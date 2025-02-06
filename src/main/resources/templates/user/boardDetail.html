@@ -28,37 +28,36 @@
             <!-- 제목 -->
             <h1 th:classappend="${board.secretFlag == 'Y' ? 'board-title' : ''}">
                 <i th:if="${board.secretFlag == 'Y'}" class="fa-solid fa-lock"></i>
-                <span th:text="${board.boardTitle}"></span>
+                <span th:text="${board.title}"></span>
             </h1>
 
             <!-- 작성자 / 작성일 / 조회수 -->
             <div class="board-nav">
                 <div class="member-name">
-                    <span th:if="${cateCode == 16}" th:text="${board.memberName.substring(0,1) + '*' + board.memberName.substring(1)}"></span>
-                    <span th:unless="${cateCode == 16}" th:text="${board.memberName}"></span>
+                    <span th:text="${board.member.email}"></span>
                 </div>
                 <div class="board-info">
-                    <p><span>작성일</span>&nbsp;<span th:text="${board.boardCreateDate}"></span></p>
-                    <p th:if="${board.lastModifiedDate != null}"><span>수정일</span>&nbsp;<span th:text="${board.boardUpdateDate}"></span></p>
-                    <p><span>조회수</span>&nbsp;<span th:text="${board.readCount}"></span></p>
+                    <p><span>작성일</span>&nbsp;<span th:text="${board.createdDate}"></span></p>
+                    <p th:if="${board.lastModifiedDate != null}"><span>수정일</span>&nbsp;<span th:text="${board.lastModifiedDate}"></span></p>
+                    <p><span>조회수</span>&nbsp;<span th:text="${board.count}"></span></p>
                 </div>
             </div>
 
             <!-- 이미지 보여지는 영역 -->
             <div th:if="${#lists.size(board.boardImgList) > 0}" class="img-box">
                 <div th:each="image : ${board.boardImgList}" class="boardImg">
-                    <img th:src="@{${image.imagePath + image.imageReName}}" alt="게시글 이미지"/>
-                    <a th:href="@{${image.imagePath + image.imageReName}}" th:download="${image.imageOriginal}">다운로드</a>
+                    <img th:src="@{${image.pathImg + image.renameImg}}" alt="게시글 이미지"/>
+                    <a th:href="@{${image.pathImg + image.renameImg}}" th:download="${image.originalImg}">다운로드</a>
                 </div>
             </div>
             <hr>
 
             <!-- 게시글 내용 -->
-            <div class="board-content" th:text="${board.boardContent}"></div>
+            <div class="board-content" th:text="${board.content}"></div>
 
             <!-- 버튼 영역 -->
             <div class="btn-area">
-                <th:block th:if="${session.loginMember != null and session.loginMember.id == board.member.id}">
+                <th:block th:if="${loginMember != null and loginMember.email == board.member.email}">
                     <button id="updateBtn">수정</button>
                     <button id="deleteBtn">삭제</button>
                 </th:block>
@@ -66,9 +65,9 @@
             </div>
         </section>
 
-        <!-- comment.jsp 연결 -->
+        <!-- comment 연결 -->
         <th:block th:if="${cateCode == 16 or cateCode == 18}">
-            <div th:replace="board/comment :: comment"></div>
+            <div th:replace="~{user/comment :: comment}"></div>
         </th:block>
     </section>
 </section>
@@ -77,10 +76,7 @@
 <div th:replace="common/footer :: footer"></div>
 
 <script>
-    const boardNo = "[[${board.boardNo}]]";
-    const loginMemberNo = "[[${loginMember != null ? loginMember.memberNo : 'null'}]]";
-    const cateEngName = "[[${cateEngName}]]";
-    const li = document.querySelectorAll(".side-menu > li");
+
 </script>
 
 <!-- boardDetail.js 연결 -->

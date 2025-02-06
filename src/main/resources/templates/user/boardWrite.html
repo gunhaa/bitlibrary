@@ -27,7 +27,7 @@
         <form th:action="@{/user/{cateEngName}/insert(cateEngName=${cateEngName})}" method="POST" class="board-write" id="boardWriteFrm" enctype="multipart/form-data">
             <!-- 제목 -->
             <h1 class="board-title">
-                <input type="text" name="boardTitle" placeholder="제목 입력">
+                <input type="text" name="title" placeholder="제목 입력">
             </h1>
 
             <!-- 이미지 등록 영역 -->
@@ -52,7 +52,7 @@
 
             <!-- 내용 -->
             <div class="board-content">
-                <textarea name="boardContent"></textarea>
+                <textarea name="content"></textarea>
             </div>
 
             <!-- 버튼 영역 -->
