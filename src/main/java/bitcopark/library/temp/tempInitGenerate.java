@@ -102,7 +102,6 @@ public class tempInitGenerate {
                 categoryService.createNewCategoryWithParentCategory("카페", 맛있는_도서관, "cafe");
 
                 Category 나의_도서관 = categoryService.createNewCategoryWithParentCategory("나의 도서관", 내_서재, "my-library");
-                categoryService.createNewCategoryWithParentCategory("결제내역", 내_서재, "payment-history");
                 Category 회원정보 = categoryService.createNewCategoryWithParentCategory("회원정보", 내_서재, "member-info");
 
                 // 레벨 3 카테고리 생성
@@ -122,10 +121,7 @@ public class tempInitGenerate {
                 Category 예약_및_신청 = categoryService.createNewCategoryWithParentCategory("예약 및 신청", 나의_도서관, "reservation-and-requests");
                 categoryService.createNewCategoryWithParentCategory("즐겨찾기", 나의_도서관, "favorites");
 
-                categoryService.createNewCategoryWithParentCategory("내 정보", 회원정보, "my-info");
-                categoryService.createNewCategoryWithParentCategory("정보수정", 회원정보, "edit-info");
                 categoryService.createNewCategoryWithParentCategory("내 글 관리", 회원정보, "my-posts");
-                categoryService.createNewCategoryWithParentCategory("비밀번호 변경", 회원정보, "change-password");
                 categoryService.createNewCategoryWithParentCategory("회원탈퇴", 회원정보, "membership-cancellation");
 
                 // 레벨 4 카테고리 생성
@@ -137,10 +133,6 @@ public class tempInitGenerate {
                 categoryService.createNewCategoryWithParentCategory("좌석 예약현황", 예약_및_신청, "seat-reservation-status");
                 categoryService.createNewCategoryWithParentCategory("공간 예약현황", 예약_및_신청, "space-reservation-status");
                 categoryService.createNewCategoryWithParentCategory("클래스 신청현황", 예약_및_신청, "class-application-status");
-
-                categoryService.createNewCategoryWithParentCategory("게시글", 회원정보, "posts");
-                categoryService.createNewCategoryWithParentCategory("댓글", 회원정보, "comments");
-
             }
 
 
