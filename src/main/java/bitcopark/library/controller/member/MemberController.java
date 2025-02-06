@@ -1,7 +1,5 @@
 package bitcopark.library.controller.member;
 
-import bitcopark.library.dto.LoginRequestDTO;
-import bitcopark.library.dto.LoginResponseDTO;
 import bitcopark.library.entity.member.MemberDelFlag;
 import bitcopark.library.service.Member.MemberService;
 import jakarta.servlet.http.Cookie;

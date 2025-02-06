@@ -3,7 +3,6 @@ package bitcopark.library.controller.user;
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.controller.util.ControllerUtils;
 import bitcopark.library.dto.BoardRequestDTO;
-import bitcopark.library.dto.LoginResponseDTO;
 import bitcopark.library.entity.board.Board;
 import bitcopark.library.entity.board.BoardImg;
 import bitcopark.library.entity.board.Category;

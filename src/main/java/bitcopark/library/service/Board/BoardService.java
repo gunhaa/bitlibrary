@@ -1,7 +1,6 @@
 package bitcopark.library.service.Board;
 
 import bitcopark.library.dto.BoardRequestDTO;
-import bitcopark.library.dto.LoginResponseDTO;
 import bitcopark.library.entity.board.*;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BoardNotFoundException;
