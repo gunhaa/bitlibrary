@@ -24,7 +24,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 /*
     @Query("select board from Board where board.boardDelFlag = 'N'")
 */
-    Page<Board> findByCategoryId(Long id, Pageable pageable);
+    Page<Board> findByCategoryIdAndBoardDelFlag(Long id, Pageable pageable, BoardDelFlag boardDelFlag);
 
     @Query("select b from Board b order by b.createdDate DESC")
     List<Board> selectNoticeRecent5(Pageable pageable);

@@ -33,10 +33,10 @@ public class BoardImg {
         // need rename logic
         String extension = "";
 
-        int dotIdx = builder().originalImg.lastIndexOf(".");
+        int dotIdx = originalImg.lastIndexOf(".");
 
         if( dotIdx != -1 ) {
-            extension = builder().originalImg.substring(dotIdx);
+            extension = originalImg.substring(dotIdx);
         }
 
         String newFileName = UUID.randomUUID().toString();

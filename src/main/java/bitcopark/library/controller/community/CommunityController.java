@@ -98,7 +98,7 @@ public class CommunityController {
 
                 for( int i = 0; i < files.length; i++ ) {
                     if (!files[i].isEmpty()) {
-                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), i);
+                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(),path, i);
                         files[i].transferTo(new File(path + boardImg.getRenameImg()));
                         boardImgList.add(boardImg);
                     }
@@ -139,7 +139,7 @@ public class CommunityController {
 
                 for( int i = 0; i < files.length; i++ ) {
                     if (!files[i].isEmpty()) {
-                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), i);
+                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(),path, i);
                         files[i].transferTo(new File(path + boardImg.getRenameImg()));
                         boardImgList.add(boardImg);
                     }
