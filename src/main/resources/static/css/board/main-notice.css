@@ -88,3 +88,7 @@
     color: #0054b4; 
     text-decoration: underline;  
 }
+
+#main-notice-title {
+    text-align : center;
+}

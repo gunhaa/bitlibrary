@@ -25,7 +25,7 @@
 
                                     <ul>
                                         <th:block th:each="subCategory : ${category2.subCategory}">
-                                            <li>
+                                            <li th:if="${subCategory.categoryName != 'deletedCategory' }">
                                                 <a th:href="@{/{catName}/{catName2}/{cat3Code}(catName=${category.categoryEngName}, catName2=${category2.categoryEngName}, cat3Code=${subCategory.id})}"
                                                    th:classappend="${catLevel3 == subCategory.id} ? 'side-side-current' : ''"
                                                    th:text="${subCategory.categoryName}"></a>

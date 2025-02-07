@@ -16,8 +16,6 @@
 ## Build
 
 ```shell
-# 도커로 빌드
+# 도커 빌드
 docker-compose up --build
 ```
-https://okky.kr/articles/884329
-test2

@@ -11,41 +11,7 @@
 <div th:fragment="mainCalHours">
   <section class="main-cal-hours-section">
     <article class="main-cal-article">
-      <div class="main-cal-suround">
-        <div id="date-div"></div>
-
-        <div class="calendar-btn-area">
-          <div id="prev-btn">&lt;</div>
-          <div id="today-btn">오늘</div>
-          <div id="next-btn">&gt;</div>
-        </div>
-
-        <div class="calendar-category-suround">
-                  <span class="calendar-category" th:onclick="|typeCalendar(1)|">
-                      <span class="category-color gong"></span>
-                      <span>공휴일</span>
-                  </span>
-          <span class="calendar-category" th:onclick="|typeCalendar(2)|">
-                      <span class="category-color hue"></span>
-                      <span>휴관일</span>
-                  </span>
-          <span class="calendar-category" th:onclick="|typeCalendar(4)|">
-                      <span class="category-color classDay"></span>
-                      <span>클래스</span>
-                  </span>
-          <span class="calendar-category" th:onclick="|typeCalendar(3)|">
-                      <span class="category-color eventDay"></span>
-                      <span>행사</span>
-                  </span>
-        </div>
-
-      </div>
-      <div class="surround-calendar-area">
-        <div id="goToLibraryCal">
-          <a th:href="@{/intro/1/8/30}"><i class="fa-solid fa-plus"></i></a>
-        </div>
-        <div id='calendar'></div>
-      </div>
+      <div th:replace="~{user/mainNotice :: mainNotice}"></div>
     </article>
 
     <article class="main-hour-article">
