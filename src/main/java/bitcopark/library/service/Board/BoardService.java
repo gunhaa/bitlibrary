@@ -64,7 +64,7 @@ public class BoardService {
     }
 
     public Page<Board> selectBoardList(Long id, Pageable pageable) {
-        return boardRepository.findByCategoryId(id, pageable);
+        return boardRepository.findByCategoryIdAndBoardDelFlag(id, pageable, BoardDelFlag.N);
     }
 
     @Transactional

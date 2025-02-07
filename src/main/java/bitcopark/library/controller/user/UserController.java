@@ -34,7 +34,7 @@ public class UserController {
     private final BoardService boardService;
     private final CategoryService categoryService;
 
-    private final String IMG_UPLOAD_PATH = "static/images/board";
+    private static final String IMG_UPLOAD_PATH = "static/images/boardRepo";
 
     @GetMapping(value="{catLevel1:user}/{catLevel2:faq}")
     public String user(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
@@ -120,7 +120,7 @@ public class UserController {
 
                 model.addAttribute("boardImgList", boardImgList);
             }catch(IOException e){
-
+                e.printStackTrace();
             }
         }
 
