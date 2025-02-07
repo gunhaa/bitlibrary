@@ -39,7 +39,7 @@ public class CategoryService {
                 .categoryEngName(categoryEngName)
                 .build();
 
-        validateDuplicateCategoryName(categoryName);
+        //validateDuplicateCategoryName(categoryName);
 
         categoryRepository.save(category);
         return category;

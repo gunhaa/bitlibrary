@@ -109,10 +109,10 @@ public class tempInitGenerate {
                 categoryService.createNewCategoryWithParentCategory("연혁", 도서관_소개, "history");
                 categoryService.createNewCategoryWithParentCategory("조직도", 도서관_소개, "organization-chart");
                 categoryService.createNewCategoryWithParentCategory("도서관 오시는 길", 도서관_소개, "directions");
-                categoryService.createNewCategoryWithParentCategory("주변 도서관", 도서관_소개, "nearby-libraries");
+                categoryService.createNewCategoryWithParentCategory("deletedCategory", 도서관_소개, "nearby-libraries");
 
                 categoryService.createNewCategoryWithParentCategory("이용시간", 이용안내, "operating-hours");
-                categoryService.createNewCategoryWithParentCategory("도서관 달력", 이용안내, "library-calendar");
+                categoryService.createNewCategoryWithParentCategory("deletedCategory", 이용안내, "library-calendar");
 
                 categoryService.createNewCategoryWithParentCategory("간략 검색", 통합자료_검색, "quick-search");
                 categoryService.createNewCategoryWithParentCategory("상세 검색", 통합자료_검색, "detailed-search");
