@@ -1,5 +1,6 @@
 package bitcopark.library.temp;
 
+import bitcopark.library.dto.BoardRequestDTO;
 import bitcopark.library.entity.board.Category;
 import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookState;
@@ -9,10 +10,12 @@ import bitcopark.library.entity.member.BookRequestApprove;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.MemberGender;
 import bitcopark.library.jwt.JwtUtil;
+import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.jwt.MemberDto;
 import bitcopark.library.oauth2.CustomOAuth2User;
 import bitcopark.library.repository.board.CategoryRepository;
 import bitcopark.library.repository.member.MemberRepository;
+import bitcopark.library.service.Board.BoardService;
 import bitcopark.library.service.Board.CategoryService;
 import bitcopark.library.service.Book.BookBorrowService;
 import bitcopark.library.service.Book.BookLikeService;
@@ -63,6 +66,8 @@ public class tempInitGenerate {
 
         private final BookReservationService bookReservationService;
 
+        private final BoardService boardService;
+
         private final BookRequestService bookRequestService;
 
         private final JwtUtil jwtUtil;
@@ -70,6 +75,7 @@ public class tempInitGenerate {
         @Transactional
         public void init() {
 
+            Category 공지사항 = null;
             if (categoryRepository.selectCategoryCount() != 49) {
                 // 기존 데이터 삭제
                 categoryRepository.deleteAll();
@@ -93,7 +99,7 @@ public class tempInitGenerate {
                 categoryService.createNewCategoryWithParentCategory("열람실", 참여_마당, "reading-room");
                 categoryService.createNewCategoryWithParentCategory("세미나실", 참여_마당, "seminar-room");
 
-                categoryService.createNewCategoryWithParentCategory("공지사항", 이용자_마당, "notice");
+                공지사항 = categoryService.createNewCategoryWithParentCategory("공지사항", 이용자_마당, "notice");
                 categoryService.createNewCategoryWithParentCategory("문의사항", 이용자_마당, "inquiries");
                 categoryService.createNewCategoryWithParentCategory("자주 묻는 질문", 이용자_마당, "faq");
                 categoryService.createNewCategoryWithParentCategory("책 후기 나눠요", 이용자_마당, "book-reviews");
@@ -136,12 +142,11 @@ public class tempInitGenerate {
             }
 
 
-
             Book 명품_인생을_살아라 = bookService.registerNewBook("박은몽 글", "명품 인생을 살아라", "대교베텔스만", "2008", "9788957592472", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F762800%3Ftimestamp%3D20220904155651", BookState.P, BookSupple.N);
             Book 백범일지 = bookService.registerNewBook("김구 저", "백범일지", "돌베개", "2008", "9788971992258", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F994701%3Ftimestamp%3D20240727112932", BookState.P, BookSupple.N);
 
-            for(int i=0; i<32; i++){
-                bookService.registerNewBook("김구 저", "백범일지"+i, "돌베개", "2008", "9788971992258"+i, "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F994701%3Ftimestamp%3D20240727112932", BookState.P, BookSupple.N);
+            for (int i = 0; i < 32; i++) {
+                bookService.registerNewBook("김구 저", "백범일지" + i, "돌베개", "2008", "9788971992258" + i, "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F994701%3Ftimestamp%3D20240727112932", BookState.P, BookSupple.N);
             }
 
             Book 디셉션_포인트 = bookService.registerNewBook("댄 브라운 지음", "디셉션 포인트", "대교베텔스만", "2006", "9788957591574", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F762541%3Ftimestamp%3D20220825213715", BookState.I, BookSupple.N);
@@ -172,6 +177,16 @@ public class tempInitGenerate {
             String googleName = "google 108061151955961388292 황건하";
             Member OAuthGoogleGunha = memberService.joinOAuth2Member(googleEmail, googleName, "ROLE_USER");
 
+            // 공지사항 생성
+            for (int i = 0; i < 7 ; i++) {
+                LoginMemberDTO loginMemberDTO = new LoginMemberDTO(naverEmail, naverName, "ROLE_ADMIN");
+                BoardRequestDTO boardRequestDTO = new BoardRequestDTO();
+                boardRequestDTO.setTitle("제목"+i);
+                boardRequestDTO.setContent("내용"+i);
+                boardService.writePost(loginMemberDTO, boardRequestDTO, 공지사항);
+            }
+
+
             // 책 좋아요
             bookFavoriteService.addBookLike(member1, 명품_인생을_살아라);
             bookFavoriteService.addBookLike(member1, 백범일지);
@@ -196,8 +211,8 @@ public class tempInitGenerate {
             bookReservationService.registerBookReservation(member3, 디셉션_포인트);
 
             //책 요청
-            for(int i=0; i<300; i++){
-                bookRequestService.createBookRequest(1L, "1234567890"+i, "bookTitle"+i, "출판사"+i, "작가"+i, BookRequestApprove.W, LocalDate.now(), "의견"+i);
+            for (int i = 0; i < 300; i++) {
+                bookRequestService.createBookRequest(1L, "1234567890" + i, "bookTitle" + i, "출판사" + i, "작가" + i, BookRequestApprove.W, LocalDate.now(), "의견" + i);
             }
 
 

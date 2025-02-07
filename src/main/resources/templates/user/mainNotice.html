@@ -23,19 +23,20 @@
         <table class="list-table">
           <tbody>
           <!-- 게시글이 존재하지 않을 경우 -->
-  <!--        <tr th:if="${#lists.isEmpty(boardList)}">-->
+          <tr th:if="${#lists.isEmpty(boardList)}">
             <th colspan="5">게시글이 존재하지 않습니다.</th>
-  <!--        </tr>-->
+          </tr>
 
           <!-- 게시글이 존재할 경우 -->
-  <!--        <tr th:each="board : ${boardList}" th:if="${boardList.size() > 0}">-->
-  <!--          <td>-->
-  <!--            <a th:href="@{/board/15/{boardNo}(boardNo=${board.boardNo})}" th:text="${board.boardTitle}"></a>-->
-  <!--          </td>-->
-  <!--          <td>-->
-  <!--            <span th:text="${board.boardUpdateDate != null ? board.boardUpdateDate : board.boardCreateDate}"></span>-->
-  <!--          </td>-->
-  <!--        </tr>-->
+          <tr th:each="board : ${boardList}" th:if="${boardList.size() > 0}">
+            <td id="main-notice-title">
+              <a th:href="@{/board/15/{boardNo}(boardNo=${board.title})}" th:text="${board.title}"></a>
+            </td>
+            <td>
+              <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd')}"></span>
+<!--              <span th:text="${board.lastModifiedDate != null ? board.lastModifiedDate : board.createdDate}"></span>-->
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
