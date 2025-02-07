@@ -37,8 +37,8 @@
                     <span th:text="${board.member.email}"></span>
                 </div>
                 <div class="board-info">
-                    <p><span>작성일</span>&nbsp;<span th:text="${board.createdDate}"></span></p>
-                    <p th:if="${board.lastModifiedDate != null}"><span>수정일</span>&nbsp;<span th:text="${board.lastModifiedDate}"></span></p>
+                    <p><span>작성일</span>&nbsp;<span th:text="${board.createdDate.toLocalDate()}"></span></p>
+                    <p th:if="${board.lastModifiedDate != null}"><span>수정일</span>&nbsp;<span th:text="${board.lastModifiedDate.toLocalDate()}"></span></p>
                     <p><span>조회수</span>&nbsp;<span th:text="${board.count}"></span></p>
                 </div>
             </div>
@@ -77,6 +77,7 @@
 
 <script>
     const cateEngName = "[[${cateEngName}]]";
+    const boardId = "[[${board.id}]]";
 </script>
 
 <!-- boardDetail.js 연결 -->

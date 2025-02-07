@@ -51,7 +51,11 @@ public class BoardService {
 
     // AOP같은 로직을 통한 인증 필요
     @Transactional
-    public BoardDelFlag deletePost(Member member, Board board){
+    public BoardDelFlag deletePost(LoginMemberDTO memberDTO, Board board){
+        Long id = memberRepository.findMemberIdByName(memberDTO.getEmail());
+
+        Member member = memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found member" + id));
+
         Board findBoard = boardRepository.findByMemberAndId(member, board.getId())
                 .orElseThrow(() -> new BoardNotFoundException("게시글을 찾을 수 없습니다."));
 

@@ -21,7 +21,7 @@
         <div class="title-line"></div>
 
         <!-- 게시글 작성 화면 -->
-        <form action="@{/user/{cateEngName}/insert(cateEngName=${cateEngName})}" method="POST" class="board-write" id="boardWriteFrm">
+        <form th:action="@{/user/{cateEngName}/insert(cateEngName=${cateEngName})}" method="POST" class="board-write" id="boardWriteFrm">
             <!-- 제목 -->
             <h1 class="board-title">
                 <input type="text" name="title" placeholder="제목 입력">

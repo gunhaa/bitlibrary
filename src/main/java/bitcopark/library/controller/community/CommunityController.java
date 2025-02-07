@@ -62,7 +62,7 @@ public class CommunityController {
 
         model.addAttribute("boardPage", boardPage);
 
-        return "community/edu-culture-program";
+        return "community/eduCultureProgram";
     }
 
     @GetMapping(value="{catLevel1:community}/{catLevel2:edu-culture-program}/insert")

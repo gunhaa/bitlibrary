@@ -63,7 +63,9 @@
                     </th:block>
                     <th:block th:unless="${#lists.isEmpty(boardPage.content)}">
                         <tr th:each="board : ${boardPage.content}">
-                            <td></td>
+                            <td>
+                                [[${board.id}]]
+                            </td>
                             <td>
                                 <i th:if="${board.secretFlag == 'Y'}" class="fa-solid fa-lock"></i>
                                 <a th:href="@{/user/{cateEngName}/{boardId}(cateEngName=${cateEngName}, boardId=${board.id}, cp=${boardPage.number}, keyword=${keyword}, query=${query})}">[[${board.title}]]</a>
@@ -75,8 +77,8 @@
                                 <span>[[${board.member.email}]]</span>
                             </td>
                             <td>
-                                <span th:if="${board.lastModifiedDate != null }">[[${board.lastModifiedDate}]]</span>
-                                <span th:unless="${board.lastModifiedDate != null }">[[${board.createdDate}]]</span>
+                                <span th:if="${board.lastModifiedDate != null }" th:text="${board.lastModifiedDate.toLocalDate()}"></span>
+                                <span th:unless="${board.lastModifiedDate != null }" th:text="${board.createdDate.toLocalDate()}"></span>
                             </td>
                             <td>[[${board.count}]]</td>
                         </tr>
