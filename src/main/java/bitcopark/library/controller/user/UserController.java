@@ -60,8 +60,6 @@ public class UserController {
         // pagination
         Page<Board> boardPage = boardService.selectBoardList(category.getId(), pageable);
 
-        System.out.println("loginMember = " + loginMember);
-
         // model addAttribute
         model.addAttribute("boardPage", boardPage);
         model.addAttribute("cateCode", category.getId());
@@ -145,5 +143,31 @@ public class UserController {
         model.addAttribute("board", board);
 
         return "user/boardDetail";
+    }
+
+
+    @GetMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/delete")
+    public String deleteBoard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+            , @PathVariable(name = "catLevel1") String catLevel1
+            , @PathVariable(name = "catLevel2") String catLevel2
+            , @RequestParam Long boardId
+            , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember
+            , Pageable pageable) {
+
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
+
+        Board board = boardService.selectBoard(boardId).get();
+        boardService.deletePost(loginMember, board);
+
+        Category category = categoryService.getCategoryEngName(catLevel2);
+        Page<Board> boardPage = boardService.selectBoardList(category.getId(), pageable);
+
+        // model addAttribute
+        model.addAttribute("boardPage", boardPage);
+        model.addAttribute("cateCode", category.getId());
+        model.addAttribute("cateName", category.getCategoryName());
+        model.addAttribute("cateEngName", category.getCategoryEngName());
+
+        return "user/boardList";
     }
 }

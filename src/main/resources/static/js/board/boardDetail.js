@@ -16,7 +16,7 @@ if(deleteBtn != null){
     deleteBtn.addEventListener("click", ()=>{
 
         if(confirm("정말 삭제하시겠습니까?")){ 
-            location.href = "/user/" + cateEngName + '/delete';
+            location.href = "/user/" + cateEngName + '/delete?boardId=' + boardId;
         }
     })
 }

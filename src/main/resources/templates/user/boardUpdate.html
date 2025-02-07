@@ -25,11 +25,11 @@
 
         <!-- 게시글 작성 화면 -->
         <!-- notice / bookreview 공통 -->
-        <form action="update" method="POST" class="board-write" id="boardWriteFrm" enctype="multipart/form-data">
+        <form th:action="@{/user/{cateEngName}/update(cateEngName=${cateEngName})}" method="POST" class="board-write" id="boardWriteFrm" enctype="multipart/form-data">
 
             <%-- 제목 --%>
             <h1 class="board-title">
-                <input type="text" name="boardTitle" placeholder="제목 입력" value="${board.boardTitle}">
+                <input type="text" name="boardTitle" placeholder="제목 입력" value="${board.title}">
             </h1>
 
             <!-- 이미지 경로 변수 설정 -->
@@ -64,12 +64,12 @@
 
             <!-- 내용 -->
             <div class="board-content">
-                <textarea name="boardContent">${board.boardContent}</textarea>
+                <textarea name="content">[[${board.content}]]</textarea>
             </div>
 
             <!-- 버튼 영역 -->
             <div class="btn-area">
-                <button type="button" onclick="location.href='/board/${cateCode}/${boardNo}'">취소</button>
+                <button type="button" th:onclick="|location.href='/user/${cateEngName}/${board.id}'|">취소</button>
                 <button type="submit" id="writeBtn">등록</button>
             </div>
 
