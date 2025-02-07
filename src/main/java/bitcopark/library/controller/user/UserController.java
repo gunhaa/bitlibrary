@@ -91,7 +91,6 @@ public class UserController {
     public String insertBoard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
             , @PathVariable(name = "catLevel1") String catLevel1
             , @PathVariable(name = "catLevel2") String catLevel2
-            , @RequestParam(name = "files", required = false) MultipartFile[] files
             , BoardRequestDTO boardRequestDTO
             , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember) {
 
@@ -105,17 +104,18 @@ public class UserController {
         Board board = boardService.writePost(loginMember, boardRequestDTO, category);
         model.addAttribute("board", board);
 
-        if (files != null && files.length > 0) {
+
+        List<MultipartFile> files = boardRequestDTO.getImages();
+
+        if (!boardRequestDTO.getImages().isEmpty()) {
             try{
                 String path = new ClassPathResource(IMG_UPLOAD_PATH).getFile().getAbsolutePath();
                 List<BoardImg> boardImgList = new ArrayList<>();
 
-                for( int i = 0; i < files.length; i++ ) {
-                    if (!files[i].isEmpty()) {
-                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), i);
-                        files[i].transferTo(new File(path + boardImg.getRenameImg()));
-                        boardImgList.add(boardImg);
-                    }
+                for( int i = 0; i < files.size(); i++ ) {
+                    BoardImg boardImg = boardService.insertBoardImg(board, files.get(i).getOriginalFilename(), path, i);
+                    files.get(i).transferTo(new File(path + boardImg.getRenameImg()));
+                    boardImgList.add(boardImg);
                 }
 
                 model.addAttribute("boardImgList", boardImgList);

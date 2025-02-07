@@ -68,9 +68,10 @@ public class BoardService {
     }
 
     @Transactional
-    public BoardImg insertBoardImg(Board board, String originalName, int orderImg) {
+    public BoardImg insertBoardImg(Board board, String originalName, String pathImg, int orderImg) {
         BoardImg boardImg = BoardImg.builder()
                 .originalImg(originalName)
+                .pathImg(pathImg)
                 .board(board)
                 .orderImg(orderImg)
                 .build();
