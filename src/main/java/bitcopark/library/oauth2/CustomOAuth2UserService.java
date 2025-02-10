@@ -4,6 +4,7 @@ import bitcopark.library.dto.GoogleResponse;
 import bitcopark.library.dto.NaverResponse;
 import bitcopark.library.dto.OAuth2Response;
 import bitcopark.library.entity.member.Member;
+import bitcopark.library.exception.MemberDeleteException;
 import bitcopark.library.jwt.MemberDto;
 import bitcopark.library.repository.member.MemberRepository;
 import bitcopark.library.service.Member.MemberService;
@@ -47,6 +48,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         if(findMember.isEmpty()){
             memberService.joinOAuth2Member(email, name, "ROLE_USER");
             return new CustomOAuth2User(new MemberDto(email, name, "ROLE_USER"));
+        }
+
+        if (findMember.get().isDeleted()) {
+            throw new MemberDeleteException("탈퇴한 회원");
         }
 
         return new CustomOAuth2User(new MemberDto(email,name,findMember.get().getAuthority()));
