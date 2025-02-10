@@ -89,8 +89,8 @@ public class WritePostTest {
         
         //when,then
         assertThrows(InvalidDataAccessApiUsageException.class, () -> {
-            String naverEmail3 = "wh82993@naver.com";
-            String naverName3 = "naver3 YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
+            String naverEmail3 = "난 회원가입 안한 사람 이메일이야";
+            String naverName3 = "난 회원가입 안한 사람 이름이야";
 
             LoginMemberDTO loginMemberDTO3 = new LoginMemberDTO(naverEmail3, naverName3, "ROLE_ADMIN");
             BoardRequestDTO boardRequestDTO3 = new BoardRequestDTO();
@@ -100,7 +100,5 @@ public class WritePostTest {
             //when, then
             boardService.writePost(loginMemberDTO3, boardRequestDTO3, 공지사항);
         });
-
     }
-
 }
