@@ -30,8 +30,8 @@ public class Member extends BaseAuditEntity {
     private String email;
     private String name;
 
-    private boolean is_deleted;
-    private LocalDateTime deleted_at;
+    private boolean isDeleted;
+    private LocalDateTime deletedAt;
 
     private String authority;
 
