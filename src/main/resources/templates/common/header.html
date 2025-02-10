@@ -64,7 +64,8 @@
 
             <div class="header-top-menu">
                 <div th:if="${loginMember == null}">
-<!--                    <a th:href="@{/member/login}">로그인</a> | <a th:href="@{/member/signUp}">회원가입</a>-->
+                    <!-- 로그인 X -->
+                    <a th:href="@{/member/login}">로그인</a>
                 </div>
                 <div th:if="${loginMember != null}">
                     <!-- 로그인 O -->

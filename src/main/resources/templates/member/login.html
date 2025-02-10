@@ -11,34 +11,16 @@
 <!-- Header Include -->
 <div th:replace="~{/common/header :: header}"></div>
 
-<form action="/member/login" method="post" name="loginFrm" id="loginFrm">
+<section class="login-area">
     <div class="login-msg">로그인</div>
+    <a href="/oauth2/authorization/google">
+        <img src="/images/login/google_login.svg" class="login-img">
+    </a>
 
-    <div class="login-input-area id">
-        <input type="text" name="email" id="memberEmail" placeholder="아이디(이메일)" value="${saveId}">
-    </div>
-
-    <div class="login-input-area pw">
-        <input type="password" name="password" id="memberPw" placeholder="비밀번호">
-    </div>
-
-    <div>
-        <input type="checkbox" id="saveId" name="saveId" th:checked="${saveId != null}"/>
-        <label for="saveId">아이디 저장</label>
-    </div>
-
-    <div>
-        <button>로그인</button>
-    </div>
-</form>
-
-<ul class="login-nav">
-    <li><a href="/member/findId">아이디 찾기</a></li>
-    <li>|</li>
-    <li><a href="/member/resetPw">비밀번호 초기화</a></li>
-    <li>|</li>
-    <li><a href="/member/signUp">회원가입</a></li>
-</ul>
+    <a href="/oauth2/authorization/naver">
+        <img src="/images/login/naver_login.png" class="login-img">
+    </a>
+</section>
 <!-- Footer Include -->
 <div th:replace="~{/common/footer :: footer}"></div>
 </body>

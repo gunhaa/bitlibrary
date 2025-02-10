@@ -12,6 +12,22 @@
     align-items: center;
 }
 
+.main-login-area > a {
+    display: inline-block;
+    width: 100%;
+}
+
+.login-msg {
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 85px;
+    text-align: center;
+}
+
+.login-img {
+    width: 100%;
+}
+
 .main-login-area .main-login-title{
     font-size: 18px;
     padding: 16px;

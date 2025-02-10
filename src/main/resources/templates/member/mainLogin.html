@@ -10,12 +10,13 @@
 <section class="main-login-area" th:fragment="mainLogin">
 
     <th:block th:if="${loginMember==null}">
-        <a href="/oauth2/authorization/google" class="main-login-btn-area">
-            <img src="/images/login/google_login.svg" class="loginBtn">
+        <div class="login-msg">로그인</div>
+        <a href="/oauth2/authorization/google">
+            <img src="/images/login/google_login.svg" class="login-img">
         </a>
 
-        <a href="/oauth2/authorization/naver" class="main-login-btn-area">
-            <img src="/images/login/naver_login.png" class="loginBtn">
+        <a href="/oauth2/authorization/naver">
+            <img src="/images/login/naver_login.png" class="login-img">
         </a>
     </th:block>
 
@@ -47,34 +48,6 @@
         </article>
 
     </th:block>
-
-
-    <!--    <div>-->
-    <!--      <article class="main-login-title main-login-member-title">-->
-    <!--        <strong>회원명</strong>님 환영합니다.-->
-    <!--      </article>-->
-
-    <!--      <article class="main-login-form main-login-table">-->
-    <!--        <table>-->
-    <!--          <tr>-->
-    <!--            <td>도서대출현황</td>-->
-    <!--            <td th:text="${loginMember.loanBook}">대출현황</td>-->
-    <!--          </tr>-->
-    <!--          <tr class="second-tr">-->
-    <!--            <td>도서예약현황</td>-->
-    <!--            <td th:text="${loginMember.resvBook}">예약현황</td>-->
-    <!--          </tr>-->
-    <!--          <tr>-->
-    <!--            <td>연체도서</td>-->
-    <!--            <td th:text="${loginMember.overdueBook}">연체도서</td>-->
-    <!--          </tr>-->
-    <!--        </table>-->
-    <!--        <div class="main-login-btn-area main-logout-btn-area">-->
-    <!--          <div id="main-my-library-btn"><a th:href="@{/member/logout}">로그아웃</a></div>-->
-    <!--          <div id="main-my-library-btn"><a th:href="@{/myLibrary/book}">내 서재</a></div>-->
-    <!--        </div>-->
-    <!--      </article>-->
-    <!--    </div>-->
 </section>
 <script th:src="@{/js/member/mainLogin.js}" defer></script>
 </body>
