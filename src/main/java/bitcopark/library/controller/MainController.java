@@ -26,16 +26,12 @@ public class MainController {
     public String mainPage(@RequestAttribute(value = "loginMember", required = false) LoginMemberDTO loginMember, Model model){
         model.addAttribute("loginMember", loginMember);
         if(loginMember != null){
-            // 테스트 필요
             BookStatusDTO bookStatus = memberService.getBookStatus(loginMember);
             model.addAttribute("bookStatus", bookStatus);
         }
 
         Pageable limit = PageRequest.of(0, 5);
-        List<Board> boardList = boardRepository.selectNoticeRecent5(limit);
-        for (Board board : boardList) {
-            System.out.println("board.getTitle() = " + board.getTitle());
-        }
+        List<Board> boardList = boardRepository.selectNoticeLimit(limit);
         model.addAttribute("boardList", boardList);
 
         return "common/main";

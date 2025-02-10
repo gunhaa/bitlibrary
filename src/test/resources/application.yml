@@ -1,22 +1,31 @@
 server:
+  # 서버 빌드시 7777
+  # port: 7777
   port: 8080
 spring:
   profiles:
     active: test
   thymeleaf:
     cache: false
+#  서버 빌드시 사용(MySQL)
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: 1234
+#    url: jdbc:mysql://mysql-container:3306/bitlibrary
+  # 로컬 빌드시 사용(H2)
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 1234
-    url: jdbc:mysql://mysql-container:3306/bitlibrary
+    url: jdbc:h2:tcp://localhost/~/bitlibrary
+    username: aa
+    password:
+    driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
         use_sql_comments: true
-        dialect: org.hibernate.dialect.MySQLDialect
+#        dialect: org.hibernate.dialect.MySQLDialect
 logging.level:
   org.hibernate.SQL: debug

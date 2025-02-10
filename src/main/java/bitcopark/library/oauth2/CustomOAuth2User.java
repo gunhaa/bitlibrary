@@ -1,6 +1,7 @@
 package bitcopark.library.oauth2;
 
 import bitcopark.library.jwt.MemberDto;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -9,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+@Profile("local")
 public class CustomOAuth2User implements OAuth2User {
 
     private final MemberDto memberDto;

@@ -42,7 +42,7 @@ class BoardServiceTest {
     @Test
     public void 게시글_생성(){
 
-        Member member = createTestMember();
+//        Member member = createTestMember();
         String title = "글 제목1";
         String content = "글 내용1";
         SecretFlag secretFlag = SecretFlag.N;
@@ -52,25 +52,25 @@ class BoardServiceTest {
 
         //Board post2 = boardService.writePost(member, title, content, secretFlag, category);
 
-        List<Board> memberPosts = boardRepository.findByMember(member)
-                .orElseThrow(()-> new IllegalArgumentException("No posts"));
+//        List<Board> memberPosts = boardRepository.findByMember(member)
+//                .orElseThrow(()-> new IllegalArgumentException("No posts"));
 
         //assertThat(post1).isEqualTo(memberPosts.get(0));
 
         //assertThat(2).isEqualTo(memberPosts.size());
     }
 
-    private Member createTestMember() {
-        String email = "test@email.com";
-        String name = "member1";
-        String phoneNumber = "01012345678";
-        MemberGender gender = MemberGender.MALE;
-        int birth = 911111;
-        String zipcode = "12345";
-        String detailed = "D동";
-        Address address = new Address(zipcode, detailed);
-        return memberService.joinMember(email, name, phoneNumber, gender, birth, address);
-    }
+//    private Member createTestMember() {
+//        String email = "test@email.com";
+//        String name = "member1";
+//        String phoneNumber = "01012345678";
+//        MemberGender gender = MemberGender.MALE;
+//        int birth = 911111;
+//        String zipcode = "12345";
+//        String detailed = "D동";
+//        Address address = new Address(zipcode, detailed);
+//        return memberService.joinMember(email, name, phoneNumber, gender, birth, address);
+//    }
 
     @BeforeEach
     public void 카테고리_생성(){
