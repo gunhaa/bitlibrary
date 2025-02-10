@@ -8,6 +8,7 @@ import bitcopark.library.jwt.MemberDto;
 import bitcopark.library.repository.member.MemberRepository;
 import bitcopark.library.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Profile("local")
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final MemberService memberService;

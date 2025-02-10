@@ -51,6 +51,7 @@ public class tempInitGenerate {
 
     @Component
     @RequiredArgsConstructor
+    @Profile("local")
     private static class initService {
 
         private final MemberService memberService;

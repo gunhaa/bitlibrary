@@ -3,6 +3,7 @@ package bitcopark.library.jwt;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -11,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
+@Profile("local")
 public class JwtUtil {
 
     private SecretKey secretKey;
@@ -51,7 +53,7 @@ public class JwtUtil {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     }
 
-    public String createJwt(String category, String username,String email, String role, Long expiredMs){
+    public synchronized String createJwt(String category, String username,String email, String role, Long expiredMs){
         return Jwts.builder()
                 .claim("category", category)
                 .claim("username", username)
