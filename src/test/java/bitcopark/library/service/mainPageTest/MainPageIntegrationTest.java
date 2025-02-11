@@ -48,7 +48,7 @@ public class MainPageIntegrationTest {
         String naverName = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
         Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, "ROLE_ADMIN");
 
-        // given: 게시글 10개 작성
+        // given
         for (int i = 0; i < 10; i++) {
             LoginMemberDTO loginMemberDTO = new LoginMemberDTO(naverEmail, naverName, "ROLE_ADMIN");
             BoardRequestDTO boardRequestDTO = new BoardRequestDTO();
@@ -57,12 +57,12 @@ public class MainPageIntegrationTest {
             boardService.writePost(loginMemberDTO, boardRequestDTO, 공지사항);
         }
 
-        // when: 공지사항 조회 (첫 페이지, 최대 10개)
-        Pageable limit = PageRequest.of(0, 10);
+        // when
+        Pageable limit = PageRequest.of(0, 5);
         List<Board> boardList = boardRepository.selectNoticeLimit(limit);
 
-        // then: 조회된 공지사항 개수가 10개인지 확인
-        Assertions.assertThat(boardList.size()).isEqualTo(10);
+        // then
+        Assertions.assertThat(boardList.size()).isEqualTo(5);
     }
 
 }
