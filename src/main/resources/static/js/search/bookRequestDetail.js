@@ -37,6 +37,8 @@ if(deleteBtn != null){
 
                 } else if (result == "not valid request"){
                     alert("삭제 중 문제가 발생하였습니다. 다시 시도해주세요");
+                } else {
+                    alert("올바르지 않은 요청입니다.");
                 }
 
             })
