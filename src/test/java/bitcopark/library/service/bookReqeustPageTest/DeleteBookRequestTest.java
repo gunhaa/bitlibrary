@@ -48,7 +48,7 @@ public class DeleteBookRequestTest {
         // 책 요청 등록
         BookRequestCondition bookRequestCondition = new BookRequestCondition();
         bookRequestCondition.setIsbn(isbn);
-        bookRequestCondition.setEmail("wh8299@naver.com");
+        bookRequestCondition.setEmail(naverName);
         bookRequestCondition.setBookTitle("책제목");
         bookRequestCondition.setBookAuthor("저자");
         bookRequestCondition.setBookPublisher("출판사");
@@ -62,6 +62,51 @@ public class DeleteBookRequestTest {
 
         BookDeleteDto bookDeleteDto = new BookDeleteDto(isbn);
         LoginMemberDTO loginMemberDTO = new LoginMemberDTO(naverEmail, naverName, role);
+
+        ResponseEntity<?> response = bookRequestService.deleteBookRequest(bookDeleteDto, loginMemberDTO);
+
+        //then
+        String body = "bookRequest delete success";
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Assertions.assertThat(response.getBody()).isEqualTo(body);
+    }
+
+    @Test
+    @DisplayName("관리자가_타인이_작성한_책_요청_삭제")
+    public void 관리자가_타인이_작성한_책_요청_삭제(){
+        // given
+
+        // 회원 가입
+        String naverEmail = "wh8299@naver.com";
+        String naverName = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
+        String role = "ROLE_USER";
+        Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, role);
+
+        String isbn = "9788971992258";
+
+        // 관리자 가입
+        String adminEmail = "admin@bitlibrary.com";
+        String adminName = "bitlibrary YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ admin";
+        String adminRole = "ROLE_ADMIN";
+        Member admin = memberService.joinOAuth2Member(adminEmail, adminName, adminRole);
+
+        // 책 요청 등록
+        BookRequestCondition bookRequestCondition = new BookRequestCondition();
+        bookRequestCondition.setIsbn(isbn);
+        bookRequestCondition.setEmail(naverEmail);
+        bookRequestCondition.setBookTitle("책제목");
+        bookRequestCondition.setBookAuthor("저자");
+        bookRequestCondition.setBookPublisher("출판사");
+        bookRequestCondition.setBookPublicationDate(LocalDateTime.now().toLocalDate());
+        bookRequestCondition.setOpinion("작성자 의견");
+        bookRequestService.registerBookRequest(bookRequestCondition);
+
+        //when
+        BookRequest findBookRequest = bookRequestRepository.findByIsbn(isbn).get();
+        Assertions.assertThat(findBookRequest.getIsbn()).isEqualTo(isbn);
+
+        BookDeleteDto bookDeleteDto = new BookDeleteDto(isbn);
+        LoginMemberDTO loginMemberDTO = new LoginMemberDTO(adminEmail, adminName, adminRole);
 
         ResponseEntity<?> response = bookRequestService.deleteBookRequest(bookDeleteDto, loginMemberDTO);
 
