@@ -82,12 +82,12 @@ public class BookRequestService {
         try {
             boolean isExist = bookRepository.existsByIsbn(bookRequestCondition.getIsbn());
             if(isExist){
-                return new BookRequestResponseDto(false, "Book exist");
+                return new BookRequestResponseDto(false, "Book already exist");
             }
             createBookRequest(bookRequestCondition);
             return new BookRequestResponseDto(true, "Book Request Success");
         } catch (Exception e){
-            return new BookRequestResponseDto(false, "Book Request fail");
+            return new BookRequestResponseDto(false, "Book Request fail " + e.getMessage());
         }
     }
 
@@ -105,7 +105,7 @@ public class BookRequestService {
 
         if(loginMember.getEmail().equals(updateCondition.getEmail())){
 
-            if(bookRequestRepository.existsByIsbn(updateCondition.getIsbn())){
+            if(bookRepository.existsByIsbn(updateCondition.getIsbn()) && !updateCondition.getIsbn().equals(updateCondition.getPrevIsbn())){
                return new ResponseEntity<>("bookRequest isbn exist" ,HttpStatus.BAD_REQUEST);
             }
 
@@ -148,12 +148,18 @@ public class BookRequestService {
             return new ResponseEntity<>("bookRequest delete success", HttpStatus.OK);
         }
 
-        BookRequest findByEmail = bookRequestRepository.findByEmail(loginMember.getEmail()).orElseThrow(() -> new IllegalArgumentException("not valid email"));
-        BookRequest findByIsbn = bookRequestRepository.findByIsbn(bookDeleteDto.getIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
+        try {
 
-        if(findByEmail == findByIsbn){
-            bookRequestRepository.deleteByIsbn(bookDeleteDto.getIsbn());
-            return new ResponseEntity<>("bookRequest delete success", HttpStatus.OK);
+            BookRequest findByEmail = bookRequestRepository.findByEmail(loginMember.getEmail()).orElseThrow(() -> new IllegalArgumentException("not valid email"));
+            BookRequest findByIsbn = bookRequestRepository.findByIsbn(bookDeleteDto.getIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
+
+            if (findByEmail == findByIsbn) {
+                bookRequestRepository.deleteByIsbn(bookDeleteDto.getIsbn());
+                return new ResponseEntity<>("bookRequest delete success", HttpStatus.OK);
+            }
+
+        } catch (IllegalArgumentException e){
+            return new ResponseEntity<>(e.getMessage() , HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>("not valid request", HttpStatus.BAD_REQUEST);

@@ -7,4 +7,7 @@ public class BookDeleteDto {
 
     private String isbn;
 
+    public BookDeleteDto(String isbn) {
+        this.isbn = isbn;
+    }
 }
