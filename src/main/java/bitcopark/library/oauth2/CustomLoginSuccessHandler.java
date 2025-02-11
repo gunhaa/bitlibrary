@@ -49,7 +49,7 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         response.addCookie(createRefreshCookie("refresh", refresh));
         response.setStatus(HttpStatus.OK.value());
 
-        response.sendRedirect("http://localhost:8080/");
+        response.sendRedirect("/");
 
     }
 

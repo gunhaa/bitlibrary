@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 
 @SpringBootTest
 @Transactional
-public class BookRequestPageTest {
+public class RegisterBookRequestTest {
 
     @Autowired
     private BookRequestService bookRequestService;
@@ -38,17 +38,18 @@ public class BookRequestPageTest {
 
     @Test
     @DisplayName("책_요청_등록")
-    public void 책_요청_등록(){
+    public void 책_요청_등록_성공(){
         // given
 
         // 회원 가입
         String naverEmail = "wh8299@naver.com";
         String naverName = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
+        String role = "ROLE_USER";
         Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, "ROLE_ADMIN");
 
         // 책 요청 등록
         BookRequestCondition bookRequestCondition = new BookRequestCondition();
-        bookRequestCondition.setIsbn("123123123123123");
+        bookRequestCondition.setIsbn("9788971992258");
         bookRequestCondition.setEmail("wh8299@naver.com");
         bookRequestCondition.setBookTitle("책제목");
         bookRequestCondition.setBookAuthor("저자");
@@ -70,7 +71,7 @@ public class BookRequestPageTest {
     public void 책_요청_실패_비로그인상태(){
         // given
         BookRequestCondition bookRequestCondition = new BookRequestCondition();
-        bookRequestCondition.setIsbn("123123123123123");
+        bookRequestCondition.setIsbn("9788971992258");
         bookRequestCondition.setEmail("wh8299@naver.com");
         bookRequestCondition.setBookTitle("책제목");
         bookRequestCondition.setBookAuthor("저자");
