@@ -45,7 +45,7 @@ public class RegisterBookRequestTest {
         String naverEmail = "wh8299@naver.com";
         String naverName = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
         String role = "ROLE_USER";
-        Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, "ROLE_ADMIN");
+        Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, role);
 
         // 책 요청 등록
         BookRequestCondition bookRequestCondition = new BookRequestCondition();
@@ -95,7 +95,8 @@ public class RegisterBookRequestTest {
         // 회원 가입
         String naverEmail = "wh8299@naver.com";
         String naverName = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
-        Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, "ROLE_ADMIN");
+        String role = "ROLE_USER";
+        Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, role);
 
         // 책 등록
         Book 백범일지 = bookService.registerNewBook("김구 저", "백범일지", "돌베개", "2008", "9788971992258", "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F994701%3Ftimestamp%3D20240727112932", BookState.P, BookSupple.N);

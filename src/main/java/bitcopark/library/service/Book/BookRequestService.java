@@ -105,7 +105,7 @@ public class BookRequestService {
 
         if(loginMember.getEmail().equals(updateCondition.getEmail())){
 
-            if(bookRequestRepository.existsByIsbn(updateCondition.getIsbn()) && !updateCondition.getIsbn().equals(updateCondition.getPrevIsbn())){
+            if(bookRepository.existsByIsbn(updateCondition.getIsbn()) && !updateCondition.getIsbn().equals(updateCondition.getPrevIsbn())){
                return new ResponseEntity<>("bookRequest isbn exist" ,HttpStatus.BAD_REQUEST);
             }
 

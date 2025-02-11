@@ -1,11 +1,15 @@
 package bitcopark.library.service.bookReqeustPageTest;
 
 import bitcopark.library.controller.book.BookRequestCondition;
+import bitcopark.library.entity.book.Book;
+import bitcopark.library.entity.book.BookState;
+import bitcopark.library.entity.book.BookSupple;
 import bitcopark.library.entity.member.BookRequest;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.repository.book.BookRequestRepository;
 import bitcopark.library.service.Book.BookRequestService;
+import bitcopark.library.service.Book.BookService;
 import bitcopark.library.service.Member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -31,6 +35,9 @@ public class UpdateBookRequestTest {
     @Autowired
     private BookRequestRepository bookRequestRepository;
 
+    @Autowired
+    private BookService bookService;
+
     @Test
     @DisplayName("책_요청_수정")
     public void 책_요청_수정_성공(){
@@ -47,7 +54,7 @@ public class UpdateBookRequestTest {
         // 책 요청 등록
         BookRequestCondition bookRequestCondition = new BookRequestCondition();
         bookRequestCondition.setIsbn(isbn);
-        bookRequestCondition.setEmail("wh8299@naver.com");
+        bookRequestCondition.setEmail(naverEmail);
         bookRequestCondition.setBookTitle("책제목");
         bookRequestCondition.setBookAuthor("저자");
         bookRequestCondition.setBookPublisher("출판사");
@@ -71,6 +78,51 @@ public class UpdateBookRequestTest {
         Assertions.assertThat(bookRequest.getIsbn()).isEqualTo(isbn);
         Assertions.assertThat(updateBookRequest.getOpinion()).isEqualTo(updateOpinion);
         Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    @DisplayName("책_요청_실패_이미_존재하는_ISBN")
+    public void 책_요청_수정실패_이미_존재하는_ISBN(){
+
+        //given
+        // 회원 가입
+        String naverEmail = "wh8299@naver.com";
+        String naverName = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
+        String role = "ROLE_USER";
+        Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, role);
+
+        String 백범일지_isbn = "9788971992258";
+
+        // 책 등록
+        Book 백범일지 = bookService.registerNewBook("김구 저", "백범일지", "돌베개", "2008", 백범일지_isbn, "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F994701%3Ftimestamp%3D20240727112932", BookState.P, BookSupple.N);
+
+        String isbn = "123123123123";
+
+        // 책 요청 등록
+        BookRequestCondition bookRequestCondition = new BookRequestCondition();
+        bookRequestCondition.setIsbn(isbn);
+        bookRequestCondition.setEmail(naverEmail);
+        bookRequestCondition.setBookTitle("책제목");
+        bookRequestCondition.setBookAuthor("저자");
+        bookRequestCondition.setBookPublisher("출판사");
+        bookRequestCondition.setBookPublicationDate(LocalDateTime.now().toLocalDate());
+        bookRequestCondition.setOpinion("작성자 의견");
+        bookRequestService.registerBookRequest(bookRequestCondition);
+        System.out.println("bookRequestCondition1 = " + bookRequestCondition);
+        // when
+        String updateOpinion = "업데이트된 작성자 의견";
+        String prevIsbn = isbn;
+        bookRequestCondition.setIsbn(백범일지_isbn);
+        bookRequestCondition.setOpinion(updateOpinion);
+        bookRequestCondition.setPrevIsbn(prevIsbn);
+        LoginMemberDTO loginMemberDTO = new LoginMemberDTO(naverEmail, naverName, role);
+        ResponseEntity<?> responseEntity = bookRequestService.updateBookRequest(bookRequestCondition, loginMemberDTO);
+        System.out.println("bookRequestCondition2 = " + bookRequestCondition);
+        // then
+        String bodyMessage = "bookRequest isbn exist";
+        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        Assertions.assertThat(responseEntity.getBody()).isEqualTo(bodyMessage);
+
     }
 
 }
