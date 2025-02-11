@@ -87,7 +87,7 @@ public class BookRequestService {
             createBookRequest(bookRequestCondition);
             return new BookRequestResponseDto(true, "Book Request Success");
         } catch (Exception e){
-            return new BookRequestResponseDto(false, "Book Request fail");
+            return new BookRequestResponseDto(false, "Book Request fail " + e.getMessage());
         }
     }
 

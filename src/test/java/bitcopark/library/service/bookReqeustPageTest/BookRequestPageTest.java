@@ -39,9 +39,6 @@ public class BookRequestPageTest {
         String naverName = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
         Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, "ROLE_ADMIN");
 
-        // when
-        boolean isExist = memberRepository.existsByEmail(naverEmail);
-
         // 책 요청 등록
         BookRequestCondition bookRequestCondition = new BookRequestCondition();
         bookRequestCondition.setIsbn("123123123123123");
@@ -51,14 +48,41 @@ public class BookRequestPageTest {
         bookRequestCondition.setBookPublisher("출판사");
         bookRequestCondition.setBookPublicationDate(LocalDateTime.now().toLocalDate());
         bookRequestCondition.setOpinion("작성자 의견");
+        
         // when
         BookRequestResponseDto bookRequestResponseDto = bookRequestService.registerBookRequest(bookRequestCondition);
-        System.out.println(bookRequestResponseDto);
 
         // then
         Assertions.assertThat(bookRequestResponseDto.isSuccess()).isTrue();
         Assertions.assertThat(bookRequestResponseDto.getMessage()).isEqualTo("Book Request Success");
         
     }
+    
+    @Test
+    @DisplayName("책_요청_실패_비로그인상태")
+    public void 책_요청_실패_비로그인상태(){
+        // given
+        BookRequestCondition bookRequestCondition = new BookRequestCondition();
+        bookRequestCondition.setIsbn("123123123123123");
+        bookRequestCondition.setEmail("wh8299@naver.com");
+        bookRequestCondition.setBookTitle("책제목");
+        bookRequestCondition.setBookAuthor("저자");
+        bookRequestCondition.setBookPublisher("출판사");
+        bookRequestCondition.setBookPublicationDate(LocalDateTime.now().toLocalDate());
+        bookRequestCondition.setOpinion("작성자 의견");
+        // when
+        // 회원 가입 안 된 상태로 글 작성 시도
+        BookRequestResponseDto bookRequestResponseDto = bookRequestService.registerBookRequest(bookRequestCondition);
+        System.out.println(bookRequestResponseDto);
 
+        //then
+        Assertions.assertThat(bookRequestResponseDto.isSuccess()).isFalse();
+        Assertions.assertThat(bookRequestResponseDto.getMessage()).isEqualTo("Book Request fail invalid memberId");
+    }
+
+    @Test
+    @DisplayName("책_요청_실패_이미_존재하는_책")
+    public void 책_요청_실패_이미_존재하는_책(){
+
+    }
 }

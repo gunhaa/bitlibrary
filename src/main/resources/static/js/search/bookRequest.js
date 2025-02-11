@@ -40,12 +40,13 @@ requestBtn.addEventListener("click", ()=>{
     })
     .then(resp=>resp.json())
     .then(result=>{
-        console.log(result);
         if(result.success === true){
             popUpLayer.style.display = "block";
         }
 
-        if(result.success === false && result.message=="Book Request fail"){
+        if (result.success === false && result.message === "Book Request fail invalid memberId") {
+            alert("로그인 상태가 아닙니다. 로그인을 하고 다시 시도해주세요.");
+        } else if (result.success === false && result.message.startsWith("Book Request fail")) {
             alert("도서 신청에 오류가 발생했습니다.");
         }
 
