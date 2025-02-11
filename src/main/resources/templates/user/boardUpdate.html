@@ -33,9 +33,9 @@
             </h1>
 
             <!-- 이미지 경로 변수 설정 -->
-            <th:block th:with="img0=${#lists.arrayFindFirst(board.imageList, img -> img.imageOrder == 0)?.imagePath +
+            <th:block th:with="img0=${#lists.arrayFindFirst(board.imageList, img -> img.imageOrder == 0)?.'/images/board/' +
                       #lists.arrayFindFirst(board.imageList, img -> img.imageOrder == 0)?.imageReName}">
-                <th:block th:with="img1=${#lists.arrayFindFirst(board.imageList, img -> img.imageOrder == 1)?.imagePath +
+                <th:block th:with="img1=${#lists.arrayFindFirst(board.imageList, img -> img.imageOrder == 1)?.'/images/board/' +
                           #lists.arrayFindFirst(board.imageList, img -> img.imageOrder == 1)?.imageReName}">
 
                     <!-- 이미지 등록 영역 -->
@@ -46,7 +46,7 @@
                             <label for="img0">
                                 <img th:src="${img0}" class="preview">
                             </label>
-                            <input type="file" name="images" class="inputImage" id="img0" accept="image/*">
+                            <input type="file" name="files" class="inputImage" id="img0" accept="image/*">
                             <span class="delete-image">&times;</span>
                         </div>
 
@@ -54,7 +54,7 @@
                             <label for="img1">
                                 <img th:src="${img1}" class="preview">
                             </label>
-                            <input type="file" name="images" class="inputImage" id="img1" accept="image/*">
+                            <input type="file" name="files" class="inputImage" id="img1" accept="image/*">
                             <span class="delete-image">&times;</span>
                         </div>
                     </div>

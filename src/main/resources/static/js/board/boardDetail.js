@@ -17,6 +17,22 @@ if(deleteBtn != null){
 
         if(confirm("정말 삭제하시겠습니까?")){ 
             location.href = "/user/" + cateEngName + '/delete?boardId=' + boardId;
+
+            const date = {
+                boardId : boardId
+            }
+
+            fetch("/user/" + cateEngName + "/delete", {
+                method:"POST",
+                headers:{"Content-Type : application/json"}
+                body: JSON.stringify(data);
+            })
+            .then(resp => resp.text())
+            .then(result => {
+
+            })
+            .catch(e => console.log(e))
+            }
         }
     })
 }
