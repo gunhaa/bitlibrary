@@ -50,7 +50,7 @@ requestBtn.addEventListener("click", ()=>{
             alert("도서 신청에 오류가 발생했습니다.");
         }
 
-        if(result.success === false && result.message==="Book exist"){
+        if(result.success === false && result.message==="Book already exist"){
             alert("이미 도서관에 있는 책입니다.")
         }
     })

@@ -82,7 +82,7 @@ public class BookRequestService {
         try {
             boolean isExist = bookRepository.existsByIsbn(bookRequestCondition.getIsbn());
             if(isExist){
-                return new BookRequestResponseDto(false, "Book exist");
+                return new BookRequestResponseDto(false, "Book already exist");
             }
             createBookRequest(bookRequestCondition);
             return new BookRequestResponseDto(true, "Book Request Success");
