@@ -73,4 +73,9 @@ public class Member extends BaseAuditEntity {
 
         return member;
     }
+
+    public void softDelete() {
+        isDeleted = true;
+        deletedAt = LocalDateTime.now();
+    }
 }

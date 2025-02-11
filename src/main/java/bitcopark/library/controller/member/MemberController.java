@@ -1,9 +1,12 @@
 package bitcopark.library.controller.member;
 
+import bitcopark.library.oauth2.CustomOAuth2User;
 import bitcopark.library.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -26,5 +29,13 @@ public class MemberController {
         }
 
         return "member/login";
+    }
+
+    @PostMapping("/secession")
+    public String softDeleteMember(@AuthenticationPrincipal CustomOAuth2User user) {
+
+        memberService.softDeleteMember(user.getName());
+
+        return "redirect:/OAuth2/logout";
     }
 }
