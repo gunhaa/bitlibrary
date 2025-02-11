@@ -24,7 +24,7 @@ import static bitcopark.library.controller.util.ControllerUtils.setCategoryAndRo
 public class StudyController {
 
     @GetMapping(value = {"/{catLevel1:study}/{catLevel2}/{catLevel3}", "/{catLevel1:study}/{catLevel2}"})
-    public String study(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList,
+    public String study(Model model, List<CategoryDTO> categoryDTOList,
                         @PathVariable String catLevel1,
                         @PathVariable String catLevel2,
                         @PathVariable(required = false) String catLevel3) {
