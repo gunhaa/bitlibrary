@@ -44,10 +44,11 @@
             </div>
 
             <!-- 이미지 보여지는 영역 -->
+            <p th:text="${#lists.size(board.boardImgList)}"></p>
             <div th:if="${#lists.size(board.boardImgList) > 0}" class="img-box">
                 <div th:each="image : ${board.boardImgList}" class="boardImg">
-                    <img th:src="@{${image.pathImg + image.renameImg}}" alt="게시글 이미지"/>
-                    <a th:href="@{${image.pathImg + image.renameImg}}" th:download="${image.originalImg}">다운로드</a>
+                    <img th:src="@{'/images/board/' + ${image.renameImg}}" alt="게시글 이미지"/>
+                    <a th:href="@{'/images/board/' + ${image.renameImg}}" th:download="${image.originalImg}">다운로드</a>
                 </div>
             </div>
             <hr>

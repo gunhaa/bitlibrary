@@ -9,6 +9,7 @@ import bitcopark.library.entity.board.Category;
 import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.service.Board.BoardService;
 import bitcopark.library.service.Board.CategoryService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
@@ -34,7 +35,7 @@ public class UserController {
     private final BoardService boardService;
     private final CategoryService categoryService;
 
-    private static final String IMG_UPLOAD_PATH = "static/images/boardRepo";
+    private static final String IMG_UPLOAD_PATH = "/Users/baejihwan/uploads/";
 
     @GetMapping(value="{catLevel1:user}/{catLevel2:faq}")
     public String user(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
@@ -92,6 +93,7 @@ public class UserController {
             , @PathVariable(name = "catLevel1") String catLevel1
             , @PathVariable(name = "catLevel2") String catLevel2
             , BoardRequestDTO boardRequestDTO
+            , @RequestParam(name = "files", required = false) MultipartFile[] files
             , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember) {
 
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
@@ -102,27 +104,23 @@ public class UserController {
         model.addAttribute("cateEngName", category.getCategoryEngName());
 
         Board board = boardService.writePost(loginMember, boardRequestDTO, category);
-        model.addAttribute("board", board);
 
-
-        List<MultipartFile> files = boardRequestDTO.getImages();
-
-        if (!boardRequestDTO.getImages().isEmpty()) {
+        if (files != null && files.length > 0)  {
             try{
-                String path = new ClassPathResource(IMG_UPLOAD_PATH).getFile().getAbsolutePath();
-                List<BoardImg> boardImgList = new ArrayList<>();
+                for( int i = 0; i < files.length; i++ ) {
+                    if (!files[i].isEmpty()) {
+                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), IMG_UPLOAD_PATH, i);
+                        files[i].transferTo(new File(IMG_UPLOAD_PATH + boardImg.getRenameImg()));
 
-                for( int i = 0; i < files.size(); i++ ) {
-                    BoardImg boardImg = boardService.insertBoardImg(board, files.get(i).getOriginalFilename(), path, i);
-                    files.get(i).transferTo(new File(path + boardImg.getRenameImg()));
-                    boardImgList.add(boardImg);
+                        board.getBoardImgList().add(boardImg);
+                    }
                 }
-
-                model.addAttribute("boardImgList", boardImgList);
             }catch(IOException e){
                 e.printStackTrace();
             }
         }
+
+        model.addAttribute("board", board);
 
         return "user/boardDetail";
     }

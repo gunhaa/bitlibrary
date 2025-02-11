@@ -41,7 +41,7 @@
             <div class="img-box">
                 <!-- 등록한 이미지가 있으면 보여줘야하는 영역 -->
                 <div class="boardImg">
-                    <img src="${boardImgList[0].renameImg}">
+                    <img th:src="@{'/images/board/' + ${board.boardImaList[0].renameImg}}">
                 </div>
             </div>
 

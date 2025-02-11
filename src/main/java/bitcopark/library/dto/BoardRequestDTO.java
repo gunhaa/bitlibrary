@@ -15,7 +15,6 @@ public class BoardRequestDTO {
     private String title;
     private String content;
     private SecretFlag secretFlag;
-    private List<MultipartFile> images = new ArrayList<>();
 
     public Board toEntity(Member member, Category category){
 

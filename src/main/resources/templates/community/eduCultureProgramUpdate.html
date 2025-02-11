@@ -43,10 +43,10 @@
                 <div class="img-box">
                     <div class="boardImg">
                         <label for="img0">
-                            <img src="${boardImg[0].rename}" class="preview" id="preview">
+                            <img th:src="@{'/images/board/' + ${board.boardImgList[0].renameImg}}" class="preview" id="preview">
                             <p id="img-ment">이미지 파일을 선택해 주세요.</p>
                         </label>
-                        <input type="file" name="images" class="inputImage" id="img0" accept="image/*">
+                        <input type="file" name="files" class="inputImage" id="img0" accept="image/*">
                         <span class="delete-image" id="delete-image">&times;</span>
                     </div>
                 </div>
