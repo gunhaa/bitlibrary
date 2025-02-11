@@ -115,4 +115,48 @@ public class DeleteBookRequestTest {
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isEqualTo(body);
     }
+    
+    @Test
+    @DisplayName("타인이_작성한_책_요청_삭제_실패")
+    public void 타인이_작성한_책_요청_삭제_실패(){
+        // given
+
+        // 회원 가입
+        String naverEmail = "wh8299@naver.com";
+        String naverName = "naver YxUVriKN_IuaBzIWFfCBzzfnVc6SHEkDJtxV9fY8pxQ 황건하";
+        String role = "ROLE_USER";
+        Member OAuthNaverGunha = memberService.joinOAuth2Member(naverEmail, naverName, role);
+
+        String isbn = "9788971992258";
+
+        // 회원2 가입
+        String naverEmail2 = "gunha@bitlibrary.com";
+        String naverName2 = "naver YxUVriKN_IuaBzIWFfCBzzfasdasdaffxQ 황건하";
+        Member admin = memberService.joinOAuth2Member(naverEmail2, naverName2, role);
+
+        // 책 요청 등록
+        BookRequestCondition bookRequestCondition = new BookRequestCondition();
+        bookRequestCondition.setIsbn(isbn);
+        bookRequestCondition.setEmail(naverEmail);
+        bookRequestCondition.setBookTitle("책제목");
+        bookRequestCondition.setBookAuthor("저자");
+        bookRequestCondition.setBookPublisher("출판사");
+        bookRequestCondition.setBookPublicationDate(LocalDateTime.now().toLocalDate());
+        bookRequestCondition.setOpinion("작성자 의견");
+        bookRequestService.registerBookRequest(bookRequestCondition);
+
+        //when
+        BookRequest findBookRequest = bookRequestRepository.findByIsbn(isbn).get();
+        Assertions.assertThat(findBookRequest.getIsbn()).isEqualTo(isbn);
+
+        BookDeleteDto bookDeleteDto = new BookDeleteDto(isbn);
+        LoginMemberDTO loginMemberDTO = new LoginMemberDTO(naverEmail2, naverName2, role);
+
+        ResponseEntity<?> response = bookRequestService.deleteBookRequest(bookDeleteDto, loginMemberDTO);
+
+        //then
+        String body = "not valid email";
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        Assertions.assertThat(response.getBody()).isEqualTo(body);
+    }
 }

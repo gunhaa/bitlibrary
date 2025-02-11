@@ -148,12 +148,18 @@ public class BookRequestService {
             return new ResponseEntity<>("bookRequest delete success", HttpStatus.OK);
         }
 
-        BookRequest findByEmail = bookRequestRepository.findByEmail(loginMember.getEmail()).orElseThrow(() -> new IllegalArgumentException("not valid email"));
-        BookRequest findByIsbn = bookRequestRepository.findByIsbn(bookDeleteDto.getIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
+        try {
 
-        if(findByEmail == findByIsbn){
-            bookRequestRepository.deleteByIsbn(bookDeleteDto.getIsbn());
-            return new ResponseEntity<>("bookRequest delete success", HttpStatus.OK);
+            BookRequest findByEmail = bookRequestRepository.findByEmail(loginMember.getEmail()).orElseThrow(() -> new IllegalArgumentException("not valid email"));
+            BookRequest findByIsbn = bookRequestRepository.findByIsbn(bookDeleteDto.getIsbn()).orElseThrow(() -> new IllegalArgumentException("not valid isbn"));
+
+            if (findByEmail == findByIsbn) {
+                bookRequestRepository.deleteByIsbn(bookDeleteDto.getIsbn());
+                return new ResponseEntity<>("bookRequest delete success", HttpStatus.OK);
+            }
+
+        } catch (IllegalArgumentException e){
+            return new ResponseEntity<>(e.getMessage() , HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>("not valid request", HttpStatus.BAD_REQUEST);
