@@ -123,7 +123,7 @@ public class UpdateBookRequestTest {
         Assertions.assertThat(responseEntity.getBody()).isEqualTo(bodyMessage);
     }
 
-    // updateCondition 을 활용한 POST요청 어뷰징 방지 테스트
+    // bookRequestCondition을 이용한 POST요청 어뷰징 방지 테스트
     @Test
     @DisplayName("잘못된_유저의_책_요청_업데이트")
     public void 잘못된_유저의_책_요청_업데이트(){
@@ -154,6 +154,8 @@ public class UpdateBookRequestTest {
         bookRequestCondition.setOpinion(updateOpinion);
         bookRequestCondition.setPrevIsbn(prevIsbn);
         LoginMemberDTO loginMemberDTO = new LoginMemberDTO(naverEmail, naverName, role);
+
+        // when
         ResponseEntity<?> responseEntity = bookRequestService.updateBookRequest(bookRequestCondition, loginMemberDTO);
 
         // then
