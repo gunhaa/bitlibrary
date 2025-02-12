@@ -10,10 +10,11 @@ import bitcopark.library.service.Member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -28,6 +29,12 @@ public class AdminRestController {
     public Page<AdminMemberResponse> getAllMembersExcludingCurrent(@AuthenticationPrincipal CustomOAuth2User user,
                                                                    Pageable pageable) {
         return memberService.getAllMembersExcludingCurrent(user.getName(), pageable);
+    }
+
+    @PatchMapping("/member")
+    public ResponseEntity<Void> toggleMembersDeletionStatus(@RequestBody List<String> emails) {
+        memberService.toggleDeletionStatus(emails);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/boards")

@@ -50,4 +50,10 @@ public class MemberService {
 
         return new PageImpl<>(dtoList, pageable, memberPage.getTotalElements());
     }
+
+    @Transactional
+    public void toggleDeletionStatus(List<String> emails) {
+        List<Member> members = memberRepository.findByEmailIn(emails);
+        members.forEach(Member::toggleDeletedStatus);
+    }
 }

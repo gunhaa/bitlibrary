@@ -78,4 +78,9 @@ public class Member extends BaseAuditEntity {
         isDeleted = true;
         deletedAt = LocalDateTime.now();
     }
+
+    public void toggleDeletedStatus() {
+        isDeleted = !isDeleted;
+        deletedAt = isDeleted ? null : LocalDateTime.now();
+    }
 }

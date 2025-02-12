@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
@@ -25,4 +26,6 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
     Long findMemberIdByName(@Param("email") String email);
 
     Page<Member> findAllByEmailNot(String email, Pageable pageable);
+
+    List<Member> findByEmailIn(List<String> emails);
 }
