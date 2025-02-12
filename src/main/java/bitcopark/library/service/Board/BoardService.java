@@ -1,5 +1,6 @@
 package bitcopark.library.service.Board;
 
+import bitcopark.library.dto.AdminBoardResponse;
 import bitcopark.library.dto.BoardRequestDTO;
 import bitcopark.library.dto.MyBoardResponse;
 import bitcopark.library.entity.board.Board;
@@ -92,5 +93,19 @@ public class BoardService {
         List<MyBoardResponse> dtoList = boardPage.getContent().stream().map(MyBoardResponse::new).toList();
 
         return new PageImpl<>(dtoList, pageable, boardPage.getTotalElements());
+    }
+
+    public Page<AdminBoardResponse> getAllBoards(Pageable pageable) {
+        Page<Board> boardPage = boardRepository.findAll(pageable);
+
+        List<AdminBoardResponse> dtoList = boardPage.getContent().stream().map(AdminBoardResponse::new).toList();
+
+        return new PageImpl<>(dtoList, pageable, boardPage.getTotalElements());
+    }
+
+    @Transactional
+    public void toggleDeletionStatus(List<Long> ids) {
+        List<Board> boards = boardRepository.findByIdIn(ids);
+        boards.forEach(Board::changeBoardDelFlag);
     }
 }

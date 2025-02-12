@@ -32,4 +32,7 @@ public class Reply extends BaseAuditEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 
+    public void toggleDeletionStatus() {
+        replyDelFlag = replyDelFlag == ReplyDelFlag.Y ? ReplyDelFlag.N :  ReplyDelFlag.Y;
+    }
 }

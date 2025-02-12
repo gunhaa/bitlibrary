@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<article class="side-menu" th:fragment="sideMenu">
+    <div>관리자</div>
+	<ul>
+		<li class="select-menu">
+			<a href="/admin/members">관리</a>
+		</li>
+		<li>
+			<div class="side-wrap">
+				<a href="/admin/members">회원 관리</a>
+				<a href="/admin/boards">게시글 관리</a>
+				<a href="/admin/replies">댓글 관리</a>
+			</div>
+		</li>
+	</ul>
+</article>
+</html>
