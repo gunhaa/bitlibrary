@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Library - 관리자</title>
+
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/admin/side.css">
+    <link rel="stylesheet" href="/css/admin/list-style.css">
+</head>
+<body>
+<!-- Header Include -->
+<div th:replace="~{/common/header :: header}"></div>
+
+<section class="container">
+    <!-- Side Menu Include -->
+    <div th:replace="~{/admin/sideMenu :: sideMenu}"></div>
+
+    <section class="list-area">
+        <h1>게시글 관리</h1>
+        <div>
+            <label for="selectAll">
+                <input type="checkbox" id="selectAll"> 전체선택
+            </label>
+        </div>
+        <table id="list-table">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+        <div class="pagination-area">
+            <ul class="pagination" id="pagination"></ul>
+        </div>
+
+        <button id="board-submit" class="submit-btn">확인</button>
+    </section>
+</section>
+
+<!-- Footer Include -->
+<div th:replace="~{/common/footer :: footer}"></div>
+<script src="/js/admin/admin.js"></script>
+<script src="/js/study/fetchdata-table.js"></script>
+</body>
+</html>
