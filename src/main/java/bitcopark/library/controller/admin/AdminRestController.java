@@ -52,4 +52,10 @@ public class AdminRestController {
     public Page<AdminReplyResponse> getAllReplies(Pageable pageable) {
         return replyService.getAllReplies(pageable);
     }
+
+    @PatchMapping("/reply")
+    public ResponseEntity<Void> toggleRepliesDeletionStatus(@RequestBody List<Long> ids) {
+        replyService.toggleDeletionStatus(ids);
+        return ResponseEntity.noContent().build();
+    }
 }

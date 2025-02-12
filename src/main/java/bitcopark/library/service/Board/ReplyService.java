@@ -55,4 +55,10 @@ public class ReplyService {
 
         return new PageImpl<>(dtoList, pageable, replyPage.getTotalElements());
     }
+
+    @Transactional
+    public void toggleDeletionStatus(List<Long> ids) {
+        List<Reply> replies = replyRepository.findByIdIn(ids);
+        replies.forEach(Reply::toggleDeletionStatus);
+    }
 }
