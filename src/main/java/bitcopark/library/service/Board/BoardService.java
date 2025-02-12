@@ -102,4 +102,10 @@ public class BoardService {
 
         return new PageImpl<>(dtoList, pageable, boardPage.getTotalElements());
     }
+
+    @Transactional
+    public void toggleDeletionStatus(List<Long> ids) {
+        List<Board> boards = boardRepository.findByIdIn(ids);
+        boards.forEach(Board::changeBoardDelFlag);
+    }
 }

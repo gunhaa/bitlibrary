@@ -42,6 +42,12 @@ public class AdminRestController {
         return boardService.getAllBoards(pageable);
     }
 
+    @PatchMapping("/board")
+    public ResponseEntity<Void> toggleBoardsDeletionStatus(@RequestBody List<Long> ids) {
+        boardService.toggleDeletionStatus(ids);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/replies")
     public Page<AdminReplyResponse> getAllReplies(Pageable pageable) {
         return replyService.getAllReplies(pageable);
