@@ -1,6 +1,6 @@
 package bitcopark.library.repository.book;
 
-public enum searchType {
+public enum SearchType {
 
     ta, a, t
 

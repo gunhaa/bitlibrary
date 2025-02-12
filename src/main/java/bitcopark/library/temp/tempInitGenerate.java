@@ -5,16 +5,11 @@ import bitcopark.library.entity.board.Category;
 import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookState;
 import bitcopark.library.entity.book.BookSupple;
-import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.BookRequestApprove;
 import bitcopark.library.entity.member.Member;
-import bitcopark.library.entity.member.MemberGender;
 import bitcopark.library.jwt.JwtUtil;
 import bitcopark.library.jwt.LoginMemberDTO;
-import bitcopark.library.jwt.MemberDto;
-import bitcopark.library.oauth2.CustomOAuth2User;
 import bitcopark.library.repository.board.CategoryRepository;
-import bitcopark.library.repository.member.MemberRepository;
 import bitcopark.library.service.Board.BoardService;
 import bitcopark.library.service.Board.CategoryService;
 import bitcopark.library.service.Book.BookBorrowService;
@@ -26,9 +21,6 @@ import bitcopark.library.service.Member.MemberService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,7 +55,7 @@ public class tempInitGenerate {
 
         private final BookBorrowService bookBorrowService;
 
-        private final BookLikeService bookFavoriteService;
+        private final BookLikeService bookLikeService;
 
         private final BookReservationService bookReservationService;
 
@@ -189,12 +181,12 @@ public class tempInitGenerate {
 
 
             // 책 좋아요
-            bookFavoriteService.addBookLike(member1, 명품_인생을_살아라);
-            bookFavoriteService.addBookLike(member1, 백범일지);
-            bookFavoriteService.addBookLike(member2, 백범일지);
-            bookFavoriteService.addBookLike(member1, 디셉션_포인트);
-            bookFavoriteService.addBookLike(member2, 디셉션_포인트);
-            bookFavoriteService.addBookLike(member3, 디셉션_포인트);
+            bookLikeService.addBookLike(member1, 명품_인생을_살아라);
+            bookLikeService.addBookLike(member1, 백범일지);
+            bookLikeService.addBookLike(member2, 백범일지);
+            bookLikeService.addBookLike(member1, 디셉션_포인트);
+            bookLikeService.addBookLike(member2, 디셉션_포인트);
+            bookLikeService.addBookLike(member3, 디셉션_포인트);
 
             // 책 대여
             bookBorrowService.registerBookRental(member1, 백범일지);
