@@ -1,6 +1,8 @@
 package bitcopark.library.repository.member;
 
 import bitcopark.library.entity.member.Member;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,4 +23,6 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
 
     @Query("SELECT m.id FROM Member m WHERE m.email = :email")
     Long findMemberIdByName(@Param("email") String email);
+
+    Page<Member> findAllByEmailNot(String email, Pageable pageable);
 }

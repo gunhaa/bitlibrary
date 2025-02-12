@@ -1,14 +1,18 @@
 package bitcopark.library.service.Member;
 
+import bitcopark.library.dto.AdminMemberResponse;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.repository.book.BookStatusDTO;
 import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +41,13 @@ public class MemberService {
                 .orElseThrow(() -> new IllegalArgumentException("not found email: " + email));
 
         member.softDelete();
+    }
+
+    public Page<AdminMemberResponse> getAllMembersExcludingCurrent(String email, Pageable pageable) {
+        Page<Member> memberPage = memberRepository.findAllByEmailNot(email, pageable);
+
+        List<AdminMemberResponse> dtoList = memberPage.getContent().stream().map(AdminMemberResponse::new).toList();
+
+        return new PageImpl<>(dtoList, pageable, memberPage.getTotalElements());
     }
 }
