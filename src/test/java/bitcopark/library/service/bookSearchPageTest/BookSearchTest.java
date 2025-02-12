@@ -76,7 +76,6 @@ public class BookSearchTest {
         bookSearchCondition.setKey(SearchType.t);
         bookSearchCondition.setQuery("디셉션");
         SearchBooklistAndLikelistDTO searchBooklistAndLikelistDTO = bookService.searchBooklistAndLikelist(bookSearchCondition);
-        System.out.println(searchBooklistAndLikelistDTO);
 
         //then
         List<BookSearchDto> bookList = searchBooklistAndLikelistDTO.getBookList();
