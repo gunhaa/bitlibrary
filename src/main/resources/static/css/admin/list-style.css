@@ -95,13 +95,14 @@ input[type='checkbox']{
 	cursor: pointer;
 }
 
-.admin-submit{
+.submit-btn{
 	float: right;
 	font-size: 15px;
 	color: white;
 	padding: 10px 25px;
 	background-color: #555;
 	border: 1px solid #ddd;
+	cursor: pointer;
 }
 
 .pagination{
