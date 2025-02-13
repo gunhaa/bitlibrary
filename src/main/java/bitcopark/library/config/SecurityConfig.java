@@ -39,7 +39,7 @@ public class SecurityConfig {
 
             CorsConfiguration configuration = new CorsConfiguration();
 
-            configuration.addAllowedOrigin("http://bitlibrary.kro.kr");
+            configuration.addAllowedOrigin("https://bitlibrary.kro.kr");
             configuration.addAllowedHeader("*");
             configuration.addAllowedMethod("*");
             configuration.setAllowCredentials(true);
