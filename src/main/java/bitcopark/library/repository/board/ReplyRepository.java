@@ -2,6 +2,7 @@ package bitcopark.library.repository.board;
 
 import bitcopark.library.entity.board.Board;
 import bitcopark.library.entity.board.Reply;
+import bitcopark.library.entity.board.ReplyDelFlag;
 import bitcopark.library.entity.member.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,6 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
     List<Reply> findByIdIn(List<Long> ids);
 
     Optional<Reply> findByMemberAndId(Member member, Long id);
+
+    List<Reply> findByBoardAndReplyDelFlag(Board board, ReplyDelFlag replyDelFlag);
 }

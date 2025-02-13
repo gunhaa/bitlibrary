@@ -50,6 +50,8 @@ public class BoardService {
         return boardRepository.findById(id);
     }
 
+
+
     // AOP같은 로직을 통한 인증 필요
     @Transactional
     public BoardDelFlag deletePost(LoginMemberDTO memberDTO, Board board){
@@ -95,8 +97,6 @@ public class BoardService {
         return new PageImpl<>(dtoList, pageable, boardPage.getTotalElements());
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     public Page<AdminBoardResponse> getAllBoards(Pageable pageable) {
         Page<Board> boardPage = boardRepository.findAll(pageable);
 
@@ -135,5 +135,9 @@ public class BoardService {
         Reply reply = replyRepository.findByMemberAndId(member, commentId).get();
 
         return reply.changeDelFlag();
+    }
+
+    public List<Reply> selectReplyList(Board board) {
+        return replyRepository.findByBoardAndReplyDelFlag(board, ReplyDelFlag.N);
     }
 }
