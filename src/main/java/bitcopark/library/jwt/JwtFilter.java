@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -89,8 +90,12 @@ public class JwtFilter extends OncePerRequestFilter {
                     RefreshTokenBlackList refreshTokenBlackList = RefreshTokenBlackList.createRefreshTokenBlackList(refreshToken);
                     refreshTokenBlackListRepository.save(refreshTokenBlackList);
 
-                    response.addCookie(createAccessCookie("access", newAccess));
-                    response.addCookie(createRefreshCookie("refresh", newRefresh));
+                    ResponseCookie accessCookie = ResponseCookie.from("access", newAccess).path("/").maxAge(600).sameSite("None").secure(true).build();
+                    ResponseCookie refreshCookie = ResponseCookie.from("refresh", newRefresh).path("/").maxAge(24 * 60 * 60).sameSite("None").secure(true).httpOnly(true).build();
+                    response.addHeader("Set-Cookie", accessCookie.toString());
+                    response.addHeader("Set-Cookie", refreshCookie.toString());
+
+
                     //로그인 멤버 추가, 세션 부여
                     setLoginMemberAndGetSession(request, response, filterChain, newAccess);
                     filterChain.doFilter(request, response);

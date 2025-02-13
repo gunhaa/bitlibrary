@@ -17,6 +17,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -30,6 +33,19 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final RefreshRepository refreshRepository;
     private final RefreshTokenBlackListRepository refreshTokenBlackListRepository;
+
+    private CorsConfigurationSource corsConfigurationSource() {
+        return request -> {
+
+            CorsConfiguration configuration = new CorsConfiguration();
+
+            configuration.addAllowedOrigin("https://bitlibrary.kro.kr");
+            configuration.addAllowedHeader("*");
+            configuration.addAllowedMethod("*");
+            configuration.setAllowCredentials(true);
+            return configuration;
+        };
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -61,8 +77,12 @@ public class SecurityConfig {
                         .failureHandler(customLoginFailHandler)
                 );
 
-
-        //http.addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshRepository), LogoutFilter.class);
+//        http.cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()));
+//
+//
+//        http.requiresChannel(channel ->
+//                        channel.anyRequest().requiresSecure()
+//        );
 
         return http.build();
     }
