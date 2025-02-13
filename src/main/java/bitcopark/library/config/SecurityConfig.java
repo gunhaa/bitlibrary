@@ -78,7 +78,11 @@ public class SecurityConfig {
                 );
 
         http.cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()));
-        //http.addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshRepository), LogoutFilter.class);
+
+
+        http.requiresChannel(channel ->
+                        channel.anyRequest().requiresSecure()
+        );
 
         return http.build();
     }
