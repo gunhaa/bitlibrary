@@ -15,24 +15,24 @@ if(deleteBtn != null){
     
     deleteBtn.addEventListener("click", ()=>{
 
-        if(confirm("정말 삭제하시겠습니까?")){ 
-            location.href = "/user/" + cateEngName + '/delete?boardId=' + boardId;
+        if(confirm("정말 삭제하시겠습니까?")){
 
-            const date = {
-                boardId : boardId
-            }
-
-            fetch("/user/" + cateEngName + "/delete", {
-                method:"POST",
-                headers:{"Content-Type : application/json"}
-                body: JSON.stringify(data);
+            fetch("/user/"+ cateEngName + "/delete", {
+                method   : "POST",
+                headers  : {"Content-Type" : "application/json"},
+                body     : boardId
             })
-            .then(resp => resp.text())
+            .then(resp =>  {
+                if( resp.ok ){
+                    return resp.text();
+                } else {
+                    throw new Error();
+                }
+            })
             .then(result => {
-
+                location.href = result;
             })
             .catch(e => console.log(e))
-            }
         }
     })
 }

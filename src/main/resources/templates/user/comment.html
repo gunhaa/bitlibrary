@@ -8,18 +8,18 @@
 <div th:fragment="comment">
     <div id="commentArea">
         <div class="comment-list-area">
-            <ul th:each="comment : ${board.replyList}" id="commentList">
-                <li class="comment-row">
+            <ul id="commentList">
+                <li th:each="comment : ${board.replyList}" class="comment-row">
                     <p class="comment-writer">
                         <span>[[${comment.member.email}]]</span>
-                        <span class="comment-date">[[${comment.createdDate}]]</span>
+                        <span th:text="${comment.createdDate.toLocalDate()}" class="comment-date"></span>
                     </p>
 
                     <p class="comment-content">[[${comment.content}]]</p>
 
                     <div th:if="${loginMember.email == comment.member.email}" class="comment-btn-area">
-                        <button onclick="showUpdateComment(${comment.commentNo}, this)">수정</button>
-                        <button onclick="deleteComment(${comment.commentNo})">삭제</button>
+                        <button th:attr="onclick='showUpdateComment(' + ${comment.id} + ', this)'" >수정</button>
+                        <button th:attr="onclick='deleteComment(' + ${comment.id} + ')'" >삭제</button>
                     </div>
                 </li>
             </ul>

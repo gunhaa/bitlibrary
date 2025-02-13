@@ -17,4 +17,6 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
     Page<Reply> findByMember(Member member, Pageable pageable);
 
     List<Reply> findByIdIn(List<Long> ids);
+
+    Optional<Reply> findByMemberAndId(Member member, Long id);
 }
