@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -45,8 +46,10 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 
         saveRefreshToken(username, email, refresh, 86400000L);
 
-        response.addCookie(createAccessCookie("access", access));
-        response.addCookie(createRefreshCookie("refresh", refresh));
+        ResponseCookie accessCookie = ResponseCookie.from("access", access).path("/").maxAge(600).sameSite("None").secure(true).build();
+        ResponseCookie refreshCookie = ResponseCookie.from("refresh", refresh).path("/").maxAge(24 * 60 * 60).sameSite("None").secure(true).httpOnly(true).build();
+        response.addHeader("Set-Cookie", accessCookie.toString());
+        response.addHeader("Set-Cookie", refreshCookie.toString());
         response.setStatus(HttpStatus.OK.value());
 
         response.sendRedirect("/");
