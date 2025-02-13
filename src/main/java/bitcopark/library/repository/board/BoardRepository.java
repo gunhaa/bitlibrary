@@ -30,5 +30,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     List<Board> selectNoticeLimit(Pageable pageable);
 
     List<Board> findByIdIn(List<Long> ids);
-    
+
 }

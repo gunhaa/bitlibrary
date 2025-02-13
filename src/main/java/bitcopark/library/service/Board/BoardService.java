@@ -95,6 +95,8 @@ public class BoardService {
         return new PageImpl<>(dtoList, pageable, boardPage.getTotalElements());
     }
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public Page<AdminBoardResponse> getAllBoards(Pageable pageable) {
         Page<Board> boardPage = boardRepository.findAll(pageable);
 
@@ -109,6 +111,7 @@ public class BoardService {
         boards.forEach(Board::changeBoardDelFlag);
     }
         
+
     @Transactional
     public Reply writeComment(LoginMemberDTO loginMemberDTO, CommentRequestDTO commentRequestDTO){
 
@@ -116,15 +119,11 @@ public class BoardService {
 
         Board board = boardRepository.findByMemberAndId(member, commentRequestDTO.getBoardId()).get();
 
-        System.out.println("board = " + board);
-
         Reply reply = Reply.builder()
                 .member(member)
                 .content(commentRequestDTO.getContent())
                 .board(board)
                 .build();
-
-        System.out.println("reply = " + reply);
 
         return replyRepository.save(reply);
     }
