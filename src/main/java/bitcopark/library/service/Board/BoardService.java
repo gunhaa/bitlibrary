@@ -95,8 +95,6 @@ public class BoardService {
         return new PageImpl<>(dtoList, pageable, boardPage.getTotalElements());
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     public Page<AdminBoardResponse> getAllBoards(Pageable pageable) {
         Page<Board> boardPage = boardRepository.findAll(pageable);
 

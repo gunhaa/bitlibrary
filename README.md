@@ -15,7 +15,4 @@
 
 ## Build
 
-```shell
-# 도커 빌드
-docker-compose up --build
-```
+- HTTPS/ OAuth2 login test build
