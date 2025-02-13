@@ -9,7 +9,7 @@
     <div id="commentArea">
         <div class="comment-list-area">
             <ul id="commentList">
-                <li th:each="comment : ${board.replyList}" class="comment-row">
+                <li th:each="comment : ${replyList}" class="comment-row">
                     <p class="comment-writer">
                         <span>[[${comment.member.email}]]</span>
                         <span th:text="${comment.createdDate.toLocalDate()}" class="comment-date"></span>

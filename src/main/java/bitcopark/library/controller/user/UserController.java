@@ -135,10 +135,12 @@ public class UserController {
         model.addAttribute("cateEngName", category.getCategoryEngName());
 
         Board board = boardService.selectBoard(boardId).get();
-
-        List<Reply> list = board.getReplyList().stream().filter(reply -> reply.getReplyDelFlag() == ReplyDelFlag.N).toList();
-
         model.addAttribute("board", board);
+
+        if( !board.getReplyList().isEmpty() ){
+            List<Reply> replyList = boardService.selectReplyList(board);
+            model.addAttribute("replyList", replyList);
+        }
 
         return "user/boardDetail";
     }
