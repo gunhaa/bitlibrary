@@ -20,11 +20,11 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:/Users/baejihwan/uploads/");
     }
 
-    @Bean
-    public FilterRegistrationBean<ForwardedHeaderFilter> forwardedHeaderFilter() {
-        FilterRegistrationBean<ForwardedHeaderFilter> bean = new FilterRegistrationBean<>();
-        bean.setFilter(new ForwardedHeaderFilter());
-        return bean;
-    }
+//    @Bean
+//    public FilterRegistrationBean<ForwardedHeaderFilter> forwardedHeaderFilter() {
+//        FilterRegistrationBean<ForwardedHeaderFilter> bean = new FilterRegistrationBean<>();
+//        bean.setFilter(new ForwardedHeaderFilter());
+//        return bean;
+//    }
 
 }

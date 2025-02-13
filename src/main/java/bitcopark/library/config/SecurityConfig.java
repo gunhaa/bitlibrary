@@ -77,12 +77,12 @@ public class SecurityConfig {
                         .failureHandler(customLoginFailHandler)
                 );
 
-        http.cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()));
-
-
-        http.requiresChannel(channel ->
-                        channel.anyRequest().requiresSecure()
-        );
+//        http.cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()));
+//
+//
+//        http.requiresChannel(channel ->
+//                        channel.anyRequest().requiresSecure()
+//        );
 
         return http.build();
     }

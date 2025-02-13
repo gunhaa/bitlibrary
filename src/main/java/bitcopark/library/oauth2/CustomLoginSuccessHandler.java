@@ -51,8 +51,8 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         response.addHeader("Set-Cookie", accessCookie.toString());
         response.addHeader("Set-Cookie", refreshCookie.toString());
         response.setStatus(HttpStatus.OK.value());
-        System.out.println("accessCookie = " + accessCookie);
-        System.out.println("로그인 성공 후 CustomLoginHandler에서 쿠키 부여 완료");
+//        System.out.println("accessCookie = " + accessCookie);
+//        System.out.println("로그인 성공 후 CustomLoginHandler에서 쿠키 부여 완료");
         response.sendRedirect("/");
 
     }
