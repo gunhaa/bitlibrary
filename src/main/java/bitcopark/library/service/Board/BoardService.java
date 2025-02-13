@@ -2,16 +2,15 @@ package bitcopark.library.service.Board;
 
 import bitcopark.library.dto.AdminBoardResponse;
 import bitcopark.library.dto.BoardRequestDTO;
+import bitcopark.library.dto.CommentRequestDTO;
 import bitcopark.library.dto.MyBoardResponse;
-import bitcopark.library.entity.board.Board;
-import bitcopark.library.entity.board.BoardDelFlag;
-import bitcopark.library.entity.board.BoardImg;
-import bitcopark.library.entity.board.Category;
+import bitcopark.library.entity.board.*;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BoardNotFoundException;
 import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.repository.board.BoardImgRepository;
 import bitcopark.library.repository.board.BoardRepository;
+import bitcopark.library.repository.board.ReplyRepository;
 import bitcopark.library.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,6 +30,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final BoardImgRepository boardImgRepository;
     private final MemberRepository memberRepository;
+    private final ReplyRepository replyRepository;
 
     @Transactional
     public Board writePost(LoginMemberDTO memberDTO, BoardRequestDTO boardRequestDTO, Category category){
@@ -107,5 +107,34 @@ public class BoardService {
     public void toggleDeletionStatus(List<Long> ids) {
         List<Board> boards = boardRepository.findByIdIn(ids);
         boards.forEach(Board::changeBoardDelFlag);
+    }
+        
+    @Transactional
+    public Reply writeComment(LoginMemberDTO loginMemberDTO, CommentRequestDTO commentRequestDTO){
+
+        Member member = memberRepository.findByEmail(loginMemberDTO.getEmail()).get();
+
+        Board board = boardRepository.findByMemberAndId(member, commentRequestDTO.getBoardId()).get();
+
+        System.out.println("board = " + board);
+
+        Reply reply = Reply.builder()
+                .member(member)
+                .content(commentRequestDTO.getContent())
+                .board(board)
+                .build();
+
+        System.out.println("reply = " + reply);
+
+        return replyRepository.save(reply);
+    }
+
+    @Transactional
+    public ReplyDelFlag deleteComment(LoginMemberDTO loginMemberDTO, Long commentId) {
+        Member member = memberRepository.findByEmail(loginMemberDTO.getEmail()).get();
+
+        Reply reply = replyRepository.findByMemberAndId(member, commentId).get();
+
+        return reply.changeDelFlag();
     }
 }

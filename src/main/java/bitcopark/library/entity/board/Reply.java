@@ -35,4 +35,10 @@ public class Reply extends BaseAuditEntity {
     public void toggleDeletionStatus() {
         replyDelFlag = replyDelFlag == ReplyDelFlag.Y ? ReplyDelFlag.N :  ReplyDelFlag.Y;
     }
+    
+    public ReplyDelFlag changeDelFlag(){
+        this.replyDelFlag = this.replyDelFlag == ReplyDelFlag.Y ? ReplyDelFlag.N : ReplyDelFlag.Y;
+        return this.replyDelFlag;
+    }
+
 }

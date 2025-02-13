@@ -3,9 +3,8 @@ package bitcopark.library.controller.user;
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.controller.util.ControllerUtils;
 import bitcopark.library.dto.BoardRequestDTO;
-import bitcopark.library.entity.board.Board;
-import bitcopark.library.entity.board.BoardImg;
-import bitcopark.library.entity.board.Category;
+import bitcopark.library.dto.CommentRequestDTO;
+import bitcopark.library.entity.board.*;
 import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.service.Board.BoardService;
 import bitcopark.library.service.Board.CategoryService;
@@ -14,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,17 +51,14 @@ public class UserController {
     public String board(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
             , @PathVariable(name = "catLevel1") String catLevel1
             , @PathVariable(name = "catLevel2") String catLevel2
-            , Pageable pageable
-            , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember){
+            , Pageable pageable){
 
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
-        // logic
         Category category = categoryService.getCategoryEngName(catLevel2);
-        // pagination
+
         Page<Board> boardPage = boardService.selectBoardList(category.getId(), pageable);
 
-        // model addAttribute
         model.addAttribute("boardPage", boardPage);
         model.addAttribute("cateCode", category.getId());
         model.addAttribute("cateName", category.getCategoryName());
@@ -122,7 +119,7 @@ public class UserController {
 
         model.addAttribute("board", board);
 
-        return "user/boardDetail";
+        return "redirect:/user/" + catLevel2 + "/" + board.getId();
     }
 
     @GetMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/{boardId}")
@@ -138,34 +135,62 @@ public class UserController {
         model.addAttribute("cateEngName", category.getCategoryEngName());
 
         Board board = boardService.selectBoard(boardId).get();
+
+        List<Reply> list = board.getReplyList().stream().filter(reply -> reply.getReplyDelFlag() == ReplyDelFlag.N).toList();
+
         model.addAttribute("board", board);
 
         return "user/boardDetail";
     }
 
 
-    @GetMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/delete")
-    public String deleteBoard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+    @PostMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/delete")
+    @ResponseBody
+    public ResponseEntity<String> deleteBoard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
             , @PathVariable(name = "catLevel1") String catLevel1
             , @PathVariable(name = "catLevel2") String catLevel2
-            , @RequestParam Long boardId
-            , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember
-            , Pageable pageable) {
+            , @RequestBody Long boardId
+            , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember) {
 
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
         Board board = boardService.selectBoard(boardId).get();
+
         boardService.deletePost(loginMember, board);
 
-        Category category = categoryService.getCategoryEngName(catLevel2);
-        Page<Board> boardPage = boardService.selectBoardList(category.getId(), pageable);
+        return ResponseEntity.ok("/user/"+ catLevel2);
+    }
 
-        // model addAttribute
-        model.addAttribute("boardPage", boardPage);
-        model.addAttribute("cateCode", category.getId());
-        model.addAttribute("cateName", category.getCategoryName());
-        model.addAttribute("cateEngName", category.getCategoryEngName());
+    @PostMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/comment")
+    @ResponseBody
+    public ResponseEntity<CommentRequestDTO> insertComment(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+            , @PathVariable(name = "catLevel1") String catLevel1
+            , @PathVariable(name = "catLevel2") String catLevel2
+            , @RequestBody CommentRequestDTO commentRequestDTO
+            , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember) {
 
-        return "user/boardList";
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
+
+        boardService.writeComment(loginMember, commentRequestDTO);
+
+        return ResponseEntity.ok(commentRequestDTO);
+    }
+
+    @DeleteMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/comment")
+    @ResponseBody
+    public ResponseEntity<String> deleteComment(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+            , @PathVariable(name = "catLevel1") String catLevel1
+            , @PathVariable(name = "catLevel2") String catLevel2
+            , @RequestBody Long commentId
+            , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember) {
+
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
+
+        ReplyDelFlag delFlag = boardService.deleteComment(loginMember, commentId);
+        if( delFlag == ReplyDelFlag.Y ) {
+            return ResponseEntity.ok("success");
+        } else {
+            return ResponseEntity.ok("failed");
+        }
     }
 }
