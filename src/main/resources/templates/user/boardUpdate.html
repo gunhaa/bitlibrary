@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Java Library - ${cateName}</title>
 
-    <link rel="stylesheet" href="/resources/css/main-style.css">
-    <link rel="stylesheet" href="/resources/css/board/boardUpdate-style.css">
+    <link rel="stylesheet" href="/css/main-style.css">
+    <link rel="stylesheet" href="/css/board/boardUpdate-style.css">
 </head>
 <body>
 
@@ -20,47 +20,28 @@
 
     <!-- 공지사항 목록 -->
     <section class="content-suround-section">
-        <div class="content-title">${cateName}</div>
+        <div class="content-title">[[${cateName}]]</div>
         <div class="title-line"></div>
 
         <!-- 게시글 작성 화면 -->
         <!-- notice / bookreview 공통 -->
         <form th:action="@{/user/{cateEngName}/update(cateEngName=${cateEngName})}" method="POST" class="board-write" id="boardWriteFrm" enctype="multipart/form-data">
 
-            <%-- 제목 --%>
             <h1 class="board-title">
-                <input type="text" name="boardTitle" placeholder="제목 입력" value="${board.title}">
+                <input type="text" name="title" placeholder="제목 입력" th:value="${board.title}">
             </h1>
 
-            <!-- 이미지 경로 변수 설정 -->
-            <th:block th:with="img0=${#lists.arrayFindFirst(board.imageList, img -> img.imageOrder == 0)?.'/images/board/' +
-                      #lists.arrayFindFirst(board.imageList, img -> img.imageOrder == 0)?.imageReName}">
-                <th:block th:with="img1=${#lists.arrayFindFirst(board.imageList, img -> img.imageOrder == 1)?.'/images/board/' +
-                          #lists.arrayFindFirst(board.imageList, img -> img.imageOrder == 1)?.imageReName}">
-
-                    <!-- 이미지 등록 영역 -->
-                    <h5>이미지 등록</h5>
-                    <div class="img-box">
-
-                        <div class="boardImg">
-                            <label for="img0">
-                                <img th:src="${img0}" class="preview">
-                            </label>
-                            <input type="file" name="files" class="inputImage" id="img0" accept="image/*">
-                            <span class="delete-image">&times;</span>
-                        </div>
-
-                        <div class="boardImg">
-                            <label for="img1">
-                                <img th:src="${img1}" class="preview">
-                            </label>
-                            <input type="file" name="files" class="inputImage" id="img1" accept="image/*">
-                            <span class="delete-image">&times;</span>
-                        </div>
-                    </div>
-                </th:block>
-            </th:block>
-
+            <!-- 이미지 등록 영역 -->
+            <h5>이미지 등록</h5>
+            <div th:if="${#lists.size(board.boardImgList) > 0}" class="img-box">
+                <div th:each="image : ${board.boardImgList}" class="boardImg">
+                    <label>
+                        <img th:src="@{'/images/board/' + ${image.renameImg}}" class="preview">
+                    </label>
+                    <input type="file" name="files" class="inputImage"  accept="image/*">
+                    <span class="delete-image">&times;</span>
+                </div>
+            </div>
 
             <!-- 내용 -->
             <div class="board-content">
@@ -69,14 +50,14 @@
 
             <!-- 버튼 영역 -->
             <div class="btn-area">
-                <button type="button" th:onclick="|location.href='/user/${cateEngName}/${board.id}'|">취소</button>
+                <button type="button" id="cancelBtn" th:data-url="|/user/${cateEngName}/${board.id}|">취소</button>
                 <button type="submit" id="writeBtn">등록</button>
             </div>
 
             <!-- 기존 이미지 존재하다가 삭제된 이미지 순서 기록 -->
-            <input type="hidden" name="deleteList" value="">
+            <input type="hidden" name="deleteImgList" value="">
             <!-- 수정 성공 시 주소 유지 용도 -->
-            <input type="hidden" name="cp" value="${param.cp}">
+            <input type="hidden" name="boardId" th:value="${board.id}">
 
         </form>
     </section>
@@ -89,8 +70,8 @@
 
 
 <script>
-    const secret = [["${board.boardSecretFlag}"]];
-    const cateEngName = [["${cateEngName}"]];
+    const secret = "[[${board.secretFlag}]]";
+    const cateEngName = "[[${cateEngName}]]";
 </script>
 
 <%-- boardUpdate.js 연결 --%>

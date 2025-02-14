@@ -1,9 +1,6 @@
 package bitcopark.library.service.Board;
 
-import bitcopark.library.dto.AdminBoardResponse;
-import bitcopark.library.dto.BoardRequestDTO;
-import bitcopark.library.dto.CommentRequestDTO;
-import bitcopark.library.dto.MyBoardResponse;
+import bitcopark.library.dto.*;
 import bitcopark.library.entity.board.*;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.exception.BoardNotFoundException;
@@ -42,8 +39,14 @@ public class BoardService {
     }
 
     @Transactional
-    public void updatePost(LoginMemberDTO memberDTO, BoardRequestDTO boardRequestDTO, Category category) {
+    public Board updatePost(LoginMemberDTO loginMemberDTO, BoardUpdateRequestDTO boardUpdateRequestDTO) {
+        Member member = memberRepository.findByEmail(loginMemberDTO.getEmail()).get();
 
+        Board board = boardRepository.findByMemberAndId(member, boardUpdateRequestDTO.getBoardId()).get();
+
+        board.updatePost(boardUpdateRequestDTO);
+
+        return boardRepository.save(board);
     }
 
     public Optional<Board> selectBoard(Long id) {

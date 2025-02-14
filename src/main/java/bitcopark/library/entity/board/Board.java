@@ -1,12 +1,15 @@
 package bitcopark.library.entity.board;
 
+import bitcopark.library.dto.BoardUpdateRequestDTO;
 import bitcopark.library.entity.clazz.ClassApplicant;
 import bitcopark.library.entity.clazz.ClassSchedule;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.audit.BaseAuditEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,5 +70,28 @@ public class Board extends BaseAuditEntity {
     public BoardDelFlag changeBoardDelFlag(){
         this.boardDelFlag = this.boardDelFlag == BoardDelFlag.Y ? BoardDelFlag.N :  BoardDelFlag.Y;
         return this.boardDelFlag;
+    }
+
+    public void updatePost(BoardUpdateRequestDTO boardUpdateRequestDTO) {
+        this.title = boardUpdateRequestDTO.getTitle();
+        this.content = boardUpdateRequestDTO.getContent();
+
+        List<Integer> deleteList = new ArrayList<>();
+        for( String image : boardUpdateRequestDTO.getDeleteImgList()){
+            System.out.println(image);
+            for( BoardImg prevImg : boardImgList ) {
+                if( prevImg.getOrderImg() == Integer.parseInt(image)){
+                    deleteList.add(Integer.parseInt(image));
+                }
+            }
+        }
+
+        for( Integer removeName : deleteList ) {
+            for( BoardImg img : boardImgList ) {
+                if( img.getOrderImg() == removeName ){
+                    boardImgList.remove(img);
+                }
+            }
+        }
     }
 }

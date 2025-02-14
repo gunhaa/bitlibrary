@@ -3,6 +3,7 @@ package bitcopark.library.controller.user;
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.controller.util.ControllerUtils;
 import bitcopark.library.dto.BoardRequestDTO;
+import bitcopark.library.dto.BoardUpdateRequestDTO;
 import bitcopark.library.dto.CommentRequestDTO;
 import bitcopark.library.entity.board.*;
 import bitcopark.library.jwt.LoginMemberDTO;
@@ -194,5 +195,38 @@ public class UserController {
         } else {
             return ResponseEntity.ok("failed");
         }
+    }
+
+    @GetMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/update/{boardId}")
+    public String updateBoard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+            , @PathVariable(name = "catLevel1") String catLevel1
+            , @PathVariable(name = "catLevel2") String catLevel2
+            , @PathVariable Long boardId)  {
+
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
+
+        Category category = categoryService.getCategoryEngName(catLevel2);
+        model.addAttribute("cateEngName", category.getCategoryEngName());
+
+        Board board = boardService.selectBoard(boardId).get();
+        model.addAttribute("board", board);
+
+        return "user/boardUpdate";
+    }
+
+    @PostMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/update")
+    public String updateboard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+            , @PathVariable(name = "catLevel1") String catLevel1
+            , @PathVariable(name = "catLevel2") String catLevel2
+            , BoardUpdateRequestDTO boardUpdateRequestDTO
+            , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember) {
+
+        setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
+
+        Board board = boardService.updatePost(loginMember, boardUpdateRequestDTO);
+
+        model.addAttribute("board", board);
+
+        return "user/boardDetail";
     }
 }
