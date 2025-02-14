@@ -1,7 +1,7 @@
 package bitcopark.library.controller.member;
 
 import bitcopark.library.oauth2.CustomOAuth2User;
-import bitcopark.library.service.Member.MemberService;
+import bitcopark.library.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

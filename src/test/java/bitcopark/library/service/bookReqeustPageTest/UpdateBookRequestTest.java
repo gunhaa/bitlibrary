@@ -1,16 +1,16 @@
 package bitcopark.library.service.bookReqeustPageTest;
 
-import bitcopark.library.controller.book.BookRequestCondition;
+import bitcopark.library.dto.BookRequestCondition;
 import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookState;
 import bitcopark.library.entity.book.BookSupple;
 import bitcopark.library.entity.member.BookRequest;
 import bitcopark.library.entity.member.Member;
-import bitcopark.library.jwt.LoginMemberDTO;
+import bitcopark.library.dto.LoginMemberDTO;
 import bitcopark.library.repository.book.BookRequestRepository;
-import bitcopark.library.service.Book.BookRequestService;
-import bitcopark.library.service.Book.BookService;
-import bitcopark.library.service.Member.MemberService;
+import bitcopark.library.service.book.BookRequestService;
+import bitcopark.library.service.book.BookService;
+import bitcopark.library.service.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

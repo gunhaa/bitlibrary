@@ -2,7 +2,7 @@ package bitcopark.library.aop;
 
 import bitcopark.library.entity.board.Category;
 import bitcopark.library.repository.board.CategoryRepository;
-import bitcopark.library.service.Board.CategoryService;
+import bitcopark.library.service.board.CategoryService;
 import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;

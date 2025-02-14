@@ -1,30 +1,25 @@
 package bitcopark.library.jwt;
 
+import bitcopark.library.dto.LoginMemberDTO;
+import bitcopark.library.dto.MemberDto;
 import bitcopark.library.entity.jwt.RefreshToken;
 import bitcopark.library.entity.jwt.RefreshTokenBlackList;
-import bitcopark.library.entity.member.Member;
 import bitcopark.library.oauth2.CustomOAuth2User;
 import bitcopark.library.repository.jwt.RefreshRepository;
-import bitcopark.library.repository.member.MemberRepository;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 
 @RequiredArgsConstructor

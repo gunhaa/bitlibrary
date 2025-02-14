@@ -2,7 +2,7 @@ package bitcopark.library.service.mainPageTest;
 
 import bitcopark.library.entity.board.Category;
 import bitcopark.library.repository.board.CategoryRepository;
-import bitcopark.library.service.Board.CategoryService;
+import bitcopark.library.service.board.CategoryService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

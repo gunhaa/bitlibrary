@@ -1,10 +1,14 @@
 package bitcopark.library.controller.book;
 
 import bitcopark.library.aop.CategoryDTO;
-import bitcopark.library.jwt.LoginMemberDTO;
-import bitcopark.library.service.Book.BookRequestDetailDto;
-import bitcopark.library.service.Book.BookRequestPageDto;
-import bitcopark.library.service.Book.BookRequestService;
+import bitcopark.library.dto.BookApproveDto;
+import bitcopark.library.dto.BookDeleteDto;
+import bitcopark.library.dto.BookRequestCondition;
+import bitcopark.library.dto.BookRequestResponseDto;
+import bitcopark.library.dto.LoginMemberDTO;
+import bitcopark.library.dto.BookRequestDetailDto;
+import bitcopark.library.dto.BookRequestPageDto;
+import bitcopark.library.service.book.BookRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,5 +1,6 @@
 package bitcopark.library.repository.book;
 
+import bitcopark.library.dto.BookLikeDto;
 import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookLike;
 import bitcopark.library.entity.member.Member;
@@ -18,7 +19,7 @@ public interface BookLikeRepository extends JpaRepository<BookLike, Long> {
     @Modifying
     void deleteByMemberAndBook(Member member, Book book);
 
-    @Query("select new bitcopark.library.repository.book.BookLikeDto(b.isbn) from BookLike bl join bl.book b where bl.member.id = :memberId")
+    @Query("select new bitcopark.library.dto.BookLikeDto(b.isbn) from BookLike bl join bl.book b where bl.member.id = :memberId")
     List<BookLikeDto> findBookLikeListByMemberId(@Param("memberId") Long MemberId);
 
     Optional<BookLike> findByIdAndMember(Long id, Member member);
