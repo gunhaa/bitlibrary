@@ -58,7 +58,7 @@ public class Board extends BaseAuditEntity {
     @JoinColumn(name = "classSchedule_id")
     private ClassSchedule classSchedule;
 
-    @OneToMany(mappedBy = "board", orphanRemoval = true)
+    @OneToMany(mappedBy = "board", orphanRemoval = true, cascade = CascadeType.ALL)
     @Builder.Default
     private List<BoardImg> boardImgList = new ArrayList<>();
 
@@ -80,38 +80,29 @@ public class Board extends BaseAuditEntity {
         this.title = boardUpdateRequestDTO.getTitle();
         this.content = boardUpdateRequestDTO.getContent();
 
-
-        for (int i = 0; i < boardUpdateRequestDTO.getDeleteImgList().size(); i++) {
-            System.out.println(boardUpdateRequestDTO.getDeleteImgList().get(i));
-        }
-
         for( String image : boardUpdateRequestDTO.getDeleteImgList()){
             boardImgList.remove(Integer.parseInt(image));
         }
 
-        System.out.println(boardUpdateRequestDTO.getFiles().length);
-        for( MultipartFile file : boardUpdateRequestDTO.getFiles() ){
-            System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
-        }
+        for (int i = 0; i < boardUpdateRequestDTO.getFiles().length; i++) {
+            if(! boardUpdateRequestDTO.getFiles()[i].getOriginalFilename().equals("")){
+                BoardImg boardImg = BoardImg.builder()
+                        .originalImg(boardUpdateRequestDTO.getFiles()[i].getOriginalFilename())
+                        .pathImg(IMG_UPLOAD_PATH)
+                        .board(this)
+                        .orderImg(i)
+                        .build();
+                boardImg.createRenameImg();
 
-        if( boardUpdateRequestDTO.getFiles() != null && boardUpdateRequestDTO.getFiles().length > 0 ){
-            for( int i = 0; i < boardImgList.size(); i++ ) {
-                for( MultipartFile file : boardUpdateRequestDTO.getFiles()){
-                    if( ! file.getOriginalFilename().equals(boardImgList.get(i).getOriginalImg())){
-
-                        BoardImg boardImg = BoardImg.builder()
-                                .pathImg(IMG_UPLOAD_PATH)
-                                .orderImg(i)
-                                .originalImg(file.getOriginalFilename())
-                                .board(this)
-                                .build();
-
-                        boardImg.createRenameImg();
-
-                        boardImgList.set(i, boardImg);
-                    }
+                if (i < boardImgList.size()) {
+                    boardImgList.set(i, boardImg);
+                } else {
+                    boardImgList.add(boardImg);
                 }
+
             }
+
         }
+
     }
 }

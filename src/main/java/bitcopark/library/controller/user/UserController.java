@@ -104,12 +104,12 @@ public class UserController {
                 for( int i = 0; i < files.length; i++ ) {
                     if (!files[i].isEmpty()) {
                         BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), IMG_UPLOAD_PATH, i);
-                        files[i].transferTo(new File(IMG_UPLOAD_PATH + boardImg.getRenameImg()));
+//                        files[i].transferTo(new File(IMG_UPLOAD_PATH + boardImg.getRenameImg()));
 
                         board.getBoardImgList().add(boardImg);
                     }
                 }
-            }catch(IOException e){
+            }catch(Exception e){
                 e.printStackTrace();
             }
         }
