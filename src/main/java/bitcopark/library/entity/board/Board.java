@@ -1,5 +1,6 @@
 package bitcopark.library.entity.board;
 
+import bitcopark.library.controller.user.UserController;
 import bitcopark.library.dto.BoardUpdateRequestDTO;
 import bitcopark.library.entity.clazz.ClassApplicant;
 import bitcopark.library.entity.clazz.ClassSchedule;
@@ -10,8 +11,11 @@ import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static bitcopark.library.controller.user.UserController.IMG_UPLOAD_PATH;
 
 @Entity
 @Getter
@@ -76,20 +80,31 @@ public class Board extends BaseAuditEntity {
         this.title = boardUpdateRequestDTO.getTitle();
         this.content = boardUpdateRequestDTO.getContent();
 
-        List<Integer> deleteList = new ArrayList<>();
         for( String image : boardUpdateRequestDTO.getDeleteImgList()){
-            System.out.println(image);
-            for( BoardImg prevImg : boardImgList ) {
-                if( prevImg.getOrderImg() == Integer.parseInt(image)){
-                    deleteList.add(Integer.parseInt(image));
-                }
-            }
+            boardImgList.remove(Integer.parseInt(image));
         }
 
-        for( Integer removeName : deleteList ) {
-            for( BoardImg img : boardImgList ) {
-                if( img.getOrderImg() == removeName ){
-                    boardImgList.remove(img);
+        System.out.println(boardUpdateRequestDTO.getFiles().length);
+        for( MultipartFile file : boardUpdateRequestDTO.getFiles() ){
+            System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
+        }
+
+        if( boardUpdateRequestDTO.getFiles() != null && boardUpdateRequestDTO.getFiles().length > 0 ){
+            for( int i = 0; i < boardImgList.size(); i++ ) {
+                for( MultipartFile file : boardUpdateRequestDTO.getFiles()){
+                    if( ! file.getOriginalFilename().equals(boardImgList.get(i).getOriginalImg())){
+
+                        BoardImg boardImg = BoardImg.builder()
+                                .pathImg(IMG_UPLOAD_PATH)
+                                .orderImg(i)
+                                .originalImg(file.getOriginalFilename())
+                                .board(this)
+                                .build();
+
+                        boardImg.createRenameImg();
+
+                        boardImgList.set(i, boardImg);
+                    }
                 }
             }
         }

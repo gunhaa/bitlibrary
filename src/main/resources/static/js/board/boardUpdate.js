@@ -63,7 +63,7 @@ boardWriteFrm.addEventListener("submit", e=>{
         return;
     }
 
-    document.querySelector("[name='deleteList']").value = Array.from(deleteSet);
+    document.querySelector("[name='deleteImgList']").value = Array.from(deleteSet);
 })
 
 document.getElementById("cancelBtn").addEventListener("click", function() {

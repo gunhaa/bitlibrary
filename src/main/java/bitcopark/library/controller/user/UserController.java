@@ -36,7 +36,7 @@ public class UserController {
     private final BoardService boardService;
     private final CategoryService categoryService;
 
-    private static final String IMG_UPLOAD_PATH = "/Users/baejihwan/uploads/";
+    public static final String IMG_UPLOAD_PATH = "/Users/baejihwan/uploads/";
 
     @GetMapping(value="{catLevel1:user}/{catLevel2:faq}")
     public String user(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
@@ -222,11 +222,11 @@ public class UserController {
             , @RequestAttribute(value="loginMember", required = false) LoginMemberDTO loginMember) {
 
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
-
+        
         Board board = boardService.updatePost(loginMember, boardUpdateRequestDTO);
 
         model.addAttribute("board", board);
 
-        return "user/boardDetail";
+        return "redirect:/user/" + catLevel2 + "/" +board.getId();
     }
 }
