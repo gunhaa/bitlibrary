@@ -42,8 +42,8 @@ for(let i=0; i<inputImage.length; i++){
 
 // 게시글 수정 시 제목, 내용 작성 여부 검사
 const boardWriteFrm = document.getElementById("boardWriteFrm");
-const boardTitle = document.getElementsByName("boardTitle")[0];
-const boardContent = document.querySelector("[name='boardContent']");
+const boardTitle = document.getElementsByName("title")[0];
+const boardContent = document.querySelector("[name='content']");
 
 boardWriteFrm.addEventListener("submit", e=>{
 
@@ -66,11 +66,7 @@ boardWriteFrm.addEventListener("submit", e=>{
     document.querySelector("[name='deleteList']").value = Array.from(deleteSet);
 })
 
-const li = document.querySelectorAll(".side-menu > li");
-
-switch(cateCode){
-    case "15" : li[0].classList.add("side-current"); break;
-    case "16" : li[1].classList.add("side-current"); break;
-    case "17" : li[2].classList.add("side-current"); break;
-    case "18" : li[3].classList.add("side-current"); break;
-}
+document.getElementById("cancelBtn").addEventListener("click", function() {
+    const url = this.getAttribute("data-url");
+    location.href = url;
+});

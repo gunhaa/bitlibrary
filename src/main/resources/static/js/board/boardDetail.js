@@ -4,7 +4,7 @@ const updateBtn = document.getElementById("updateBtn");
 if(updateBtn != null){
     
     updateBtn.addEventListener("click", ()=>{
-        location.href = "/user/" + cateEngName + '/update' + location.search;
+        location.href = "/user/" + cateEngName + '/update/' + boardId;
     })
 }
 
