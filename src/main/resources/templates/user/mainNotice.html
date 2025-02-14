@@ -30,11 +30,10 @@
           <!-- 게시글이 존재할 경우 -->
           <tr th:each="board : ${boardList}" th:if="${boardList.size() > 0}">
             <td id="main-notice-title">
-              <a th:href="@{/board/15/{boardNo}(boardNo=${board.title})}" th:text="${board.title}"></a>
+              <a th:href="@{/user/notice/{boardNo}?cp=0&keyword=&query=(boardNo=${board.id})}" th:text="${board.title}"></a>
             </td>
             <td>
               <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd')}"></span>
-<!--              <span th:text="${board.lastModifiedDate != null ? board.lastModifiedDate : board.createdDate}"></span>-->
             </td>
           </tr>
           </tbody>
