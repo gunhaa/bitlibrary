@@ -6,6 +6,7 @@ import bitcopark.library.entity.jwt.RefreshToken;
 import bitcopark.library.entity.jwt.RefreshTokenBlackList;
 import bitcopark.library.oauth2.CustomOAuth2User;
 import bitcopark.library.repository.jwt.RefreshRepository;
+import bitcopark.library.repository.jwt.RefreshTokenBlackListRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

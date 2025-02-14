@@ -1,6 +1,8 @@
-package bitcopark.library.jwt;
+package bitcopark.library.oauth2;
 
 import bitcopark.library.entity.jwt.RefreshTokenBlackList;
+import bitcopark.library.repository.jwt.RefreshTokenBlackListRepository;
+import bitcopark.library.jwt.ReissueService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequiredArgsConstructor
 @Profile("local")
+@Deprecated
 public class OAuth2Controller {
 
     private final ReissueService reissueService;
