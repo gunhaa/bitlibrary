@@ -13,4 +13,5 @@ public class BoardUpdateRequestDTO {
     private SecretFlag secretFlag;
     private List<String> deleteImgList;
     private Long boardId;
+    private MultipartFile[] files;
 }

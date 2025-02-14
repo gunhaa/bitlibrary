@@ -34,8 +34,8 @@ for(let i=0; i<inputImage.length; i++){
 
 // 게시글 작성 시 제목, 내용 작성 여부 검사
 const boardWirteFrm = document.getElementById("boardWriteFrm");
-const boardTitle = document.getElementsByName("boardTitle")[0];
-const boardContent = document.querySelector("[name='boardContent']");
+const boardTitle = document.getElementsByName("title")[0];
+const boardContent = document.querySelector("[name='content']");
 
 boardWirteFrm.addEventListener("submit", e=>{
 

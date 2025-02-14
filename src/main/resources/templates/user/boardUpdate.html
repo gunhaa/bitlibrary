@@ -33,15 +33,29 @@
 
             <!-- 이미지 등록 영역 -->
             <h5>이미지 등록</h5>
-            <div th:if="${#lists.size(board.boardImgList) > 0}" class="img-box">
-                <div th:each="image : ${board.boardImgList}" class="boardImg">
-                    <label>
-                        <img th:src="@{'/images/board/' + ${image.renameImg}}" class="preview">
-                    </label>
-                    <input type="file" name="files" class="inputImage"  accept="image/*">
-                    <span class="delete-image">&times;</span>
-                </div>
+            <div class="img-box">
+                <th:block th:with="firstImage=${board != null and board.boardImgList != null and #lists.size(board.boardImgList) > 0 ? board.boardImgList[0] : null}">
+                    <div class="boardImg">
+                        <label for="img0" >
+                            <img th:src="${firstImage != null ? '/images/board/' + firstImage.renameImg : ''}" class="preview">
+                        </label>
+                        <input type="file" name="files" class="inputImage" id="img0"  accept="image/*">
+                        <span class="delete-image">&times;</span>
+                    </div>
+                </th:block>
+
+                <th:block th:with="secondImage=${board != null and board.boardImgList != null and #lists.size(board.boardImgList) > 1 ? board.boardImgList[1] : null}">
+                    <div class="boardImg">
+                        <label for="img1">
+                            <img th:src="${secondImage != null ? '/images/board/' + secondImage.renameImg : ''}" class="preview">
+                        </label>
+                        <input type="file" name="files" class="inputImage" id="img1"  accept="image/*">
+                        <span class="delete-image">&times;</span>
+                    </div>
+                </th:block>
             </div>
+
+
 
             <!-- 내용 -->
             <div class="board-content">
@@ -55,7 +69,7 @@
             </div>
 
             <!-- 기존 이미지 존재하다가 삭제된 이미지 순서 기록 -->
-            <input type="hidden" name="deleteImgList" value="">
+            <input type="hidden" name="deleteImgList" th:value="${deleteImgList} ?: ''">
             <!-- 수정 성공 시 주소 유지 용도 -->
             <input type="hidden" name="boardId" th:value="${board.id}">
 

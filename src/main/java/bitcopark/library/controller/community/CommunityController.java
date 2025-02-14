@@ -36,7 +36,7 @@ public class CommunityController {
     private final CategoryService categoryService;
     private final ClassScheduleService classScheduleService;
 
-    private final String IMG_UPLOAD_PATH = "static/images/board";
+    private final String IMG_UPLOAD_PATH = "/Users/baejihwan/uploads/";
 
     @GetMapping(value="{catLevel1:community}/{catLevel2:reading-room|seminar-room}")
     public String community(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
@@ -91,22 +91,18 @@ public class CommunityController {
         Board board = boardService.writePost(loginMemberDTO, boardRequestDTO, category);
         model.addAttribute("board", board);
 
-        if (files != null && files.length > 0) {
+        if (files != null && files.length > 0)  {
             try{
-                String path = new ClassPathResource(IMG_UPLOAD_PATH).getFile().getAbsolutePath();
-                List<BoardImg> boardImgList = new ArrayList<>();
-
                 for( int i = 0; i < files.length; i++ ) {
                     if (!files[i].isEmpty()) {
-                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(),path, i);
-                        files[i].transferTo(new File(path + boardImg.getRenameImg()));
-                        boardImgList.add(boardImg);
+                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), IMG_UPLOAD_PATH, i);
+                        files[i].transferTo(new File(IMG_UPLOAD_PATH + boardImg.getRenameImg()));
+
+                        board.getBoardImgList().add(boardImg);
                     }
                 }
-
-                model.addAttribute("boardImgList", boardImgList);
             }catch(IOException e){
-
+                e.printStackTrace();
             }
         }
 
@@ -127,32 +123,7 @@ public class CommunityController {
 
         setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
 
-        Category category = categoryService.getCategoryEngName(catLevel2);
 
-        Board board = boardService.writePost(loginMemberDTO, boardRequestDTO, category);
-        model.addAttribute("board", board);
-
-        if (files != null && files.length > 0) {
-            try{
-                String path = new ClassPathResource(IMG_UPLOAD_PATH).getFile().getAbsolutePath();
-                List<BoardImg> boardImgList = new ArrayList<>();
-
-                for( int i = 0; i < files.length; i++ ) {
-                    if (!files[i].isEmpty()) {
-                        BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(),path, i);
-                        files[i].transferTo(new File(path + boardImg.getRenameImg()));
-                        boardImgList.add(boardImg);
-                    }
-                }
-
-                model.addAttribute("boardImgList", boardImgList);
-            }catch(IOException e){
-
-            }
-        }
-
-        ClassSchedule classSchedule = classScheduleService.registClassSchedule(board, classRequestDTO);
-        model.addAttribute("classSchedule", classSchedule);
 
         return "community/eduCultureProgramDetail";
     }
