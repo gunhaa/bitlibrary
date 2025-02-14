@@ -78,7 +78,7 @@
 <script>
     const cateEngName = "[[${cateEngName}]]";
     const boardId = "[[${board.id}]]";
-    const memberEmail = "[[${loginMember.email}]]";
+    const memberEmail = "[[${loginMember != null ? loginMember.email : ''}]]";
 </script>
 
 <!-- boardDetail.js 연결 -->
