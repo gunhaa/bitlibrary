@@ -93,7 +93,7 @@ public class BoardService {
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("not found member" + email));
 
-        Page<Board> boardPage = boardRepository.findByMember(member, pageable);
+        Page<Board> boardPage = boardRepository.findByMemberAndBoardDelFlag(member, BoardDelFlag.N, pageable);
 
         List<MyBoardResponse> dtoList = boardPage.getContent().stream().map(MyBoardResponse::new).toList();
 
