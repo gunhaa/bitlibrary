@@ -80,6 +80,11 @@ public class Board extends BaseAuditEntity {
         this.title = boardUpdateRequestDTO.getTitle();
         this.content = boardUpdateRequestDTO.getContent();
 
+
+        for (int i = 0; i < boardUpdateRequestDTO.getDeleteImgList().size(); i++) {
+            System.out.println(boardUpdateRequestDTO.getDeleteImgList().get(i));
+        }
+
         for( String image : boardUpdateRequestDTO.getDeleteImgList()){
             boardImgList.remove(Integer.parseInt(image));
         }

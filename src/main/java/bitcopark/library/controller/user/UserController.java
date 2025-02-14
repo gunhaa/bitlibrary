@@ -211,7 +211,7 @@ public class UserController {
     }
 
     @PostMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/update")
-    public String updateboard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+    public String updateBoard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
             , @PathVariable(name = "catLevel1") String catLevel1
             , @PathVariable(name = "catLevel2") String catLevel2
             , BoardUpdateRequestDTO boardUpdateRequestDTO

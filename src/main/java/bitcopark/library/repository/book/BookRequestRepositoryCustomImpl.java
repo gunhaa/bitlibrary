@@ -1,11 +1,11 @@
 package bitcopark.library.repository.book;
 
+import bitcopark.library.dto.QBookRequestDetailDto;
+import bitcopark.library.dto.QBookRequestPageDto;
 import bitcopark.library.entity.member.QBookRequest;
 import bitcopark.library.entity.member.QMember;
 import bitcopark.library.dto.BookRequestDetailDto;
 import bitcopark.library.dto.BookRequestPageDto;
-import bitcopark.library.service.book.QBookRequestDetailDto;
-import bitcopark.library.service.book.QBookRequestPageDto;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
