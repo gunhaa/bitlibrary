@@ -104,12 +104,12 @@ public class UserController {
                 for( int i = 0; i < files.length; i++ ) {
                     if (!files[i].isEmpty()) {
                         BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), IMG_UPLOAD_PATH, i);
-                        files[i].transferTo(new File(IMG_UPLOAD_PATH + boardImg.getRenameImg()));
+//                        files[i].transferTo(new File(IMG_UPLOAD_PATH + boardImg.getRenameImg()));
 
                         board.getBoardImgList().add(boardImg);
                     }
                 }
-            }catch(IOException e){
+            }catch(Exception e){
                 e.printStackTrace();
             }
         }
@@ -211,7 +211,7 @@ public class UserController {
     }
 
     @PostMapping(value="{catLevel1:user}/{catLevel2:notice|inquiries|book-reviews}/update")
-    public String updateboard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
+    public String updateBoard(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
             , @PathVariable(name = "catLevel1") String catLevel1
             , @PathVariable(name = "catLevel2") String catLevel2
             , BoardUpdateRequestDTO boardUpdateRequestDTO

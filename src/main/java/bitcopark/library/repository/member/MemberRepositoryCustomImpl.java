@@ -1,11 +1,11 @@
 package bitcopark.library.repository.member;
 
+import bitcopark.library.dto.QBookStatusDTO;
 import bitcopark.library.entity.book.QBookBorrow;
 import bitcopark.library.entity.book.QBookReservation;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.entity.member.QMember;
 import bitcopark.library.dto.BookStatusDTO;
-import bitcopark.library.repository.book.QBookStatusDTO;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
