@@ -56,6 +56,7 @@
 <div th:replace="~{common/footer :: footer}"></div>
 
 <script>
+    const memberEmail = "[[${loginMember != null ? loginMember.email : ''}]]";
 </script>
 
 <script src="/js/scheduling/study.js"></script>
