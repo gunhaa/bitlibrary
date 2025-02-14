@@ -1,17 +1,16 @@
 package bitcopark.library.controller.study;
 
 import bitcopark.library.dto.*;
-import bitcopark.library.jwt.LoginMemberDTO;
 import bitcopark.library.oauth2.CustomOAuth2User;
-import bitcopark.library.service.Board.BoardService;
-import bitcopark.library.service.Board.ReplyService;
-import bitcopark.library.service.Book.BookBorrowService;
-import bitcopark.library.service.Book.BookLikeService;
-import bitcopark.library.service.Book.BookRequestService;
-import bitcopark.library.service.Book.BookReservationService;
-import bitcopark.library.service.Class.ClassApplicantService;
-import bitcopark.library.service.LibrarySeatBooking.SeatReservationService;
-import bitcopark.library.service.Member.MemberService;
+import bitcopark.library.service.board.BoardService;
+import bitcopark.library.service.board.ReplyService;
+import bitcopark.library.service.book.BookBorrowService;
+import bitcopark.library.service.book.BookLikeService;
+import bitcopark.library.service.book.BookRequestService;
+import bitcopark.library.service.book.BookReservationService;
+import bitcopark.library.service.clazz.ClassApplicantService;
+import bitcopark.library.service.librarySeatBooking.SeatReservationService;
+import bitcopark.library.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

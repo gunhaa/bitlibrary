@@ -3,7 +3,7 @@ package bitcopark.library.service.mainPageTest;
 import bitcopark.library.entity.member.Address;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.repository.member.MemberRepository;
-import bitcopark.library.service.Member.MemberService;
+import bitcopark.library.service.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

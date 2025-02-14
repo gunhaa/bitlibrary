@@ -1,6 +1,7 @@
 package bitcopark.library.repository.book;
 
-import bitcopark.library.controller.book.BookSearchDetailCondition;
+import bitcopark.library.dto.BookSearchDetailCondition;
+import bitcopark.library.dto.BookSearchDto;
 
 import java.util.List;
 

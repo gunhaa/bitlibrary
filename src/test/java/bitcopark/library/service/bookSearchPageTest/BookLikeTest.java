@@ -1,19 +1,21 @@
 package bitcopark.library.service.bookSearchPageTest;
 
-import bitcopark.library.controller.search.LikeCondition;
+import bitcopark.library.dto.BookLikeDto;
+import bitcopark.library.dto.BookSearchDto;
+import bitcopark.library.dto.LikeCondition;
 import bitcopark.library.controller.search.LikeStatus;
 import bitcopark.library.entity.book.Book;
 import bitcopark.library.entity.book.BookLike;
 import bitcopark.library.entity.book.BookState;
 import bitcopark.library.entity.book.BookSupple;
 import bitcopark.library.entity.member.Member;
-import bitcopark.library.jwt.LoginMemberDTO;
+import bitcopark.library.dto.LoginMemberDTO;
 import bitcopark.library.repository.book.*;
 import bitcopark.library.repository.member.MemberRepository;
-import bitcopark.library.service.Book.BookLikeService;
-import bitcopark.library.service.Book.BookService;
-import bitcopark.library.service.Book.SearchBooklistAndLikelistDTO;
-import bitcopark.library.service.Member.MemberService;
+import bitcopark.library.service.book.BookLikeService;
+import bitcopark.library.service.book.BookService;
+import bitcopark.library.dto.SearchBooklistAndLikelistDTO;
+import bitcopark.library.service.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +24,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @SpringBootTest
 @Transactional

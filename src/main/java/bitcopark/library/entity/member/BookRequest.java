@@ -1,6 +1,6 @@
 package bitcopark.library.entity.member;
 
-import bitcopark.library.controller.book.BookRequestCondition;
+import bitcopark.library.dto.BookRequestCondition;
 import bitcopark.library.entity.audit.BaseAuditEntity;
 import jakarta.persistence.*;
 import lombok.*;

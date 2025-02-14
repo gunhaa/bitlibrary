@@ -3,6 +3,7 @@ package bitcopark.library.jwt;
 import bitcopark.library.entity.jwt.RefreshToken;
 import bitcopark.library.entity.jwt.RefreshTokenBlackList;
 import bitcopark.library.repository.jwt.RefreshRepository;
+import bitcopark.library.repository.jwt.RefreshTokenBlackListRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

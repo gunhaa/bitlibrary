@@ -1,10 +1,10 @@
 package bitcopark.library.controller;
 
 import bitcopark.library.entity.board.Board;
-import bitcopark.library.jwt.LoginMemberDTO;
+import bitcopark.library.dto.LoginMemberDTO;
 import bitcopark.library.repository.board.BoardRepository;
-import bitcopark.library.repository.book.BookStatusDTO;
-import bitcopark.library.service.Member.MemberService;
+import bitcopark.library.dto.BookStatusDTO;
+import bitcopark.library.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

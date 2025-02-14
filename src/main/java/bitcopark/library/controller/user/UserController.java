@@ -6,12 +6,10 @@ import bitcopark.library.dto.BoardRequestDTO;
 import bitcopark.library.dto.BoardUpdateRequestDTO;
 import bitcopark.library.dto.CommentRequestDTO;
 import bitcopark.library.entity.board.*;
-import bitcopark.library.jwt.LoginMemberDTO;
-import bitcopark.library.service.Board.BoardService;
-import bitcopark.library.service.Board.CategoryService;
-import jakarta.servlet.http.HttpSession;
+import bitcopark.library.dto.LoginMemberDTO;
+import bitcopark.library.service.board.BoardService;
+import bitcopark.library.service.board.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static bitcopark.library.controller.util.ControllerUtils.setCategoryAndRoute;
 

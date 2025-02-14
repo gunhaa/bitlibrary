@@ -2,12 +2,10 @@ package bitcopark.library.controller.search;
 
 import bitcopark.library.aop.CategoryDTO;
 import bitcopark.library.categoryStrategy.CategoryRouter;
-import bitcopark.library.jwt.LoginMemberDTO;
-import bitcopark.library.repository.book.BookRepository;
+import bitcopark.library.dto.LoginMemberDTO;
 import bitcopark.library.repository.book.BookSearchCondition;
-import bitcopark.library.repository.book.BookSearchDto;
-import bitcopark.library.service.Book.BookService;
-import bitcopark.library.service.Book.SearchBooklistAndLikelistDTO;
+import bitcopark.library.service.book.BookService;
+import bitcopark.library.dto.SearchBooklistAndLikelistDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

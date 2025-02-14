@@ -2,11 +2,9 @@ package bitcopark.library.config;
 
 import bitcopark.library.jwt.JwtFilter;
 import bitcopark.library.jwt.JwtUtil;
-import bitcopark.library.jwt.RefreshTokenBlackListRepository;
+import bitcopark.library.repository.jwt.RefreshTokenBlackListRepository;
 import bitcopark.library.oauth2.*;
 import bitcopark.library.repository.jwt.RefreshRepository;
-import bitcopark.library.repository.member.MemberRepository;
-import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
