@@ -24,7 +24,7 @@ services:
 
   spring-boot:
     build: .
-    image: spring-boot-bitlibrary
+    image: spring-boot-bitlibrary:latest
     container_name: spring-boot-container
     ports:
       - "443:443"
