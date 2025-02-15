@@ -10,12 +10,10 @@
     <link rel="stylesheet" href="/css/study/list-style.css">
 </head>
 <body>
-<!-- Header Include -->
-<div th:replace="~{/common/header :: header}"></div>
+<div th:replace="~{common/header :: header}"></div>
 
 <section class="container">
-    <!-- Side Menu Include -->
-    <div th:replace="~{/intro/sideMenu :: sideMenu}"></div>
+    <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
 
     <section class="list-area">
         <h1>도서현황</h1>
@@ -36,7 +34,7 @@
 </section>
 
 <!-- Footer Include -->
-<div th:replace="~{/common/footer :: footer}"></div>
+<div th:replace="~{common/footer :: footer}"></div>
 <script src="/js/study/book-status.js"></script>
 <script src="/js/study/fetchdata-table.js"></script>
 </body>
