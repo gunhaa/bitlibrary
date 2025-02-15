@@ -15,4 +15,4 @@
 
 ## Build
 
-- HTTPS/ OAuth2 login test build
+- prod build
