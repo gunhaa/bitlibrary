@@ -36,4 +36,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query("select b from Board b join fetch b.replyList r where r.replyDelFlag = :replyDelFlag and b.id =:id")
     Optional<Board> findByIdAndReplyDelFlag(Long id, ReplyDelFlag replyDelFlag);
 
+    Page<Board> findByMemberAndBoardDelFlag(Member member, BoardDelFlag boardDelFlag, Pageable pageable);
 }

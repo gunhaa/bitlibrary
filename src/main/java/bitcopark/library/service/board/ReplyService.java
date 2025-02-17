@@ -4,6 +4,7 @@ import bitcopark.library.dto.AdminReplyResponse;
 import bitcopark.library.dto.MyReplyResponse;
 import bitcopark.library.entity.board.Board;
 import bitcopark.library.entity.board.Reply;
+import bitcopark.library.entity.board.ReplyDelFlag;
 import bitcopark.library.entity.member.Member;
 import bitcopark.library.repository.board.ReplyRepository;
 import bitcopark.library.repository.member.MemberRepository;
@@ -41,7 +42,7 @@ public class ReplyService {
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("not found member: " + email));
 
-        Page<Reply> replyPage = replyRepository.findByMember(member, pageable);
+        Page<Reply> replyPage = replyRepository.findByMemberAndReplyDelFlag(member, ReplyDelFlag.N, pageable);
 
         List<MyReplyResponse> dtoList = replyPage.getContent().stream().map(MyReplyResponse::new).toList();
 

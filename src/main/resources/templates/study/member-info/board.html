@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Library - 도서현황</title>
+    <title>Java Library - 내 글 관리</title>
 
     <link rel="stylesheet" href="/css/main-style.css">
     <link rel="stylesheet" href="/css/common/sideMenu.css">
@@ -11,14 +11,14 @@
 </head>
 <body>
 <!-- Header Include -->
-<div th:replace="~{/common/header :: header}"></div>
+<div th:replace="~{common/header :: header}"></div>
 
 <section class="container">
     <!-- Side Menu Include -->
-    <div th:replace="~{/intro/sideMenu :: sideMenu}"></div>
+    <div th:replace="~{intro/sideMenu :: sideMenu}"></div>
 
     <section class="list-area">
-        <h1>도서현황</h1>
+        <h1>내 글 관리</h1>
         <div class="nav-area">
             <button id="btnBoard">게시글</button>
             <button id="btnReply">댓글</button>
@@ -34,7 +34,7 @@
 </section>
 
 <!-- Footer Include -->
-<div th:replace="~{/common/footer :: footer}"></div>
+<div th:replace="~{common/footer :: footer}"></div>
 <script src="/js/study/member-info.js"></script>
 <script src="/js/study/fetchdata-table.js"></script>
 </body>
