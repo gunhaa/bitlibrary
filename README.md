@@ -10,10 +10,12 @@
 - [Remove]: 파일 삭제 작업 수행
 
 ## 브랜치 전략
-- feature - 각 기능 또는 작업을 진행할 때는 feature에서 파일 관리
-- main - 기능 개발 테스트 완료 및 검증 후에 main 브랜치 병합
+- feature - 각 기능 또는 작업을 개발할 때 사용하는 브랜치
+- main - 기능 개발 완료 및 테스트 검증 후 병합되는 브랜치
+- prod - Jenkins Webhook이 연결된 배포 브랜치
 
 ## run
+- Jenkins에서 application.yml을 생성해야 실행할 수 있음
 ```shell
 docker-compose up --build -d
 ```
