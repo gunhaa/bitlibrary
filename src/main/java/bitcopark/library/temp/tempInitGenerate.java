@@ -31,9 +31,6 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class tempInitGenerate {
 
-    // 해당 클래스는 로컬환경에서 테스트 데이터 삽입을 위한 클래스이다
-    // 배포시 제거해야한다.
-
     private final initService initService;
 
     @PostConstruct
@@ -68,7 +65,9 @@ public class tempInitGenerate {
         @Transactional
         public void init() {
 
-            Category 공지사항 = null;
+            Category 공지사항=null;
+            Category 문의사항=null;
+            Category 책_후기_나눠요=null;
             if (categoryRepository.selectCategoryCount() != 49) {
                 // 기존 데이터 삭제
                 categoryRepository.deleteAll();
@@ -93,9 +92,9 @@ public class tempInitGenerate {
                 categoryService.createNewCategoryWithParentCategory("세미나실", 참여_마당, "seminar-room");
 
                 공지사항 = categoryService.createNewCategoryWithParentCategory("공지사항", 이용자_마당, "notice");
-                categoryService.createNewCategoryWithParentCategory("문의사항", 이용자_마당, "inquiries");
+                문의사항 = categoryService.createNewCategoryWithParentCategory("문의사항", 이용자_마당, "inquiries");
                 categoryService.createNewCategoryWithParentCategory("자주 묻는 질문", 이용자_마당, "faq");
-                categoryService.createNewCategoryWithParentCategory("책 후기 나눠요", 이용자_마당, "book-reviews");
+                책_후기_나눠요 = categoryService.createNewCategoryWithParentCategory("책 후기 나눠요", 이용자_마당, "book-reviews");
 
                 categoryService.createNewCategoryWithParentCategory("구내식당", 맛있는_도서관, "cafeteria");
                 categoryService.createNewCategoryWithParentCategory("카페", 맛있는_도서관, "cafe");
@@ -171,12 +170,28 @@ public class tempInitGenerate {
             Member OAuthGoogleGunha = memberService.joinOAuth2Member(googleEmail, googleName, "ROLE_USER");
 
             // 공지사항 생성
-            for (int i = 0; i < 7 ; i++) {
+            for (int i = 0; i < 50 ; i++) {
                 LoginMemberDTO loginMemberDTO = new LoginMemberDTO(naverEmail, naverName, "ROLE_ADMIN");
                 BoardRequestDTO boardRequestDTO = new BoardRequestDTO();
-                boardRequestDTO.setTitle("제목"+i);
-                boardRequestDTO.setContent("내용"+i);
+                boardRequestDTO.setTitle("공지사항 제목"+i);
+                boardRequestDTO.setContent("공지사항 내용"+i);
                 boardService.writePost(loginMemberDTO, boardRequestDTO, 공지사항);
+            }
+
+            for (int i = 0; i < 50 ; i++) {
+                LoginMemberDTO loginMemberDTO = new LoginMemberDTO(naverEmail, naverName, "ROLE_ADMIN");
+                BoardRequestDTO boardRequestDTO = new BoardRequestDTO();
+                boardRequestDTO.setTitle("문의사항 제목"+i);
+                boardRequestDTO.setContent("문의사항 내용"+i);
+                boardService.writePost(loginMemberDTO, boardRequestDTO, 문의사항);
+            }
+
+            for (int i = 0; i < 50 ; i++) {
+                LoginMemberDTO loginMemberDTO = new LoginMemberDTO(naverEmail, naverName, "ROLE_ADMIN");
+                BoardRequestDTO boardRequestDTO = new BoardRequestDTO();
+                boardRequestDTO.setTitle("책 후기 나눠요 제목"+i);
+                boardRequestDTO.setContent("책 후기 나눠요 내용"+i);
+                boardService.writePost(loginMemberDTO, boardRequestDTO, 책_후기_나눠요);
             }
 
 
@@ -204,7 +219,7 @@ public class tempInitGenerate {
             bookReservationService.registerBookReservation(member3, 디셉션_포인트);
 
             //책 요청
-            for (int i = 0; i < 300; i++) {
+            for (int i = 0; i < 200; i++) {
                 bookRequestService.createBookRequest(1L, "1234567890" + i, "bookTitle" + i, "출판사" + i, "작가" + i, BookRequestApprove.W, LocalDate.now(), "의견" + i);
             }
 

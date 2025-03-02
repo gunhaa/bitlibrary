@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Library - <span th:text="${cateName}"></span></title>
+    <title>Java Library</title>
 
     <link rel="stylesheet" href="/css/main-style.css">
     <link rel="stylesheet" href="/css/board/boardDetail-style.css">
@@ -73,17 +73,17 @@
 </section>
 
 <!-- footer -->
-<div th:replace="common/footer :: footer"></div>
+<div th:replace="~{common/footer :: footer}"></div>
 
 <script>
     const cateEngName = "[[${cateEngName}]]";
     const boardId = "[[${board.id}]]";
     const memberEmail = "[[${loginMember != null ? loginMember.email : ''}]]";
 </script>
-
 <!-- boardDetail.js 연결 -->
 <script src="/js/board/boardDetail.js"></script>
 <!-- comment.js 연결 -->
 <script src="/js/board/comment.js"></script>
+
 </body>
 </html>

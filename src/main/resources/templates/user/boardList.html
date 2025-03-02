@@ -70,7 +70,7 @@
                                 <i th:if="${board.secretFlag == 'Y'}" class="fa-solid fa-lock"></i>
                                 <a th:href="@{/user/{cateEngName}/{boardId}(cateEngName=${cateEngName}, boardId=${board.id}, cp=${boardPage.number}, keyword=${keyword}, query=${query})}">[[${board.title}]]</a>
                                 <span th:if="${cateCode == 16 || cateCode == 18}">
-                                    [[${board.replyList.size}]]
+                                    <span th:text="'[' + ${board.replyList.size} + ']'"></span>
                                 </span>
                             </td>
                             <td>
@@ -113,7 +113,7 @@
                         <th:block th:if="${i != boardPage.number}">
                             <!-- 현재 페이지 제외한 나머지 -->
                             <li>
-                                <a th:href="@{/user/{cateEngName}(cateEngName=${cateEngName}, page=${i})" th:text="${i + 1}"></a>
+                                <a th:href="@{/user/{cateEngName}(cateEngName=${cateEngName}, page=${i})}" th:text="${i + 1}"></a>
                             </li>
                         </th:block>
                     </th:block>
