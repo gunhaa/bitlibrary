@@ -2,42 +2,46 @@
 const commentContent = document.getElementById("commentContent")
 const commentAdd = document.getElementById("commentAdd");
 
-commentAdd.addEventListener("click", e=>{
+if(commentAdd != null){
+    commentAdd.addEventListener("click", e=>{
 
-    if(memberEmail == ""){
-        alert("로그인 후 이용해주세요.");
-        return;
-    }
-
-    if(commentContent.value.trim().length == 0){
-        alert("댓글을 작성한 후 등록 버튼을 눌러주세요.");
-        commentContent.value = "";
-        commentContent.focus();
-        return;
-    }
-
-    // insert
-    const data = {"content" : commentContent.value,
-                    "boardId" :  boardId};
-    // post 방식                
-    fetch("/user/"+ cateEngName + "/comment", {
-        method   : "POST",
-        headers  : {"Content-Type" : "application/json"},
-        body     : JSON.stringify(data)
-    }) 
-    .then(resp => {
-        if( !resp.ok ){
-            throw new Error();
+        if(memberEmail == ""){
+            alert("로그인 후 이용해주세요.");
+            return;
         }
-    })
-    .then(()=> {
-        alert("댓글이 등록되었습니다.");
-        commentContent.value = "";
-        window.location.reload();
-    })
-    .catch(e => console.log("댓글 등록 중 오류 발생", e));
 
-});
+        if(commentContent.value.trim().length == 0){
+            alert("댓글을 작성한 후 등록 버튼을 눌러주세요.");
+            commentContent.value = "";
+            commentContent.focus();
+            return;
+        }
+
+        // insert
+        const data = {"content" : commentContent.value,
+                        "boardId" :  boardId};
+        // post 방식
+        fetch("/user/"+ cateEngName + "/comment", {
+            method   : "POST",
+            headers  : {"Content-Type" : "application/json"},
+            body     : JSON.stringify(data)
+        })
+        .then(resp => {
+            if( !resp.ok ){
+                throw new Error();
+            }
+        })
+        .then(()=> {
+            alert("댓글이 등록되었습니다.");
+            commentContent.value = "";
+            window.location.reload();
+        })
+        .catch(e => console.log("댓글 등록 중 오류 발생", e));
+
+    });
+}
+
+
 
 
 // 댓글 삭제
