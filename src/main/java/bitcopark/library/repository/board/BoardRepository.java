@@ -28,7 +28,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 */
     Page<Board> findByCategoryIdAndBoardDelFlag(Long id, Pageable pageable, BoardDelFlag boardDelFlag);
 
-    @Query("select b from Board b order by b.createdDate DESC")
+    @Query("select b from Board b where b.category.id = 15 order by b.createdDate DESC")
     List<Board> selectNoticeLimit(Pageable pageable);
 
     List<Board> findByIdIn(List<Long> ids);
