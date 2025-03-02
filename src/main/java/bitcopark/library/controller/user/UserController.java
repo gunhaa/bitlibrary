@@ -32,7 +32,7 @@ public class UserController {
     private final BoardService boardService;
     private final CategoryService categoryService;
 
-    public static final String IMG_UPLOAD_PATH = "/Users/baejihwan/uploads/";
+    public static final String IMG_UPLOAD_PATH = "/";
 
     @GetMapping(value="{catLevel1:user}/{catLevel2:faq}")
     public String user(Model model, @ModelAttribute("categoryDTOList") List<CategoryDTO> categoryDTOList
@@ -104,7 +104,6 @@ public class UserController {
                 for( int i = 0; i < files.length; i++ ) {
                     if (!files[i].isEmpty()) {
                         BoardImg boardImg = boardService.insertBoardImg(board, files[i].getOriginalFilename(), IMG_UPLOAD_PATH, i);
-//                        files[i].transferTo(new File(IMG_UPLOAD_PATH + boardImg.getRenameImg()));
 
                         board.getBoardImgList().add(boardImg);
                     }
