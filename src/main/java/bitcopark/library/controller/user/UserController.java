@@ -39,8 +39,9 @@ public class UserController {
             ,@PathVariable(name = "catLevel1") String catLevel1
             ,@PathVariable(name = "catLevel2") String catLevel2){
 
+        Category category = categoryService.getCategoryEngName(catLevel2);
         ControllerUtils.CategoryRouterResult categoryRouterResult = setCategoryAndRoute(model, categoryDTOList, catLevel1, catLevel2, null);
-
+        model.addAttribute("cateName", category.getCategoryName());
         return categoryRouterResult.router().routing(categoryRouterResult.categoryLevel3());
     }
 
